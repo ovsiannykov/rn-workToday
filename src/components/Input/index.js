@@ -19,10 +19,13 @@ const Input = (props) => {
         autoCorrect={props.autoCorrect ? props.autoCorrect : false}
         maxLength={props.maxLength ? props.maxLength : null}
         textContentType={props.textContentType ? props.textContentType : null}
-        secureTextEntry={props.secureTextEntry ? props.secureTextEntry : false}
+        secureTextEntry={props.secureTextEntry}
       />
       {props.isPassword == "true" ? (
-        <TouchableOpacity onPress={props.viewPassFunc}>
+        <TouchableOpacity
+          style={styles.viewPassBox}
+          onPress={props.viewPassFunc}
+        >
           <Text style={styles.viewPasswordBtn}>Показати</Text>
         </TouchableOpacity>
       ) : null}

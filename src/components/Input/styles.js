@@ -25,4 +25,9 @@ export default StyleSheet.create({
     lineHeight: 15.61,
     color: Colors.yellow,
   },
+  viewPassBox: {
+    position: "absolute",
+    top: 23,
+    right: 5,
+  },
 });

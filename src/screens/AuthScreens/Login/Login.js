@@ -81,7 +81,7 @@ const Login = ({ navigation, login, ...props }) => {
                     textContentType='password'
                     secureTextEntry={loginView ? true : false}
                     isPassword='true'
-                    viewPassFunc={() => setLoginView((prev) => !prev)}
+                    viewPassFunc={() => setLoginView(!loginView)}
                   />
                 </View>
                 <BigButton title='УВIЙТИ' />
