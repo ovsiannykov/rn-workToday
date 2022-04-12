@@ -17,17 +17,6 @@ const logo = require("../../../assets/images/Logo.png");
 
 const Login = ({ navigation, login, ...props }) => {
   const [typeEntrance, setTypeEntrance] = useState("login");
-  const [loginView, setLoginView] = useState(true);
-
-  const liginPasswordView = () => {
-    if (loginView == true) {
-      setLoginView(false);
-    }
-
-    if (loginView == false) {
-      setLoginView(true);
-    }
-  };
 
   const DismissKeyboard = ({ children }) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -79,9 +68,7 @@ const Login = ({ navigation, login, ...props }) => {
                   <Input
                     title='Пароль'
                     textContentType='password'
-                    secureTextEntry={loginView ? true : false}
-                    isPassword='true'
-                    viewPassFunc={() => setLoginView(!loginView)}
+                    isPassword={true}
                   />
                 </View>
                 <BigButton title='УВIЙТИ' />
@@ -103,7 +90,7 @@ const Login = ({ navigation, login, ...props }) => {
                   <Input
                     title='Пароль'
                     textContentType='password'
-                    secureTextEntry={true}
+                    isPassword={true}
                   />
                 </View>
                 <BigButton title='РЕЄСТРАЦІЯ' />

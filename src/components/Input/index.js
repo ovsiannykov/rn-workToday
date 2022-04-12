@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
 
 const Input = (props) => {
   const [text, onChangeText] = useState("");
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (props.isPassword == true) {
+      setShow(true);
+    }
+  }, []);
+
   return (
     <View style={styles.inputBox}>
       <Text style={styles.inputLabel}>
@@ -19,12 +27,12 @@ const Input = (props) => {
         autoCorrect={props.autoCorrect ? props.autoCorrect : false}
         maxLength={props.maxLength ? props.maxLength : null}
         textContentType={props.textContentType ? props.textContentType : null}
-        secureTextEntry={props.secureTextEntry}
+        secureTextEntry={show}
       />
-      {props.isPassword == "true" ? (
+      {props.isPassword == true ? (
         <TouchableOpacity
           style={styles.viewPassBox}
-          onPress={props.viewPassFunc}
+          onPress={() => setShow(!show)}
         >
           <Text style={styles.viewPasswordBtn}>Показати</Text>
         </TouchableOpacity>
