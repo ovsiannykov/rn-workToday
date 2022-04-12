@@ -17,6 +17,6 @@ export default StyleSheet.create({
     borderBottomColor: "#D9DFEB",
     borderBottomWidth: 2,
     paddingVertical: 10,
-    fontFamily: "Poppins500",
+    fontFamily: "ComfortaaLight",
   },
 });

@@ -15,6 +15,6 @@ export default StyleSheet.create({
     color: "white",
     fontSize: 16,
     fontWeight: "300",
-    fontFamily: "Poppins300",
+    fontFamily: "ComfortaaLight",
   },
 });

@@ -10,6 +10,13 @@ export async function bootstrap() {
     'Poppins800': require('../assets/fonts/Poppins-ExtraBold.ttf'),
     'Poppins900': require('../assets/fonts/Poppins-Black.ttf'),
     'Roboto500': require('../assets/fonts/Roboto-Medium.ttf'),
-    'Roboto900': require('../assets/fonts/Roboto-Black.ttf')
+    'Roboto900': require('../assets/fonts/Roboto-Black.ttf'),
+    'RobotoItalic': require('../assets/fonts/Roboto-Italic.ttf'),
+    'RobotoThinItalic': require('../assets/fonts/Roboto-ThinItalic.ttf'),
+    'ComfortaaLight': require('../assets/fonts/Comfortaa/Comfortaa-Light.ttf'),
+    'ComfortaaBold': require('../assets/fonts/Comfortaa/Comfortaa-Bold.ttf'),
+    'ComfortaaMedium': require('../assets/fonts/Comfortaa/Comfortaa-Medium.ttf'),
+    'ComfortaaRegular': require('../assets/fonts/Comfortaa/Comfortaa-Regular.ttf'),
+    'ComfortaaSemiBold': require('../assets/fonts/Comfortaa/Comfortaa-SemiBold.ttf')
   });
 }
