@@ -1,9 +1,10 @@
-import React from "react";
-import { View, Text, TextInput } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
 
 const Input = (props) => {
+  const [text, onChangeText] = useState("");
   return (
     <View style={styles.inputBox}>
       <Text style={styles.inputLabel}>
@@ -11,6 +12,8 @@ const Input = (props) => {
       </Text>
       <TextInput
         style={styles.TextInput}
+        value={text}
+        onChangeText={onChangeText}
         placeholder={props.placeholder ? props.placeholder : null}
         keyboardType={props.keyType ? props.keyType : "default"}
         autoCorrect={props.autoCorrect ? props.autoCorrect : false}
@@ -18,6 +21,11 @@ const Input = (props) => {
         textContentType={props.textContentType ? props.textContentType : null}
         secureTextEntry={props.secureTextEntry ? props.secureTextEntry : false}
       />
+      {props.isPassword == "true" ? (
+        <TouchableOpacity onPress={props.viewPassFunc}>
+          <Text style={styles.viewPasswordBtn}>Показати</Text>
+        </TouchableOpacity>
+      ) : null}
     </View>
   );
 };

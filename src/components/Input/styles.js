@@ -19,4 +19,10 @@ export default StyleSheet.create({
     paddingVertical: 10,
     fontFamily: "ComfortaaLight",
   },
+  viewPasswordBtn: {
+    fontSize: 15,
+    fontFamily: "ComfortaaMedium",
+    lineHeight: 15.61,
+    color: Colors.yellow,
+  },
 });
