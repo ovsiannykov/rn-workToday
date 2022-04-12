@@ -1,0 +1,51 @@
+{
+  "expo": {
+    "name": "Find work",
+    "slug": "FindWork",
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "resizeMode": "cover",
+      "image": "./assets/splash.png"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "buildNumber": "1",
+      "bundleIdentifier": "com.work.ios"
+    },
+    "android": {
+      "package": "com.work",
+      "softwareKeyboardLayoutMode": "pan",
+      "versionCode": 1
+    },
+    "packagerOpts": {
+      "config": "metro.config.js",
+      "sourceExts": [
+        "expo.ts",
+        "expo.tsx",
+        "expo.js",
+        "expo.jsx",
+        "ts",
+        "tsx",
+        "js",
+        "jsx",
+        "json",
+        "wasm",
+        "svg"
+      ]
+    }
+  }
+}
