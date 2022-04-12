@@ -13,6 +13,7 @@ export async function bootstrap() {
     'Roboto900': require('../assets/fonts/Roboto-Black.ttf'),
     'RobotoItalic': require('../assets/fonts/Roboto-Italic.ttf'),
     'RobotoThinItalic': require('../assets/fonts/Roboto-ThinItalic.ttf'),
+    'MulishRegular': require("../assets/fonts/Mulish-Regular.ttf"),
     'ComfortaaLight': require('../assets/fonts/Comfortaa/Comfortaa-Light.ttf'),
     'ComfortaaBold': require('../assets/fonts/Comfortaa/Comfortaa-Bold.ttf'),
     'ComfortaaMedium': require('../assets/fonts/Comfortaa/Comfortaa-Medium.ttf'),
