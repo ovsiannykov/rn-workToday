@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
@@ -7,6 +7,7 @@ import styles from "./styles";
 import { sized } from "../../Svg";
 import calendarSvg from "../../assets/icons/Calendar.svg";
 import filterSvg from "../../assets/icons/filter.svg";
+import Colors from "../../constants/Colors";
 
 const HomeHeader = (props) => {
   const CalendarIcon = sized(calendarSvg, 28, 28);
@@ -22,13 +23,33 @@ const HomeHeader = (props) => {
           placeholderStyle={{ fontSize: 16 }}
         />
       </View>
-      <TouchableOpacity style={styles.header_btn}>
+      <TouchableOpacity
+        style={{
+          backgroundColor: !props.isMap ? Colors.yellow : Colors.primaryBlue,
+          ...styles.header_btn,
+        }}
+        onPress={props.mapHandler}
+      >
         <Fontisto name='map-marker-alt' size={24} color='white' />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.header_btn}>
+      <TouchableOpacity
+        onPress={props.calendarHandler}
+        style={{
+          backgroundColor: !props.isCalendar
+            ? Colors.yellow
+            : Colors.primaryBlue,
+          ...styles.header_btn,
+        }}
+      >
         <CalendarIcon />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.header_btn}>
+      <TouchableOpacity
+        onPress={props.filterHandler}
+        style={{
+          backgroundColor: !props.isFilter ? Colors.yellow : Colors.primaryBlue,
+          ...styles.header_btn,
+        }}
+      >
         <FilterIcon />
       </TouchableOpacity>
     </View>

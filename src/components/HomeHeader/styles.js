@@ -39,7 +39,6 @@ export default StyleSheet.create({
     shadowOpacity: 0.16,
     shadowRadius: 1.51,
     elevation: 2,
-    backgroundColor: Colors.yellow,
     justifyContent: "center",
     alignItems: "center",
   },
