@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { View, Text, ScrollView } from "react-native";
 
 import styles from "./styles";
 import HomeHeader from "../../../components/HomeHeader";
+import Map from "../../../components/Map";
+import Vacancy from "../../../components/Vacancy";
 
 const HomeScreen = (props) => {
   const [isMap, setIsMap] = useState(false);
@@ -22,16 +25,26 @@ const HomeScreen = (props) => {
   };
 
   return (
-    <View style={styles.container}>
-      <HomeHeader
-        mapHandler={mapHandler}
-        isMap={isMap}
-        calendarHandler={calendarHandler}
-        isCalendar={isCalendar}
-        filterHandler={filterHandler}
-        isFilter={isFilter}
-      />
-    </View>
+    <>
+      <LinearGradient colors={["#F4F7FF", "#FFFFFF"]} style={styles.container}>
+        <View style={styles.header_box}>
+          <HomeHeader
+            mapHandler={mapHandler}
+            isMap={isMap}
+            calendarHandler={calendarHandler}
+            isCalendar={isCalendar}
+            filterHandler={filterHandler}
+            isFilter={isFilter}
+          />
+        </View>
+        {isMap ? <Map /> : null}
+        <ScrollView>
+          <View style={styles.vacancy_box}>
+            <Vacancy />
+          </View>
+        </ScrollView>
+      </LinearGradient>
+    </>
   );
 };
 

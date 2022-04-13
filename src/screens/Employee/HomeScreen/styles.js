@@ -6,5 +6,11 @@ export default StyleSheet.create({
     paddingTop: Platform.OS == "ios" ? 50 : 10,
     paddingHorizontal: 14,
   },
-  serach_input: {},
+  header_box: {
+    position: "relative",
+    zIndex: 10,
+  },
+  vacancy_box: {
+    alignItems: "center",
+  },
 });

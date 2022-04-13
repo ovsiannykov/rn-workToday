@@ -8,6 +8,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignContent: "center",
+    zIndex: 10,
   },
   search_box: {
     width: "49%",
