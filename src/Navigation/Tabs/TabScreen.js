@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { ButtonTabBar } from "../../components/ButtonTabBar";
+
+import { ButtonTabBar } from "../../components/ButtonTabBar/ButtonTabBar";
 import { MainStackScreen } from "../MainStack/MainStack";
 import { StackScreenProps } from "@react-navigation/stack";
 

@@ -14,15 +14,15 @@ const Profile = ({ navigation }) => {
       colors={["#F4F7FF", "#FFFFFF"]}
       style={{ flex: 1, ...styles.container }}
     >
-      <ScrollView>
-        <View style={styles.header}>
-          <View style={styles.headerContainer}>
-            <Text style={styles.headerTitle}>Профіль</Text>
-            <TouchableOpacity>
-              <Ionicons name='ellipsis-horizontal' size={24} color='black' />
-            </TouchableOpacity>
-          </View>
+      <View style={styles.header}>
+        <View style={styles.headerContainer}>
+          <Text style={styles.headerTitle}>Профіль</Text>
+          <TouchableOpacity>
+            <Ionicons name='ellipsis-horizontal' size={24} color='black' />
+          </TouchableOpacity>
         </View>
+      </View>
+      <ScrollView>
         <View style={{ alignItems: "center" }}>
           <View style={styles.profileBox}>
             <View style={styles.profile}>
