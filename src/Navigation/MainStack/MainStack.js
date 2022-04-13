@@ -3,8 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
 import MainStackStyles from "./MainStackStyles";
-import Login from "../../screens/AuthScreens/Login/Login";
 import Profile from "../../screens/Employee/Profile";
+import HomeScreen from "../../screens/Employee/HomeScreen/";
 
 const MainStack = createStackNavigator();
 
@@ -21,9 +21,10 @@ export const MainStackScreen = ({ navigation, route }) => {
   }, [navigation, route]);
   return (
     <MainStack.Navigator
-      initialRouteName={"Profile"}
+      initialRouteName={"Home"}
       screenOptions={MainStackStyles.screenOptions}
     >
+      <MainStack.Screen name={"Home"} component={HomeScreen} />
       <MainStack.Screen name={"Profile"} component={Profile} />
     </MainStack.Navigator>
   );

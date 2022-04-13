@@ -1,9 +1,10 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    paddingTop: Platform.OS == "ios" ? 50 : 10,
+    paddingHorizontal: 14,
   },
+  serach_input: {},
 });
