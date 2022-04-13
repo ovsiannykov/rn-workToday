@@ -1,6 +1,8 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+
 import Login from '../../screens/AuthScreens/Login/Login';
+import OnboardingScreen from '../../screens/AuthScreens/OnboardingScreen';
 
 
 const Stack = createStackNavigator();
@@ -8,10 +10,11 @@ const Stack = createStackNavigator();
 export const Authorization = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Login"
+      initialRouteName="Onboarding"
       screenOptions={{
         headerShown: false
       }}>
+      <Stack.Screen name="Onboarding" component={OnboardingScreen}/>
       <Stack.Screen name="Login" component={Login}/>
     </Stack.Navigator>
   );
