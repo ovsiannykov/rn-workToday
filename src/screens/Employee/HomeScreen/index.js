@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { View, Text, ScrollView } from "react-native";
+import {View, Text, ScrollView, SafeAreaView} from "react-native";
 
 import styles from "./styles";
 import HomeHeader from "../../../components/HomeHeader";
@@ -36,8 +36,8 @@ const HomeScreen = (props) => {
             filterHandler={filterHandler}
             isFilter={isFilter}
           />
+          {isMap ? <Map /> : null}
         </View>
-        {isMap ? <Map /> : null}
         <ScrollView>
           <View style={styles.vacancy_box}>
             <Vacancy />

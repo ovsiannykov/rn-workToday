@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, TextInput } from "react-native";
+import {View, Text, TouchableOpacity, TextInput, SafeAreaView} from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 
@@ -14,7 +14,7 @@ const HomeHeader = (props) => {
   const FilterIcon = sized(filterSvg, 28, 28);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.search_box}>
         <Feather name='search' size={20} color='#828282' />
         <TextInput
@@ -52,7 +52,7 @@ const HomeHeader = (props) => {
       >
         <FilterIcon />
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -4,16 +4,14 @@ import Colors from "../../constants/Colors";
 
 export default StyleSheet.create({
   container: {
-    display: "flex",
     flexDirection: "row",
     justifyContent: "space-around",
     alignContent: "center",
-    zIndex: 10,
+    zIndex: 1000,
   },
   search_box: {
     width: "49%",
     paddingLeft: 20,
-    display: "flex",
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "white",
