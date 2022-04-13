@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 import Colors from "../../../constants/Colors";
 
@@ -8,7 +8,7 @@ export default StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
   header: {
-    height: 85,
+    height: Platform.OS == "ios" ? 100 : 60,
     justifyContent: "flex-end",
     marginBottom: 10,
     paddingHorizontal: 40,

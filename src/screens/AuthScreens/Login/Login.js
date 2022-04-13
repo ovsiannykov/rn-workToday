@@ -16,7 +16,7 @@ import BigButton from "../../../components/BigButton";
 const logo = require("../../../assets/images/Logo.png");
 
 const Login = ({ navigation, login, ...props }) => {
-  const [typeEntrance, setTypeEntrance] = useState("login");
+  const [typeEntrance, setTypeEntrance] = useState(false);
 
   const DismissKeyboard = ({ children }) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -34,21 +34,21 @@ const Login = ({ navigation, login, ...props }) => {
           <View style={styles.switchGroup}>
             <TouchableOpacity
               style={{ marginRight: 50 }}
-              onPress={() => setTypeEntrance("login")}
+              onPress={() => setTypeEntrance(false)}
             >
               <Text
                 style={{
-                  opacity: typeEntrance == "login" ? 1 : 0.5,
+                  opacity: typeEntrance == false ? 1 : 0.5,
                   ...styles.switchButton,
                 }}
               >
                 Вхід
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setTypeEntrance("registr")}>
+            <TouchableOpacity onPress={() => setTypeEntrance(true)}>
               <Text
                 style={{
-                  opacity: typeEntrance == "registr" ? 1 : 0.5,
+                  opacity: typeEntrance == true ? 1 : 0.5,
                   ...styles.switchButton,
                 }}
               >
@@ -57,8 +57,8 @@ const Login = ({ navigation, login, ...props }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.inputsBox}>
-            {typeEntrance == "login" ? (
-              <KeyboardAwareScrollView showsVerticalScrollIndicator='false'>
+            {!typeEntrance ? (
+              <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <Text style={styles.welcomeText}>Ласкаво просимо</Text>
                 <Text style={styles.subTitle}>Віхд у ваш аккаунт</Text>
                 <View>

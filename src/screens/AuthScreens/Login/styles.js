@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 import Colors from "../../../constants/Colors";
 
@@ -17,7 +17,7 @@ export default StyleSheet.create({
     width: 178,
   },
   tabMenu: {
-    height: 600,
+    height: Platform.OS == "ios" ? 600 : 520,
     backgroundColor: Colors.blue,
     width: "100%",
     position: "absolute",
