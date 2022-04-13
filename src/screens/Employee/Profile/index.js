@@ -10,8 +10,11 @@ const image = require("../../../assets/images/profile.png");
 
 const Profile = ({ navigation }) => {
   return (
-    <>
-      <LinearGradient colors={["#F4F7FF", "#FFFFFF"]} style={styles.container}>
+    <LinearGradient
+      colors={["#F4F7FF", "#FFFFFF"]}
+      style={{ flex: 1, ...styles.container }}
+    >
+      <ScrollView>
         <View style={styles.header}>
           <View style={styles.headerContainer}>
             <Text style={styles.headerTitle}>Профіль</Text>
@@ -66,13 +69,15 @@ const Profile = ({ navigation }) => {
           </View>
         </View>
         <Text style={styles.worksTitle}>Останні роботи</Text>
-        <OldWorkItem
-          company='Alt Bier'
-          position='Бармен'
-          review='Норм чел все делал быстро и качественно'
-        />
-      </LinearGradient>
-    </>
+        <View style={{ paddingBottom: 30 }}>
+          <OldWorkItem
+            company='Alt Bier'
+            position='Бармен'
+            review='Норм чел все делал быстро и качественно'
+          />
+        </View>
+      </ScrollView>
+    </LinearGradient>
   );
 };
 
