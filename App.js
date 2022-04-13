@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Root } from "./src/Navigation/Root";
 import AppLoading from "expo-app-loading";
 import { bootstrap } from "./src/bootstrap";
-import { AuthContext } from "./src/Navigation/AuthContext";
+import { AuthContext } from "./src/Navigation/Auth/AuthContext";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
 

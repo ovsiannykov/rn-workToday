@@ -2,8 +2,9 @@ import React, { useLayoutEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
-import Profile from "../screens/MainScreens/Profile";
 import MainStackStyles from "./MainStackStyles";
+import Login from "../../screens/AuthScreens/Login/Login";
+import Profile from "../../screens/Employee/Profile";
 
 const MainStack = createStackNavigator();
 

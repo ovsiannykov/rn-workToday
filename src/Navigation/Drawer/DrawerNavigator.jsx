@@ -1,9 +1,10 @@
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import React from 'react';
 import {Dimensions, StyleSheet} from 'react-native';
-import {sized} from '../Svg';
-import {TabsScreen} from "./TabScreen";
-import {SCREEN_WIDTH} from "../styles/mainStyles";
+
+import {sized} from '../../Svg';
+import {TabsScreen} from "../Tabs/TabScreen";
+import {SCREEN_WIDTH} from "../../styles/mainStyles";
 
 const {Navigator, Screen} = createDrawerNavigator();
 
