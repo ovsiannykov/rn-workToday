@@ -8,7 +8,7 @@ export default StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
   header: {
-    height: 100,
+    height: 85,
     justifyContent: "flex-end",
     marginBottom: 10,
     paddingHorizontal: 40,
