@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 import { sized } from "../../Svg";
@@ -16,6 +17,8 @@ const WalletIcon = sized(walletSvg, 16, 16);
 
 const Vacancy = (props) => {
   const [isFavorite, setIsFavorite] = useState(false);
+
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -62,7 +65,12 @@ const Vacancy = (props) => {
             <Text style={styles.sub_content}>Вулиця Івана 23, буд 56</Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.link_btn}>
+        <TouchableOpacity
+          style={styles.link_btn}
+          onPress={() =>
+            navigation.navigate("VacancyDetail", { title: props.title })
+          }
+        >
           <Text style={styles.link_title}>Перейти</Text>
           <LinkIcon />
         </TouchableOpacity>

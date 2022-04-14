@@ -3,8 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
 import MainStackStyles from "./MainStackStyles";
-import Profile from "../../screens/Employee/Profile";
 import HomeScreen from "../../screens/Employee/HomeScreen/";
+import VacancyDetail from "../../screens/Employee/VacancyDetail";
 
 const MainStack = createStackNavigator();
 
@@ -25,7 +25,7 @@ export const MainStackScreen = ({ navigation, route }) => {
       screenOptions={MainStackStyles.screenOptions}
     >
       <MainStack.Screen name={"Home"} component={HomeScreen} />
-      <MainStack.Screen name={"Profile"} component={Profile} />
+      <MainStack.Screen name={"VacancyDetail"} component={VacancyDetail} />
     </MainStack.Navigator>
   );
 };

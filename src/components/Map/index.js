@@ -104,10 +104,11 @@ const styles = StyleSheet.create({
   },
   vacancy: {
     position: "absolute",
-    bottom: -50,
     left: 20,
     width: 347,
     height: 164,
+    zIndex: 999,
+    bottom: 620,
   },
 });
 

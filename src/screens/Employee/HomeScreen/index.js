@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { View, Text, ScrollView, SafeAreaView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 import HomeHeader from "../../../components/HomeHeader";
@@ -13,6 +14,8 @@ const HomeScreen = (props) => {
   const [isMap, setIsMap] = useState(false);
   const [isCalendar, setIsCalendar] = useState(false);
   const [isFilter, setIsFilter] = useState(false);
+
+  const navigation = useNavigation();
 
   const mapHandler = () => {
     setIsMap(!isMap);
@@ -55,7 +58,12 @@ const HomeScreen = (props) => {
         <View style={styles.vacancy_scrollBox}>
           <ScrollView>
             <View style={styles.vacancy_box}>
-              <Vacancy />
+              <Vacancy
+                title='Офіціант'
+                pressFunc={() =>
+                  navigation.navigate("VacancyDetail", { title: "Офіціант" })
+                }
+              />
             </View>
           </ScrollView>
         </View>
