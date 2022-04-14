@@ -7,6 +7,7 @@ import HomeHeader from "../../../components/HomeHeader";
 import Map from "../../../components/Map";
 import Vacancy from "../../../components/Vacancy";
 import DateFilter from "../../../components/DateFilter";
+import HomeModal from "../../../components/HomeModal";
 
 const HomeScreen = (props) => {
   const [isMap, setIsMap] = useState(false);
@@ -31,10 +32,15 @@ const HomeScreen = (props) => {
     setIsCalendar(false);
   };
 
+  const closeModal = () => {
+    setIsFilter(false);
+  };
+
   return (
     <>
       <LinearGradient colors={["#F4F7FF", "#FFFFFF"]} style={styles.container}>
         <View style={styles.header_box}>
+          <HomeModal isFilter={isFilter} closeModal={closeModal} />
           <HomeHeader
             mapHandler={mapHandler}
             isMap={isMap}
@@ -43,9 +49,10 @@ const HomeScreen = (props) => {
             filterHandler={filterHandler}
             isFilter={isFilter}
           />
-          {isMap ? <Map /> : null}
           {isCalendar ? <DateFilter /> : null}
+          {isMap ? <Map /> : null}
         </View>
+
         <ScrollView>
           <View style={styles.vacancy_box}>
             <Vacancy />
