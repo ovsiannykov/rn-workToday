@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { View, Text, ScrollView, SafeAreaView } from "react-native";
+import { View, ScrollView } from "react-native";
 
-import styles from "./styles";
 import HomeHeader from "../../../components/HomeHeader";
 import Map from "../../../components/Map";
 import Vacancy from "../../../components/Vacancy";
 import DateFilter from "../../../components/DateFilter";
 import HomeModal from "../../../components/HomeModal";
+import styles from "./styles";
 
-const HomeScreen = (props) => {
+const FavoritesScreen = (props) => {
   const [isMap, setIsMap] = useState(false);
   const [isCalendar, setIsCalendar] = useState(false);
   const [isFilter, setIsFilter] = useState(false);
@@ -56,6 +56,8 @@ const HomeScreen = (props) => {
           <ScrollView>
             <View style={styles.vacancy_box}>
               <Vacancy />
+              <Vacancy title='Прибиральниця' />
+              <Vacancy title='Юрист' />
             </View>
           </ScrollView>
         </View>
@@ -64,4 +66,4 @@ const HomeScreen = (props) => {
   );
 };
 
-export default HomeScreen;
+export default FavoritesScreen;

@@ -6,8 +6,8 @@ import {
   Platform,
   Text,
 } from "react-native";
-import { sized } from "../../Svg";
 
+import { sized } from "../../Svg";
 import homeSvg from "../../assets/icons/home.svg";
 import contractsSvg from "../../assets/icons/contracts.svg";
 import bookmarksSvg from "../../assets/icons/bookmarks.svg";
@@ -35,7 +35,10 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
   return (
     <View style={styles.TabView__wrapper}>
       <View style={[styles.TabView]}>
-        <TouchableOpacity style={styles.TabView__item}>
+        <TouchableOpacity
+          style={styles.TabView__item}
+          onPress={() => navigation.navigate("TabsBar")}
+        >
           <View style={styles.iconWrapper}>
             <HomeIcon />
             <Text style={styles.TabTitle}>Вакансії</Text>
@@ -55,13 +58,19 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity style={styles.TabView__item}>
+        <TouchableOpacity
+          style={styles.TabView__item}
+          onPress={() => navigation.navigate("Favorites")}
+        >
           <View style={styles.iconWrapper}>
             <BookmarksIcon />
             <Text style={styles.TabTitle}>Закладки</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.TabView__item}>
+        <TouchableOpacity
+          style={styles.TabView__item}
+          onPress={() => navigation.navigate("Profile")}
+        >
           <View style={styles.iconWrapper}>
             <SettingsIcon />
             <Text style={styles.TabTitle}>Профіль</Text>
