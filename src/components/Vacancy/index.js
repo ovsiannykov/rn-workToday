@@ -32,7 +32,9 @@ const Vacancy = (props) => {
       <View style={styles.content}>
         <Image style={styles.image} source={image} />
         <View style={{ marginLeft: 15 }}>
-          <Text style={styles.title}>Офіціант</Text>
+          <Text style={styles.title}>
+            {props.title ? props.title : "Офіціант"}
+          </Text>
           <Text style={styles.description}>
             У кафе потрібен офіціант для часткової підробітки та підтримки
             ресторану...

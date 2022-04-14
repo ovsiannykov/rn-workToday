@@ -50,14 +50,16 @@ const HomeScreen = (props) => {
             isFilter={isFilter}
           />
           {isCalendar ? <DateFilter /> : null}
-          {isMap ? <Map /> : null}
+          {isMap ? (
+            <Map />
+          ) : (
+            <ScrollView>
+              <View style={styles.vacancy_box}>
+                <Vacancy />
+              </View>
+            </ScrollView>
+          )}
         </View>
-
-        <ScrollView>
-          <View style={styles.vacancy_box}>
-            <Vacancy />
-          </View>
-        </ScrollView>
       </LinearGradient>
     </>
   );
