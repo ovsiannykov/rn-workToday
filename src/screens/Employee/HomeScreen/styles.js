@@ -14,5 +14,9 @@ export default StyleSheet.create({
   },
   vacancy_box: {
     alignItems: "center",
+    height: "100%",
+  },
+  vacancy_scrollBox: {
+    minHeight: "80%",
   },
 });

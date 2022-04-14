@@ -63,12 +63,23 @@ const Map = (props) => {
             color={!viewMarker3 ? Colors.markerBlue : Colors.yellow}
           />
         </Marker>
-        <Overlay style={styles.vacancy}>
-          {viewMarker1 == true ? <Vacancy title='Бармен' /> : null}
-          {viewMarker2 == true ? <Vacancy title='Бухгалтер' /> : null}
-          {viewMarker3 == true ? <Vacancy title='Юрист' /> : null}
-        </Overlay>
       </MapView>
+
+      {viewMarker1 == true ? (
+        <View style={styles.vacancy}>
+          <Vacancy title='Бармен' />
+        </View>
+      ) : null}
+      {viewMarker2 == true ? (
+        <View style={styles.vacancy}>
+          <Vacancy title='Юрист' />
+        </View>
+      ) : null}
+      {viewMarker3 == true ? (
+        <View style={styles.vacancy}>
+          <Vacancy title='Кухар' />
+        </View>
+      ) : null}
     </View>
   );
 };
@@ -93,7 +104,8 @@ const styles = StyleSheet.create({
   },
   vacancy: {
     position: "absolute",
-    bottom: 130,
+    bottom: -50,
+    left: 20,
     width: 347,
     height: 164,
   },

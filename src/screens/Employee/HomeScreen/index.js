@@ -53,11 +53,13 @@ const HomeScreen = (props) => {
           {isMap ? (
             <Map />
           ) : (
-            <ScrollView>
-              <View style={styles.vacancy_box}>
-                <Vacancy />
-              </View>
-            </ScrollView>
+            <View style={styles.vacancy_scrollBox}>
+              <ScrollView>
+                <View style={styles.vacancy_box}>
+                  <Vacancy />
+                </View>
+              </ScrollView>
+            </View>
           )}
         </View>
       </LinearGradient>
