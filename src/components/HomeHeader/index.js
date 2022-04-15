@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {View, Text, TouchableOpacity, TextInput, SafeAreaView} from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  SafeAreaView,
+} from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 

@@ -4,19 +4,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Feather } from "@expo/vector-icons";
 
 import styles from "./styles";
+import Search from "../../../components/Search";
 
 const ContractsScreen = (props) => {
   return (
     <LinearGradient colors={["#F4F7FF", "#FFFFFF"]} style={styles.container}>
       <View style={styles.container}>
-        <View style={styles.search_box}>
-          <Feather name='search' size={20} color='#828282' />
-          <TextInput
-            style={styles.serach_input}
-            placeholder='Пошук'
-            placeholderStyle={{ fontSize: 16 }}
-          />
-        </View>
+        <Search />
         <Text>ContractsScreen</Text>
       </View>
     </LinearGradient>

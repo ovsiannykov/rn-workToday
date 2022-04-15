@@ -65,12 +65,7 @@ const Vacancy = (props) => {
             <Text style={styles.sub_content}>Вулиця Івана 23, буд 56</Text>
           </View>
         </View>
-        <TouchableOpacity
-          style={styles.link_btn}
-          onPress={() =>
-            navigation.navigate("VacancyDetail", { title: props.title })
-          }
-        >
+        <TouchableOpacity style={styles.link_btn} onPress={props.onPress}>
           <Text style={styles.link_title}>Перейти</Text>
           <LinkIcon />
         </TouchableOpacity>

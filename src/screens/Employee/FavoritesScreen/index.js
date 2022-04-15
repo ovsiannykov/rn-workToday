@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { View, ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import HomeHeader from "../../../components/HomeHeader";
 import Map from "../../../components/Map";
@@ -13,6 +14,8 @@ const FavoritesScreen = (props) => {
   const [isMap, setIsMap] = useState(false);
   const [isCalendar, setIsCalendar] = useState(false);
   const [isFilter, setIsFilter] = useState(false);
+
+  const navigation = useNavigation();
 
   const mapHandler = () => {
     setIsMap(!isMap);
@@ -55,9 +58,19 @@ const FavoritesScreen = (props) => {
         <View style={styles.vacancy_scrollBox}>
           <ScrollView>
             <View style={styles.vacancy_box}>
-              <Vacancy />
-              <Vacancy title='Прибиральниця' />
-              <Vacancy title='Юрист' />
+              <Vacancy
+                onPress={() => navigation.navigate("ContractDetailScreen")}
+              />
+              <Vacancy
+                acancy
+                onPress={() => navigation.navigate("ContractDetailScreen")}
+                title='Прибиральниця'
+              />
+              <Vacancy
+                title='Юрист'
+                acancy
+                onPress={() => navigation.navigate("ContractDetailScreen")}
+              />
             </View>
           </ScrollView>
         </View>

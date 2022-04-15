@@ -32,13 +32,6 @@ const VacancyInfo = (props) => {
     { id: "3", label: "Навик 3" },
   ];
 
-  const compitensesList = [
-    { id: "1", label: "Art", its: false },
-    { id: "2", label: "Design", its: false },
-    { id: "3", label: "Culture", its: true },
-    { id: "4", label: "Production", its: false },
-  ];
-
   return (
     <View>
       <View style={styles.vacancy_info}>

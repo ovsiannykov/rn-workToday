@@ -8,6 +8,7 @@ export default StyleSheet.create({
     justifyContent: "space-around",
     alignContent: "center",
     zIndex: 1000,
+    paddingHorizontal: 14,
   },
   search_box: {
     width: "49%",
