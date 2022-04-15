@@ -10,8 +10,8 @@ export default StyleSheet.create({
     borderRadius: 16,
     paddingHorizontal: 10,
     paddingTop: 23,
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 10,
+    marginBottom: 10,
     shadowColor: "#000000",
     shadowOffset: {
       width: 0,

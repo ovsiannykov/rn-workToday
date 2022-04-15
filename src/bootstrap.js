@@ -11,6 +11,7 @@ export async function bootstrap() {
     'Poppins900': require('../assets/fonts/Poppins-Black.ttf'),
     'Roboto500': require('../assets/fonts/Roboto-Medium.ttf'),
     'Roboto900': require('../assets/fonts/Roboto-Black.ttf'),
+    'Roboto_Regular': require('../assets/fonts/Roboto-Regular.ttf'),
     'RobotoItalic': require('../assets/fonts/Roboto-Italic.ttf'),
     'RobotoThinItalic': require('../assets/fonts/Roboto-ThinItalic.ttf'),
     'MulishRegular': require("../assets/fonts/Mulish-Regular.ttf"),

@@ -22,7 +22,7 @@ const NavigationHeader = (props) => {
           <BackIcon />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>
-          {route.title ? route.title : "Назва вакансії"}
+          {props.title ? props.title : "Назва вакансії"}
         </Text>
       </View>
     </View>
@@ -31,9 +31,10 @@ const NavigationHeader = (props) => {
 
 const styles = StyleSheet.create({
   header: {
-    height: Platform.OS == "ios" ? 100 : 60,
-    marginBottom: 10,
+    // height: 60,
+    marginBottom: 0,
     paddingHorizontal: 40,
+    paddingBottom: 22,
   },
   headerContainer: {
     display: "flex",
