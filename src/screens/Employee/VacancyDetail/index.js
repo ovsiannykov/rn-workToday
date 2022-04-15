@@ -18,6 +18,7 @@ import ErrorBlock from "../../../components/ErrorBlock";
 import Skill from "../../../components/Skill";
 import LongWhiteButton from "../../../components/LongWhiteButton";
 import LongBlueButton from "../../../components/LongBlueButton";
+import VacancyInfo from "../../../components/VacancyInfo";
 
 const VacancyDetail = (props) => {
   const route = useRoute();
@@ -53,74 +54,8 @@ const VacancyDetail = (props) => {
       <NavigationHeader title={route.params.title} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ paddingHorizontal: 39 }}>
-          <View style={styles.vacancy_info}>
-            <View style={styles.image_box}>
-              <Image source={vacancyImage} style={styles.image} />
-            </View>
-            <View>
-              <Text style={styles.company_name}>Компанія</Text>
-              <View style={{ display: "flex", flexDirection: "row" }}>
-                <Feather name='clock' size={14} color={Colors.darkBlue} />
-                <Text style={styles.time}>22.02.2022 - 23.03.2022</Text>
-              </View>
-            </View>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <TouchableOpacity style={styles.send_icon}>
-                <SendIcon />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.favorite_icon}>
-                <Ionicons
-                  name='bookmark-outline'
-                  size={21}
-                  color={Colors.primaryBlue}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={{ marginTop: 20, ...styles.vacancy_info }}>
-            <WalletIcon />
-            <Text style={styles.price}>500 zl/день</Text>
-            <TimeIcon />
-            <Text style={styles.price}>50 zl/год.</Text>
-          </View>
-          <View
-            style={{ marginTop: 7, marginLeft: -2, ...styles.vacancy_info }}
-          >
-            <MaterialCommunityIcons
-              name='map-marker'
-              size={22}
-              color={Colors.darkBlue}
-            />
-            <Text style={styles.price}>Вулиця Івана 23, буд 56</Text>
-          </View>
-          <Text style={{ marginTop: 18, ...styles.company_name }}>
-            Категорія вакансії: віддалена робота
-          </Text>
-          <Text style={{ marginTop: 20, ...styles.company_name }}>
-            Обов'язки:
-          </Text>
-          <View>
-            {dutyList.map((item) => (
-              <Text key={item.id} style={styles.listItem}>
-                {"\u2022 " + item.label}
-              </Text>
-            ))}
-          </View>
-          <Text style={{ marginTop: 20, ...styles.company_name }}>
-            Необхідні навички:
-          </Text>
-          <View style={{ marginBottom: 20 }}>
-            {skillList.map((item) => (
-              <Text key={item.id} style={styles.listItem}>
-                {"\u2022 " + item.label}
-              </Text>
-            ))}
+          <View style={{ alignItems: "center" }}>
+            <VacancyInfo />
           </View>
           <ErrorBlock title='Ви недостатньо компетентні, щоб прийняти завдання' />
           <Text style={{ marginTop: 20, ...styles.company_name }}>

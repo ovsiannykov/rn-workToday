@@ -5,6 +5,7 @@ import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import MainStackStyles from "./MainStackStyles";
 import HomeScreen from "../../screens/Employee/HomeScreen/";
 import VacancyDetail from "../../screens/Employee/VacancyDetail";
+import Profile from "../../screens/Employee/Profile";
 
 const MainStack = createStackNavigator();
 

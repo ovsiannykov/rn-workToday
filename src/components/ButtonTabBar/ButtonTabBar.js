@@ -26,9 +26,9 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
     return null;
   }
 
-  const HomeIcon = sized(homeSvg, 20, 20, Colors.darkGray);
-  const ContractsIcon = sized(contractsSvg, 28, 28, Colors.darkGray);
-  const BookmarksIcon = sized(bookmarksSvg, 20, 20, Colors.darkGray);
+  const HomeIcon = sized(homeSvg, 22, 22);
+  const ContractsIcon = sized(contractsSvg, 21, 21);
+  const BookmarksIcon = sized(bookmarksSvg, 20, 20);
   const SettingsIcon = sized(settingsSvg, 20, 20, "green");
   const StatisticIcon = sized(statisticSvg, 20, 20);
 
@@ -44,10 +44,13 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
             <Text style={styles.TabTitle}>Вакансії</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.TabView__item_contracts}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Contracts")}
+          style={styles.TabView__item}
+        >
           <View style={styles.iconWrapper}>
             <ContractsIcon />
-            <Text style={styles.TabTitle_contrats}>Контракти</Text>
+            <Text style={styles.TabTitle}>Контракти</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.TabView__item}>
@@ -88,7 +91,7 @@ const styles = StyleSheet.create({
   },
   TabView: {
     backgroundColor: "#FFFFFF",
-    height: 65,
+    height: 85,
     paddingHorizontal: Platform.OS === "ios" ? 20 : 10,
     bottom: 0,
     left: 0,
@@ -99,7 +102,7 @@ const styles = StyleSheet.create({
     height: 80,
     // position: "absolute",
     paddingTop: 20,
-    paddingBottom: 20,
+    paddingBottom: 35,
     zIndex: -1,
     shadowColor: "#000",
     shadowOffset: {
