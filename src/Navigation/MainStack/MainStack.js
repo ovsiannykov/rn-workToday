@@ -9,6 +9,7 @@ import Profile from "../../screens/Employee/Profile";
 import ContractDetailScreen from "../../screens/Employee/ContractDetailScreen";
 import Settings from "../../screens/Employee/Settings";
 import Feedback from "../../screens/Employee/Feedback";
+import UploadCompetence from "../../screens/Employee/UploadCompetence";
 
 const MainStack = createStackNavigator();
 
@@ -36,6 +37,10 @@ export const MainStackScreen = ({ navigation, route }) => {
       />
       <MainStack.Screen name={"Settings"} component={Settings} />
       <MainStack.Screen name={"Feedback"} component={Feedback} />
+      <MainStack.Screen
+        name={"UploadCompetence"}
+        component={UploadCompetence}
+      />
     </MainStack.Navigator>
   );
 };

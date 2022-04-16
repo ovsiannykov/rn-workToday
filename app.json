@@ -3,6 +3,15 @@
     "name": "Find work",
     "slug": "FindWork",
     "privacy": "public",
+     "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission":
+            "Застосунок отримує доступ до ваших фотографій для коректної роботи."
+        }
+      ]
+    ],
     "platforms": [
       "ios",
       "android",

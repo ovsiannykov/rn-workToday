@@ -84,15 +84,27 @@ const Settings = (props) => {
             marginTop: 20,
           }}
         >
-          <View style={{ width: "100%", marginBottom: 20 }}>
-            <ErrorBlock title='Ви не погодилися з маркетинговими умовами ' />
+          <View
+            style={{
+              width: 336,
+              alignItems: "center",
+              justifyContent: "center",
+              marginRight: -20,
+            }}
+          >
+            <View style={{ width: "100%", marginBottom: 20 }}>
+              <ErrorBlock title='Ви не погодилися з маркетинговими умовами ' />
+            </View>
+            <LongWhiteButton title='Переглянути маркетингові умови' />
+            <LongBlueButton
+              onPress={() => navigation.navigate("UploadCompetence")}
+              title='Заповнити компетенції'
+            />
+            <LongWhiteButton
+              title='Звернутися у підтримку'
+              onPress={() => setIsModal(true)}
+            />
           </View>
-          <LongWhiteButton title='Переглянути маркетингові умови' />
-          <LongBlueButton title='Заповнити компетенції' />
-          <LongWhiteButton
-            title='Звернутися у підтримку'
-            onPress={() => setIsModal(true)}
-          />
         </View>
         <View>
           <Text style={styles.label}>Повідомлення</Text>
