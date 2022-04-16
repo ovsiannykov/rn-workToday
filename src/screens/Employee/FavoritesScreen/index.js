@@ -59,17 +59,25 @@ const FavoritesScreen = (props) => {
           <ScrollView>
             <View style={styles.vacancy_box}>
               <Vacancy
-                onPress={() => navigation.navigate("ContractDetailScreen")}
+                onPress={() =>
+                  navigation.navigate("VacancyDetail", { title: "Офіціант" })
+                }
               />
               <Vacancy
                 acancy
-                onPress={() => navigation.navigate("ContractDetailScreen")}
+                onPress={() =>
+                  navigation.navigate("VacancyDetail", {
+                    title: "Прибиральниця",
+                  })
+                }
                 title='Прибиральниця'
               />
               <Vacancy
                 title='Юрист'
                 acancy
-                onPress={() => navigation.navigate("ContractDetailScreen")}
+                onPress={() =>
+                  navigation.navigate("VacancyDetail", { title: "Юрист" })
+                }
               />
             </View>
           </ScrollView>

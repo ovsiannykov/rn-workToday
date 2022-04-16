@@ -71,4 +71,9 @@ export default StyleSheet.create({
     right: 10,
     top: 16,
   },
+  status_box: {
+    position: "absolute",
+    right: 25,
+    top: 22,
+  },
 });

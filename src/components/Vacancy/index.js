@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
@@ -10,6 +10,7 @@ import { sized } from "../../Svg";
 import linkSvg from "../../assets/icons/link.svg";
 import walletSvg from "../../assets/icons/Wallet.svg";
 import Colors from "../../constants/Colors";
+import VacancyStatusText from "../../components/VacancyStatusText";
 
 const image = require("../../assets/images/vacancy.jpeg");
 const LinkIcon = sized(linkSvg, 12, 12);
@@ -22,16 +23,18 @@ const Vacancy = (props) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        onPress={() => setIsFavorite(!isFavorite)}
-        style={styles.favorite}
-      >
-        {isFavorite ? (
-          <Ionicons name='bookmark' size={22} color='#376AED' />
-        ) : (
-          <Ionicons name='bookmark-outline' size={22} color='#376AED' />
-        )}
-      </TouchableOpacity>
+      {props.status ? null : (
+        <TouchableOpacity
+          onPress={() => setIsFavorite(!isFavorite)}
+          style={styles.favorite}
+        >
+          {isFavorite ? (
+            <Ionicons name='bookmark' size={22} color='#376AED' />
+          ) : (
+            <Ionicons name='bookmark-outline' size={22} color='#376AED' />
+          )}
+        </TouchableOpacity>
+      )}
       <View style={styles.content}>
         <Image style={styles.image} source={image} />
         <View style={{ marginLeft: 15 }}>
@@ -70,6 +73,11 @@ const Vacancy = (props) => {
           <LinkIcon />
         </TouchableOpacity>
       </View>
+      {props.status ? (
+        <View style={styles.status_box}>
+          <VacancyStatusText text={props.status} />
+        </View>
+      ) : null}
     </View>
   );
 };
