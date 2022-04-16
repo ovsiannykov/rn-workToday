@@ -95,7 +95,10 @@ const Settings = (props) => {
             <View style={{ width: "100%", marginBottom: 20 }}>
               <ErrorBlock title='Ви не погодилися з маркетинговими умовами ' />
             </View>
-            <LongWhiteButton title='Переглянути маркетингові умови' />
+            <LongWhiteButton
+              onPress={() => navigation.navigate("MarketingAgreements")}
+              title='Переглянути маркетингові умови'
+            />
             <LongBlueButton
               onPress={() => navigation.navigate("UploadCompetence")}
               title='Заповнити компетенції'

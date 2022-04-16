@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Platform } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import StarRating from "react-native-star-rating";
 
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   btn_box: {
     position: "relative",
-    bottom: -350,
+    bottom: Platform.OS == "android" ? -280 : -340,
   },
 });
 

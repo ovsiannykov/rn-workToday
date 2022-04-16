@@ -10,6 +10,7 @@ import ContractDetailScreen from "../../screens/Employee/ContractDetailScreen";
 import Settings from "../../screens/Employee/Settings";
 import Feedback from "../../screens/Employee/Feedback";
 import UploadCompetence from "../../screens/Employee/UploadCompetence";
+import MarketingAgreements from "../../screens/Employee/MarketingAgreements";
 
 const MainStack = createStackNavigator();
 
@@ -40,6 +41,10 @@ export const MainStackScreen = ({ navigation, route }) => {
       <MainStack.Screen
         name={"UploadCompetence"}
         component={UploadCompetence}
+      />
+      <MainStack.Screen
+        name={"MarketingAgreements"}
+        component={MarketingAgreements}
       />
     </MainStack.Navigator>
   );

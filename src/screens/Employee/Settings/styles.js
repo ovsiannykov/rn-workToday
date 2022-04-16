@@ -37,11 +37,12 @@ export default StyleSheet.create({
     shadowColor: Colors.primaryBlue,
     shadowOffset: {
       width: 0,
-      height: 3,
+      height: 1,
     },
     shadowOpacity: 0.24,
-    shadowRadius: 5.86,
-    elevation: 18,
+    shadowRadius: 0,
+    elevation: 2,
+    marginRight: 1,
   },
   btn_title: {
     color: Colors.primaryBlue,

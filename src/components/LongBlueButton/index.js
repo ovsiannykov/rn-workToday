@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.24,
     shadowRadius: 5.86,
-    elevation: 18,
+    elevation: 3,
   },
   text: {
     color: "white",

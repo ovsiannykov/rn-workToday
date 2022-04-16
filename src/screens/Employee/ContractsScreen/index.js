@@ -18,7 +18,10 @@ const ContractsScreen = (props) => {
         <View style={{ marginTop: 20 }}>
           <ContractFilter />
         </View>
-        <ScrollView style={{ marginTop: 10 }}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ marginTop: 10, paddingBottom: 20 }}
+        >
           <Vacancy
             status='Активний'
             onPress={() => navigation.navigate("ContractDetailScreen")}
