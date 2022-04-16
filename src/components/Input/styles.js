@@ -4,12 +4,12 @@ import Colors from "../../constants/Colors";
 
 export default StyleSheet.create({
   inputBox: {
-    width: 295,
+    // width: 295,
     height: 66,
   },
   inputLabel: {
     color: Colors.darkBlue,
-    fontFamily: "Poppins300",
+    fontFamily: "ComfortaaLight",
     fontSize: 14,
     lineHeight: 16,
   },

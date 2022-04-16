@@ -60,7 +60,7 @@ const HomeScreen = (props) => {
             <View style={styles.vacancy_box}>
               <Vacancy
                 title='Офіціант'
-                pressFunc={() =>
+                onPress={() =>
                   navigation.navigate("VacancyDetail", { title: "Офіціант" })
                 }
               />

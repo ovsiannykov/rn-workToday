@@ -7,6 +7,7 @@ import HomeScreen from "../../screens/Employee/HomeScreen/";
 import VacancyDetail from "../../screens/Employee/VacancyDetail";
 import Profile from "../../screens/Employee/Profile";
 import ContractDetailScreen from "../../screens/Employee/ContractDetailScreen";
+import Settings from "../../screens/Employee/Settings";
 
 const MainStack = createStackNavigator();
 
@@ -32,6 +33,7 @@ export const MainStackScreen = ({ navigation, route }) => {
         name={"ContractDetailScreen"}
         component={ContractDetailScreen}
       />
+      <MainStack.Screen name={"Settings"} component={Settings} />
     </MainStack.Navigator>
   );
 };

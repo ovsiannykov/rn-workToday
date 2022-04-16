@@ -17,7 +17,7 @@ const Profile = ({ navigation }) => {
       <View style={styles.header}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerTitle}>Профіль</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
             <Ionicons name='ellipsis-horizontal' size={24} color='black' />
           </TouchableOpacity>
         </View>

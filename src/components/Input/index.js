@@ -20,14 +20,14 @@ const Input = (props) => {
       </Text>
       <TextInput
         style={styles.TextInput}
-        value={text}
-        onChangeText={onChangeText}
+        value={props.value ? props.value : text}
+        onChangeText={props.onChange ? props.onChange : onChangeText}
         placeholder={props.placeholder ? props.placeholder : null}
         keyboardType={props.keyType ? props.keyType : "default"}
         autoCorrect={props.autoCorrect ? props.autoCorrect : false}
         maxLength={props.maxLength ? props.maxLength : null}
         textContentType={props.textContentType ? props.textContentType : null}
-        secureTextEntry={show}
+        secureTextEntry={props.secureTextEntry ? props.secureTextEntry : show}
       />
       {props.isPassword == true ? (
         <TouchableOpacity

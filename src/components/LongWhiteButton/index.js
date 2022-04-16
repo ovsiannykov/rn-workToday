@@ -28,7 +28,7 @@ const LongWhiteButton = (props) => {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
-    width: 299,
+    width: "100%",
     height: 48,
     backgroundColor: "#FFFFFF",
     borderRadius: 12,
