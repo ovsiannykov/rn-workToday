@@ -8,6 +8,7 @@ import VacancyDetail from "../../screens/Employee/VacancyDetail";
 import Profile from "../../screens/Employee/Profile";
 import ContractDetailScreen from "../../screens/Employee/ContractDetailScreen";
 import Settings from "../../screens/Employee/Settings";
+import Feedback from "../../screens/Employee/Feedback";
 
 const MainStack = createStackNavigator();
 
@@ -34,6 +35,7 @@ export const MainStackScreen = ({ navigation, route }) => {
         component={ContractDetailScreen}
       />
       <MainStack.Screen name={"Settings"} component={Settings} />
+      <MainStack.Screen name={"Feedback"} component={Feedback} />
     </MainStack.Navigator>
   );
 };

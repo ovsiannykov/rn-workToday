@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, ScrollView, TouchableOpacity, Switch } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
+import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 import Input from "../../../components/Input";
@@ -9,13 +10,17 @@ import LongWhiteButton from "../../../components/LongWhiteButton";
 import LongBlueButton from "../../../components/LongBlueButton";
 import ErrorBlock from "../../../components/ErrorBlock";
 import Colors from "../../../constants/Colors";
+import SettingsModal from "../../../components/SettingsModal";
 
 const Settings = (props) => {
   const [email, setEmail] = useState("alexander.warps@gmail.ua");
   const [isEnabled, setIsEnabled] = useState(true);
   const [disablePush, setDisablePush] = useState(0);
   const [pushType, setPushType] = useState(0);
+  const [isModal, setIsModal] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+
+  const navigation = useNavigation();
 
   const Button = () => {
     return (
@@ -25,11 +30,23 @@ const Settings = (props) => {
     );
   };
 
+  const closeModal = () => {
+    setIsModal(false);
+  };
+
   return (
     <LinearGradient
       colors={["#F4F7FF", "#FFFFFF"]}
       style={{ ...styles.container }}
     >
+      <SettingsModal
+        isModal={isModal}
+        closeModal={closeModal}
+        onPress={() => {
+          navigation.navigate("Feedback");
+          setIsModal(false);
+        }}
+      />
       <Text style={styles.title}>Налаштування профілю</Text>
       <ScrollView style={styles.scroll_container}>
         <View style={styles.wrapper}>
@@ -72,6 +89,10 @@ const Settings = (props) => {
           </View>
           <LongWhiteButton title='Переглянути маркетингові умови' />
           <LongBlueButton title='Заповнити компетенції' />
+          <LongWhiteButton
+            title='Звернутися у підтримку'
+            onPress={() => setIsModal(true)}
+          />
         </View>
         <View>
           <Text style={styles.label}>Повідомлення</Text>
