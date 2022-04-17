@@ -19,6 +19,7 @@ export async function bootstrap() {
     'ComfortaaBold': require('../assets/fonts/Comfortaa/Comfortaa-Bold.ttf'),
     'ComfortaaMedium': require('../assets/fonts/Comfortaa/Comfortaa-Medium.ttf'),
     'ComfortaaRegular': require('../assets/fonts/Comfortaa/Comfortaa-Regular.ttf'),
-    'ComfortaaSemiBold': require('../assets/fonts/Comfortaa/Comfortaa-SemiBold.ttf')
+    'ComfortaaSemiBold': require('../assets/fonts/Comfortaa/Comfortaa-SemiBold.ttf'),
+    'Rubik_Regular': require('../assets/fonts/Rubik-Regular.ttf')
   });
 }

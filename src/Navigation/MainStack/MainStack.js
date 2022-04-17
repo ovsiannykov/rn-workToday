@@ -11,6 +11,7 @@ import Settings from "../../screens/Employee/Settings";
 import Feedback from "../../screens/Employee/Feedback";
 import UploadCompetence from "../../screens/Employee/UploadCompetence";
 import MarketingAgreements from "../../screens/Employee/MarketingAgreements";
+import Questions from "../../screens/Employee/Questions";
 
 const MainStack = createStackNavigator();
 
@@ -46,6 +47,7 @@ export const MainStackScreen = ({ navigation, route }) => {
         name={"MarketingAgreements"}
         component={MarketingAgreements}
       />
+      <MainStack.Screen name={"Questions"} component={Questions} />
     </MainStack.Navigator>
   );
 };

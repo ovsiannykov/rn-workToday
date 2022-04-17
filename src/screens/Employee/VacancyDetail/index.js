@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 import NavigationHeader from "../../../components/NavigationHeader";
@@ -13,6 +14,7 @@ import VacancyInfo from "../../../components/VacancyInfo";
 
 const VacancyDetail = (props) => {
   const route = useRoute();
+  const navigation = useNavigation();
 
   const compitensesList = [
     { id: "1", label: "Art", its: false },
@@ -42,8 +44,14 @@ const VacancyDetail = (props) => {
             ))}
           </View>
           <View style={styles.buttons_container}>
-            <LongWhiteButton title='Заповнити компетенції' />
-            <LongBlueButton title='Відповсіти на вакансію' />
+            <LongWhiteButton
+              onPress={() => navigation.navigate("UploadCompetence")}
+              title='Заповнити компетенції'
+            />
+            <LongBlueButton
+              onPress={() => navigation.navigate("Questions")}
+              title='Відповсіти на вакансію'
+            />
           </View>
         </View>
       </ScrollView>
