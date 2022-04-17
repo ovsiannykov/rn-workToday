@@ -56,7 +56,10 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
         <View style={styles.TabView__item}>
           <View style={styles.iconWrapper_staticric}>
             {/*{(calendarScreens.indexOf(routeName) !== -1) ? <CalendarActiveIcon/> : <CalendarIcon/>}*/}
-            <TouchableOpacity style={styles.Statistic_Btn}>
+            <TouchableOpacity
+              style={styles.Statistic_Btn}
+              onPress={() => navigation.navigate("Statistics")}
+            >
               <StatisticIcon />
             </TouchableOpacity>
           </View>
