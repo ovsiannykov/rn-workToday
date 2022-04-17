@@ -16,9 +16,9 @@ const LongWhiteButton = (props) => {
     <TouchableOpacity
       onPress={props.onPress}
       style={styles.container}
-      disabled={disabled}
+      disabled={props.disabled}
     >
-      <Text style={disabled ? styles.text_disabled : styles.text}>
+      <Text style={props.disabled ? styles.text_disabled : styles.text}>
         {props.title ? props.title : "Кнопка"}
       </Text>
     </TouchableOpacity>

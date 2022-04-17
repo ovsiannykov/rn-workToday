@@ -12,9 +12,9 @@ const QuestionsContainer = (props) => {
         <Text style={styles.step_text}>{props.step} з 5 кроків</Text>
         <QuestionsSteps step={props.step} />
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <View>
         <View style={styles.wrapper}>{props.children}</View>
-      </ScrollView>
+      </View>
     </>
   );
 };

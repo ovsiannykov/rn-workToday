@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
 import QuestionsContainer from "../../../components/Questions/QuestionsContainer";
 import StepOne from "../../../components/Questions/StepOne";
+import Step1 from "../../../components/Questions/Step1";
 
 const Questions = (props) => {
   const [step, setStep] = useState(1);
@@ -14,7 +15,7 @@ const Questions = (props) => {
     setStep(2);
   };
 
-  const Step = <StepOne nextStep={nextStepOne} />;
+  const Step = <Step1 nextStep={nextStepOne} />;
 
   return (
     <LinearGradient

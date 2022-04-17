@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
@@ -19,71 +20,80 @@ const statusOptions = [
 ];
 
 const Step1 = (props) => {
-  const [birth, setBirth] = useState();
-  const [citizenship, setCitizenship] = useState();
+  const [birth, setBirth] = useState("");
+  const [citizenship, setCitizenship] = useState("");
   const [selctList, setSelectList] = useState(false);
-  const [status, setStatus] = useState();
+  const [status, setStatus] = useState("");
   const [disableBtn, setDisableBtn] = useState(true);
 
   useEffect(() => {
-    if (birth) {
+    if (birth && citizenship && status) {
       setDisableBtn(false);
     }
-
-    console.log(status);
-  }, [birth, disableBtn]);
+  }, [birth, status, citizenship, disableBtn]);
 
   return (
     <View>
-      <View style={{ marginTop: 20 }}>
-        <Text style={styles.label}>Дата народження:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setBirth}
-          value={birth}
-          placeholder='(день-місяць-рік)'
-        />
-      </View>
-      <View style={{ marginTop: 20 }}>
-        <Text style={styles.label}>Громадянство:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setCitizenship}
-          value={citizenship}
-          placeholder='Україна'
-        />
-      </View>
-      <View style={{ marginTop: 20 }}>
-        <Text style={styles.label}>Громадянство:</Text>
-        <TouchableOpacity
-          style={styles.select_input}
-          onPress={() => setSelectList(!selctList)}
-        >
-          <Text style={styles.select_text}>{status ? status : "Виберіть"}</Text>
-        </TouchableOpacity>
-        {selctList ? (
-          <View style={styles.select_box}>
-            {statusOptions.map((item) => (
-              <TouchableOpacity
-                key={item.id}
-                style={styles.select_variant}
-                onPress={() => {
-                  setStatus(item.label);
-                  setSelectList(false);
-                }}
-              >
-                <Text style={styles.select_text}>{item.label}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        ) : null}
-      </View>
-      <View style={{ marginTop: 200 }}>
-        <LongWhiteButton
-          title='Наступний крок'
-          onPress={props.nextStep}
-          disabled={disableBtn}
-        />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{ height: "100%" }}
+      >
+        <View style={{ marginTop: 20 }}>
+          <Text style={styles.label}>Дата народження:</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={setBirth}
+            value={birth}
+            placeholder='(день-місяць-рік)'
+          />
+        </View>
+        <View style={{ marginTop: 20 }}>
+          <Text style={styles.label}>Громадянство:</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={setCitizenship}
+            value={citizenship}
+            placeholder='Україна'
+          />
+        </View>
+        <View style={{ marginTop: 20 }}>
+          <Text style={styles.label}>Я в даний час*</Text>
+          <TouchableOpacity
+            style={styles.select_input}
+            onPress={() => setSelectList(!selctList)}
+          >
+            <Text style={styles.select_text}>
+              {status ? status : "Виберіть"}
+            </Text>
+          </TouchableOpacity>
+          {selctList ? (
+            <View style={styles.select_box}>
+              {statusOptions.map((item) => (
+                <TouchableOpacity
+                  key={item.id}
+                  style={styles.select_variant}
+                  onPress={() => {
+                    setStatus(item.label);
+                    setSelectList(false);
+                  }}
+                >
+                  <Text style={styles.select_text}>
+                    {"\u2022  " + item.label}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          ) : null}
+        </View>
+      </ScrollView>
+      <View style={{ alignItems: "center" }}>
+        <View style={styles.btn_box}>
+          <LongWhiteButton
+            title='Наступний крок'
+            onPress={props.nextStep}
+            disabled={disableBtn}
+          />
+        </View>
       </View>
     </View>
   );
@@ -130,8 +140,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderBottomColor: "#D9DFEB",
     borderBottomWidth: 0.5,
+    borderRadius: 18,
   },
-  btn_box: {},
+  btn_box: {
+    width: 299,
+    position: "absolute",
+    bottom: 150,
+  },
 });
 
 export default Step1;
