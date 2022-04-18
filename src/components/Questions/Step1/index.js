@@ -56,7 +56,7 @@ const Step1 = (props) => {
             placeholder='Україна'
           />
         </View>
-        <View style={{ marginTop: 20 }}>
+        {/* <View style={{ marginTop: 20 }}>
           <Text style={styles.label}>Я в даний час*</Text>
           <TouchableOpacity
             style={styles.select_input}
@@ -84,7 +84,7 @@ const Step1 = (props) => {
               ))}
             </View>
           ) : null}
-        </View>
+        </View> */}
       </ScrollView>
       <View style={{ alignItems: "center" }}>
         <View style={styles.btn_box}>

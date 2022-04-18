@@ -28,6 +28,7 @@ const Input = (props) => {
         maxLength={props.maxLength ? props.maxLength : null}
         textContentType={props.textContentType ? props.textContentType : null}
         secureTextEntry={props.secureTextEntry ? props.secureTextEntry : show}
+        error={props.error}
       />
       {props.isPassword == true ? (
         <TouchableOpacity

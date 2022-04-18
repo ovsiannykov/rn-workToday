@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 273,
     marginTop: 16,
+    paddingBottom: 10,
   },
   yellow_box: {
     width: 45.34,
