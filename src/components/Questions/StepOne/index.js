@@ -61,13 +61,14 @@ const StepOne = (props) => {
               style={{ height: "100%" }}
             >
               <View style={{ marginTop: 20, width: 300 }}>
-                <Text style={styles.label}>Громадянство:</Text>
+                <Text style={styles.label}>Дата народження:</Text>
                 <TextInput
                   style={styles.input}
                   value={values.birth}
                   onChangeText={handleChange("birth")}
                   error={errors.birth}
                   placeholder='(день-місяць-рік)'
+                  keyboardType='numeric'
                 />
               </View>
               <View style={{ marginTop: 20, width: 300 }}>

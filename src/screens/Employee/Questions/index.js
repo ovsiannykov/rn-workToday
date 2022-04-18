@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, ScrollView, TextInput, Button } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 import QuestionsContainer from "../../../components/Questions/QuestionsContainer";
@@ -8,10 +9,13 @@ import StepOne from "../../../components/Questions/StepOne";
 import StepTwo from "../../../components/Questions/StepTwo";
 import StepThree from "../../../components/Questions/StepThree";
 import StepFour from "../../../components/Questions/StepFour";
+import StepFive from "../../../components/Questions/StepFive";
 
 const Questions = (props) => {
   const [step, setStep] = useState(1);
   const [title, setTitle] = useState("Основна інформація");
+
+  const navigation = useNavigation();
 
   const nextStep = () => {
     setStep((step) => step + 1);
@@ -42,9 +46,11 @@ const Questions = (props) => {
       style={{ ...styles.container }}
     >
       <QuestionsContainer title={title} step={step}>
-        {step == 2 ? <StepOne nextStep={nextStep} /> : null}
-        {step == 4 ? <StepTwo nextStep={nextStep} /> : null}
-        {step == 1 ? <StepFour nextStep={nextStep} /> : null}
+        {step == 1 ? <StepOne nextStep={nextStep} /> : null}
+        {step == 2 ? <StepTwo nextStep={nextStep} /> : null}
+        {step == 3 ? <StepThree nextStep={nextStep} /> : null}
+        {step == 4 ? <StepFour nextStep={nextStep} /> : null}
+        {step == 5 ? <StepFive nextStep={() => navigation.goBack()} /> : null}
       </QuestionsContainer>
     </LinearGradient>
   );

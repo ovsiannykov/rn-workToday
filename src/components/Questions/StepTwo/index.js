@@ -142,7 +142,9 @@ const StepTwo = (props) => {
                   ) : null}
                 </View>
                 <View style={{ marginTop: 20 }}>
-                  <Text style={styles.label}>Відпустка крім щорічної*</Text>
+                  <Text style={styles.label}>
+                    Внески сплачуються від мінімум 2800 брутто*
+                  </Text>
                   <TouchableOpacity
                     style={styles.select_input}
                     onPress={() => setSelectList3(!selctList3)}

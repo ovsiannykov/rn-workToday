@@ -19,8 +19,6 @@ import Input from "../../Input";
 const StepThree = (props) => {
   const [keyboardStatus, setKeyboardStatus] = useState(undefined);
 
-  console.log(keyboardStatus);
-
   useEffect(() => {
     const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
       setKeyboardStatus("Keyboard Shown");
@@ -28,6 +26,11 @@ const StepThree = (props) => {
     const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
       setKeyboardStatus("Keyboard Hidden");
     });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
   }, []);
 
   return (

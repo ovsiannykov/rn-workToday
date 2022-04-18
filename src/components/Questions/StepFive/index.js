@@ -14,23 +14,19 @@ import * as Yup from "yup";
 
 import Colors from "../../../constants/Colors";
 import LongWhiteButton from "../../LongWhiteButton";
+import UploadInput from "../../../components/UpluadInput/index";
 import Input from "../../Input";
 
-const streetType = [
-  { id: "1", label: "Вулиця" },
-  { id: "2", label: "Алея" },
-  { id: "3", label: "Площа" },
-  { id: "4", label: "Мікрорайон" },
+const methods = [
+  {
+    id: "1",
+    label: "Вислати фото документів, які видаляться одразу після перевірки",
+  },
+  { id: "2", label: "Особисто в офісі Tikrow Pruszków ul. Kraszewskiego 32/4" },
 ];
 
-const factAdress = [
-  { id: "1", label: "Так" },
-  { id: "2", label: "Ні" },
-];
-
-const StepFour = (props) => {
+const StepFive = (props) => {
   const [selctList, setSelectList] = useState(true);
-  const [selctList2, setSelectList2] = useState(true);
   const [keyboardStatus, setKeyboardStatus] = useState(undefined);
 
   useEffect(() => {
@@ -45,17 +41,11 @@ const StepFour = (props) => {
   return (
     <Formik
       initialValues={{
-        post: "",
-        city: "",
-        streetType: "",
-        isAdress: "",
-        houseNum: "",
-        apartament: "",
-        correspondenceCity: "",
-        correspondenceStreetType: "",
-        correspondenceStreetName: "",
-        correspondenceHouseNum: "",
-        correspondenceAppartament: "",
+        method: "",
+        passport1: "",
+        passport2: "",
+        polandCard1: "",
+        polandCard2: "",
       }}
       onSubmit={(values) => {
         console.log(values);
@@ -76,12 +66,11 @@ const StepFour = (props) => {
       }) => {
         errors = submitCount > 0 ? errors : {};
         const isValid =
-          values.post.length > 0 &&
-          values.city.length > 0 &&
-          values.streetType.length > 0 &&
-          values.isAdress.length > 0 &&
-          values.houseNum.length > 0 &&
-          values.apartament.length > 0;
+          values.method.length > 0 &&
+          values.passport1 &&
+          values.passport2 &&
+          values.polandCard1 &&
+          values.polandCard2;
         return (
           <View>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -90,43 +79,26 @@ const StepFour = (props) => {
                   paddingBottom: keyboardStatus == "Keyboard Shown" ? 400 : 150,
                 }}
               >
-                <View style={{ marginTop: 20, width: 300 }}>
-                  <Text style={styles.label}>Код почтовий (індекс):</Text>
-                  <TextInput
-                    style={styles.input}
-                    value={values.post}
-                    onChangeText={handleChange("post")}
-                    error={errors.post}
-                    keyboardType='numeric'
-                  />
-                </View>
-                <View style={{ marginTop: 20, width: 300 }}>
-                  <Text style={styles.label}>Населений пункт:</Text>
-                  <TextInput
-                    style={styles.input}
-                    value={values.city}
-                    onChangeText={handleChange("city")}
-                    error={errors.city}
-                  />
-                </View>
                 <View style={{ marginTop: 20 }}>
-                  <Text style={styles.label}>Вид вулиці*</Text>
+                  <Text style={styles.label}>
+                    Спосіб підтвердження правдивості документів:
+                  </Text>
                   <TouchableOpacity
                     style={styles.select_input}
                     onPress={() => setSelectList(!selctList)}
                   >
                     <Text style={styles.select_text}>
-                      {values.streetType ? values.streetType : "Виберіть"}
+                      {values.method ? values.method : "Виберіть"}
                     </Text>
                   </TouchableOpacity>
                   {selctList ? (
                     <View style={styles.select_box}>
-                      {streetType.map((item) => (
+                      {methods.map((item) => (
                         <TouchableOpacity
                           key={item.id}
                           style={styles.select_variant}
                           onPress={() => {
-                            setFieldValue("streetType", item.label);
+                            setFieldValue("method", item.label);
                             setSelectList(false);
                           }}
                         >
@@ -139,117 +111,26 @@ const StepFour = (props) => {
                   ) : null}
                 </View>
                 <View style={{ marginTop: 20, width: 300 }}>
-                  <Text style={styles.label}>Номер будинку:</Text>
-                  <TextInput
-                    style={styles.input}
-                    value={values.houseNum}
-                    onChangeText={handleChange("houseNum")}
-                    error={errors.houseNum}
-                    keyboardType='numeric'
-                  />
+                  <Text style={styles.label}>Фото 1 сторінки паспорту:</Text>
+                  <UploadInput />
                 </View>
                 <View style={{ marginTop: 20, width: 300 }}>
-                  <Text style={styles.label}>Номер квартири:</Text>
-                  <TextInput
-                    style={styles.input}
-                    value={values.apartament}
-                    onChangeText={handleChange("apartament")}
-                    error={errors.apartament}
-                    keyboardType='numeric'
-                  />
-                </View>
-                <View style={{ marginTop: 20 }}>
-                  <Text style={styles.label}>
-                    Поштова адреса (адреса кореспонденції) така сама як і адреса
-                    проживання?
-                  </Text>
-                  <TouchableOpacity
-                    style={styles.select_input}
-                    onPress={() => setSelectList2(!selctList2)}
-                  >
-                    <Text style={styles.select_text}>
-                      {values.isAdress ? values.isAdress : "Виберіть"}
-                    </Text>
-                  </TouchableOpacity>
-                  {selctList2 ? (
-                    <View style={styles.select_box}>
-                      {factAdress.map((item) => (
-                        <TouchableOpacity
-                          key={item.id}
-                          style={styles.select_variant}
-                          onPress={() => {
-                            setFieldValue("isAdress", item.label);
-                            setSelectList2(false);
-                          }}
-                        >
-                          <Text style={styles.select_text}>{"\u2022"}</Text>
-                          <Text style={styles.select_text}>{item.label}</Text>
-                        </TouchableOpacity>
-                      ))}
-                    </View>
-                  ) : null}
+                  <Text style={styles.label}>Фото 2 сторінки паспорту:</Text>
+                  <UploadInput />
                 </View>
                 <View style={{ marginTop: 20, width: 300 }}>
-                  <Text style={styles.label}>
-                    Населений пункт кореспонденції:
-                  </Text>
-                  <TextInput
-                    style={styles.input}
-                    value={values.correspondenceCity}
-                    onChangeText={handleChange("correspondenceCity")}
-                    error={errors.correspondenceCity}
-                  />
+                  <Text style={styles.label}>Фото 1 сторона Карти Поляка:</Text>
+                  <UploadInput />
                 </View>
                 <View style={{ marginTop: 20, width: 300 }}>
-                  <Text style={styles.label}>Вид вулиці:</Text>
-                  <TextInput
-                    style={styles.input}
-                    value={values.correspondenceStreetType}
-                    onChangeText={handleChange("correspondenceStreetType")}
-                    error={errors.correspondenceStreetType}
-                  />
-                </View>
-                <View style={{ marginTop: 20, width: 300 }}>
-                  <Text style={styles.label}>
-                    Назва вулиці для кореспонденції:
-                  </Text>
-                  <TextInput
-                    style={styles.input}
-                    value={values.correspondenceStreetName}
-                    onChangeText={handleChange("correspondenceStreetName")}
-                    error={errors.correspondenceStreetName}
-                  />
-                </View>
-                <View style={{ marginTop: 20, width: 300 }}>
-                  <Text style={styles.label}>
-                    Номер будинку для кореспонденції:
-                  </Text>
-                  <TextInput
-                    style={styles.input}
-                    value={values.correspondenceHouseNum}
-                    onChangeText={handleChange("correspondenceHouseNum")}
-                    error={errors.correspondenceHouseNum}
-                    keyboardType='numeric'
-                  />
-                </View>
-                <View style={{ marginTop: 20, width: 300 }}>
-                  <Text style={styles.label}>
-                    Номер квартири для кореспонденції:
-                  </Text>
-                  <TextInput
-                    style={styles.input}
-                    value={values.correspondenceAppartament}
-                    onChangeText={handleChange("correspondenceAppartament")}
-                    error={errors.correspondenceAppartament}
-                    keyboardType='numeric'
-                  />
+                  <Text style={styles.label}>Фото 2 сторона Карти Поляка:</Text>
+                  <UploadInput />
                 </View>
                 <View style={{ marginTop: 20, padding: 5 }}>
                   <LongWhiteButton
-                    title='Наступний крок'
-                    // onPress={props.nextStep}
-                    //disabled={!isValid}
-                    onPress={handleSubmit}
+                    title='Закінчити'
+                    onPress={props.nextStep}
+                    disabled={!isValid}
                   />
                 </View>
               </View>
@@ -297,7 +178,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5F5F5",
   },
   select_variant: {
-    height: 44,
+    // height: 44,
+    padding: 10,
     width: 294,
     borderBottomColor: "#D9DFEB",
     borderBottomWidth: 0.5,
@@ -314,4 +196,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StepFour;
+export default StepFive;
