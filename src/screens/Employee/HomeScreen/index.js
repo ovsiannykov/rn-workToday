@@ -19,11 +19,11 @@ const HomeScreen = (props) => {
 
   const navigation = useNavigation();
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setStoryViewModal(true);
-  //   }, 1000);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setStoryViewModal(true);
+    }, 1000);
+  }, []);
 
   const mapHandler = () => {
     setIsMap(!isMap);
