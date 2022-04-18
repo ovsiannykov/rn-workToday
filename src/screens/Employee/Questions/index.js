@@ -12,17 +12,17 @@ const Questions = (props) => {
   const [title, setTitle] = useState("Основна інформація");
 
   const nextStepOne = () => {
-    setStep(2);
+    setStep((step) => step + 1);
   };
-
-  const Step = <Step1 nextStep={nextStepOne} />;
 
   return (
     <LinearGradient
       colors={["#F4F7FF", "#FFFFFF"]}
       style={{ ...styles.container }}
     >
-      <QuestionsContainer children={Step} title={title} step={step} />
+      <QuestionsContainer title={title} step={step}>
+        {step == 1 ? <Step1 nextStep={nextStepOne} /> : null}
+      </QuestionsContainer>
     </LinearGradient>
   );
 };
