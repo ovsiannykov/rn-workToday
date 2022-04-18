@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 import Input from "../../../components/Input";
@@ -71,7 +72,10 @@ const Login = ({ navigation, login, ...props }) => {
                     isPassword={true}
                   />
                 </View>
-                <BigButton title='УВIЙТИ' />
+                <BigButton
+                  title='УВIЙТИ'
+                  onPress={() => navigation.navigate("SMS")}
+                />
                 <View style={styles.loginSmallButtonsBox}>
                   <Text style={styles.restorePassword}>Забули пароль?</Text>
                   <TouchableOpacity>

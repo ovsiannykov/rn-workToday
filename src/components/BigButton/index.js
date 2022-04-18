@@ -6,7 +6,7 @@ import styles from "./styles";
 const BigButton = (props) => {
   return (
     <TouchableOpacity
-      onPress={props.func ? props.func : null}
+      onPress={props.onPress ? props.onPress : null}
       style={styles.btnBox}
     >
       <Text style={styles.btnText}>{props.title ? props.title : "Button"}</Text>
