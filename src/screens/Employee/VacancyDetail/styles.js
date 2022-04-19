@@ -63,6 +63,5 @@ export default StyleSheet.create({
   buttons_container: {
     justifyContent: "center",
     alignItems: "center",
-    paddingBottom: 20,
   },
 });

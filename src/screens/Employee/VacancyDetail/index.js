@@ -11,6 +11,7 @@ import Skill from "../../../components/Skill";
 import LongWhiteButton from "../../../components/LongWhiteButton";
 import LongBlueButton from "../../../components/LongBlueButton";
 import VacancyInfo from "../../../components/VacancyInfo";
+import PhotoSlider from "../../../components/PhotoSlider";
 
 const VacancyDetail = (props) => {
   const route = useRoute();
@@ -54,6 +55,7 @@ const VacancyDetail = (props) => {
             />
           </View>
         </View>
+        <PhotoSlider />
       </ScrollView>
     </LinearGradient>
   );
