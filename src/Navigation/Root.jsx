@@ -4,6 +4,7 @@ import {Authorization} from './Auth/Authorization';
 import {StatusBar} from "react-native";
 import {DrawerNavigator} from "./Drawer/DrawerNavigator";
 import AuthContext from './Auth/AuthContext'
+import EmployerStack from '../Navigation/EmployerStack/EmployerStack'
 
 
 export const Root = ({userToken}) => {
@@ -12,8 +13,9 @@ export const Root = ({userToken}) => {
 
     <NavigationContainer>
       <StatusBar backgroundColor={'#ffffff'} barStyle={'dark-content'}/>
-      {userToken !== null ? <DrawerNavigator/> : <Authorization/>}
+      {/* {userToken !== null ? <DrawerNavigator/> : <Authorization/>} */}
        {/* <DrawerNavigator/> */}
+       <EmployerStack />
     </NavigationContainer>
   );
 };
