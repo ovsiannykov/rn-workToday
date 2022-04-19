@@ -11,6 +11,8 @@ import LongBlueButton from "../../../components/LongBlueButton";
 import ErrorBlock from "../../../components/ErrorBlock";
 import Colors from "../../../constants/Colors";
 import SettingsModal from "../../../components/SettingsModal";
+import sized from "../../../Svg/sized";
+import supportSvg from "../../../assets/icons/support.svg";
 
 const Settings = (props) => {
   const [email, setEmail] = useState("alexander.warps@gmail.ua");
@@ -21,6 +23,7 @@ const Settings = (props) => {
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   const navigation = useNavigation();
+  const SupportIcon = sized(supportSvg, 20, 20);
 
   const Button = () => {
     return (
@@ -103,10 +106,6 @@ const Settings = (props) => {
               onPress={() => navigation.navigate("UploadCompetence")}
               title='Заповнити компетенції'
             />
-            <LongWhiteButton
-              title='Звернутися у підтримку'
-              onPress={() => setIsModal(true)}
-            />
           </View>
         </View>
         <View>
@@ -144,6 +143,27 @@ const Settings = (props) => {
                 setPushType(event.nativeEvent.selectedSegmentIndex);
               }}
             />
+          </View>
+          <View
+            style={{
+              marginBottom: 50,
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <TouchableOpacity style={{ marginBottom: 20, ...styles.btn_long2 }}>
+              <Text style={{ ...styles.btnLong_title2 }}>
+                Заповнити інформацію для роботодавців
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btn_long}
+              onPress={() => setIsModal(true)}
+            >
+              <Text style={styles.btnLong_title}>Відправити питання</Text>
+              <SupportIcon />
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
