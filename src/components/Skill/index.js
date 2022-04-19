@@ -3,19 +3,36 @@ import { View, Text, StyleSheet } from "react-native";
 
 import trueSvg from "../../assets/icons/true.svg";
 import falseSvg from "../../assets/icons/false.svg";
+import blueCircleSvg from "../../assets/icons/blueCircle.svg";
 import sized from "../../Svg/sized";
 
 const Skill = (props) => {
-  const [isTrue, setIsTrue] = useState(false);
+  const [isTrue, setIsTrue] = useState(undefined);
 
   useEffect(() => {
     if (props.isTrue) {
       setIsTrue(true);
     }
+
+    if (!props.isTrue && props.isTrue == undefined) {
+      setIsTrue(undefined);
+    }
   }, [props.isTrue]);
 
   const TrueIcon = sized(trueSvg, 24, 24);
   const FalseIcon = sized(falseSvg, 24, 24);
+  const JustIcon = sized(blueCircleSvg, 24, 24);
+
+  if (isTrue == undefined) {
+    return (
+      <View style={styles.container_just}>
+        <Text style={styles.text_just}>{props.title}</Text>
+        <View>
+          <JustIcon />
+        </View>
+      </View>
+    );
+  }
 
   return (
     <View style={isTrue ? styles.container_true : styles.container_false}>
@@ -72,6 +89,31 @@ const styles = StyleSheet.create({
   },
   text_false: {
     color: "#FF4B55",
+    marginRight: 5,
+    fontFamily: "ComfortaaLight",
+    fontSize: 12,
+    lineHeight: 18,
+    letterSpacing: 0.7,
+  },
+  container_just: {
+    display: "flex",
+    flexDirection: "row",
+    borderRadius: 75,
+    justifyContent: "space-between",
+    paddingRight: 3,
+    borderWidth: 2,
+    borderStyle: "solid",
+    paddingVertical: 4,
+    marginBottom: 10,
+    paddingLeft: 16,
+    borderColor: "#376AED",
+    alignItems: "center",
+    minHeight: 32,
+    maxWidth: 128,
+    marginHorizontal: 5,
+  },
+  text_just: {
+    color: "#376AED",
     marginRight: 5,
     fontFamily: "ComfortaaLight",
     fontSize: 12,
