@@ -1,6 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Contracts from "../../screens/Employer/Contracts";
+import Reviews from "../../screens/Employer/Reviews";
 
 import EmployerStackStyles from "./EmployerStackStyles";
 
@@ -9,10 +9,10 @@ const Stack = createNativeStackNavigator();
 const EmployerStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName='Contracts'
+      initialRouteName='Reviews'
       screenOptions={EmployerStackStyles.screenOptions}
     >
-      <Stack.Screen name='Contracts' component={Contracts} />
+      <Stack.Screen name='Reviews' component={Reviews} />
     </Stack.Navigator>
   );
 };

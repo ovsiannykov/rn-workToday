@@ -1,32 +1,77 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
+import Colors from "../../constants/Colors";
+
+const standartData = [
+  { id: "1", label: "Категорія 1" },
+  { id: "2", label: "Категорія 2" },
+];
+
 const RadioButtons = (props) => {
-  const [radioBtn, setRadioBtn] = useState(true);
+  const [data, setData] = useState(standartData);
+  const [radioBtn, setRadioBtn] = useState(data[0].id);
+
+  useEffect(() => {
+    if (props.data) {
+      setData(props.data);
+    }
+  }, [props.data]);
+
+  const RadioItem = (props) => {
+    if (props.all) {
+      return (
+        <TouchableOpacity
+          style={styles.btn_all}
+          onPress={() => setRadioBtn(props.id)}
+        >
+          <View style={styles.icon_box}>
+            <Ionicons
+              name={
+                radioBtn == props.id
+                  ? "radio-button-on"
+                  : "radio-button-off-sharp"
+              }
+              size={18}
+              color='black'
+            />
+          </View>
+          <Text style={styles.text_all}>{props.title}</Text>
+        </TouchableOpacity>
+      );
+    }
+    return (
+      <TouchableOpacity
+        style={styles.btn}
+        onPress={() => setRadioBtn(props.id)}
+      >
+        <View style={styles.icon_box}>
+          <Ionicons
+            name={
+              radioBtn == props.id
+                ? "radio-button-on"
+                : "radio-button-off-sharp"
+            }
+            size={18}
+            color='black'
+          />
+        </View>
+        <Text style={styles.text}>{props.title}</Text>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View style={{ marginTop: 10 }}>
-      <TouchableOpacity style={styles.btn} onPress={() => setRadioBtn(true)}>
-        <View style={styles.icon_box}>
-          <Ionicons
-            name={radioBtn ? "radio-button-on" : "radio-button-off-sharp"}
-            size={18}
-            color='black'
-          />
-        </View>
-        <Text style={styles.text}>Категорія 1</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.btn} onPress={() => setRadioBtn(false)}>
-        <View style={styles.icon_box}>
-          <Ionicons
-            name={!radioBtn ? "radio-button-on" : "radio-button-off-sharp"}
-            size={18}
-            color='black'
-          />
-        </View>
-        <Text>Категорія 2</Text>
-      </TouchableOpacity>
+      {data.map((item) => (
+        <RadioItem
+          key={item.id}
+          title={item.label}
+          id={item.id}
+          all={item.all}
+        />
+      ))}
     </View>
   );
 };
@@ -57,6 +102,20 @@ const styles = StyleSheet.create({
   text: {
     color: "#141010",
     fontSize: 14,
+  },
+  btn_all: {
+    width: 333,
+    height: 44,
+    alignItems: "center",
+    paddingHorizontal: 21,
+    marginBottom: 16,
+    display: "flex",
+    flexDirection: "row",
+  },
+  text_all: {
+    color: Colors.darkBlue,
+    fontSize: 16,
+    fontWeight: "700",
   },
 });
 

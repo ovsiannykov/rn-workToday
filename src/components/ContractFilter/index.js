@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 import sized from "../../Svg/sized";
@@ -13,28 +13,20 @@ const filters = [
   { id: "5", label: "Активний", count: "87" },
 ];
 
-const ContractFilter = () => {
-  const [selectCategory, setSelectCategory] = useState(filters[1]);
+const ContractFilter = (props) => {
+  const [selectCategory, setSelectCategory] = useState(
+    props.data ? props.data[1] : filters[1]
+  );
   const [opneList, setOpenList] = useState(false);
+  const [data, setData] = useState(filters);
+
+  useEffect(() => {
+    if (props.data) {
+      setData(props.data);
+    }
+  }, [props.data]);
 
   const DownIcon = sized(downSvg, 20, 20);
-
-  // const DropItem = () => {
-  //   return (
-  //     <TouchableOpacity
-  //       style={styles.item}
-  //       onPress={() => setSelectCategory(item)}
-  //     >
-  //       <View>
-  //         <Text>{item.count}</Text>
-  //       </View>
-  //       <View>
-  //         <Text>{item.label}</Text>
-  //       </View>
-  //       <View></View>
-  //     </TouchableOpacity>
-  //   );
-  // };
 
   return (
     <View style={styles.container}>
@@ -54,7 +46,7 @@ const ContractFilter = () => {
       </TouchableOpacity>
       {opneList ? (
         <View>
-          {filters.map((item) => (
+          {data.map((item) => (
             <TouchableOpacity
               key={item.id}
               style={

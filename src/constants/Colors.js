@@ -6,4 +6,6 @@ export default {
   darkGray: "#7B8BB2",
   primaryBlue: "#376AED",
   markerBlue: "#0047CC",
+  green: "#2EB44C",
+  red: "#FF4B55",
 };
