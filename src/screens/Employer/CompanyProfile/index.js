@@ -17,7 +17,9 @@ const CompanyProfile = ({ navigation }, props) => {
       <View style={styles.header}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerTitle}>Профіль</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("CreateCompany")}
+          >
             <Ionicons name='ellipsis-horizontal' size={24} color='black' />
           </TouchableOpacity>
         </View>
