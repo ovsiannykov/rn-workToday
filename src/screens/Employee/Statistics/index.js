@@ -7,7 +7,7 @@ import Chart from "../../../components/Chart";
 import StatisicModal from "../../../components/Modals/EmployeeModals/StatisicModal";
 
 const Statistics = (props) => {
-  const [isModal, setIsModal] = useState(true);
+  const [isModal, setIsModal] = useState(false);
 
   const closeModal = () => {
     setIsModal(false);
@@ -17,7 +17,7 @@ const Statistics = (props) => {
     <View style={styles.container}>
       <StatisicModal isModal={isModal} closeModal={closeModal} />
       <Text style={styles.title}>
-        {props.title ? props.titile : "Статистика"}
+        {props.title ? props.title : "Статистика"}
       </Text>
       <View style={styles.content}>
         <ScrollView>
