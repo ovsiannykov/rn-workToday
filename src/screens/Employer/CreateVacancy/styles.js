@@ -16,7 +16,7 @@ export default StyleSheet.create({
     width: 328,
   },
   wrapper: {
-    paddingHorizontal: 34,
+    paddingLeft: 25,
   },
   input: {
     borderBottomColor: "#D9DFEB",
@@ -74,8 +74,8 @@ export default StyleSheet.create({
     justifyContent: "flex-end",
     width: 102.64,
     position: "absolute",
-    top: 32,
-    right: -70,
+    top: 35,
+    right: -40,
   },
   selectMap_text: {
     color: Colors.primaryBlue,
@@ -84,5 +84,48 @@ export default StyleSheet.create({
     textAlign: "right",
     marginRight: 6,
     fontFamily: "ComfortaaLight",
+  },
+  vacancy_info: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 21,
+  },
+  image_box: {
+    width: 38,
+    height: 38,
+    borderRadius: 12,
+    marginRight: 9,
+  },
+  image: {
+    width: 38,
+    height: 38,
+    borderRadius: 12,
+  },
+  company_name: {
+    fontSize: 14,
+    color: Colors.darkBlue,
+    fontFamily: "ComfortaaMedium",
+    marginBottom: 7,
+  },
+  time: {
+    fontFamily: "Roboto_Regular",
+    color: Colors.darkBlue,
+    fontSize: 12,
+    marginLeft: 3,
+  },
+  input_min: {
+    borderBottomColor: "#D9DFEB",
+    borderBottomWidth: 2,
+    paddingVertical: 10,
+    fontFamily: "ComfortaaLight",
+    width: 111,
+  },
+  input_middle: {
+    borderBottomColor: "#D9DFEB",
+    borderBottomWidth: 2,
+    paddingVertical: 10,
+    fontFamily: "ComfortaaLight",
+    width: 161,
   },
 });

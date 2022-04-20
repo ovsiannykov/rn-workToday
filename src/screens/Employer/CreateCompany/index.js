@@ -130,7 +130,7 @@ const CreateCompany = (props) => {
                       />
                     </View>
                     <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>ПАватар профіля</Text>
+                      <Text style={styles.label}>Аватар профіля</Text>
                       <UpluadInput />
                     </View>
 

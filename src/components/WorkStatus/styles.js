@@ -105,6 +105,7 @@ export default StyleSheet.create({
     borderStyle: "solid",
     borderColor: Colors.primaryBlue,
     marginTop: 20,
+    marginBottom: 20,
   },
   support_btn_text: {
     color: Colors.primaryBlue,
