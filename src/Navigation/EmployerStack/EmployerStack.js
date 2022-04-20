@@ -9,13 +9,14 @@ import CreateCompany from "../../screens/Employer/CreateCompany";
 import VacancyDetail from "../../screens/Employer/VacancyDetail";
 import Workers from "../../screens/Employer/Workers";
 import CreateVacancy from "../../screens/Employer/CreateVacancy";
+import Statistics from "../../screens/Employer/Statistics";
 
 const Stack = createNativeStackNavigator();
 
 const EmployerStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName='Workers'
+      initialRouteName='Statistics'
       screenOptions={EmployerStackStyles.screenOptions}
     >
       <Stack.Screen name='Reviews' component={Reviews} />
@@ -25,6 +26,7 @@ const EmployerStack = () => {
       <Stack.Screen name='VacancyDetail' component={VacancyDetail} />
       <Stack.Screen name='Workers' component={Workers} />
       <Stack.Screen name='CreateVacancy' component={CreateVacancy} />
+      <Stack.Screen name='Statistics' component={Statistics} />
     </Stack.Navigator>
   );
 };
