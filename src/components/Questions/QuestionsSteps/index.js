@@ -1,15 +1,21 @@
 import React from "react";
-import {View, StyleSheet} from "react-native";
+import { View, StyleSheet } from "react-native";
 
 import Colors from "../../../constants/Colors";
 
 const QuestionsSteps = (props) => {
-
-  return <View style={styles.container}>
-    {Array.apply(null, {length: 5}).map((_, index) => {
-      return <View style={[index < props.step ? styles.yellow_box : styles.gray_box]}/>
-    })}
-  </View>
+  return (
+    <View style={styles.container}>
+      {Array.apply(null, { length: 5 }).map((_, index) => {
+        return (
+          <View
+            key={Math.random()}
+            style={[index < props.step ? styles.yellow_box : styles.gray_box]}
+          />
+        );
+      })}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({

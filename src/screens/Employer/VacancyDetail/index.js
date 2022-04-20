@@ -18,8 +18,8 @@ const VacancyDetail = (props) => {
   const navigation = useNavigation();
 
   const compitensesList = [
-    { id: "1", label: "Art" },
-    { id: "2", label: "Design" },
+    { id: "1", label: "Art", its: undefined },
+    { id: "2", label: "Design", its: undefined },
   ];
 
   return (

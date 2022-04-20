@@ -15,7 +15,7 @@ import * as Yup from "yup";
 import Colors from "../../../constants/Colors";
 import LongWhiteButton from "../../LongWhiteButton";
 import Input from "../../Input";
-import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const streetType = [
   { id: "1", label: "Вулиця" },
@@ -32,16 +32,6 @@ const factAdress = [
 const StepFour = (props) => {
   const [selctList, setSelectList] = useState(true);
   const [selctList2, setSelectList2] = useState(true);
-  const [keyboardStatus, setKeyboardStatus] = useState(undefined);
-
-  useEffect(() => {
-    const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
-      setKeyboardStatus("Keyboard Shown");
-    });
-    const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
-      setKeyboardStatus("Keyboard Hidden");
-    });
-  }, []);
 
   return (
     <Formik
@@ -87,13 +77,14 @@ const StepFour = (props) => {
           <View>
             <ScrollView
               nestedScrollEnabled={true}
-              showsVerticalScrollIndicator={false}>
+              showsVerticalScrollIndicator={false}
+            >
               <View
                 style={{
                   paddingBottom: 150,
                 }}
               >
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>Код почтовий (індекс):</Text>
                   <TextInput
                     style={styles.input}
@@ -103,7 +94,7 @@ const StepFour = (props) => {
                     keyboardType='numeric'
                   />
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>Населений пункт:</Text>
                   <TextInput
                     style={styles.input}
@@ -141,7 +132,7 @@ const StepFour = (props) => {
                     </View>
                   ) : null}
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>Номер будинку:</Text>
                   <TextInput
                     style={styles.input}
@@ -151,7 +142,7 @@ const StepFour = (props) => {
                     keyboardType='numeric'
                   />
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>Номер квартири:</Text>
                   <TextInput
                     style={styles.input}
@@ -192,7 +183,7 @@ const StepFour = (props) => {
                     </View>
                   ) : null}
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>
                     Населений пункт кореспонденції:
                   </Text>
@@ -203,7 +194,7 @@ const StepFour = (props) => {
                     error={errors.correspondenceCity}
                   />
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>Вид вулиці:</Text>
                   <TextInput
                     style={styles.input}
@@ -212,7 +203,7 @@ const StepFour = (props) => {
                     error={errors.correspondenceStreetType}
                   />
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>
                     Назва вулиці для кореспонденції:
                   </Text>
@@ -223,7 +214,7 @@ const StepFour = (props) => {
                     error={errors.correspondenceStreetName}
                   />
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>
                     Номер будинку для кореспонденції:
                   </Text>
@@ -235,7 +226,7 @@ const StepFour = (props) => {
                     keyboardType='numeric'
                   />
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>
                     Номер квартири для кореспонденції:
                   </Text>

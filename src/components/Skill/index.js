@@ -9,12 +9,18 @@ import sized from "../../Svg/sized";
 const Skill = (props) => {
   const [isTrue, setIsTrue] = useState(undefined);
 
+  console.log(isTrue);
+
   useEffect(() => {
     if (props.isTrue) {
       setIsTrue(true);
     }
 
-    if (!props.isTrue && props.isTrue == undefined) {
+    if (props.isTrue == false) {
+      setIsTrue(false);
+    }
+
+    if (props.isTrue == undefined) {
       setIsTrue(undefined);
     }
   }, [props.isTrue]);

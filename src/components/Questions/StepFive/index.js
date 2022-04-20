@@ -27,16 +27,6 @@ const methods = [
 
 const StepFive = (props) => {
   const [selctList, setSelectList] = useState(true);
-  const [keyboardStatus, setKeyboardStatus] = useState(undefined);
-
-  useEffect(() => {
-    const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
-      setKeyboardStatus("Keyboard Shown");
-    });
-    const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
-      setKeyboardStatus("Keyboard Hidden");
-    });
-  }, []);
 
   return (
     <Formik
@@ -75,7 +65,8 @@ const StepFive = (props) => {
           <View>
             <ScrollView
               nestedScrollEnabled={true}
-              showsVerticalScrollIndicator={false}>
+              showsVerticalScrollIndicator={false}
+            >
               <View
                 style={{
                   paddingBottom: 150,
@@ -112,19 +103,19 @@ const StepFive = (props) => {
                     </View>
                   ) : null}
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>Фото 1 сторінки паспорту:</Text>
                   <UploadInput />
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>Фото 2 сторінки паспорту:</Text>
                   <UploadInput />
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>Фото 1 сторона Карти Поляка:</Text>
                   <UploadInput />
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>Фото 2 сторона Карти Поляка:</Text>
                   <UploadInput />
                 </View>

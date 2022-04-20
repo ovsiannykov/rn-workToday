@@ -83,7 +83,7 @@ const CreateCompany = (props) => {
                         keyboardStatus == "Keyboard Shown" ? 400 : 150,
                     }}
                   >
-                    <View style={{ width: 300 }}>
+                    <View style={{ width: "75%" }}>
                       <Text style={styles.label}>Назва компанії</Text>
                       <TextInput
                         style={styles.input}
@@ -93,7 +93,7 @@ const CreateCompany = (props) => {
                         placeholder='Назва компанії'
                       />
                     </View>
-                    <View style={{ marginTop: 20, width: 300 }}>
+                    <View style={{ marginTop: 20, width: "75%" }}>
                       <Text style={styles.label}>Тематика</Text>
                       <TextInput
                         style={styles.input}
@@ -103,7 +103,7 @@ const CreateCompany = (props) => {
                         placeholder='Тематика'
                       />
                     </View>
-                    <View style={{ marginTop: 20, width: 300 }}>
+                    <View style={{ marginTop: 20, width: "75%" }}>
                       <Text style={styles.label}>Місце роботи:</Text>
                       <TextInput
                         style={styles.input}
@@ -119,7 +119,7 @@ const CreateCompany = (props) => {
                         <SlecetMapIcon />
                       </TouchableOpacity>
                     </View>
-                    <View style={{ marginTop: 20, width: 300 }}>
+                    <View style={{ marginTop: 20, width: "75%" }}>
                       <Text style={styles.label}>Про компанію</Text>
                       <TextInput
                         style={styles.input}
@@ -129,7 +129,7 @@ const CreateCompany = (props) => {
                         placeholder='У кількох словах'
                       />
                     </View>
-                    <View style={{ marginTop: 20, width: 300 }}>
+                    <View style={{ marginTop: 20, width: "75%" }}>
                       <Text style={styles.label}>ПАватар профіля</Text>
                       <UpluadInput />
                     </View>
