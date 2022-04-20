@@ -28,4 +28,10 @@ export default StyleSheet.create({
     fontSize: 18,
     fontFamily: "ComfortaaLight",
   },
+  status_box: {
+    alignItems: "center",
+    position: "relative",
+    top: -150,
+    marginBottom: 60,
+  },
 });

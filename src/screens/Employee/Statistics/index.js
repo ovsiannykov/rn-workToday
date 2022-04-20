@@ -5,9 +5,15 @@ import styles from "./styles";
 import StatisticSlider from "../../../components/StatisticSlider";
 import Chart from "../../../components/Chart";
 import StatisicModal from "../../../components/Modals/EmployeeModals/StatisicModal";
+import WorkStatus from "../../../components/WorkStatus";
 
 const Statistics = (props) => {
   const [isModal, setIsModal] = useState(false);
+  const [workStatus, setWorkStatus] = useState("Активний");
+
+  const cancelWork = () => {
+    setWorkStatus("Скасований");
+  };
 
   const closeModal = () => {
     setIsModal(false);
@@ -15,7 +21,11 @@ const Statistics = (props) => {
 
   return (
     <View style={styles.container}>
-      <StatisicModal isModal={isModal} closeModal={closeModal} />
+      <StatisicModal
+        isModal={isModal}
+        closeModal={closeModal}
+        onPress={cancelWork}
+      />
       <Text style={styles.title}>
         {props.title ? props.title : "Статистика"}
       </Text>
@@ -25,6 +35,12 @@ const Statistics = (props) => {
           <View>
             <StatisticSlider />
             <Chart />
+          </View>
+          <View style={styles.status_box}>
+            <WorkStatus
+              status={workStatus}
+              greenPress={() => setIsModal(true)}
+            />
           </View>
         </ScrollView>
       </View>

@@ -14,6 +14,11 @@ const StatisicModal = (props) => {
   const QuestionIcon = sized(questionMarkSvg, 64, 64);
   const ExclamationIcon = sized(exclamationSvg, 64, 64);
 
+  const CancelHandler = () => {
+    props.closeModal();
+    props.onPress();
+  };
+
   const ContentOne = (props) => {
     return (
       <View style={styles.modal}>
@@ -48,7 +53,7 @@ const StatisicModal = (props) => {
           >
             <Text style={styles.btn_titile}>Отмена</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={props.closeModal} style={styles.btn}>
+          <TouchableOpacity onPress={CancelHandler} style={styles.btn}>
             <Text style={styles.btn_titile}>Відправити</Text>
           </TouchableOpacity>
         </View>
