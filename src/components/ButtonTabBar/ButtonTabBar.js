@@ -37,7 +37,7 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
       <View style={[styles.TabView]}>
         <TouchableOpacity
           style={styles.TabView__item}
-          onPress={() => navigation.navigate("TabsBar")}
+          onPress={() => navigation.navigate("Home")}
         >
           <View style={styles.iconWrapper}>
             <HomeIcon />

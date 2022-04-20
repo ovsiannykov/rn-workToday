@@ -79,7 +79,7 @@ const StepThree = (props) => {
               showsVerticalScrollIndicator={false}>
               <View
                 style={{
-                  paddingBottom:  150,
+                  paddingBottom: 150,
                 }}
               >
                 <View style={{marginTop: 20, width: 300}}>

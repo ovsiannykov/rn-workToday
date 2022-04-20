@@ -1,68 +1,15 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import {View, StyleSheet} from "react-native";
 
 import Colors from "../../../constants/Colors";
 
 const QuestionsSteps = (props) => {
-  if (props.step == 1) {
-    return (
-      <View style={styles.container}>
-        <View style={styles.yellow_box}></View>
-        <View style={styles.gray_box}></View>
-        <View style={styles.gray_box}></View>
-        <View style={styles.gray_box}></View>
-        <View style={styles.gray_box}></View>
-      </View>
-    );
-  }
 
-  if (props.step == 2) {
-    return (
-      <View style={styles.container}>
-        <View style={styles.yellow_box}></View>
-        <View style={styles.yellow_box}></View>
-        <View style={styles.gray_box}></View>
-        <View style={styles.gray_box}></View>
-        <View style={styles.gray_box}></View>
-      </View>
-    );
-  }
-
-  if (props.step == 3) {
-    return (
-      <View style={styles.container}>
-        <View style={styles.yellow_box}></View>
-        <View style={styles.yellow_box}></View>
-        <View style={styles.yellow_box}></View>
-        <View style={styles.gray_box}></View>
-        <View style={styles.gray_box}></View>
-      </View>
-    );
-  }
-
-  if (props.step == 4) {
-    return (
-      <View style={styles.container}>
-        <View style={styles.yellow_box}></View>
-        <View style={styles.yellow_box}></View>
-        <View style={styles.yellow_box}></View>
-        <View style={styles.yellow_box}></View>
-        <View style={styles.gray_box}></View>
-      </View>
-    );
-  }
-
-  if (props.step == 5) {
-    return (
-      <View style={styles.container}>
-        <View style={styles.yellow_box}></View>
-        <View style={styles.yellow_box}></View>
-        <View style={styles.yellow_box}></View>
-        <View style={styles.yellow_box}></View>
-        <View style={styles.yellow_box}></View>
-      </View>
-    );
-  }
+  return <View style={styles.container}>
+    {Array.apply(null, {length: 5}).map((_, index) => {
+      return <View style={[index < props.step ? styles.yellow_box : styles.gray_box]}/>
+    })}
+  </View>
 };
 
 const styles = StyleSheet.create({
