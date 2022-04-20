@@ -15,6 +15,7 @@ import * as Yup from "yup";
 import Colors from "../../../constants/Colors";
 import LongWhiteButton from "../../LongWhiteButton";
 import Input from "../../Input";
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 
 const streetType = [
   { id: "1", label: "Вулиця" },
@@ -84,10 +85,12 @@ const StepFour = (props) => {
           values.apartament.length > 0;
         return (
           <View>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView
+              nestedScrollEnabled={true}
+              showsVerticalScrollIndicator={false}>
               <View
                 style={{
-                  paddingBottom: keyboardStatus == "Keyboard Shown" ? 400 : 150,
+                  paddingBottom: 150,
                 }}
               >
                 <View style={{ marginTop: 20, width: 300 }}>

@@ -15,7 +15,7 @@ export default StyleSheet.create({
     fontFamily: "ComfortaaLight",
   },
   content: {
-    height: 600,
+    // height: 600,
     backgroundColor: "white",
     //position: "absolute",
     bottom: -80,

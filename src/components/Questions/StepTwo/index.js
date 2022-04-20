@@ -71,7 +71,9 @@ const StepTwo = (props) => {
           values.contributions.length > 0;
         return (
           <View>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView
+              nestedScrollEnabled={true}
+              showsVerticalScrollIndicator={false}>
               <View style={{ paddingBottom: 150 }}>
                 <View style={{ marginTop: 20, width: 300 }}>
                   <Text style={styles.label}>

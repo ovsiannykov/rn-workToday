@@ -34,7 +34,6 @@ const Questions = (props) => {
     if (step == 4) {
       setTitle("Адресса проживання");
     }
-
     if (step == 5) {
       setTitle("Завантаження документів");
     }

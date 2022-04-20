@@ -12,6 +12,14 @@ import Feedback from "../../screens/Employee/Feedback";
 import UploadCompetence from "../../screens/Employee/UploadCompetence";
 import MarketingAgreements from "../../screens/Employee/MarketingAgreements";
 import Questions from "../../screens/Employee/Questions";
+import Reviews from "../../screens/Employer/Reviews";
+import Vacancies from "../../screens/Employer/Vacancies";
+import CompanyProfile from "../../screens/Employer/CompanyProfile";
+import CreateCompany from "../../screens/Employer/CreateCompany";
+import Workers from "../../screens/Employer/Workers";
+import ContractsScreen from "../../screens/Employee/ContractsScreen";
+import Statistics from "../../screens/Employee/Statistics";
+import FavoritesScreen from "../../screens/Employee/FavoritesScreen";
 
 const MainStack = createStackNavigator();
 
@@ -48,6 +56,15 @@ export const MainStackScreen = ({ navigation, route }) => {
         component={MarketingAgreements}
       />
       <MainStack.Screen name={"Questions"} component={Questions} />
+      <MainStack.Screen name='Reviews' component={Reviews} />
+      <MainStack.Screen name='Vacancies' component={Vacancies} />
+      <MainStack.Screen name='CompanyProfile' component={CompanyProfile} />
+      <MainStack.Screen name='CreateCompany' component={CreateCompany} />
+      <MainStack.Screen name='Workers' component={Workers} />
+      <MainStack.Screen name='Contracts' component={ContractsScreen} />
+      <MainStack.Screen name='Statistics' component={Statistics} />
+      <MainStack.Screen name='Favorites' component={FavoritesScreen} />
+      <MainStack.Screen name='Profile' component={Profile} />
     </MainStack.Navigator>
   );
 };

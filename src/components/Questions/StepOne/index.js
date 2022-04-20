@@ -15,6 +15,7 @@ import * as Yup from "yup";
 import Colors from "../../../constants/Colors";
 import LongWhiteButton from "../../LongWhiteButton";
 import Input from "../../../components/Input";
+import {mainStyles, SCREEN_HEIGHT, SCREEN_WIDTH} from "../../../styles/mainStyles";
 
 const statusOptions = [
   { id: "1", label: "Працюю" },
@@ -57,8 +58,9 @@ const StepOne = (props) => {
         return (
           <View>
             <ScrollView
+              nestedScrollEnabled={true}
               showsVerticalScrollIndicator={false}
-              style={{ height: "100%" }}
+              style={{ height: SCREEN_HEIGHT / 100 * 58}}
             >
               <View style={{ marginTop: 20, width: 300 }}>
                 <Text style={styles.label}>Дата народження:</Text>
@@ -171,9 +173,7 @@ const styles = StyleSheet.create({
     borderRadius: 18,
   },
   btn_box: {
-    width: 299,
-    position: "absolute",
-    bottom: 140,
+    width: SCREEN_WIDTH - 70,
   },
 });
 

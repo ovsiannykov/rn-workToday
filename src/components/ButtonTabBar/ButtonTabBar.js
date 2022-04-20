@@ -94,7 +94,6 @@ const styles = StyleSheet.create({
   },
   TabView: {
     backgroundColor: "#FFFFFF",
-    height: 85,
     paddingHorizontal: Platform.OS === "ios" ? 20 : 10,
     bottom: 0,
     left: 0,

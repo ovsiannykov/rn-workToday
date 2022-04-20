@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import {
   View,
   Text,
@@ -9,7 +9,7 @@ import {
   Keyboard,
   ScrollView,
 } from "react-native";
-import { Formik, Form, Field } from "formik";
+import {Formik, Form, Field} from "formik";
 import * as Yup from "yup";
 
 import Colors from "../../../constants/Colors";
@@ -55,13 +55,13 @@ const StepThree = (props) => {
       // })}
     >
       {({
-        values,
-        handleChange,
-        handleSubmit,
-        errors,
-        submitCount,
-        setFieldValue,
-      }) => {
+          values,
+          handleChange,
+          handleSubmit,
+          errors,
+          submitCount,
+          setFieldValue,
+        }) => {
         errors = submitCount > 0 ? errors : {};
         const isValid =
           values.passport.length > 0 &&
@@ -74,13 +74,15 @@ const StepThree = (props) => {
           values.tax.length > 0;
         return (
           <View>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView
+              nestedScrollEnabled={true}
+              showsVerticalScrollIndicator={false}>
               <View
                 style={{
-                  paddingBottom: keyboardStatus == "Keyboard Shown" ? 400 : 150,
+                  paddingBottom:  150,
                 }}
               >
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{marginTop: 20, width: 300}}>
                   <Text style={styles.label}>Серія і номер паспорту:</Text>
                   <TextInput
                     style={styles.input}
@@ -89,7 +91,7 @@ const StepThree = (props) => {
                     error={errors.passport}
                   />
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{marginTop: 20, width: 300}}>
                   <Text style={styles.label}>
                     Дата закінчення дії паспорту:
                   </Text>
@@ -100,7 +102,7 @@ const StepThree = (props) => {
                     error={errors.passportDate}
                   />
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{marginTop: 20, width: 300}}>
                   <Text style={styles.label}>Номер PESEL:</Text>
                   <TextInput
                     style={styles.input}
@@ -109,7 +111,7 @@ const StepThree = (props) => {
                     error={errors.pessel}
                   />
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{marginTop: 20, width: 300}}>
                   <Text style={styles.label}>Ім’я:</Text>
                   <TextInput
                     style={styles.input}
@@ -118,7 +120,7 @@ const StepThree = (props) => {
                     error={errors.firstname}
                   />
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{marginTop: 20, width: 300}}>
                   <Text style={styles.label}>Прізвище:</Text>
                   <TextInput
                     style={styles.input}
@@ -127,7 +129,7 @@ const StepThree = (props) => {
                     error={errors.lastname}
                   />
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{marginTop: 20, width: 300}}>
                   <Text style={styles.label}>Електронна адреса:</Text>
                   <TextInput
                     style={styles.input}
@@ -137,7 +139,7 @@ const StepThree = (props) => {
                     keyboardType='email-address'
                   />
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{marginTop: 20, width: 300}}>
                   <Text style={styles.label}>Номер банківського рахунку:</Text>
                   <TextInput
                     style={styles.input}
@@ -147,7 +149,7 @@ const StepThree = (props) => {
                     keyboardType='numeric'
                   />
                 </View>
-                <View style={{ marginTop: 20, width: 300 }}>
+                <View style={{marginTop: 20, width: 300}}>
                   <Text style={styles.label}>Назва, адреса податкової:</Text>
                   <TextInput
                     style={styles.input}
@@ -156,7 +158,7 @@ const StepThree = (props) => {
                     error={errors.tax}
                   />
                 </View>
-                <View style={{ marginTop: 20, padding: 5 }}>
+                <View style={{marginTop: 20, padding: 5}}>
                   <LongWhiteButton
                     title='Наступний крок'
                     onPress={props.nextStep}

@@ -3,10 +3,11 @@ import { View, Text, ScrollView, StyleSheet } from "react-native";
 
 import Colors from "../../../constants/Colors";
 import QuestionsSteps from "../../../components/Questions/QuestionsSteps";
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 
 const QuestionsContainer = (props) => {
   return (
-    <>
+    <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
       <View style={{ alignItems: "center" }}>
         <Text style={styles.title}>{props.title}</Text>
         <Text style={styles.step_text}>{props.step} з 5 кроків</Text>
@@ -15,7 +16,7 @@ const QuestionsContainer = (props) => {
       <View>
         <View style={styles.wrapper}>{props.children}</View>
       </View>
-    </>
+    </KeyboardAwareScrollView>
   );
 };
 

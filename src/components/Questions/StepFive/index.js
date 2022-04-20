@@ -73,10 +73,12 @@ const StepFive = (props) => {
           values.polandCard2;
         return (
           <View>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView
+              nestedScrollEnabled={true}
+              showsVerticalScrollIndicator={false}>
               <View
                 style={{
-                  paddingBottom: keyboardStatus == "Keyboard Shown" ? 400 : 150,
+                  paddingBottom: 150,
                 }}
               >
                 <View style={{ marginTop: 20 }}>
