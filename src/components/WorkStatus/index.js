@@ -56,7 +56,21 @@ const WorkStatus = (props) => {
         </View>
       </View>
       <View style={{ alignItems: "center" }}>
-        <TouchableOpacity style={styles.support_btn}>
+        {status == "Активний" ? (
+          <TouchableOpacity
+            style={styles.cancel_btn}
+            onPress={props.greenPress}
+          >
+            <Text style={styles.cancel_btn_text}>Відмінити роботу</Text>
+          </TouchableOpacity>
+        ) : null}
+        <TouchableOpacity
+          style={{
+            marginTop: status == "Активний" ? -10 : 20,
+            ...styles.support_btn,
+          }}
+          onPress={props.onPressRed}
+        >
           <Text style={styles.support_btn_text}>Звернутися у підтримку</Text>
         </TouchableOpacity>
       </View>

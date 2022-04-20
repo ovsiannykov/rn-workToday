@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 import StatisticSlider from "../../../components/StatisticSlider";
@@ -10,6 +11,7 @@ import WorkStatus from "../../../components/WorkStatus";
 const Statistics = (props) => {
   const [isModal, setIsModal] = useState(false);
   const [workStatus, setWorkStatus] = useState("Активний");
+  const navigation = useNavigation();
 
   const cancelWork = () => {
     setWorkStatus("Скасований");
@@ -40,6 +42,9 @@ const Statistics = (props) => {
             <WorkStatus
               status={workStatus}
               greenPress={() => setIsModal(true)}
+              onPressRed={() =>
+                navigation.navigate("Settings", { setModal: true })
+              }
             />
           </View>
         </ScrollView>

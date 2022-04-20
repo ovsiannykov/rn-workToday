@@ -8,12 +8,14 @@ import {
 } from "react-native";
 import Modal from "react-native-modal";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import LongWhiteButton from "../../components/LongWhiteButton";
 
 const StoryviewModal = (props) => {
   const deviceWidth = Dimensions.get("window").width;
   const deviceHeight = Dimensions.get("window").height;
+  const navigation = useNavigation();
 
   return (
     <Modal
@@ -31,8 +33,22 @@ const StoryviewModal = (props) => {
         </Text>
       </View>
       <View style={styles.buttons_box}>
-        <LongWhiteButton title='До заповнення' />
-        <TouchableOpacity style={styles.red_btn}>
+        <LongWhiteButton
+          title='До заповнення'
+          onPress={() => {
+            props.close();
+            navigation.navigate("UploadCompetence");
+          }}
+        />
+        <TouchableOpacity
+          style={styles.red_btn}
+          onPress={() => {
+            props.close();
+            setTimeout(() => {
+              navigation.navigate("Settings", { setModal: true });
+            }, 500);
+          }}
+        >
           <Text style={styles.btn_text}>Потрібна допомога ? </Text>
         </TouchableOpacity>
       </View>

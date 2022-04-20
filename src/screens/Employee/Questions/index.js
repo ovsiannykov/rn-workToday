@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ScrollView, TextInput, Button } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 

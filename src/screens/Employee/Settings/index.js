@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView, TouchableOpacity, Switch } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import { useNavigation } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 
 import styles from "./styles";
 import Input from "../../../components/Input";
 import LongWhiteButton from "../../../components/LongWhiteButton";
 import LongBlueButton from "../../../components/LongBlueButton";
 import ErrorBlock from "../../../components/ErrorBlock";
-import Colors from "../../../constants/Colors";
 import SettingsModal from "../../../components/SettingsModal";
 import sized from "../../../Svg/sized";
 import supportSvg from "../../../assets/icons/support.svg";
@@ -23,7 +23,14 @@ const Settings = (props) => {
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   const navigation = useNavigation();
+  const route = useRoute();
   const SupportIcon = sized(supportSvg, 20, 20);
+
+  useEffect(() => {
+    if (route.params && route.params.setModal) {
+      setIsModal(true);
+    }
+  }, [route]);
 
   const Button = () => {
     return (

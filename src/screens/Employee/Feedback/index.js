@@ -3,14 +3,16 @@ import { View, Text, StyleSheet, Platform } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import StarRating from "react-native-star-rating";
 import { useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 import Colors from "../../../constants/Colors";
 import Input from "../../../components/Input";
 import LongWhiteButton from "../../../components/LongWhiteButton";
 
 const Feedback = () => {
-  const [rating, setRating] = useState(3);
+  const [rating, setRating] = useState(0);
 
+  const navigation = useNavigation();
   const route = useRoute();
 
   return (
@@ -38,7 +40,11 @@ const Feedback = () => {
         <Input title='Додатковий відгук' placeholder='Я вважаю...' />
         <View>
           <View style={styles.btn_box}>
-            <LongWhiteButton title='Закінчити' />
+            <LongWhiteButton
+              title='Закінчити'
+              onPress={() => navigation.goBack()}
+              disabled={rating == 0 ? true : false}
+            />
           </View>
         </View>
       </View>

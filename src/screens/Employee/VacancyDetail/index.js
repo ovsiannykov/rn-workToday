@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
