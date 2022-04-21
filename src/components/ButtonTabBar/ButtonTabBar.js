@@ -16,8 +16,8 @@ import statisticSvg from "../../assets/icons/statistic.svg";
 import Colors from "../../constants/Colors";
 
 export const ButtonTabBar = ({ state, descriptors, navigation }) => {
-  const vacancyScreens = [undefined]; // enter
-  const contractScreens = [];
+  const vacancyScreens = [undefined]; // enter name screens
+  const contractScreens = ['Contracts'];
   const marksScreens = [];
   const profileScreens = [];
   let focusedOptions = descriptors[state.routes[state.index].key].options;
@@ -55,7 +55,7 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
         </TouchableOpacity>
         <View style={styles.TabView__item}>
           <View style={styles.iconWrapper_staticric}>
-            {/*{(calendarScreens.indexOf(routeName) !== -1) ? <CalendarActiveIcon/> : <CalendarIcon/>}*/}
+            {/*{(contractScreens.indexOf(routeName) !== -1) ? <CalendarActiveIcon/> : <CalendarIcon/>}*/}
             <TouchableOpacity
               style={styles.Statistic_Btn}
               onPress={() => navigation.navigate("Statistics")}

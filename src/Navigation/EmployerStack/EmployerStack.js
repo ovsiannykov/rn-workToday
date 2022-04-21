@@ -16,7 +16,7 @@ const Stack = createNativeStackNavigator();
 const EmployerStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName='Statistics'
+      initialRouteName='Reviews'
       screenOptions={EmployerStackStyles.screenOptions}
     >
       <Stack.Screen name='Reviews' component={Reviews} />
