@@ -55,8 +55,22 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
           onPress={() => navigation.navigate("Home")}
         >
           <View style={styles.iconWrapper}>
-            <HomeIcon />
-            <Text style={styles.TabTitle}>Вакансії</Text>
+            {vacancyScreens.indexOf(routeName) !== -1 ? (
+              <ActiveHomeIcon />
+            ) : (
+              <HomeIcon />
+            )}
+            <Text
+              style={{
+                color:
+                  vacancyScreens.indexOf(routeName) !== -1
+                    ? "#376AED"
+                    : Colors.darkBlue,
+                ...styles.TabTitle,
+              }}
+            >
+              Вакансії
+            </Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity
@@ -69,7 +83,17 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
             ) : (
               <ContractsIcon />
             )}
-            <Text style={styles.TabTitle}>Контракти</Text>
+            <Text
+              style={{
+                color:
+                  contractScreens.indexOf(routeName) !== -1
+                    ? "#376AED"
+                    : Colors.darkBlue,
+                ...styles.TabTitle,
+              }}
+            >
+              Контракти
+            </Text>
           </View>
         </TouchableOpacity>
         <View style={styles.TabView__item}>
@@ -93,7 +117,17 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
             ) : (
               <BookmarksIcon />
             )}
-            <Text style={styles.TabTitle}>Закладки</Text>
+            <Text
+              style={{
+                color:
+                  bookmarksScreens.indexOf(routeName) !== -1
+                    ? "#376AED"
+                    : Colors.darkBlue,
+                ...styles.TabTitle,
+              }}
+            >
+              Закладки
+            </Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity
@@ -106,7 +140,17 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
             ) : (
               <SettingsIcon />
             )}
-            <Text style={styles.TabTitle}>Профіль</Text>
+            <Text
+              style={{
+                color:
+                  profileScreens.indexOf(routeName) !== -1
+                    ? "#376AED"
+                    : Colors.darkBlue,
+                ...styles.TabTitle,
+              }}
+            >
+              Профіль
+            </Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -197,7 +241,6 @@ const styles = StyleSheet.create({
     fontSize: 10,
     textAlign: "center",
     marginTop: 8,
-    color: Colors.darkGray,
   },
   TabTitle_contrats: {
     fontFamily: "ComfortaaRegular",
