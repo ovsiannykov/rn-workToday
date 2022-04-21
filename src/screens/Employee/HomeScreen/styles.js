@@ -17,5 +17,6 @@ export default StyleSheet.create({
   },
   vacancy_scrollBox: {
     height: "100%",
+    paddingHorizontal: 14,
   },
 });

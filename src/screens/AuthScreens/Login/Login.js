@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -13,13 +13,13 @@ import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 import Input from "../../../components/Input";
 import BigButton from "../../../components/BigButton";
-import {AuthContext} from "../../../Navigation/Auth/AuthContext";
+import { AuthContext } from "../../../Navigation/Auth/AuthContext";
 
 const logo = require("../../../assets/images/Logo.png");
 
 const Login = ({ navigation, login, ...props }) => {
   const [typeEntrance, setTypeEntrance] = useState(false);
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
 
   const DismissKeyboard = ({ children }) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -74,10 +74,12 @@ const Login = ({ navigation, login, ...props }) => {
                     isPassword={true}
                   />
                 </View>
-                <BigButton
-                  title='УВIЙТИ'
-                  onPress={() => context.signIn('asd')} // пользователь заходит в приложение, в context устанавливаю токен, переключается на основной стек со скринами
-                />
+                <View style={{ alignItems: "center" }}>
+                  <BigButton
+                    title='УВIЙТИ'
+                    onPress={() => context.signIn("asd")} // пользователь заходит в приложение, в context устанавливаю токен, переключается на основной стек со скринами
+                  />
+                </View>
                 <View style={styles.loginSmallButtonsBox}>
                   <Text style={styles.restorePassword}>Забули пароль?</Text>
                   <TouchableOpacity>
@@ -99,7 +101,14 @@ const Login = ({ navigation, login, ...props }) => {
                     isPassword={true}
                   />
                 </View>
-                <BigButton onPress={() => navigation.navigate("SMS")} title='РЕЄСТРАЦІЯ' />
+                <View>
+                  <View style={{ alignItems: "center" }}>
+                    <BigButton
+                      onPress={() => navigation.navigate("SMS")}
+                      title='РЕЄСТРАЦІЯ'
+                    />
+                  </View>
+                </View>
               </KeyboardAwareScrollView>
             )}
           </View>

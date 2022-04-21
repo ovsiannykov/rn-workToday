@@ -5,7 +5,7 @@ import Colors from "../../constants/Colors";
 export default StyleSheet.create({
   btnBox: {
     backgroundColor: Colors.blue,
-    width: 295,
+    width: "100%",
     height: 60,
     borderRadius: 12,
     alignItems: "center",

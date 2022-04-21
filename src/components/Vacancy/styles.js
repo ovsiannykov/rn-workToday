@@ -4,7 +4,7 @@ import Colors from "../../constants/Colors";
 
 export default StyleSheet.create({
   container: {
-    width: 347,
+    width: "98%",
     height: 164,
     backgroundColor: "white",
     borderRadius: 16,

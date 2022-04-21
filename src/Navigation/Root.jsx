@@ -13,7 +13,7 @@ export const Root = ({userToken}) => {
 
     <NavigationContainer>
       <StatusBar backgroundColor={'#ffffff'} barStyle={'dark-content'}/>
-       {/*{userToken !== null ? <DrawerNavigator/> : <Authorization/>}*/}
+       {/* {userToken !== null ? <DrawerNavigator/> : <Authorization/>} */}
         <EmployerStack />
     </NavigationContainer>
   );

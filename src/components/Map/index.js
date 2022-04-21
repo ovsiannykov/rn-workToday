@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Dimensions, Text } from "react-native";
-import MapView, { Marker, Overlay } from "react-native-maps";
+import { View, StyleSheet, Dimensions, Text, Platform } from "react-native";
+import MapView, { Marker } from "react-native-maps";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import Colors from "../../constants/Colors";
@@ -18,11 +18,23 @@ const Map = (props) => {
     longitudeDelta: 0.0421,
   };
 
+  const closeAllMarker = () => {
+    if (viewMarker1 || viewMarker2 || viewMarker3) {
+      setViewMarker1(false);
+      setViewMarker2(false);
+      setViewMarker3(false);
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <MapView region={mapRegion} style={styles.map}>
+      <MapView region={mapRegion} style={styles.map} onPress={closeAllMarker}>
         <Marker
-          onPress={() => setViewMarker1(!viewMarker1)}
+          onPress={() => {
+            setViewMarker1(!viewMarker1);
+            setViewMarker2(false);
+            setViewMarker3(false);
+          }}
           key={1}
           coordinate={{
             latitude: 50.4472139478322,
@@ -36,7 +48,11 @@ const Map = (props) => {
           />
         </Marker>
         <Marker
-          onPress={() => setViewMarker2(!viewMarker2)}
+          onPress={() => {
+            setViewMarker2(!viewMarker2);
+            setViewMarker1(false);
+            setViewMarker3(false);
+          }}
           key={2}
           coordinate={{
             latitude: 50.429970987937644,
@@ -50,7 +66,11 @@ const Map = (props) => {
           />
         </Marker>
         <Marker
-          onPress={() => setViewMarker3(!viewMarker3)}
+          onPress={() => {
+            setViewMarker3(!viewMarker3);
+            setViewMarker1(false);
+            setViewMarker2(false);
+          }}
           key={3}
           coordinate={{
             latitude: 50.43979132001462,
@@ -108,7 +128,7 @@ const styles = StyleSheet.create({
     width: 347,
     height: 164,
     zIndex: 999,
-    bottom: 620,
+    bottom: Platform.OS == "ios" ? 620 : 690,
   },
 });
 

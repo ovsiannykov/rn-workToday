@@ -129,7 +129,8 @@ const StatisticSlider = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: 33.5,
+    marginLeft: 25,
+    marginRight: 19,
     marginTop: 29,
   },
   scrollBar: {

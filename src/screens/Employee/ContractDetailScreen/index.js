@@ -45,36 +45,41 @@ const ContractDetailScreen = (props) => {
       style={{ ...styles.container }}
     >
       <Text style={styles.title}>Перегляд контракту</Text>
-      <View style={styles.wrapper}>
-        <TouchableOpacity
-          onPress={() => setContract(!conract)}
-          style={styles.button}
-        >
-          <View style={{ ...styles.button_wrapper }}>
-            <Text style={styles.button_text}>Деталі контракту</Text>
-          </View>
-          {!conract ? <DownIcon /> : <UpIcon />}
-        </TouchableOpacity>
-        {conract ? (
-          <View>
-            <ContractDetai />
-          </View>
-        ) : null}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => setVacancy(!vacancy)}
-        >
-          <View style={{ ...styles.button_wrapper }}>
-            <Text style={styles.button_text}>Деталі вакансії</Text>
-          </View>
-          {!vacancy ? <DownIcon /> : <UpIcon />}
-        </TouchableOpacity>
-        {vacancy ? (
-          <View style={{ alignItems: "center" }}>
-            <VacancyInfo />
-          </View>
-        ) : null}
-      </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{ paddingBottom: 280 }}
+      >
+        <View style={styles.wrapper}>
+          <TouchableOpacity
+            onPress={() => setContract(!conract)}
+            style={styles.button}
+          >
+            <View style={{ ...styles.button_wrapper }}>
+              <Text style={styles.button_text}>Деталі контракту</Text>
+            </View>
+            {!conract ? <DownIcon /> : <UpIcon />}
+          </TouchableOpacity>
+          {conract ? (
+            <View>
+              <ContractDetai />
+            </View>
+          ) : null}
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => setVacancy(!vacancy)}
+          >
+            <View style={{ ...styles.button_wrapper }}>
+              <Text style={styles.button_text}>Деталі вакансії</Text>
+            </View>
+            {!vacancy ? <DownIcon /> : <UpIcon />}
+          </TouchableOpacity>
+          {vacancy ? (
+            <View style={{ alignItems: "center" }}>
+              <VacancyInfo />
+            </View>
+          ) : null}
+        </View>
+      </ScrollView>
     </LinearGradient>
   );
 };
