@@ -31,14 +31,22 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "buildNumber": "1",
-      "bundleIdentifier": "com.work.ios"
+      "bundleIdentifier": "com.work.ios",
+      "config": {
+        "googleMapsApiKey": "AIzaSyBOgtxgzRLUT614o4D7nwepZVGJ2IGgP0Y"
+      }
     },
     "android": {
       "package": "com.work",
       "softwareKeyboardLayoutMode": "pan",
-      "versionCode": 1
+      "versionCode": 1,
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBOgtxgzRLUT614o4D7nwepZVGJ2IGgP0Y"
+        }
+      }
     },
     "packagerOpts": {
       "config": "metro.config.js",

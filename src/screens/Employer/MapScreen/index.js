@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import * as Location from "expo-location";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -19,8 +19,6 @@ import Colors from "../../../constants/Colors";
 const MapScreen = (props) => {
   const [isFetching, setIsFetching] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(mapRegion);
-
-  console.log(selectedLocation);
 
   const navigation = useNavigation();
 
@@ -78,6 +76,7 @@ const MapScreen = (props) => {
         style={styles.map}
         region={selectedLocation ? markerCoordinates : mapRegion}
         onPress={selectLocationHandler}
+        provider={PROVIDER_GOOGLE}
       >
         {selectedLocation ? (
           <Marker coordinate={markerCoordinates}>
@@ -135,10 +134,10 @@ const styles = StyleSheet.create({
     bottom: 220,
     position: "absolute",
     zIndex: 999,
-    width: 40,
-    height: 40,
+    width: 44,
+    height: 44,
     backgroundColor: "white",
-    borderRadius: 8,
+    borderRadius: 12,
   },
 });
 
