@@ -65,7 +65,7 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
                 color:
                   vacancyScreens.indexOf(routeName) !== -1
                     ? "#376AED"
-                    : Colors.darkBlue,
+                    : "#7B8BB2",
                 ...styles.TabTitle,
               }}
             >
@@ -88,7 +88,7 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
                 color:
                   contractScreens.indexOf(routeName) !== -1
                     ? "#376AED"
-                    : Colors.darkBlue,
+                    : "#7B8BB2",
                 ...styles.TabTitle,
               }}
             >
@@ -122,7 +122,7 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
                 color:
                   bookmarksScreens.indexOf(routeName) !== -1
                     ? "#376AED"
-                    : Colors.darkBlue,
+                    : "#7B8BB2",
                 ...styles.TabTitle,
               }}
             >
@@ -145,7 +145,7 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
                 color:
                   profileScreens.indexOf(routeName) !== -1
                     ? "#376AED"
-                    : Colors.darkBlue,
+                    : "#7B8BB2",
                 ...styles.TabTitle,
               }}
             >

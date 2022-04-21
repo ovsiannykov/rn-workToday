@@ -1,25 +1,56 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Alert,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-
+import { FontAwesome } from "@expo/vector-icons";
 import LongWhiteButton from "../../../components/LongWhiteButton";
 import LongBlueButton from "../../../components/LongBlueButton";
 import Colors from "../../../constants/Colors";
 
 const MapScreen = (props) => {
+  const [isFetching, setIsFetching] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(mapRegion);
+
+  console.log(selectedLocation);
 
   const navigation = useNavigation();
 
+  const GetCurrentLocation = async () => {
+    setIsFetching(true);
+    let { status } = await Location.requestForegroundPermissionsAsync();
+
+    if (status !== "granted") {
+      Alert.alert(
+        "Упс...",
+        "Дозвольте програмі використовувати службу локації",
+        [{ text: "OK" }],
+        { cancelable: false }
+      );
+    }
+
+    let { coords } = await Location.getCurrentPositionAsync();
+
+    if (coords) {
+      setSelectedLocation(coords);
+    } else {
+      Alert.alert("Щось пішло не так...", "Не вдалося знайти місцезнаходження");
+    }
+    setIsFetching(false);
+  };
+
   const selectLocationHandler = (event) => {
     setSelectedLocation({
-      lat: event.nativeEvent.coordinate.latitude,
-      lng: event.nativeEvent.coordinate.longitude,
-      latitudeDelta: event.nativeEvent.coordinate.latitude,
-      longitudeDelta: event.nativeEvent.coordinate.longitude,
+      latitude: event.nativeEvent.coordinate.latitude,
+      longitude: event.nativeEvent.coordinate.longitude,
     });
   };
 
@@ -34,10 +65,10 @@ const MapScreen = (props) => {
 
   if (selectedLocation) {
     markerCoordinates = {
-      latitude: selectedLocation.lat,
-      longitude: selectedLocation.lng,
-      latitudeDelta: selectedLocation.lat,
-      longitudeDelta: selectedLocation.lng,
+      latitude: selectedLocation.latitude,
+      longitude: selectedLocation.longitude,
+      latitudeDelta: 0.001332,
+      longitudeDelta: 0.001331,
     };
   }
 
@@ -45,7 +76,7 @@ const MapScreen = (props) => {
     <View style={{ height: "100%" }}>
       <MapView
         style={styles.map}
-        region={mapRegion}
+        region={selectedLocation ? markerCoordinates : mapRegion}
         onPress={selectLocationHandler}
       >
         {selectedLocation ? (
@@ -66,6 +97,16 @@ const MapScreen = (props) => {
           <LongBlueButton title='Ok' onPress={() => navigation.goBack()} />
         </View>
       </View>
+      <TouchableOpacity
+        style={styles.location_btn}
+        onPress={GetCurrentLocation}
+      >
+        {isFetching ? (
+          <ActivityIndicator size='small' color='#0000ff' />
+        ) : (
+          <FontAwesome name='location-arrow' size={28} color={Colors.blue} />
+        )}
+      </TouchableOpacity>
     </View>
   );
 };
@@ -86,6 +127,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     left: "12%",
     right: "50%",
+  },
+  location_btn: {
+    alignItems: "center",
+    justifyContent: "center",
+    right: 20,
+    bottom: 220,
+    position: "absolute",
+    zIndex: 999,
+    width: 40,
+    height: 40,
+    backgroundColor: "white",
+    borderRadius: 8,
   },
 });
 
