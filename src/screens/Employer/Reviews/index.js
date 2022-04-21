@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
 
 import ReviewsHeader from "../../../components/ReviewsHeader";
 import ContractFilter from "../../../components/ContractFilter";
@@ -25,6 +26,8 @@ const data = [
 const Reviews = (props) => {
   const [isFilter, setIsFilter] = useState(false);
 
+  const navigation = useNavigation();
+
   const filterHandler = () => {
     setIsFilter(true);
   };
@@ -47,8 +50,17 @@ const Reviews = (props) => {
       </View>
       <ScrollView>
         <View style={styles.wrapper}>
-          <WorkerItem status='Прийнято' refuseBtn={true} acceptBtn={true} />
-          <WorkerItem status='Відхилино' acceptBtn={true} />
+          <WorkerItem
+            status='Прийнято'
+            refuseBtn={true}
+            acceptBtn={true}
+            onPress={() => navigation.navigate("Profile")}
+          />
+          <WorkerItem
+            status='Відхилино'
+            acceptBtn={true}
+            onPress={() => navigation.navigate("Profile")}
+          />
         </View>
       </ScrollView>
     </LinearGradient>

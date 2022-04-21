@@ -7,8 +7,7 @@ export default StyleSheet.create({
     paddingHorizontal: 17,
   },
   wrapper: {
-    justifyContent: "center",
-    alignItems: "center",
+    paddingHorizontal: 0,
   },
   input_box: {
     width: 350,

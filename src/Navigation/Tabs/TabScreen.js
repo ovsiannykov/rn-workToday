@@ -9,6 +9,7 @@ import FavoritesScreen from "../../screens/Employee/FavoritesScreen";
 import ContractsScreen from "../../screens/Employee/ContractsScreen";
 import Statistics from "../../screens/Employee/Statistics";
 import EmployerStack from "../EmployerStack/EmployerStack";
+import { ButtonTabBarEmployer } from "../../components/ButtonTabBarEmployer/ButtonTabBarEmployer";
 
 const Tabs = createBottomTabNavigator();
 export const TabsScreen = () => {
@@ -20,9 +21,11 @@ export const TabsScreen = () => {
         tabBarHideOnKeyboard: true,
         keyboardVerticalOffset: -25,
       }}
-      tabBar={(props) => <ButtonTabBar {...props} />}
+      // tabBar={(props) => <ButtonTabBar {...props} />}
+      tabBar={(props) => <ButtonTabBarEmployer {...props} />}
     >
-      <Tabs.Screen name='TabsBar' component={MainStackScreen} />
+      {/* <Tabs.Screen name='TabsBar' component={MainStackScreen} /> */}
+      <Tabs.Screen name='TabsBar' component={EmployerStack} />
     </Tabs.Navigator>
   );
 };
