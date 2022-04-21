@@ -12,6 +12,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
 import { Formik } from "formik";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import styles from "./styles";
 import { sized } from "../../../Svg";
@@ -23,23 +24,7 @@ import Colors from "../../../constants/Colors";
 const SlecetMapIcon = sized(selectMapSvg, 16.64, 23);
 
 const CreateVacancy = (props) => {
-  const [keyboardStatus, setKeyboardStatus] = useState(undefined);
-
   const navigation = useNavigation();
-
-  useEffect(() => {
-    const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
-      setKeyboardStatus("Keyboard Shown");
-    });
-    const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
-      setKeyboardStatus("Keyboard Hidden");
-    });
-
-    return () => {
-      showSubscription.remove();
-      hideSubscription.remove();
-    };
-  }, []);
 
   return (
     <LinearGradient
@@ -100,12 +85,11 @@ const CreateVacancy = (props) => {
               values.skills.length > 0 &&
               values.compitence.length > 0;
             return (
-              <View>
+              <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                   <View
                     style={{
-                      paddingBottom:
-                        keyboardStatus == "Keyboard Shown" ? 400 : 150,
+                      paddingBottom: 150,
                     }}
                   >
                     <View
@@ -179,7 +163,10 @@ const CreateVacancy = (props) => {
                         error={errors.location}
                         placeholder='Україна'
                       />
-                      <TouchableOpacity style={styles.map_btn}>
+                      <TouchableOpacity
+                        style={styles.map_btn}
+                        onPress={() => navigation.navigate("MapScreen")}
+                      >
                         <Text style={styles.selectMap_text}>
                           Выбрать на карте
                         </Text>
@@ -273,7 +260,7 @@ const CreateVacancy = (props) => {
                     </View>
                   </View>
                 </ScrollView>
-              </View>
+              </KeyboardAwareScrollView>
             );
           }}
         </Formik>

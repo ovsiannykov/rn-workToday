@@ -13,13 +13,23 @@ import contractsSvg from "../../assets/icons/contracts.svg";
 import bookmarksSvg from "../../assets/icons/bookmarks.svg";
 import settingsSvg from "../../assets/icons/settings.svg";
 import statisticSvg from "../../assets/icons/statistic.svg";
+import activeHomeSvg from "../../assets/icons/active/Home.svg";
+
+import activeContractsSvg from "../../assets/icons/active/Articles.svg";
+import activebookmarksSvg from "../../assets/icons/active/Bookmark.svg";
+import activeProfileSvg from "../../assets/icons/active/Menu.svg";
 import Colors from "../../constants/Colors";
 
 export const ButtonTabBar = ({ state, descriptors, navigation }) => {
   const vacancyScreens = [undefined]; // enter name screens
-  const contractScreens = ['Contracts'];
-  const marksScreens = [];
-  const profileScreens = [];
+  const contractScreens = ["Contracts", "ContractDetailScreen"];
+  const bookmarksScreens = ["Favorites", "VacancyDetail"];
+  const profileScreens = [
+    "Settings",
+    "Profile",
+    "MarketingAgreements",
+    "UploadCompetence",
+  ];
   let focusedOptions = descriptors[state.routes[state.index].key].options;
   let routeName = focusedOptions.currentRoute;
   if (focusedOptions.tabBarVisible === false) {
@@ -31,6 +41,11 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
   const BookmarksIcon = sized(bookmarksSvg, 20, 20);
   const SettingsIcon = sized(settingsSvg, 20, 20, "green");
   const StatisticIcon = sized(statisticSvg, 20, 20);
+
+  const ActiveHomeIcon = sized(activeHomeSvg, 22, 22);
+  const ActiveContractsIcon = sized(activeContractsSvg, 24, 24);
+  const ActiveBookmarksIcon = sized(activebookmarksSvg, 21, 21);
+  const ActiveSettingsIcon = sized(activeProfileSvg, 23, 23);
 
   return (
     <View style={styles.TabView__wrapper}>
@@ -49,13 +64,17 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
           style={styles.TabView__item}
         >
           <View style={styles.iconWrapper}>
-            <ContractsIcon />
+            {contractScreens.indexOf(routeName) !== -1 ? (
+              <ActiveContractsIcon />
+            ) : (
+              <ContractsIcon />
+            )}
             <Text style={styles.TabTitle}>Контракти</Text>
           </View>
         </TouchableOpacity>
         <View style={styles.TabView__item}>
           <View style={styles.iconWrapper_staticric}>
-            {/*{(contractScreens.indexOf(routeName) !== -1) ? <CalendarActiveIcon/> : <CalendarIcon/>}*/}
+            {/*{(contractScreens.indexOf(routeName) !== -1) ? <CalendarActiveIcon/> : <BookmarksIcon/>}*/}
             <TouchableOpacity
               style={styles.Statistic_Btn}
               onPress={() => navigation.navigate("Statistics")}
@@ -69,7 +88,11 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
           onPress={() => navigation.navigate("Favorites")}
         >
           <View style={styles.iconWrapper}>
-            <BookmarksIcon />
+            {bookmarksScreens.indexOf(routeName) !== -1 ? (
+              <ActiveBookmarksIcon />
+            ) : (
+              <BookmarksIcon />
+            )}
             <Text style={styles.TabTitle}>Закладки</Text>
           </View>
         </TouchableOpacity>
@@ -78,7 +101,11 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
           onPress={() => navigation.navigate("Profile")}
         >
           <View style={styles.iconWrapper}>
-            <SettingsIcon />
+            {profileScreens.indexOf(routeName) !== -1 ? (
+              <ActiveSettingsIcon />
+            ) : (
+              <SettingsIcon />
+            )}
             <Text style={styles.TabTitle}>Профіль</Text>
           </View>
         </TouchableOpacity>

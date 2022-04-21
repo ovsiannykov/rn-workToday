@@ -10,6 +10,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { Formik } from "formik";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import styles from "./styles";
 import sized from "../../../Svg/sized";
@@ -20,23 +21,7 @@ import LongWhiteButton from "../../../components/LongWhiteButton";
 const SlecetMapIcon = sized(selectMapSvg, 16.64, 23);
 
 const CreateCompany = (props) => {
-  const [keyboardStatus, setKeyboardStatus] = useState(undefined);
-
   const navigation = useNavigation();
-
-  useEffect(() => {
-    const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
-      setKeyboardStatus("Keyboard Shown");
-    });
-    const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
-      setKeyboardStatus("Keyboard Hidden");
-    });
-
-    return () => {
-      showSubscription.remove();
-      hideSubscription.remove();
-    };
-  }, []);
 
   return (
     <LinearGradient
@@ -75,12 +60,11 @@ const CreateCompany = (props) => {
               values.location.length > 0 &&
               values.about.length > 0;
             return (
-              <View>
+              <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                   <View
                     style={{
-                      paddingBottom:
-                        keyboardStatus == "Keyboard Shown" ? 400 : 150,
+                      paddingBottom: 150,
                     }}
                   >
                     <View style={{ width: "75%" }}>
@@ -112,7 +96,10 @@ const CreateCompany = (props) => {
                         error={errors.location}
                         placeholder='Україна'
                       />
-                      <TouchableOpacity style={styles.map_btn}>
+                      <TouchableOpacity
+                        style={styles.map_btn}
+                        onPress={() => navigation.navigate("MapScreen")}
+                      >
                         <Text style={styles.selectMap_text}>
                           Выбрать на карте
                         </Text>
@@ -146,7 +133,7 @@ const CreateCompany = (props) => {
                     </View>
                   </View>
                 </ScrollView>
-              </View>
+              </KeyboardAwareScrollView>
             );
           }}
         </Formik>
