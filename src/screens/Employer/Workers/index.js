@@ -31,11 +31,12 @@ const Workers = (props) => {
       <View style={{ marginTop: 22, marginBottom: 5 }}>
         <VacancyFilter />
       </View>
-      <View style={styles.wrapper}>
-        <ScrollView style={{ height: "100%", paddingTop: 27 }}>
+      <ScrollView style={{ height: "100%", paddingTop: 27 }}>
+        <View style={styles.wrapper}>
           <WorkStatus status={workStatus} greenPress={() => setIsModal(true)} />
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
+
       <StatisicModal
         isModal={isModal}
         closeModal={closeModal}

@@ -18,8 +18,9 @@ const Vacancies = (props) => {
       <View style={styles.input_box}>
         <Search />
       </View>
-      <View style={styles.wrapper}>
-        <ScrollView style={{ height: "100%", paddingTop: 20 }}>
+
+      <ScrollView style={{ height: "100%", paddingTop: 20 }}>
+        <View style={styles.wrapper}>
           <Vacancy
             onPress={() =>
               navigation.navigate("VacancyDetail", { title: "Офіціант" })
@@ -31,8 +32,8 @@ const Vacancies = (props) => {
               navigation.navigate("VacancyDetail", { title: "Лiкар" })
             }
           />
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
     </LinearGradient>
   );
 };

@@ -7,9 +7,9 @@ export default StyleSheet.create({
     paddingHorizontal: 17,
   },
   wrapper: {
-    paddingHorizontal: 0,
+    width: "100%",
   },
   input_box: {
-    width: 350,
+    width: "100%",
   },
 });

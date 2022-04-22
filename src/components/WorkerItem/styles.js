@@ -6,6 +6,7 @@ export default StyleSheet.create({
   container: {
     //height: 312,
     width: 347,
+    marginBottom: 30,
     borderRadius: 16,
     backgroundColor: "white",
     paddingHorizontal: 10,

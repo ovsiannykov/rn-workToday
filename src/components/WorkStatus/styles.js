@@ -18,6 +18,8 @@ export default StyleSheet.create({
     elevation: 1,
     paddingHorizontal: 10,
     paddingTop: 17,
+    paddingBottom: 5,
+    marginBottom: 5,
   },
   flexBox: {
     display: "flex",
