@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Dimensions, Text, Platform } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import Colors from "../../constants/Colors";
@@ -28,7 +28,12 @@ const Map = (props) => {
 
   return (
     <View style={styles.container}>
-      <MapView region={mapRegion} style={styles.map} onPress={closeAllMarker}>
+      <MapView
+        provider={PROVIDER_GOOGLE}
+        region={mapRegion}
+        style={styles.map}
+        onPress={closeAllMarker}
+      >
         <Marker
           onPress={() => {
             setViewMarker1(!viewMarker1);

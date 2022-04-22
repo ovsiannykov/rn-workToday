@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Find work",
-    "slug": "FindWork",
+    "name": "Worker",
+    "slug": "Worker",
     "privacy": "public",
      "plugins": [
       [

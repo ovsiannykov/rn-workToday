@@ -154,9 +154,6 @@ const Settings = (props) => {
           <View
             style={{
               marginBottom: 50,
-              width: "100%",
-              justifyContent: "center",
-              alignItems: "center",
             }}
           >
             <TouchableOpacity style={{ marginBottom: 20, ...styles.btn_long2 }}>
