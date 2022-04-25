@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from "react-native";
+import { StyleSheet, Platform, Dimensions } from "react-native";
 
 import Colors from "../../../constants/Colors";
 
@@ -12,7 +12,8 @@ export default StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     paddingHorizontal: 40,
-    paddingTop: Platform.OS == "ios" ? 50 : 40,
+    paddingTop:
+      Platform.OS == "android" ? 60 : Dimensions.get("window").height / 8,
   },
   row_two: {
     display: "flex",
@@ -46,7 +47,8 @@ export default StyleSheet.create({
   },
   content_box: {
     backgroundColor: "white",
-    // height: 324,
+    minHeight:
+      Platform.OS == "android" ? null : Dimensions.get("window").height - 530,
     paddingBottom: 40,
     position: "absolute",
     bottom: 0,

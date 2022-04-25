@@ -10,6 +10,7 @@ import {
   ScrollView,
   Platform,
 } from "react-native";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
@@ -30,12 +31,21 @@ const statusOptions = [
 
 const StepOne = (props) => {
   const [selctList, setSelectList] = useState(true);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
 
   return (
     <Formik
       initialValues={{
         birth: "",
-        citizenship: "",
+        citizenship: "Україна",
         status: "",
       }}
       onSubmit={(values) => {
@@ -60,22 +70,43 @@ const StepOne = (props) => {
           values.birth.length > 0 &&
           values.citizenship.length > 0 &&
           values.status.length > 0;
+
+        const handleConfirm = (date) => {
+          const num = date.getDate().toString();
+          const month = date.getMonth().toString();
+          const year = date.getFullYear().toString();
+          setFieldValue("birth", `${num}-${month}-${year}`);
+          hideDatePicker();
+        };
+
         return (
           <View>
             <ScrollView
               nestedScrollEnabled={true}
               showsVerticalScrollIndicator={false}
-              style={{ height: (SCREEN_HEIGHT / 100) * 58 }}
+              style={{ paddingBottom: 50 }}
             >
               <View style={{ marginTop: 20, width: "75%" }}>
                 <Text style={styles.label}>Дата народження:</Text>
-                <TextInput
-                  style={styles.input}
-                  value={values.birth}
-                  onChangeText={handleChange("birth")}
-                  error={errors.birth}
-                  placeholder='(день-місяць-рік)'
-                  keyboardType='numeric'
+                <TouchableOpacity onPress={showDatePicker}>
+                  <View pointerEvents='none'>
+                    <TextInput
+                      style={styles.input}
+                      value={values.birth}
+                      onChangeText={handleChange("birth")}
+                      error={errors.birth}
+                      placeholder='(день-місяць-рік)'
+                      keyboardType='numeric'
+                    />
+                  </View>
+                </TouchableOpacity>
+                <DateTimePickerModal
+                  isVisible={isDatePickerVisible}
+                  mode='date'
+                  onConfirm={handleConfirm}
+                  onCancel={hideDatePicker}
+                  confirmTextIOS='Обрати'
+                  locale='uk_UA'
                 />
               </View>
               <View style={{ marginTop: 20, width: "75%" }}>
@@ -118,8 +149,8 @@ const StepOne = (props) => {
                 ) : null}
               </View>
             </ScrollView>
-            <View style={{ alignItems: "center" }}>
-              <View style={styles.btn_box}>
+            <View style={styles.btn_box}>
+              <View style={{ width: 299 }}>
                 <LongWhiteButton
                   title='Наступний крок'
                   onPress={props.nextStep}
@@ -178,9 +209,12 @@ const styles = StyleSheet.create({
     borderRadius: 18,
   },
   btn_box: {
-    width: SCREEN_WIDTH - 70,
-    marginBottom: 20,
-    marginTop: Platform.OS == "ios" ? 20 : 0,
+    //width: SCREEN_WIDTH - 70,
+    width: "100%",
+    position: "absolute",
+    bottom: -30,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

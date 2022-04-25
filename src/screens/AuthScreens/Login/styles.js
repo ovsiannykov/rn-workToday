@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from "react-native";
+import { StyleSheet, Platform, Dimensions } from "react-native";
 
 import Colors from "../../../constants/Colors";
 
@@ -10,14 +10,14 @@ export default StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
   logoBox: {
-    marginTop: 50,
+    marginTop: Dimensions.get("window").height / 10,
     marginBottom: 109,
   },
   logo: {
     width: 178,
   },
   tabMenu: {
-    height: 520,
+    height: 510,
     backgroundColor: Colors.blue,
     width: "100%",
     position: "absolute",

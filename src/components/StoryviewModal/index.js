@@ -61,12 +61,12 @@ const StoryviewModal = (props) => {
 
 const styles = StyleSheet.create({
   modal: {
-    height: "100%",
+    height: Dimensions.get("window").height,
     width: "100%",
     marginLeft: 0,
   },
   container: {
-    height: "100%",
+    height: Dimensions.get("window").height,
     width: "100%",
     paddingTop: 100,
     backgroundColor: "#376AED",

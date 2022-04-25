@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Image, ScrollView } from "react-native";
 
 import styles from "./style";
+import RatingBox from "../RatingBox";
 
 const starsImage = require("../../assets/images/GroupStars.png");
 
@@ -45,7 +46,7 @@ const OldWorkItem = (props) => {
             </Text>
           </View>
           <View>
-            <Image source={starsImage} />
+            <RatingBox rating={props.rating} />
           </View>
         </View>
       </View>

@@ -14,8 +14,8 @@ const Map = (props) => {
   const mapRegion = {
     latitude: 50.450001,
     longitude: 30.523333,
-    latitudeDelta: 0.001332,
-    longitudeDelta: 0.001331,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
   };
 
   const closeAllMarker = () => {

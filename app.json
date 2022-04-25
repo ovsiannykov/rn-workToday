@@ -3,6 +3,7 @@
     "name": "Worker",
     "slug": "Worker",
     "privacy": "public",
+    "userInterfaceStyle": "automatic",
      "plugins": [
       [
         "expo-image-picker",

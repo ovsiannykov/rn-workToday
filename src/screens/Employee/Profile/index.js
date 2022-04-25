@@ -74,6 +74,7 @@ const Profile = ({ navigation }) => {
             company='Alt Bier'
             position='Бармен'
             review='Норм чел все делал быстро и качественно'
+            rating={3}
           />
         </View>
       </ScrollView>
