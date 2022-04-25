@@ -2,20 +2,19 @@ import React, { useContext, useState } from "react";
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
   Keyboard,
   TouchableWithoutFeedback,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { AuthContext } from "../../../Navigation/Auth/AuthContext";
 import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 import Input from "../../../components/Input";
 import BigButton from "../../../components/BigButton";
-import { AuthContext } from "../../../Navigation/Auth/AuthContext";
-
-const logo = require("../../../assets/images/Logo.png");
+import sized from "../../../Svg/sized";
+import logoSvg from "../../../assets/icons/logo.svg";
 
 const Login = ({ navigation, login, ...props }) => {
   const [typeEntrance, setTypeEntrance] = useState(false);
@@ -27,11 +26,13 @@ const Login = ({ navigation, login, ...props }) => {
     </TouchableWithoutFeedback>
   );
 
+  const LogoIcon = sized(logoSvg, 179, 89);
+
   return (
     <DismissKeyboard>
       <View style={styles.loginBox}>
         <View style={styles.logoBox}>
-          <Image style={styles.logo} source={logo} />
+          <LogoIcon />
         </View>
         <View style={styles.tabMenu}>
           <View style={styles.switchGroup}>

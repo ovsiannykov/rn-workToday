@@ -10,14 +10,14 @@ export default StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
   logoBox: {
-    marginTop: 80,
+    marginTop: 50,
     marginBottom: 109,
   },
   logo: {
     width: 178,
   },
   tabMenu: {
-    height: Platform.OS == "ios" ? 600 : 520,
+    height: 520,
     backgroundColor: Colors.blue,
     width: "100%",
     position: "absolute",
@@ -36,6 +36,7 @@ export default StyleSheet.create({
     fontFamily: "ComfortaaRegular",
     fontSize: 18,
     lineHeight: 18,
+    marginVertical: 0.5,
     textTransform: "uppercase",
     color: "white",
   },

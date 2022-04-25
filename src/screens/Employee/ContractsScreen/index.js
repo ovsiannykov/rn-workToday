@@ -22,18 +22,20 @@ const ContractsScreen = (props) => {
           showsVerticalScrollIndicator={false}
           style={{ marginTop: 10, paddingBottom: 20 }}
         >
-          <Vacancy
-            status='Активний'
-            onPress={() => navigation.navigate("ContractDetailScreen")}
-          />
-          <Vacancy
-            status='Скасований'
-            onPress={() => navigation.navigate("ContractDetailScreen")}
-          />
-          <Vacancy
-            status='Закінчений'
-            onPress={() => navigation.navigate("ContractDetailScreen")}
-          />
+          <View style={{ paddingBottom: 30 }}>
+            <Vacancy
+              status='Активний'
+              onPress={() => navigation.navigate("ContractDetailScreen")}
+            />
+            <Vacancy
+              status='Скасований'
+              onPress={() => navigation.navigate("ContractDetailScreen")}
+            />
+            <Vacancy
+              status='Закінчений'
+              onPress={() => navigation.navigate("ContractDetailScreen")}
+            />
+          </View>
         </ScrollView>
       </View>
     </LinearGradient>

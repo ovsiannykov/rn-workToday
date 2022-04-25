@@ -14,8 +14,8 @@ const Map = (props) => {
   const mapRegion = {
     latitude: 50.450001,
     longitude: 30.523333,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+    latitudeDelta: 0.001332,
+    longitudeDelta: 0.001331,
   };
 
   const closeAllMarker = () => {
@@ -89,20 +89,25 @@ const Map = (props) => {
           />
         </Marker>
       </MapView>
-
       {viewMarker1 == true ? (
         <View style={styles.vacancy}>
-          <Vacancy title='Бармен' />
+          <View style={{ width: 347 }}>
+            <Vacancy title='Бармен' />
+          </View>
         </View>
       ) : null}
       {viewMarker2 == true ? (
         <View style={styles.vacancy}>
-          <Vacancy title='Юрист' />
+          <View style={{ width: 347 }}>
+            <Vacancy title='Юрист' />
+          </View>
         </View>
       ) : null}
       {viewMarker3 == true ? (
         <View style={styles.vacancy}>
-          <Vacancy title='Кухар' />
+          <View style={{ width: 347 }}>
+            <Vacancy title='Кухар' />
+          </View>
         </View>
       ) : null}
     </View>
@@ -128,12 +133,12 @@ const styles = StyleSheet.create({
     left: 0,
   },
   vacancy: {
+    width: "100%",
     position: "absolute",
-    left: 20,
-    width: 347,
-    height: 164,
+    bottom: Dimensions.get("window").height - 260,
+    alignItems: "center",
+    justifyContent: "center",
     zIndex: 999,
-    bottom: Platform.OS == "ios" ? 620 : 690,
   },
 });
 

@@ -8,6 +8,7 @@ import {
   Button,
   Keyboard,
   ScrollView,
+  Platform,
 } from "react-native";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
@@ -178,6 +179,8 @@ const styles = StyleSheet.create({
   },
   btn_box: {
     width: SCREEN_WIDTH - 70,
+    marginBottom: 20,
+    marginTop: Platform.OS == "ios" ? 20 : 0,
   },
 });
 

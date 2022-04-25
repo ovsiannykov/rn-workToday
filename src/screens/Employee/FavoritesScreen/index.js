@@ -57,7 +57,7 @@ const FavoritesScreen = (props) => {
         </View>
         <View style={styles.vacancy_scrollBox}>
           <ScrollView>
-            <View style={styles.vacancy_box}>
+            <View style={{ paddingBottom: 120, ...styles.vacancy_box }}>
               <Vacancy
                 onPress={() =>
                   navigation.navigate("VacancyDetail", { title: "Офіціант" })

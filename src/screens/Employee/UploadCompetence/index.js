@@ -61,7 +61,7 @@ const UploadCompetence = () => {
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    paddingTop: Platform.OS == "ios" ? 80 : 40,
+    paddingTop: Platform.OS == "ios" ? 65 : 40,
   },
   title: {
     textAlign: "center",

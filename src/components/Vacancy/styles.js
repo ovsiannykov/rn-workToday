@@ -11,6 +11,7 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     paddingTop: 23,
     marginTop: 10,
+    marginHorizontal: 2,
     marginBottom: 10,
     shadowColor: "#000000",
     shadowOffset: {

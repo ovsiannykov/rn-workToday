@@ -72,8 +72,8 @@ const MarketingAgreements = () => {
           </View>
         </View>
       </ScrollView>
-      <View style={{ alignItems: "center" }}>
-        <View style={styles.btn_box}>
+      <View style={styles.btn_box}>
+        <View style={{ width: 299 }}>
           <LongWhiteButton
             title='Погоджуюся'
             onPress={() => navigation.goBack()}
@@ -87,7 +87,7 @@ const MarketingAgreements = () => {
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    paddingTop: Platform.OS == "ios" ? 80 : 40,
+    paddingTop: Platform.OS == "ios" ? 65 : 40,
   },
   title: {
     textAlign: "center",
@@ -125,9 +125,11 @@ const styles = StyleSheet.create({
     top: 5,
   },
   btn_box: {
-    width: 299,
+    width: "100%",
     position: "absolute",
-    bottom: 70,
+    bottom: 18,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

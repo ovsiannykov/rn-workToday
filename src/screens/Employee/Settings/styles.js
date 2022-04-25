@@ -21,7 +21,7 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   scroll_container: {
-    paddingHorizontal: 21,
+    paddingHorizontal: 15,
   },
   input_box: {
     width: 224,

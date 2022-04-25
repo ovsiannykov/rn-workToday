@@ -11,6 +11,10 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
+import { sized } from "../../../Svg";
+import ukraineSvg from "../../../assets/icons/ukraine-flag.svg";
+import polandSvg from "../../../assets/icons/poland-flag.svg";
+import ukSvg from "../../../assets/icons/united-kingdom-flag";
 
 const bgImage = require("../../../assets/images/bg.png");
 
@@ -18,14 +22,15 @@ const OnboardingImg1 = require("../../../assets/images/onboarding/onboarding-1.j
 const OnboardingImg2 = require("../../../assets/images/onboarding/onboarding-2.png");
 const OnboardingImg3 = require("../../../assets/images/onboarding/onboarding-3.png");
 const OnboardingImg4 = require("../../../assets/images/onboarding/onboarding-4.jpeg");
-const ukraineImg = require("../../../assets/images/onboarding/ukraine.png");
-const polandImg = require("../../../assets/images/onboarding/poland.png");
-const ukImg = require("../../../assets/images/onboarding/united-kingdom.png");
 
 const OnboardingScreen = (props) => {
   const [section, setSection] = useState(false);
 
   const navigation = useNavigation();
+
+  const UkraineIcon = sized(ukraineSvg, 63, 63);
+  const PolandIcon = sized(polandSvg, 63, 63);
+  const UkIcon = sized(ukSvg, 63, 63);
 
   return (
     <ImageBackground
@@ -58,13 +63,13 @@ const OnboardingScreen = (props) => {
             </Text>
             <View style={styles.flags_box}>
               <TouchableOpacity onPress={() => setSection(true)}>
-                <Image style={styles.flag} source={ukraineImg} />
+                <UkraineIcon style={styles.flag} />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setSection(true)}>
-                <Image style={styles.flag} source={polandImg} />
+                <PolandIcon style={styles.flag} />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setSection(true)}>
-                <Image style={styles.flag} source={ukImg} />
+                <UkIcon style={styles.flag} />
               </TouchableOpacity>
             </View>
             <View style={{ marginTop: 30, ...styles.pionts_box }}>

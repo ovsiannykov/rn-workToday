@@ -12,7 +12,7 @@ export default StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     paddingHorizontal: 40,
-    paddingTop: Platform.OS == "ios" ? 112 : 40,
+    paddingTop: Platform.OS == "ios" ? 50 : 40,
   },
   row_two: {
     display: "flex",
@@ -46,7 +46,8 @@ export default StyleSheet.create({
   },
   content_box: {
     backgroundColor: "white",
-    height: 324,
+    // height: 324,
+    paddingBottom: 40,
     position: "absolute",
     bottom: 0,
     width: "100%",
@@ -87,9 +88,9 @@ export default StyleSheet.create({
     alignContent: "space-around",
   },
   flag: {
-    marginTop: 31.8,
+    marginTop: 10,
     width: 63,
-    height: 41.2,
+    height: 63,
     marginRight: 20,
   },
   pionts_box: {

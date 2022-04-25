@@ -38,14 +38,14 @@ const Feedback = () => {
           />
         </View>
         <Input title='Додатковий відгук' placeholder='Я вважаю...' />
-        <View>
-          <View style={styles.btn_box}>
-            <LongWhiteButton
-              title='Закінчити'
-              onPress={() => navigation.goBack()}
-              disabled={rating == 0 ? true : false}
-            />
-          </View>
+      </View>
+      <View style={styles.btn_box}>
+        <View style={{ width: 299 }}>
+          <LongWhiteButton
+            title='Закінчити'
+            onPress={() => navigation.goBack()}
+            disabled={rating == 0 ? true : false}
+          />
         </View>
       </View>
     </LinearGradient>
@@ -79,8 +79,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   btn_box: {
-    position: "relative",
-    bottom: Platform.OS == "android" ? -280 : -340,
+    width: "100%",
+    position: "absolute",
+    bottom: 18,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import {
@@ -11,7 +11,7 @@ import {
 import styles from "./styles";
 import sized from "../../../Svg/sized";
 import logoSvg from "../../../assets/icons/logo.svg";
-import {AuthContext} from "../../../Navigation/Auth/AuthContext";
+import { AuthContext } from "../../../Navigation/Auth/AuthContext";
 
 const CELL_COUNT = 6;
 
@@ -22,11 +22,13 @@ const SMS = () => {
     value,
     setValue,
   });
-  const context = useContext(AuthContext)
-  useEffect(() => {
-    if(value.length === CELL_COUNT) context.signIn('asd')
-  }, [value])
+  const context = useContext(AuthContext);
   const LogoIcon = sized(logoSvg, 178, 83);
+
+  useEffect(() => {
+    if (value.length === CELL_COUNT) context.signIn("asd");
+  }, [value]);
+
   return (
     <LinearGradient
       colors={["#F4F7FF", "#FFFFFF"]}
