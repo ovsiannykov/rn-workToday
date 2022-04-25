@@ -5,7 +5,8 @@ import Colors from "../../constants/Colors";
 export default StyleSheet.create({
   worksBox: {
     width: 347,
-    height: 164,
+    minHeight: 164,
+    paddingBottom: 15,
     backgroundColor: "white",
     borderRadius: 16,
     paddingHorizontal: 20,

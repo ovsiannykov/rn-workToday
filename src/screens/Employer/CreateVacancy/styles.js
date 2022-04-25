@@ -128,4 +128,8 @@ export default StyleSheet.create({
     fontFamily: "ComfortaaLight",
     width: 161,
   },
+  commission_box: {
+    alignContent: "flex-end",
+    maxHeight: 65,
+  },
 });

@@ -81,7 +81,7 @@ const StatisicModal = (props) => {
 const styles = StyleSheet.create({
   modal: {
     width: 371,
-    height: 247,
+    minHeight: 247,
     backgroundColor: "white",
     borderRadius: 10,
     padding: 30,
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
   modal2: {
     width: 371,
-    height: 263,
+    minHeight: 263,
     backgroundColor: "white",
     borderRadius: 10,
     padding: 30,
@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
   buttons_container: {
     display: "flex",
     flexDirection: "row",
+    marginTop: 20,
   },
   title: {
     fontSize: 14,

@@ -99,7 +99,13 @@ const CreateVacancy = (props) => {
                         alignItems: "center",
                       }}
                     >
-                      <View style={{ width: 120, marginRight: 12 }}>
+                      <View
+                        style={{
+                          width: 140,
+                          marginRight: 12,
+                          ...styles.commission_box,
+                        }}
+                      >
                         <Text style={styles.label}>Оплата в год.:</Text>
                         <TextInput
                           style={styles.input_min}
@@ -109,10 +115,8 @@ const CreateVacancy = (props) => {
                           placeholder='500 zl'
                         />
                       </View>
-                      <View style={{ width: 210 }}>
-                        <Text style={styles.label}>
-                          Оплата с учетом комисии:
-                        </Text>
+                      <View style={{ width: 210, ...styles.commission_box }}>
+                        <Text style={styles.label}>Оплата з комісією:</Text>
                         <TextInput
                           style={styles.input_middle}
                           value={values.taxYear}
@@ -130,7 +134,13 @@ const CreateVacancy = (props) => {
                         marginTop: 20,
                       }}
                     >
-                      <View style={{ width: 120, marginRight: 12 }}>
+                      <View
+                        style={{
+                          width: 140,
+                          marginRight: 12,
+                          ...styles.commission_box,
+                        }}
+                      >
                         <Text style={styles.label}>Оплата в день:</Text>
                         <TextInput
                           style={styles.input_min}
@@ -140,10 +150,8 @@ const CreateVacancy = (props) => {
                           placeholder='50 zl'
                         />
                       </View>
-                      <View style={{ width: 210 }}>
-                        <Text style={styles.label}>
-                          Оплата с учетом комисии:
-                        </Text>
+                      <View style={{ width: 210, ...styles.commission_box }}>
+                        <Text style={styles.label}>Оплата з комісією:</Text>
                         <TextInput
                           style={styles.input_middle}
                           value={values.taxDay}

@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
 import * as ImagePicker from "expo-image-picker";
 
 const UpluadInput = (props) => {
@@ -47,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 16,
+    fontSize: Platform.OS == "ios" ? 16 : 12,
     lineHeight: 22,
     fontFamily: "ComfortaaRegular",
   },

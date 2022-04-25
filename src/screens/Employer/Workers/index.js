@@ -25,7 +25,7 @@ const Workers = (props) => {
       colors={["#F4F7FF", "#FFFFFF"]}
       style={{ ...styles.container }}
     >
-      <View style={styles.input_box}>
+      <View style={{ paddingHorizontal: 17, ...styles.input_box }}>
         <Search />
       </View>
       <View style={{ marginTop: 22, marginBottom: 5 }}>

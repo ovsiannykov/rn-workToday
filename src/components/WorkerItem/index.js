@@ -56,17 +56,23 @@ const WorkerItem = (props) => {
           </Text>
         </View>
       </View>
-      <View style={{ marginTop: 11 }}>
-        <View style={styles.info_box}>
-          <Text style={styles.vancy_title}>Вакансія:</Text>
-          <Text style={styles.vancy}>
-            {props.vacancy ? props.vacancy : "Охоронець"}
-          </Text>
+      <View style={{ ...styles.down_box }}>
+        <View>
+          <View style={styles.info_box}>
+            <Text style={styles.vancy_title}>Вакансія:</Text>
+            <Text style={styles.vancy}>
+              {props.vacancy ? props.vacancy : "Охоронець"}
+            </Text>
+          </View>
+          <View style={{ marginTop: 6, ...styles.info_box }}>
+            <Text style={styles.vancy_title}>Статус:</Text>
+            <StatusText status={props.status} />
+          </View>
         </View>
-        <View style={{ marginTop: 6, ...styles.info_box }}>
-          <Text style={styles.vancy_title}>Статус:</Text>
-          <StatusText status={props.status} />
-        </View>
+        <TouchableOpacity style={styles.link_btn} onPress={props.onPress}>
+          <Text style={styles.link_title}>Перейти</Text>
+          <LinkIcon />
+        </TouchableOpacity>
       </View>
       {props.acceptBtn || props.refuseBtn ? (
         <View style={{ marginTop: 10 }}>
@@ -84,10 +90,6 @@ const WorkerItem = (props) => {
           ) : null}
         </View>
       ) : null}
-      <TouchableOpacity style={styles.link_btn} onPress={props.onPress}>
-        <Text style={styles.link_title}>Перейти</Text>
-        <LinkIcon />
-      </TouchableOpacity>
     </View>
   );
 };

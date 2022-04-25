@@ -46,7 +46,7 @@ export default StyleSheet.create({
     fontSize: 14,
     color: Colors.darkBlue,
     fontFamily: "ComfortaaLight",
-    width: 215,
+    maxWidth: 230,
     lineHeight: 20,
   },
   vancy_title: {
@@ -81,14 +81,18 @@ export default StyleSheet.create({
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
-    position: "absolute",
-    right: 13,
-    top: 142,
   },
   link_title: {
     color: "white",
-    fontSize: 12,
+    fontSize: 11,
     fontFamily: "ComfortaaMedium",
     marginRight: 5,
+  },
+  down_box: {
+    marginTop: 11,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 });

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, Platform } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -54,7 +54,7 @@ const Vacancy = (props) => {
           ...styles.content,
         }}
       >
-        <View style={{ marginTop: 5 }}>
+        <View style={{ marginTop: 5, maxWidth: 160 }}>
           <View style={{ alignItems: "center", ...styles.content }}>
             <WalletIcon />
             <Text style={styles.sub_content}>500 zl</Text>

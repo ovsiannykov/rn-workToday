@@ -95,6 +95,7 @@ export default StyleSheet.create({
     color: "#2D4379",
     fontSize: 14,
     lineHeight: 20,
+    maxHeight: 80,
   },
   numbers: {
     display: "flex",

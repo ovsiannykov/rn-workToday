@@ -4,7 +4,7 @@ import Colors from "../../constants/Colors";
 
 export default StyleSheet.create({
   container: {
-    width: 347,
+    minWidth: 290,
     minHeight: 241,
     backgroundColor: "white",
     borderRadius: 16,
@@ -95,7 +95,7 @@ export default StyleSheet.create({
     textAlign: "center",
     fontFamily: "ComfortaaLight",
     marginTop: 30,
-    fontSize: 12,
+    fontSize: 10,
   },
   support_btn: {
     width: 312,

@@ -1,15 +1,16 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 import Colors from "../../constants/Colors";
 
 export default StyleSheet.create({
   container: {
     width: "100%",
-    height: 164,
+    // height: 164,
     backgroundColor: "white",
     borderRadius: 16,
     paddingHorizontal: 10,
     paddingTop: 23,
+    paddingBottom: 10,
     marginTop: 10,
     marginHorizontal: 2,
     marginBottom: 10,
@@ -46,7 +47,8 @@ export default StyleSheet.create({
     color: Colors.veryDarkBlue,
   },
   link_btn: {
-    width: 87,
+    //width: 87,
+    paddingHorizontal: 5,
     height: 34,
     backgroundColor: Colors.primaryBlue,
     borderRadius: 12,
@@ -57,7 +59,7 @@ export default StyleSheet.create({
   },
   link_title: {
     color: "white",
-    fontSize: 12,
+    fontSize: Platform.OS == "ios" ? 12 : 12,
     fontFamily: "ComfortaaMedium",
     marginRight: 5,
   },
