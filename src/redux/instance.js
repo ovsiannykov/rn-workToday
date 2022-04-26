@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // api base url
-export const API_BASE_URL = "http://161.97.147.182:3005/api-docs/#/";
+export const API_BASE_URL = "http://161.97.147.182:3005/";
 
 const instance = axios.create({
   baseURL: API_BASE_URL,

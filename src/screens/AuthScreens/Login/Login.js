@@ -17,12 +17,12 @@ import Input from "../../../components/Input";
 import BigButton from "../../../components/BigButton";
 import sized from "../../../Svg/sized";
 import logoSvg from "../../../assets/icons/logo.svg";
-import { fetchWorkerRegister } from "../../../redux/register/register-thunks";
+import { fetchWorkerRegister } from "../../../redux/auth/auth-thunks";
 
 const Login = ({ navigation, login, ...props }) => {
   const [typeEntrance, setTypeEntrance] = useState(false);
   const context = useContext(AuthContext);
-  const registr = useSelector((state) => state.registerReducer.workerRegister);
+  const registr = useSelector((state) => state.authReducer.workerRegister);
 
   const dispatch = useDispatch();
 
