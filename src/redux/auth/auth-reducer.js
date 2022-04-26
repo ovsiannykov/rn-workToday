@@ -1,15 +1,11 @@
 import { authTypes } from "./auth-types";
 
-initialState = {
-  workerRegister: null,
-  workerSubmitcode: "0000",
+const initialState = {
+  userId: null
 };
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case authTypes.SET_WORKER_REGISTER:
-      return { ...state, workerRegister: action.payload };
-    case authTypes.SET_WORKER_SUBMIT_CODE:
-      return { ...state, workerSubmitcode: action.payload };
+    case authTypes.SET_USER_ID: return {...state, userId: action.userId}
     default:
       return state;
   }
