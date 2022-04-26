@@ -11,7 +11,7 @@ const Input = (props) => {
     if (props.isPassword == true) {
       setShow(true);
     }
-  }, []);
+  }, [props]);
 
   return (
     <View style={styles.inputBox}>
@@ -20,8 +20,8 @@ const Input = (props) => {
       </Text>
       <TextInput
         style={styles.TextInput}
-        value={props.value ? props.value : text}
-        onChangeText={props.onChange ? props.onChange : onChangeText}
+        value={props.value}
+        onChangeText={props.onChange}
         placeholder={props.placeholder ? props.placeholder : null}
         keyboardType={props.keyType ? props.keyType : "default"}
         autoCorrect={props.autoCorrect ? props.autoCorrect : false}

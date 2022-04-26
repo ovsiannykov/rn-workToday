@@ -81,4 +81,17 @@ export default StyleSheet.create({
     fontWeight: "100",
     color: Colors.darkBlue,
   },
+  input: {
+    borderBottomColor: "#D9DFEB",
+    borderBottomWidth: 2,
+    paddingVertical: 10,
+    fontFamily: "ComfortaaLight",
+    width: "100%",
+  },
+  label: {
+    color: Colors.darkBlue,
+    fontFamily: "ComfortaaLight",
+    fontSize: 14,
+    lineHeight: 16,
+  },
 });

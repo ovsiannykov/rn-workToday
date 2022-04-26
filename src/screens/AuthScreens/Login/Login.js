@@ -5,11 +5,12 @@ import {
   TouchableOpacity,
   Keyboard,
   TouchableWithoutFeedback,
+  Alert,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { AuthContext } from "../../../Navigation/Auth/AuthContext";
-import { useNavigation } from "@react-navigation/native";
-import {connect, useDispatch} from "react-redux";
+import { connect, useDispatch } from "react-redux";
+import { Formik } from "formik";
 import { useSelector } from "react-redux";
 
 import styles from "./styles";
@@ -17,14 +18,13 @@ import Input from "../../../components/Input";
 import BigButton from "../../../components/BigButton";
 import sized from "../../../Svg/sized";
 import logoSvg from "../../../assets/icons/logo.svg";
-import {fetchWorkerRegister, registerStart} from "../../../redux/auth/auth-thunks";
+import { registerStart } from "../../../redux/auth/auth-thunks";
 
 const Login = ({ navigation, login, registerStart, ...props }) => {
   const [typeEntrance, setTypeEntrance] = useState(false);
   const context = useContext(AuthContext);
-  const registr = useSelector((state) => state.authReducer.workerRegister);
 
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   const DismissKeyboard = ({ children }) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -98,30 +98,71 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
               <KeyboardAwareScrollView>
                 <Text style={styles.welcomeText}>Ласкаво просимо</Text>
                 <Text style={styles.subTitle}>Cтворення нового аккаунту</Text>
-                <View>
-                  <Input title='Телефон' keyType='numeric' />
-                </View>
-                <View style={{ marginTop: 30, marginBottom: 20 }}>
-                  <Input
-                    title='Пароль'
-                    textContentType='password'
-                    isPassword={true}
-                  />
-                </View>
-                <View>
-                  <View style={{ alignItems: "center" }}>
-                    <BigButton
-                      onPress={() => {
-                        //navigation.navigate("SMS");
-                        registerStart({
-
-                        })
-                        console.log(registr);
-                      }}
-                      title='РЕЄСТРАЦІЯ'
-                    />
-                  </View>
-                </View>
+                <Formik
+                  initialValues={{
+                    phone: "",
+                    password: "",
+                  }}
+                  onSubmit={(values) => {
+                    registerStart({});
+                    console.log(values);
+                  }}
+                >
+                  {({
+                    values,
+                    handleChange,
+                    handleSubmit,
+                    errors,
+                    submitCount,
+                    setFieldValue,
+                    validate,
+                  }) => {
+                    errors = submitCount > 0 ? errors : {};
+                    const isValid =
+                      values.phone.length > 0 && values.password.length > 0;
+                    return (
+                      <>
+                        <View>
+                          <Input
+                            title='Телефон'
+                            value={values.phone}
+                            onChange={handleChange("phone")}
+                            error={errors.phone}
+                            keyType='numeric'
+                          />
+                        </View>
+                        <View style={{ marginTop: 30, marginBottom: 20 }}>
+                          <Input
+                            title='Пароль'
+                            textContentType='password'
+                            isPassword={true}
+                            value={values.password}
+                            onChange={handleChange("password")}
+                            error={errors.password}
+                          />
+                        </View>
+                        <View>
+                          <View style={{ alignItems: "center" }}>
+                            <BigButton
+                              onPress={() => {
+                                if (isValid) {
+                                   handleSubmit();
+                                   navigation.navigate("SMS");
+                                } else {
+                                  Alert.alert(
+                                    "Упс...",
+                                    "Перевірте правильність заповнення форми"
+                                  );
+                                }
+                              }}
+                              title='РЕЄСТРАЦІЯ'
+                            />
+                          </View>
+                        </View>
+                      </>
+                    );
+                  }}
+                </Formik>
               </KeyboardAwareScrollView>
             )}
           </View>
@@ -131,10 +172,8 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({});
 
-})
-
-export default connect(mapStateToProps, {registerStart})(Login)
+export default connect(mapStateToProps, { registerStart })(Login);
 
 //mapDispatchToProps, mapStateToProps
