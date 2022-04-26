@@ -3,13 +3,13 @@ import { TouchableOpacity, Text } from "react-native";
 
 import styles from "./styles";
 
-const BigButton = (props) => {
+const BigButton = ({title, style, ...props}) => {
   return (
     <TouchableOpacity
-      onPress={props.onPress ? props.onPress : null}
-      style={styles.btnBox}
+      style={[styles.btnBox, style]}
+      {...props}
     >
-      <Text style={styles.btnText}>{props.title ? props.title : "Button"}</Text>
+      <Text style={styles.btnText}>{title}</Text>
     </TouchableOpacity>
   );
 };

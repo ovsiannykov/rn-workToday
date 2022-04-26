@@ -104,7 +104,7 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                     password: "",
                   }}
                   onSubmit={(values) => {
-                    registerStart({});
+                    registerStart(values, navigation);
                     console.log(values);
                   }}
                 >
@@ -115,7 +115,7 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                     errors,
                     submitCount,
                     setFieldValue,
-                    validate,
+                    validate
                   }) => {
                     errors = submitCount > 0 ? errors : {};
                     const isValid =
@@ -144,15 +144,11 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                         <View>
                           <View style={{ alignItems: "center" }}>
                             <BigButton
+                              disabled={!isValid}
                               onPress={() => {
                                 if (isValid) {
                                    handleSubmit();
                                    navigation.navigate("SMS");
-                                } else {
-                                  Alert.alert(
-                                    "Упс...",
-                                    "Перевірте правильність заповнення форми"
-                                  );
                                 }
                               }}
                               title='РЕЄСТРАЦІЯ'
