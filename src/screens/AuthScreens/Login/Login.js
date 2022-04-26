@@ -9,7 +9,7 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { AuthContext } from "../../../Navigation/Auth/AuthContext";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch } from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import { useSelector } from "react-redux";
 
 import styles from "./styles";
@@ -17,9 +17,9 @@ import Input from "../../../components/Input";
 import BigButton from "../../../components/BigButton";
 import sized from "../../../Svg/sized";
 import logoSvg from "../../../assets/icons/logo.svg";
-import { fetchWorkerRegister } from "../../../redux/auth/auth-thunks";
+import {fetchWorkerRegister, registerStart} from "../../../redux/auth/auth-thunks";
 
-const Login = ({ navigation, login, ...props }) => {
+const Login = ({ navigation, login, registerStart, ...props }) => {
   const [typeEntrance, setTypeEntrance] = useState(false);
   const context = useContext(AuthContext);
   const registr = useSelector((state) => state.authReducer.workerRegister);
@@ -113,7 +113,9 @@ const Login = ({ navigation, login, ...props }) => {
                     <BigButton
                       onPress={() => {
                         //navigation.navigate("SMS");
-                        dispatch(fetchWorkerRegister());
+                        registerStart({
+
+                        })
                         console.log(registr);
                       }}
                       title='РЕЄСТРАЦІЯ'
@@ -129,4 +131,10 @@ const Login = ({ navigation, login, ...props }) => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => ({
+
+})
+
+export default connect(mapStateToProps, {registerStart})(Login)
+
+//mapDispatchToProps, mapStateToProps
