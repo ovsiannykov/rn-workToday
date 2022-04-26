@@ -9,16 +9,22 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { AuthContext } from "../../../Navigation/Auth/AuthContext";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import styles from "./styles";
 import Input from "../../../components/Input";
 import BigButton from "../../../components/BigButton";
 import sized from "../../../Svg/sized";
 import logoSvg from "../../../assets/icons/logo.svg";
+import { fetchWorkerRegister } from "../../../redux/register/register-thunks";
 
 const Login = ({ navigation, login, ...props }) => {
   const [typeEntrance, setTypeEntrance] = useState(false);
   const context = useContext(AuthContext);
+  const registr = useSelector((state) => state.registerReducer.workerRegister);
+
+  const dispatch = useDispatch();
 
   const DismissKeyboard = ({ children }) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -105,7 +111,11 @@ const Login = ({ navigation, login, ...props }) => {
                 <View>
                   <View style={{ alignItems: "center" }}>
                     <BigButton
-                      onPress={() => navigation.navigate("SMS")}
+                      onPress={() => {
+                        //navigation.navigate("SMS");
+                        dispatch(fetchWorkerRegister());
+                        console.log(registr);
+                      }}
                       title='РЕЄСТРАЦІЯ'
                     />
                   </View>
