@@ -51,7 +51,19 @@ const HomeScreen = (props) => {
   // fetchData
   useEffect(() => {
     setLoading(true);
-    dispatch(vacanciesWorkerThunk(location, searchText));
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert("Упс...", "Схоже, у нас немає доступу до геолокації 😔");
+        return;
+      }
+
+      let geo = await Location.getCurrentPositionAsync({});
+      await setLocation(geo);
+    })();
+    (async () => {
+      await dispatch(vacanciesWorkerThunk(location, searchText));
+    })();
     setLoading(false);
   }, []);
 

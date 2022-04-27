@@ -26,6 +26,7 @@ const HomeHeader = (props) => {
         <TextInput
           style={styles.serach_input}
           placeholder='Пошук'
+          placeholderTextColor='#828282'
           placeholderStyle={{ fontSize: 16 }}
           value={props.value}
           onChangeText={props.onChangeText}
