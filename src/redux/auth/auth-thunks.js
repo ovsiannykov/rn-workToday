@@ -23,26 +23,27 @@ export const registerStart = (body, navigation, phone) => async (dispatch) => {
   }
 };
 
-export const registerSubmitCode = (num) => async (dispatch, getState) => {
-  const userId = getState();
+export const registerSubmitCode =
+  (num, context) => async (dispatch, getState) => {
+    const userId = getState();
 
-  try {
-    const res = await authApi.registerSubmitCode({
-      _id: userId.authReducer.userId.toString(),
-      code: num.toString(),
-    });
+    try {
+      const res = await authApi.registerSubmitCode({
+        _id: userId.authReducer.userId.toString(),
+        code: num.toString(),
+      });
 
-    if (res.data.status === "Success") {
-      dispatch(setUserToken(res.data.token));
-      setTokenInHeaders(res.data.token);
-      context.signIn(res.data.token);
-    } else {
-      Alert.alert(res.data.status, res.data.text);
+      if (res.data.status === "Success") {
+        dispatch(setUserToken(res.data.token));
+        setTokenInHeaders(res.data.token);
+        context.signIn(res.data.token);
+      } else {
+        Alert.alert(res.data.status, res.data.text);
+      }
+    } catch (e) {
+      console.log(e);
     }
-  } catch (e) {
-    console.log(e);
-  }
-};
+  };
 
 export const registerReSendCode = (num) => async (dispatch) => {
   try {

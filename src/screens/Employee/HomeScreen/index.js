@@ -92,6 +92,7 @@ const HomeScreen = (props) => {
       </LinearGradient>
     );
   }
+  const renderItem = ({ item }) => <Vacancy title={item.title} />;
 
   return (
     <>
@@ -119,29 +120,7 @@ const HomeScreen = (props) => {
           <FlatList
             data={data}
             keyExtractor={(item) => item._id}
-            renderItem={(item) => (
-              <Vacancy
-                competencies={item.competencies}
-                createdAt={item.createdAt}
-                employerId={item.employerId}
-                geo={item.geo}
-                info={item.info}
-                photos={item.photos}
-                place={item.place}
-                pricePerHour={item.pricePerHour}
-                priceTotal={item.priceTotal}
-                responsibilities={item.responsibilities}
-                skills={item.skills}
-                status={item.status}
-                timeEnd={item.timeEnd}
-                timeStart={item.timeStart}
-                updatedAt={item.updatedAt}
-                onPress={(item) => {
-                  navigation.navigate("VacancyDetail", { title: "Офіціант" });
-                  selectVacancyHandler(item);
-                }}
-              />
-            )}
+            renderItem={renderItem}
           />
         </View>
       </LinearGradient>

@@ -16,7 +16,7 @@ const image = require("../../assets/images/vacancy.jpeg");
 const LinkIcon = sized(linkSvg, 12, 12);
 const WalletIcon = sized(walletSvg, 16, 16);
 
-const Vacancy = (props) => {
+const Vacancy = ({ title, ...props }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const navigation = useNavigation();
@@ -38,13 +38,8 @@ const Vacancy = (props) => {
       <View style={styles.content}>
         <Image style={styles.image} source={image} />
         <View style={{ marginLeft: 15 }}>
-          <Text style={styles.title}>
-            {props.title ? props.title : "Офіціант"}
-          </Text>
-          <Text style={styles.description}>
-            У кафе потрібен офіціант для часткової підробітки та підтримки
-            ресторану...
-          </Text>
+          <Text style={styles.title}>{props.title ?? "Юрист"}</Text>
+          <Text style={styles.description}>{props.info ?? "Инфо..."}</Text>
         </View>
       </View>
       <View
