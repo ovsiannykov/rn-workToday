@@ -7,27 +7,44 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from "react-native-confirmation-code-field";
+import { useRoute } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 
 import styles from "./styles";
 import sized from "../../../Svg/sized";
 import logoSvg from "../../../assets/icons/logo.svg";
 import { AuthContext } from "../../../Navigation/Auth/AuthContext";
+import {
+  registerSubmitCode,
+  registerReSendCode,
+} from "../../../redux/auth/auth-thunks";
 
-const CELL_COUNT = 6;
+const CELL_COUNT = 4;
 
 const SMS = () => {
   const [value, setValue] = useState("");
+  const [number, setNumber] = useState("Ваш номер");
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
     setValue,
   });
   const context = useContext(AuthContext);
+  const route = useRoute();
+  const dispatch = useDispatch();
   const LogoIcon = sized(logoSvg, 178, 83);
 
   useEffect(() => {
-    if (value.length === CELL_COUNT) context.signIn("asd");
+    if (value.length === CELL_COUNT) {
+      dispatch(registerSubmitCode(value, context));
+    } // context.signIn("asd");
   }, [value]);
+
+  useEffect(() => {
+    if (route.params) {
+      setNumber(route.params.phone);
+    }
+  }, [route]);
 
   return (
     <LinearGradient
@@ -37,7 +54,7 @@ const SMS = () => {
       <LogoIcon />
       <Text style={styles.header_title}>Введите код из смс</Text>
       <Text style={styles.sub_title}>
-        Проверочный код был отправлен вам на телефон +380988566330733
+        Проверочный код был отправлен вам на телефон {number}
       </Text>
       <CodeField
         ref={ref}
@@ -61,7 +78,12 @@ const SMS = () => {
           </View>
         )}
       />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          dispatch(registerReSendCode(number));
+        }}
+      >
         <Text style={styles.btn_text}>Переотправить код</Text>
       </TouchableOpacity>
     </LinearGradient>

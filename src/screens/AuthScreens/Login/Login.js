@@ -104,8 +104,7 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                     password: "",
                   }}
                   onSubmit={(values) => {
-                    registerStart(values, navigation);
-                    console.log(values);
+                    registerStart(values, navigation, values.phone);
                   }}
                 >
                   {({
@@ -115,7 +114,7 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                     errors,
                     submitCount,
                     setFieldValue,
-                    validate
+                    validate,
                   }) => {
                     errors = submitCount > 0 ? errors : {};
                     const isValid =
@@ -147,8 +146,8 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                               disabled={!isValid}
                               onPress={() => {
                                 if (isValid) {
-                                   handleSubmit();
-                                   navigation.navigate("SMS");
+                                  handleSubmit();
+                                  navigation.navigate("SMS");
                                 }
                               }}
                               title='РЕЄСТРАЦІЯ'

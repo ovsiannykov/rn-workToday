@@ -28,6 +28,7 @@ export default StyleSheet.create({
     lineHeight: 16.73,
     letterSpacing: 0.37,
     marginBottom: 20,
+    textAlign: "center",
   },
   //
   root: { flex: 1, padding: 20 },
@@ -77,5 +78,8 @@ export default StyleSheet.create({
     fontSize: 13,
     fontFamily: "ComfortaaMedium",
     color: "#C1C1C3",
+  },
+  phone: {
+    fontWeight: "900",
   },
 });
