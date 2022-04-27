@@ -63,7 +63,8 @@ export const auth = (body, context) => async (dispatch) => {
     const res = await authApi.auth(body);
 
     if (res.data.status === "Success") {
-      dispatch(setUserId(res.data.data));
+      dispatch(setUserToken(res.data.data));
+      setTokenInHeaders(res.data.data);
       context.signIn(res.data.data);
     } else {
       Alert.alert(res.data.status, res.data.text);

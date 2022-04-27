@@ -27,6 +27,7 @@
     "expo-image-picker": "~10.2.2",
     "expo-linear-gradient": "~9.2.0",
     "expo-location": "~12.1.2",
+    "expo-permissions": "^13.1.1",
     "expo-screen-orientation": "~3.3.0",
     "formik": "^2.2.9",
     "react": "16.13.1",

@@ -27,6 +27,8 @@ const HomeHeader = (props) => {
           style={styles.serach_input}
           placeholder='Пошук'
           placeholderStyle={{ fontSize: 16 }}
+          value={props.value}
+          onChangeText={props.onChangeText}
         />
       </View>
       <TouchableOpacity

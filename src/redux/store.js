@@ -2,9 +2,11 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 
 import thunk from "redux-thunk";
 import { authReducer } from "./auth/auth-reducer";
+import { workerReducer } from "./worker/worker-reducer";
 
 let reducers = combineReducers({
   authReducer,
+  workerReducer,
 });
 
 let store = createStore(reducers, applyMiddleware(thunk));

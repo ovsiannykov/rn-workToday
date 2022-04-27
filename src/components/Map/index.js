@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Dimensions, Text, Platform } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -10,6 +10,10 @@ const Map = (props) => {
   const [viewMarker1, setViewMarker1] = useState(false);
   const [viewMarker2, setViewMarker2] = useState(false);
   const [viewMarker3, setViewMarker3] = useState(false);
+  const [marker, setMarker] = useState();
+  const [data, setData] = useState();
+
+  console.log(data);
 
   const mapRegion = {
     latitude: 50.450001,
@@ -17,6 +21,12 @@ const Map = (props) => {
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
+
+  useEffect(() => {
+    if (props.data) {
+      setData(props.data);
+    }
+  }, [props]);
 
   const closeAllMarker = () => {
     if (viewMarker1 || viewMarker2 || viewMarker3) {
@@ -34,25 +44,22 @@ const Map = (props) => {
         style={styles.map}
         onPress={closeAllMarker}
       >
-        <Marker
-          onPress={() => {
-            setViewMarker1(!viewMarker1);
-            setViewMarker2(false);
-            setViewMarker3(false);
-          }}
-          key={1}
-          coordinate={{
-            latitude: 50.4472139478322,
-            longitude: 30.536182455740377,
-          }}
-        >
-          <MaterialCommunityIcons
-            name='map-marker'
-            size={36}
-            color={!viewMarker1 ? Colors.markerBlue : Colors.yellow}
-          />
-        </Marker>
-        <Marker
+        {/* {data.map((item) => (
+          <Marker
+            coordinate={{
+              latitude: item.latitude,
+              longitude: item.longitude,
+            }}
+            key={item._id}
+          >
+            <MaterialCommunityIcons
+              name='map-marker'
+              size={36}
+              color={!viewMarker1 ? Colors.markerBlue : Colors.yellow}
+            />
+          </Marker>
+        ))} */}
+        {/* <Marker
           onPress={() => {
             setViewMarker2(!viewMarker2);
             setViewMarker1(false);
@@ -87,22 +94,9 @@ const Map = (props) => {
             size={36}
             color={!viewMarker3 ? Colors.markerBlue : Colors.yellow}
           />
-        </Marker>
+        </Marker> */}
       </MapView>
-      {viewMarker1 == true ? (
-        <View style={styles.vacancy}>
-          <View style={{ width: 347 }}>
-            <Vacancy title='Бармен' />
-          </View>
-        </View>
-      ) : null}
-      {viewMarker2 == true ? (
-        <View style={styles.vacancy}>
-          <View style={{ width: 347 }}>
-            <Vacancy title='Юрист' />
-          </View>
-        </View>
-      ) : null}
+
       {viewMarker3 == true ? (
         <View style={styles.vacancy}>
           <View style={{ width: 347 }}>
