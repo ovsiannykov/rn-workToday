@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import styles from "./styles";
 import { sized } from "../../../Svg";
@@ -31,6 +32,14 @@ const OnboardingScreen = (props) => {
   const UkraineIcon = sized(ukraineSvg, 63, 63);
   const PolandIcon = sized(polandSvg, 63, 63);
   const UkIcon = sized(ukSvg, 63, 63);
+
+  const storeOnboarding = async () => {
+    try {
+      await AsyncStorage.setItem("onboarding", "true");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <ImageBackground
@@ -95,7 +104,14 @@ const OnboardingScreen = (props) => {
               </View>
               <TouchableOpacity
                 style={styles.next_button}
-                onPress={() => navigation.navigate("Login")}
+                onPress={async () => {
+                  try {
+                    await AsyncStorage.setItem("@isOnboarding", "true");
+                  } catch (e) {
+                    console.log(e);
+                  }
+                  navigation.navigate("Login");
+                }}
               >
                 <AntDesign name='arrowright' size={24} color='white' />
               </TouchableOpacity>
