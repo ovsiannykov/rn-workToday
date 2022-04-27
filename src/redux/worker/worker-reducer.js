@@ -2,7 +2,7 @@ import { workerTypes } from "./worker-types";
 
 const initialState = {
   vacancies: [],
-  vacancy: null
+  vacancy: null,
 };
 export const workerReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -12,6 +12,8 @@ export const workerReducer = (state = initialState, action) => {
       return { ...state, vacancy: action.vacancy };
     case workerTypes.SET_SELECT_VACANCY:
       return { ...state, vacancy: action.vacancy };
+    case workerTypes.SET_VACANCY_INFO:
+      return { ...state, vacancyInfo: action.vacancyInfo };
     default:
       return state;
   }

@@ -22,7 +22,10 @@ import DateFilter from "../../../components/DateFilter";
 import HomeModal from "../../../components/HomeModal";
 import StoryviewModal from "../../../components/StoryviewModal";
 import { vacanciesWorkerThunk } from "../../../redux/worker/worker-thunks";
-import { setSelectVacancy } from "../../../redux/worker/worker-actions";
+import {
+  setSelectVacancy,
+  setVacancyInfo,
+} from "../../../redux/worker/worker-actions";
 
 const HomeScreen = (props) => {
   const [isMap, setIsMap] = useState(false);
@@ -92,7 +95,24 @@ const HomeScreen = (props) => {
       </LinearGradient>
     );
   }
-  const renderItem = ({ item }) => <Vacancy title={item.title} />;
+
+  const renderItem = ({ item }) => (
+    <Vacancy
+      title={item.Title}
+      info={item.info}
+      id={item._id}
+      photos={item.photos}
+      priceTotal={item.priceTotal}
+      place={item.place}
+      timeStart={item.timeStart}
+      timeEnd={item.timeEnd}
+      item={item}
+      onPress={(item) => {
+        navigation.navigate("VacancyDetail", { title: item.Title });
+        dispatch(setVacancyInfo(item));
+      }}
+    />
+  );
 
   return (
     <>

@@ -1,4 +1,5 @@
 import { Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { authReducer } from "./auth-reducer";
 import { authApi } from "./auth-api";
@@ -7,6 +8,14 @@ import instance from "../instance";
 
 export const setTokenInHeaders = (token) => {
   Object.assign(instance.defaults, { headers: { Authorization: token } });
+};
+
+const storeToken = async (value) => {
+  try {
+    await AsyncStorage.setItem("@storage_workerToken", value);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const registerStart = (body, navigation, phone) => async (dispatch) => {
@@ -66,6 +75,7 @@ export const auth = (body, context) => async (dispatch) => {
     if (res.data.status === "Success") {
       dispatch(setUserToken(res.data.data));
       setTokenInHeaders(res.data.data);
+      storeToken(res.data.data);
       context.signIn(res.data.data);
     } else {
       Alert.alert(res.data.status, res.data.text);

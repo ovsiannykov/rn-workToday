@@ -14,3 +14,8 @@ export const setSelectVacancy = (payload) => ({
   type: workerTypes.SET_SELECT_VACANCY,
   selectVacancy: payload,
 });
+
+export const setVacancyInfo = (payload) => ({
+  type: workerTypes.SET_VACANCY_INFO,
+  vacancyInfo: payload,
+});

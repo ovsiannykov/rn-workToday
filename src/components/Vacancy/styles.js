@@ -79,4 +79,11 @@ export default StyleSheet.create({
     right: 25,
     top: 22,
   },
+  place: {
+    fontFamily: "ComfortaaMedium",
+    color: "#2D4379",
+    fontSize: 12,
+    marginHorizontal: 5,
+    width: 200,
+  },
 });

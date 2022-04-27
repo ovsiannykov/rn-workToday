@@ -29,7 +29,7 @@ const VacancyDetail = (props) => {
       colors={["#F4F7FF", "#FFFFFF"]}
       style={{ ...styles.container }}
     >
-      <NavigationHeader title={route.params.title} />
+      <NavigationHeader title={route.params.title ?? "Назва вакансії"} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ paddingHorizontal: 39 }}>
           <View style={{ alignItems: "center" }}>

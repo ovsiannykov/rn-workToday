@@ -21,9 +21,7 @@ const NavigationHeader = (props) => {
         >
           <BackIcon />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>
-          {props.title ? props.title : "Назва вакансії"}
-        </Text>
+        <Text style={styles.headerTitle}>{props.title}</Text>
       </View>
     </View>
   );
