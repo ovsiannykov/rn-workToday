@@ -6,4 +6,5 @@ export const authApi = {
     instance.post("/application/registerSubmitCode", body),
   registerReSendCode: (body) =>
     instance.post("/application/registerReSendCode", body),
+  auth: (body) => instance.post("/application/auth", body),
 };
