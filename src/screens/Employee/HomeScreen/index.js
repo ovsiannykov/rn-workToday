@@ -31,7 +31,7 @@ const HomeScreen = (props) => {
   const [storyViewModal, setStoryViewModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [location, setLocation] = useState(null);
-  const [searchText, setSerachText] = useState();
+  const [searchText, setSearchText] = useState();
 
   const data = useSelector((state) => state.workerReducer.vacancies);
 
@@ -109,7 +109,7 @@ const HomeScreen = (props) => {
             isCalendar={isCalendar}
             filterHandler={filterHandler}
             isFilter={isFilter}
-            onChangeText={setSerachText}
+            onChangeText={setSearchText}
             value={searchText}
           />
           {isCalendar ? <DateFilter /> : null}

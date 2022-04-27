@@ -1,8 +1,8 @@
 import { workerTypes } from "./worker-types";
 
 const initialState = {
-  vanacies: null,
-  vacancy: null,
+  vacancies: [],
+  vacancy: null
 };
 export const workerReducer = (state = initialState, action) => {
   switch (action.type) {

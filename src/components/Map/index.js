@@ -1,19 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Dimensions, Text, Platform } from "react-native";
-import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React, {useState, useEffect, useRef} from "react";
+import {View, StyleSheet, Dimensions, Text, Platform} from "react-native";
+import MapView, {Marker, PROVIDER_GOOGLE} from "react-native-maps";
+import {MaterialCommunityIcons} from "@expo/vector-icons";
 
 import Colors from "../../constants/Colors";
 import Vacancy from "../Vacancy";
 
-const Map = (props) => {
-  const [viewMarker1, setViewMarker1] = useState(false);
-  const [viewMarker2, setViewMarker2] = useState(false);
-  const [viewMarker3, setViewMarker3] = useState(false);
-  const [marker, setMarker] = useState();
-  const [data, setData] = useState();
+const Map = ({data, ...props}) => {
+  const [marker, setMarker] = useState(null);
+  const mapRef = useRef()
 
-  console.log(data);
+  useEffect(() => {
+    if (data.length > 0) {
+      mapRef.current.animateToRegion({
+        ...data[0].geo,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      })
+    }
+  }, [data])
 
   const mapRegion = {
     latitude: 50.450001,
@@ -22,43 +27,40 @@ const Map = (props) => {
     longitudeDelta: 0.0421,
   };
 
-  useEffect(() => {
-    if (props.data) {
-      setData(props.data);
-    }
-  }, [props]);
-
   const closeAllMarker = () => {
-    if (viewMarker1 || viewMarker2 || viewMarker3) {
-      setViewMarker1(false);
-      setViewMarker2(false);
-      setViewMarker3(false);
-    }
-  };
+    setMarker(null)
+  }
 
   return (
     <View style={styles.container}>
       <MapView
+        ref={mapRef}
         provider={PROVIDER_GOOGLE}
-        region={mapRegion}
+        region={data.length > 0 ? {
+          latitude: +data[0].geo?.latitude,
+          longitude: +data[0].geo?.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        } : mapRegion}
         style={styles.map}
         onPress={closeAllMarker}
       >
-        {/* {data.map((item) => (
+        {data.map((item) => (
           <Marker
             coordinate={{
-              latitude: item.latitude,
-              longitude: item.longitude,
+              latitude: +item.geo.latitude,
+              longitude: +item.geo.longitude,
             }}
             key={item._id}
+            onPress={() => setMarker(item._id)}
           >
             <MaterialCommunityIcons
               name='map-marker'
               size={36}
-              color={!viewMarker1 ? Colors.markerBlue : Colors.yellow}
+              color={marker === item._id ? Colors.yellow : Colors.markerBlue}
             />
           </Marker>
-        ))} */}
+        ))}
         {/* <Marker
           onPress={() => {
             setViewMarker2(!viewMarker2);
@@ -97,13 +99,12 @@ const Map = (props) => {
         </Marker> */}
       </MapView>
 
-      {viewMarker3 == true ? (
-        <View style={styles.vacancy}>
-          <View style={{ width: 347 }}>
-            <Vacancy title='Кухар' />
-          </View>
+      {marker &&
+      <View style={styles.vacancy}>
+        <View style={{width: 347}}>
+          <Vacancy title='Кухар'/>
         </View>
-      ) : null}
+      </View>}
     </View>
   );
 };
