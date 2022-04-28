@@ -12,6 +12,8 @@ import { AuthContext } from "../../../Navigation/Auth/AuthContext";
 import { connect, useDispatch } from "react-redux";
 import { Formik } from "formik";
 import { useSelector } from "react-redux";
+import * as Yup from "yup";
+import PhoneInput from "react-native-phone-input";
 
 import styles from "./styles";
 import Input from "../../../components/Input";
@@ -19,6 +21,17 @@ import BigButton from "../../../components/BigButton";
 import sized from "../../../Svg/sized";
 import logoSvg from "../../../assets/icons/logo.svg";
 import { registerStart, auth } from "../../../redux/auth/auth-thunks";
+
+const SignupSchema = Yup.object().shape({
+  phone: Yup.string()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  password: Yup.string()
+    .min(2, "Too Short!")
+    .max(10, "Too Long!")
+    .required("Required"),
+});
 
 const Login = ({ navigation, login, registerStart, ...props }) => {
   const [typeEntrance, setTypeEntrance] = useState(false);
@@ -77,7 +90,8 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                     password: "",
                   }}
                   onSubmit={(values) => {
-                    dispatch(auth(values, context));
+                    // dispatch(auth(values, context));
+                    console.log(values);
                   }}
                 >
                   {({
@@ -91,16 +105,26 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                   }) => {
                     errors = submitCount > 0 ? errors : {};
                     const isValid =
-                      values.phone.length > 0 && values.password.length > 0;
+                      values.phone.length < 13 && values.password.length > 6;
+
+                    const handleConfirm = (num) => {
+                      const number = num.replace(/\s/g, "");
+                      setFieldValue("phone", number);
+                    };
                     return (
                       <>
                         <View>
-                          <Input
-                            title='Телефон'
-                            value={values.phone}
-                            onChange={handleChange("phone")}
+                          <Text style={styles.label}>Телефон</Text>
+                          <PhoneInput
+                            initialCountry={"ua"}
                             error={errors.phone}
-                            keyType='numeric'
+                            //onPressFlag={() => null}
+                            value={values.phone}
+                            maxLength={13}
+                            onChangePhoneNumber={(num) => handleConfirm(num)}
+                            allowZeroAfterCountryCode={false}
+                            autoFormat={true}
+                            style={styles.input}
                           />
                         </View>
                         <View style={{ marginTop: 30, marginBottom: 20 }}>
@@ -160,15 +184,26 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                     errors = submitCount > 0 ? errors : {};
                     const isValid =
                       values.phone.length > 0 && values.password.length > 0;
+
+                    const handleConfirm = (num) => {
+                      const number = num.replace(/\s/g, "");
+                      setFieldValue("phone", number);
+                    };
+
                     return (
                       <>
                         <View>
-                          <Input
-                            title='Телефон'
-                            value={values.phone}
-                            onChange={handleChange("phone")}
+                          <Text style={styles.label}>Телефон</Text>
+                          <PhoneInput
+                            initialCountry={"ua"}
                             error={errors.phone}
-                            keyType='numeric'
+                            //onPressFlag={() => null}
+                            value={values.phone}
+                            maxLength={13}
+                            onChangePhoneNumber={(num) => handleConfirm(num)}
+                            allowZeroAfterCountryCode={false}
+                            autoFormat={true}
+                            style={styles.input}
                           />
                         </View>
                         <View style={{ marginTop: 30, marginBottom: 20 }}>
