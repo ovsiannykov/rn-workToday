@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import {
-  View,
-  Text,
-  Alert,
-  ScrollView,
-  FlatList,
-  ActivityIndicator,
-} from "react-native";
+import { View, Alert, FlatList, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -119,9 +112,9 @@ const HomeScreen = (props) => {
       timeStart={item.timeStart}
       timeEnd={item.timeEnd}
       item={item}
-      onPress={(item) => {
-        navigation.navigate("VacancyDetail", { title: item.Title });
-        dispatch(setVacancyInfo(item));
+      onPress={async () => {
+        await dispatch(setVacancyInfo(item));
+        navigation.navigate("VacancyDetail");
       }}
     />
   );

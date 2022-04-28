@@ -39,8 +39,12 @@ const Vacancy = (props) => {
       <View style={styles.content}>
         <Image
           style={styles.image}
-          //source={{ uri: `${API_BASE_URL}/static/${props.photos[0]}` }}
-          source={image}
+          source={
+            props.photos
+              ? { uri: `${API_BASE_URL}static/${props.photos[0]}` }
+              : image
+          }
+          //source={image}
         />
         <View style={{ marginLeft: 15 }}>
           <Text style={styles.title}>{props.title ?? "Юрист"}</Text>

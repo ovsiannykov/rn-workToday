@@ -2,14 +2,19 @@ import React, { useState, useEffect, useRef } from "react";
 import { View, StyleSheet, Dimensions, Text, Platform } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
 import Colors from "../../constants/Colors";
 import Vacancy from "../Vacancy";
+import { setVacancyInfo } from "../../redux/worker/worker-actions";
 
 const Map = ({ data, ...props }) => {
   const [marker, setMarker] = useState(null);
   const [selectItem, setSelectItem] = useState(null);
   const mapRef = useRef();
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   useEffect(() => {
     if (data.length > 0) {
@@ -88,6 +93,10 @@ const Map = ({ data, ...props }) => {
               timeStart={selectItem.timeStart}
               timeEnd={selectItem.timeEnd}
               item={selectItem}
+              onPress={async () => {
+                await dispatch(setVacancyInfo(selectItem));
+                navigation.navigate("VacancyDetail");
+              }}
             />
           </View>
         </View>

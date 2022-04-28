@@ -39,10 +39,13 @@ const VacancyInfo = (props) => {
           <Image source={vacancyImage} style={styles.image} />
         </View>
         <View>
-          <Text style={styles.company_name}>Компанія</Text>
+          <Text style={styles.company_name}>{props.company ?? "Компанія"}</Text>
           <View style={{ display: "flex", flexDirection: "row" }}>
             <Feather name='clock' size={14} color={Colors.darkBlue} />
-            <Text style={styles.time}>22.02.2022 - 23.03.2022</Text>
+            <Text style={styles.time}>
+              {props.timeStart ?? "23.03.2022"} -{" "}
+              {props.timeEnd ?? "25.03.2022"}
+            </Text>
           </View>
         </View>
         <View
@@ -66,9 +69,9 @@ const VacancyInfo = (props) => {
       </View>
       <View style={{ marginTop: 20, ...styles.vacancy_info }}>
         <WalletIcon />
-        <Text style={styles.price}>500 zl/день</Text>
+        <Text style={styles.price}>{props.priceTotal ?? "0"} zl/день</Text>
         <TimeIcon />
-        <Text style={styles.price}>50 zl/год.</Text>
+        <Text style={styles.price}>{props.pricePerHour ?? "0"} zl/год.</Text>
       </View>
       <View style={{ marginTop: 7, marginLeft: -2, ...styles.vacancy_info }}>
         <MaterialCommunityIcons
@@ -76,28 +79,42 @@ const VacancyInfo = (props) => {
           size={22}
           color={Colors.darkBlue}
         />
-        <Text style={styles.price}>Вулиця Івана 23, буд 56</Text>
+        <Text style={styles.price}>
+          {props.place ?? "Вулиця Івана 23, буд 56}"}
+        </Text>
       </View>
       <Text style={{ marginTop: 18, ...styles.company_name }}>
-        Категорія вакансії: віддалена робота
+        Категорія вакансії: {props.type ?? "Невідомо"}
       </Text>
       <Text style={{ marginTop: 20, ...styles.company_name }}>Обов'язки:</Text>
       <View>
-        {dutyList.map((item) => (
-          <Text key={item.id} style={styles.listItem}>
-            {"\u2022 " + item.label}
-          </Text>
-        ))}
+        {props.resp
+          ? props.resp.map((item) => (
+              <Text key={item.name} style={styles.listItem}>
+                {"\u2022 " + item.name}
+              </Text>
+            ))
+          : dutyList.map((item) => (
+              <Text key={item.id} style={styles.listItem}>
+                {"\u2022 " + item.label}
+              </Text>
+            ))}
       </View>
       <Text style={{ marginTop: 20, ...styles.company_name }}>
         Необхідні навички:
       </Text>
       <View style={{ marginBottom: 20 }}>
-        {skillList.map((item) => (
-          <Text key={item.id} style={styles.listItem}>
-            {"\u2022 " + item.label}
-          </Text>
-        ))}
+        {props.skills
+          ? props.skills.map((item) => (
+              <Text key={item.name} style={styles.listItem}>
+                {"\u2022 " + item.name}
+              </Text>
+            ))
+          : skillList.map((item) => (
+              <Text key={item.id} style={styles.listItem}>
+                {"\u2022 " + item.label}
+              </Text>
+            ))}
       </View>
     </View>
   );

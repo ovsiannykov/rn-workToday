@@ -8,6 +8,7 @@ import sized from "../../Svg/sized";
 
 const Skill = (props) => {
   const [isTrue, setIsTrue] = useState(undefined);
+  const [typeUser, setTypeUser] = useState(undefined);
 
   useEffect(() => {
     if (props.isTrue) {
@@ -23,9 +24,26 @@ const Skill = (props) => {
     }
   }, [props.isTrue]);
 
+  useEffect(() => {
+    if (props.type == "worker") {
+      setTypeUser("worker");
+    }
+  }, [props.type]);
+
   const TrueIcon = sized(trueSvg, 24, 24);
   const FalseIcon = sized(falseSvg, 24, 24);
   const JustIcon = sized(blueCircleSvg, 24, 24);
+
+  if (isTrue == undefined && typeUser === "worker") {
+    return (
+      <View style={styles.container_false}>
+        <Text style={styles.text_false}>{props.title}</Text>
+        <View>
+          <FalseIcon />
+        </View>
+      </View>
+    );
+  }
 
   if (isTrue == undefined) {
     return (
