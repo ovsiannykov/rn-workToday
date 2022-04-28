@@ -36,8 +36,12 @@ const Map = ({ data, ...props }) => {
         region={
           data.length > 0
             ? {
-                latitude: selectItem ? selectItem.geo.latitude : 50.450001,
-                longitude: selectItem ? selectItem.geo.longitude : 30.523333,
+                latitude: selectItem
+                  ? Number(selectItem.geo.latitude)
+                  : 50.450001,
+                longitude: selectItem
+                  ? Number(selectItem.geo.longitude)
+                  : 30.523333,
                 latitudeDelta: selectItem ? 0.008 : 0.5,
                 longitudeDelta: selectItem ? 0.008 : 0,
               }
