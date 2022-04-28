@@ -9,19 +9,16 @@ import {
   Keyboard,
   ScrollView,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Formik, Form, Field } from "formik";
-import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
 import Colors from "../../../constants/Colors";
 import LongWhiteButton from "../../LongWhiteButton";
-import Input from "../../../components/Input";
-import {
-  mainStyles,
-  SCREEN_HEIGHT,
-  SCREEN_WIDTH,
-} from "../../../styles/mainStyles";
+import { setStep1 } from "../../../redux/worker/worker-thunks";
 
 const statusOptions = [
   { id: "1", label: "Працюю" },
@@ -32,6 +29,10 @@ const statusOptions = [
 const StepOne = (props) => {
   const [selctList, setSelectList] = useState(true);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [fetching, setFetching] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -41,6 +42,14 @@ const StepOne = (props) => {
     setDatePickerVisibility(false);
   };
 
+  if (fetching) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size='large' color='#376AED' />
+      </View>
+    );
+  }
+
   return (
     <Formik
       initialValues={{
@@ -48,14 +57,11 @@ const StepOne = (props) => {
         citizenship: "Україна",
         status: "",
       }}
-      onSubmit={(values) => {
-        console.log(values);
+      onSubmit={async (values) => {
+        setFetching(true);
+        await dispatch(setStep1(values, navigation));
+        setFetching(false);
       }}
-      // validationSchema={Yup.object({
-      //   birth: Yup.string().required("Birth.required"),
-      //   citizenship: Yup.string().required("Citizenship.required"),
-      //   status: Yup.string().required("Status.required"),
-      // })}
     >
       {({
         values,
@@ -153,7 +159,10 @@ const StepOne = (props) => {
               <View style={{ width: 299 }}>
                 <LongWhiteButton
                   title='Наступний крок'
-                  onPress={props.nextStep}
+                  onPress={async () => {
+                    await handleSubmit();
+                    props.nextStep();
+                  }}
                   disabled={!isValid}
                 />
               </View>

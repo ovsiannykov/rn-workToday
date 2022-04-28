@@ -19,3 +19,7 @@ export const setVacancyInfo = (payload) => ({
   type: workerTypes.SET_VACANCY_INFO,
   vacancyInfo: payload,
 });
+
+export const setStepWorker = () => ({
+  type: workerTypes.SET_QUESTIONS_STEP,
+});

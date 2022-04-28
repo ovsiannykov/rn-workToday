@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Root } from "./src/Navigation/Root";
 import AppLoading from "expo-app-loading";
+import FlashMessage from "react-native-flash-message";
+
 import { bootstrap } from "./src/bootstrap";
 import { AuthContext } from "./src/Navigation/Auth/AuthContext";
 import { Provider } from "react-redux";
@@ -16,7 +18,16 @@ let App = ({ userToken }) => {
         onError={(err) => console.log(err)}
       />
     );
-  return <Root userToken={userToken} />;
+  return (
+    <>
+      <Root userToken={userToken} />
+      <FlashMessage
+        position='top'
+        color='red'
+        titleStyle={{ fontFamily: "ComfortaaMedium", fontSize: 14 }}
+      />
+    </>
+  );
 };
 
 const AppWrapper = () => {

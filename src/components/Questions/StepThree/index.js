@@ -4,19 +4,31 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
-  Button,
-  Keyboard,
+  ActivityIndicator,
   ScrollView,
 } from "react-native";
-import { Formik, Form, Field } from "formik";
-import * as Yup from "yup";
+import { Formik } from "formik";
+import { useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
 import Colors from "../../../constants/Colors";
 import LongWhiteButton from "../../LongWhiteButton";
-import Input from "../../Input";
+import { setStep3 } from "../../../redux/worker/worker-thunks";
 
 const StepThree = (props) => {
+  const [fetching, setFetching] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+
+  if (fetching) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size='large' color='#376AED' />
+      </View>
+    );
+  }
+
   return (
     <Formik
       initialValues={{
@@ -30,13 +42,10 @@ const StepThree = (props) => {
         tax: "",
       }}
       onSubmit={(values) => {
-        console.log(values);
+        setFetching(true);
+        dispatch(setStep3(values, navigation));
+        setFetching(false);
       }}
-      // validationSchema={Yup.object({
-      //   birth: Yup.string().required("Birth.required"),
-      //   citizenship: Yup.string().required("Citizenship.required"),
-      //   status: Yup.string().required("Status.required"),
-      // })}
     >
       {({
         values,
@@ -146,7 +155,10 @@ const StepThree = (props) => {
                 <View style={{ marginTop: 20, padding: 5 }}>
                   <LongWhiteButton
                     title='Наступний крок'
-                    onPress={props.nextStep}
+                    onPress={() => {
+                      handleSubmit();
+                      props.nextStep();
+                    }}
                     disabled={!isValid}
                   />
                 </View>

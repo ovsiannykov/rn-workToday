@@ -5,17 +5,16 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  Button,
-  Keyboard,
+  ActivityIndicator,
   ScrollView,
 } from "react-native";
-import { Formik, Form, Field } from "formik";
-import * as Yup from "yup";
+import { Formik } from "formik";
+import { useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
 import Colors from "../../../constants/Colors";
 import LongWhiteButton from "../../LongWhiteButton";
-import Input from "../../Input";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { setStep4 } from "../../../redux/worker/worker-thunks";
 
 const streetType = [
   { id: "1", label: "Вулиця" },
@@ -32,6 +31,18 @@ const factAdress = [
 const StepFour = (props) => {
   const [selctList, setSelectList] = useState(true);
   const [selctList2, setSelectList2] = useState(true);
+  const [fetching, setFetching] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+
+  if (fetching) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size='large' color='#376AED' />
+      </View>
+    );
+  }
 
   return (
     <Formik
@@ -48,14 +59,11 @@ const StepFour = (props) => {
         correspondenceHouseNum: "",
         correspondenceAppartament: "",
       }}
-      onSubmit={(values) => {
-        console.log(values);
+      onSubmit={async (values) => {
+        setFetching(true);
+        await dispatch(setStep4(values, navigation));
+        setFetching(false);
       }}
-      // validationSchema={Yup.object({
-      //   birth: Yup.string().required("Birth.required"),
-      //   citizenship: Yup.string().required("Citizenship.required"),
-      //   status: Yup.string().required("Status.required"),
-      // })}
     >
       {({
         values,
@@ -241,7 +249,10 @@ const StepFour = (props) => {
                 <View style={{ marginTop: 20, padding: 5 }}>
                   <LongWhiteButton
                     title='Наступний крок'
-                    onPress={props.nextStep}
+                    onPress={() => {
+                      handleSubmit();
+                      props.nextStep();
+                    }}
                     disabled={!isValid}
                   />
                 </View>
