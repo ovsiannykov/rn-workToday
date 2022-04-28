@@ -23,3 +23,8 @@ export const setVacancyInfo = (payload) => ({
 export const setStepWorker = () => ({
   type: workerTypes.SET_QUESTIONS_STEP,
 });
+
+export const setCategoriesFilter = (payload) => ({
+  type: workerTypes.SET_FILTER_CATEGORIES,
+  categories: payload,
+});

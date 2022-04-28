@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
 
 import Colors from "../../constants/Colors";
 
-const standartData = [
-  { id: "1", label: "Категорія 1" },
-  { id: "2", label: "Категорія 2" },
-];
+const standartData = ["Категорія 1", "Категорія 2"];
 
 const RadioButtons = (props) => {
   const [data, setData] = useState(standartData);
-  const [radioBtn, setRadioBtn] = useState(data[0].id);
+  const [radioBtn, setRadioBtn] = useState();
+
+  const categories = useSelector((state) => state.workerReducer.categories);
+
+  useEffect(() => {
+    if (categories.length) {
+      setData(categories);
+    }
+  }, []);
 
   useEffect(() => {
     if (props.data) {
@@ -65,12 +71,7 @@ const RadioButtons = (props) => {
   return (
     <View style={{ marginTop: 10 }}>
       {data.map((item) => (
-        <RadioItem
-          key={item.id}
-          title={item.label}
-          id={item.id}
-          all={item.all}
-        />
+        <RadioItem key={item} title={item} id={item} />
       ))}
     </View>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { View, Alert, FlatList, ActivityIndicator } from "react-native";
+import { View, Alert, FlatList, ActivityIndicator, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -14,7 +14,10 @@ import Vacancy from "../../../components/Vacancy";
 import DateFilter from "../../../components/DateFilter";
 import HomeModal from "../../../components/HomeModal";
 import StoryviewModal from "../../../components/StoryviewModal";
-import { vacanciesWorkerThunk } from "../../../redux/worker/worker-thunks";
+import {
+  vacanciesWorkerThunk,
+  getCategories,
+} from "../../../redux/worker/worker-thunks";
 import {
   setSelectVacancy,
   setVacancyInfo,
@@ -44,6 +47,7 @@ const HomeScreen = (props) => {
   // fetchData
   useEffect(() => {
     setLoading(true);
+    dispatch(getCategories());
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
@@ -142,6 +146,11 @@ const HomeScreen = (props) => {
           {isMap ? <Map data={data} /> : null}
         </View>
         <View style={styles.vacancy_scrollBox}>
+          {data.length == 0 ? (
+            <Text style={styles.noItems}>
+              Поки що немає актуальних вакансій 😔
+            </Text>
+          ) : null}
           <FlatList
             data={data}
             keyExtractor={(item) => item._id}

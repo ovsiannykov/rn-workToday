@@ -8,4 +8,5 @@ export const workerApi = {
   step3: (body) => instance.post("/application/step3", body),
   step4: (body) => instance.post("/application/step4", body),
   step5: (body) => instance.post("/application/step5", body),
+  getCategories: (body) => instance.post("/application/getCategories", body),
 };

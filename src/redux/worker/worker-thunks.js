@@ -3,7 +3,11 @@ import { showMessage } from "react-native-flash-message";
 
 import { workerReducer } from "./worker-reducer";
 import { workerApi } from "./worker-api";
-import { setWorkerVanacies, setWorkerVacancy } from "./worker-actions";
+import {
+  setWorkerVanacies,
+  setWorkerVacancy,
+  setCategoriesFilter,
+} from "./worker-actions";
 import instance from "../instance";
 
 export const setTokenInHeaders = (token) => {
@@ -133,5 +137,18 @@ export const setStep5 = (body, navigation) => async (dispatch) => {
     console.log(error);
     Alert.alert("Помилка 😔", "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️");
     navigation.goBack();
+  }
+};
+
+export const getCategories = () => async (dispatch) => {
+  try {
+    const res = await workerApi.getCategories();
+    if (res.data.status === "Success") {
+      dispatch(setCategoriesFilter(res.data.data));
+    } else {
+      Alert.alert(res.data.status, res.data.text);
+    }
+  } catch (error) {
+    console.log(error);
   }
 };

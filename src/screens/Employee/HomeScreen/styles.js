@@ -19,4 +19,11 @@ export default StyleSheet.create({
     height: "100%",
     paddingHorizontal: 14,
   },
+  noItems: {
+    fontFamily: "ComfortaaLight",
+    fontSize: 14,
+    color: "gray",
+    marginTop: 25,
+    textAlign: "center",
+  },
 });

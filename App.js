@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Root } from "./src/Navigation/Root";
 import AppLoading from "expo-app-loading";
 import FlashMessage from "react-native-flash-message";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ActivityIndicator, View } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { useContext } from "react";
 
 import { bootstrap } from "./src/bootstrap";
 import { AuthContext } from "./src/Navigation/Auth/AuthContext";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
+import Colors from "./src/constants/Colors";
 
 let App = ({ userToken }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -32,6 +37,8 @@ let App = ({ userToken }) => {
 
 const AppWrapper = () => {
   const [userToken, setUserToken] = useState(null);
+  const [fetching, setFetching] = useState(false);
+
   const authContext = React.useMemo(() => {
     return {
       signIn: (token) => {
@@ -45,6 +52,34 @@ const AppWrapper = () => {
       },
     };
   }, []);
+
+  //const context = useContext(AuthContext);
+
+  const findToken = async (context) => {
+    setFetching(true);
+    const value = await AsyncStorage.getItem("@storage_workerToken");
+    if (value !== null) {
+      //await setUserToken(value);
+      //context.signIn(value);
+    }
+    setFetching(false);
+  };
+
+  useEffect(() => {
+    findToken();
+  }, []);
+
+  if (fetching) {
+    return (
+      <LinearGradient
+        colors={["#F4F7FF", "#FFFFFF"]}
+        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+      >
+        <ActivityIndicator size='large' color={Colors.primaryBlue} />
+      </LinearGradient>
+    );
+  }
+
   return (
     <Provider store={store}>
       <AuthContext.Provider value={authContext}>
