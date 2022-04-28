@@ -94,4 +94,11 @@ export default StyleSheet.create({
     fontSize: 14,
     lineHeight: 16,
   },
+  error: {
+    fontSize: 10,
+    color: "red",
+    fontFamily: "ComfortaaLight",
+    position: "relative",
+    top: 5,
+  },
 });

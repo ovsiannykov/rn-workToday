@@ -24,13 +24,10 @@ import { registerStart, auth } from "../../../redux/auth/auth-thunks";
 
 const SignupSchema = Yup.object().shape({
   phone: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-  password: Yup.string()
-    .min(2, "Too Short!")
-    .max(10, "Too Long!")
-    .required("Required"),
+    .min(13, "Занадто короткий!")
+    .max(13, "Занадто довгий!")
+    .required("Обов'язково"),
+  password: Yup.string().min(6, "Занадто короткий!").required("Обов'язково"),
 });
 
 const Login = ({ navigation, login, registerStart, ...props }) => {
@@ -90,9 +87,9 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                     password: "",
                   }}
                   onSubmit={(values) => {
-                    // dispatch(auth(values, context));
-                    console.log(values);
+                    dispatch(auth(values, context));
                   }}
+                  validationSchema={SignupSchema}
                 >
                   {({
                     values,
@@ -102,10 +99,11 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                     submitCount,
                     setFieldValue,
                     validate,
+                    touched,
                   }) => {
                     errors = submitCount > 0 ? errors : {};
                     const isValid =
-                      values.phone.length < 13 && values.password.length > 6;
+                      values.phone.length < 0 && values.password.length < 0;
 
                     const handleConfirm = (num) => {
                       const number = num.replace(/\s/g, "");
@@ -118,7 +116,7 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                           <PhoneInput
                             initialCountry={"ua"}
                             error={errors.phone}
-                            //onPressFlag={() => null}
+                            onPressFlag={() => null}
                             value={values.phone}
                             maxLength={13}
                             onChangePhoneNumber={(num) => handleConfirm(num)}
@@ -126,6 +124,9 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                             autoFormat={true}
                             style={styles.input}
                           />
+                          {errors.phone && touched.phone ? (
+                            <Text style={styles.error}>{errors.phone}</Text>
+                          ) : null}
                         </View>
                         <View style={{ marginTop: 30, marginBottom: 20 }}>
                           <Input
@@ -136,15 +137,15 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                             onChange={handleChange("password")}
                             error={errors.password}
                           />
+                          {errors.password && touched.password ? (
+                            <Text style={styles.error}>{errors.password}</Text>
+                          ) : null}
                         </View>
                         <View style={{ alignItems: "center" }}>
                           <BigButton
                             title='УВIЙТИ'
-                            disabled={!isValid}
                             onPress={() => {
-                              if (isValid) {
-                                handleSubmit();
-                              }
+                              handleSubmit();
                             }}
                           />
                         </View>
@@ -171,6 +172,7 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                   onSubmit={(values) => {
                     registerStart(values, navigation, values.phone);
                   }}
+                  validationSchema={SignupSchema}
                 >
                   {({
                     values,
@@ -180,6 +182,7 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                     submitCount,
                     setFieldValue,
                     validate,
+                    touched,
                   }) => {
                     errors = submitCount > 0 ? errors : {};
                     const isValid =
@@ -197,7 +200,7 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                           <PhoneInput
                             initialCountry={"ua"}
                             error={errors.phone}
-                            //onPressFlag={() => null}
+                            onPressFlag={() => null}
                             value={values.phone}
                             maxLength={13}
                             onChangePhoneNumber={(num) => handleConfirm(num)}
@@ -205,6 +208,9 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                             autoFormat={true}
                             style={styles.input}
                           />
+                          {errors.phone && touched.phone ? (
+                            <Text style={styles.error}>{errors.phone}</Text>
+                          ) : null}
                         </View>
                         <View style={{ marginTop: 30, marginBottom: 20 }}>
                           <Input
@@ -215,16 +221,15 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                             onChange={handleChange("password")}
                             error={errors.password}
                           />
+                          {errors.password && touched.password ? (
+                            <Text style={styles.error}>{errors.password}</Text>
+                          ) : null}
                         </View>
                         <View>
                           <View style={{ alignItems: "center" }}>
                             <BigButton
-                              disabled={!isValid}
                               onPress={() => {
-                                if (isValid) {
-                                  handleSubmit();
-                                  navigation.navigate("SMS");
-                                }
+                                handleSubmit();
                               }}
                               title='РЕЄСТРАЦІЯ'
                             />
