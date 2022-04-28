@@ -8,6 +8,7 @@ import Vacancy from "../Vacancy";
 
 const Map = ({ data, ...props }) => {
   const [marker, setMarker] = useState(null);
+  const [selectItem, setSelectItem] = useState(null);
   const mapRef = useRef();
 
   useEffect(() => {
@@ -27,10 +28,6 @@ const Map = ({ data, ...props }) => {
     longitudeDelta: 0.0421,
   };
 
-  const closeAllMarker = () => {
-    setMarker(null);
-  };
-
   return (
     <View style={styles.container}>
       <MapView
@@ -39,15 +36,19 @@ const Map = ({ data, ...props }) => {
         region={
           data.length > 0
             ? {
-                latitude: +data[0].geo?.latitude,
-                longitude: +data[0].geo?.longitude,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
+                latitude: selectItem ? selectItem.geo.latitude : 50.450001,
+                longitude: selectItem ? selectItem.geo.longitude : 30.523333,
+                latitudeDelta: selectItem ? 0.008 : 0.5,
+                longitudeDelta: selectItem ? 0.008 : 0,
               }
             : mapRegion
         }
         style={styles.map}
-        onPress={closeAllMarker}
+        onPress={() => {
+          if (marker !== null) {
+            setMarker(null);
+          }
+        }}
       >
         {data.map((item) => (
           <Marker
@@ -56,7 +57,11 @@ const Map = ({ data, ...props }) => {
               longitude: +item.geo.longitude,
             }}
             key={item._id}
-            onPress={() => setMarker(item._id)}
+            onPress={async () => {
+              await setMarker(null);
+              setSelectItem(item);
+              setMarker(item._id);
+            }}
           >
             <MaterialCommunityIcons
               name='map-marker'
@@ -66,13 +71,23 @@ const Map = ({ data, ...props }) => {
           </Marker>
         ))}
       </MapView>
-      {marker && (
+      {marker ? (
         <View style={styles.vacancy}>
           <View style={{ width: 347 }}>
-            <Vacancy title='Кухар' />
+            <Vacancy
+              title={selectItem.Title}
+              info={selectItem.info}
+              id={selectItem._id}
+              photos={selectItem.photos}
+              priceTotal={selectItem.priceTotal}
+              place={selectItem.place}
+              timeStart={selectItem.timeStart}
+              timeEnd={selectItem.timeEnd}
+              item={selectItem}
+            />
           </View>
         </View>
-      )}
+      ) : null}
     </View>
   );
 };
