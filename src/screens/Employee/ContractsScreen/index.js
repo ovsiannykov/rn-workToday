@@ -42,7 +42,7 @@ const ContractsScreen = (props) => {
       timeStart={item.vacansyId.timeStart}
       timeEnd={item.vacansyId.timeEnd}
       item={item}
-      status={item.workInfo.workstatus}
+      status={item.status}
     />
   );
 

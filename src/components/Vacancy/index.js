@@ -84,9 +84,14 @@ const Vacancy = (props) => {
           <LinkIcon />
         </TouchableOpacity>
       </View>
-      {props.status ? (
+      {props.status == "consideration" ? (
         <View style={styles.status_box}>
-          <VacancyStatusText text={props.status} />
+          <VacancyStatusText text='На розгляді' />
+        </View>
+      ) : null}
+      {props.status == "canseled" ? (
+        <View style={styles.status_box}>
+          <VacancyStatusText text='Скасований' />
         </View>
       ) : null}
     </View>
