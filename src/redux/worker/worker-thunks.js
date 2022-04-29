@@ -8,6 +8,7 @@ import {
   setWorkerVanacies,
   setWorkerVacancy,
   setCategoriesFilter,
+  setContracts,
 } from "./worker-actions";
 import instance from "../instance";
 import { createFile } from "../../../utils";
@@ -30,6 +31,10 @@ export const vacanciesWorkerThunk = (geo, searchText) => async (dispatch) => {
     }
   } catch (error) {
     console.log(error);
+    showMessage({
+      message: "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️",
+      type: "danger",
+    });
   }
 };
 
@@ -44,15 +49,18 @@ export const setStep1 = (body, navigation) => async (dispatch) => {
     }
 
     if (res.status === "Error") {
-      Alert.alert(
-        "Помилка 😔",
-        "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️"
-      );
+      showMessage({
+        message: "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️",
+        type: "danger",
+      });
       navigation.goBack();
     }
   } catch (error) {
     console.log(error);
-    Alert.alert("Помилка 😔", "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️");
+    showMessage({
+      message: "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️",
+      type: "danger",
+    });
     navigation.goBack();
   }
 };
@@ -68,15 +76,18 @@ export const setStep2 = (body, navigation) => async (dispatch) => {
     }
 
     if (res.data.status === "Error") {
-      Alert.alert(
-        "Помилка 😔",
-        "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️"
-      );
+      showMessage({
+        message: "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️",
+        type: "danger",
+      });
       navigation.goBack();
     }
   } catch (error) {
     console.log(error);
-    Alert.alert("Помилка 😔", "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️");
+    showMessage({
+      message: "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️",
+      type: "danger",
+    });
     navigation.goBack();
   }
 };
@@ -92,15 +103,18 @@ export const setStep3 = (body, navigation) => async (dispatch) => {
     }
 
     if (res.data.status === "Error") {
-      Alert.alert(
-        "Помилка 😔",
-        "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️"
-      );
+      showMessage({
+        message: "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️",
+        type: "danger",
+      });
       navigation.goBack();
     }
   } catch (error) {
     console.log(error);
-    Alert.alert("Помилка 😔", "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️");
+    showMessage({
+      message: "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️",
+      type: "danger",
+    });
     navigation.goBack();
   }
 };
@@ -116,15 +130,18 @@ export const setStep4 = (body, navigation) => async (dispatch) => {
     }
 
     if (res.data.status === "Error") {
-      Alert.alert(
-        "Помилка 😔",
-        "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️"
-      );
+      showMessage({
+        message: "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️",
+        type: "danger",
+      });
       navigation.goBack();
     }
   } catch (error) {
     console.log(error);
-    Alert.alert("Помилка 😔", "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️");
+    showMessage({
+      message: "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️",
+      type: "danger",
+    });
     navigation.goBack();
   }
 };
@@ -148,15 +165,18 @@ export const setStep5 = (body, navigation) => async (dispatch) => {
       });
       navigation.goBack();
     } else {
-      Alert.alert(
-        "Помилка 😔",
-        "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️"
-      );
+      showMessage({
+        message: "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️",
+        type: "danger",
+      });
       navigation.goBack();
     }
   } catch (error) {
     console.log(error);
-    Alert.alert("Помилка 😔", "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️");
+    showMessage({
+      message: "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️",
+      type: "danger",
+    });
     navigation.goBack();
   }
 };
@@ -167,7 +187,10 @@ export const getCategories = () => async (dispatch) => {
     if (res.data.status === "Success") {
       dispatch(setCategoriesFilter(res.data.data));
     } else {
-      Alert.alert(res.data.status, res.data.text);
+      showMessage({
+        message: `${res.data.text}`,
+        type: "danger",
+      });
     }
   } catch (error) {
     console.log(error);
@@ -185,24 +208,37 @@ export const getLoadCompetitions = (body, type) => async (dispatch) => {
     const res = await workerApi.getLoadCompetitions(formData);
 
     if (res.data.status !== "Success") {
-      Alert.alert(
-        "Помилка 😔",
-        "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️"
-      );
+      showMessage({
+        message: "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️",
+        type: "danger",
+      });
     }
   } catch (error) {
     console.log(error);
-    Alert.alert("Помилка 😔", "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️");
+    showMessage({
+      message: "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️",
+      type: "danger",
+    });
   }
 };
 
 export const getFeedback = (body) => async (dispatch) => {
   try {
-    const res = await workerApi.getFeedback(body);
-    console.log(res.data);
+    const res = await workerApi.getFeedback({ type: body });
+    if (res.data.status === "Success") {
+      dispatch(setContracts(res.data.data));
+    } else {
+      showMessage({
+        message: "Не вдалося завантажити контракти",
+        type: "danger",
+      });
+    }
   } catch (error) {
     console.log(error);
-    Alert.alert("Помилка 😔", "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️");
+    showMessage({
+      message: "Не вдалося завантажити контракти 😔",
+      type: "danger",
+    });
   }
 };
 
@@ -217,11 +253,14 @@ export const sendFeedback = (id) => async (dispatch) => {
     } else {
       showMessage({
         message: `${res.data}`,
-        type: "error",
+        type: "danger",
       });
     }
   } catch (error) {
     console.log(error);
-    Alert.alert("Помилка 😔", "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️");
+    showMessage({
+      message: "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️",
+      type: "danger",
+    });
   }
 };

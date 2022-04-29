@@ -8,4 +8,11 @@ export default StyleSheet.create({
     paddingTop: Platform.OS == "ios" ? 25 : 10,
     paddingHorizontal: 10,
   },
+  noItems: {
+    fontFamily: "ComfortaaLight",
+    marginTop: 20,
+    fontSize: 14,
+    color: "gray",
+    textAlign: "center",
+  },
 });
