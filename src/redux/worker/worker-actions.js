@@ -33,3 +33,13 @@ export const setContracts = (payload) => ({
   type: workerTypes.SET_CONTRACTS,
   contracts: payload,
 });
+
+export const getMyWorkActive = (payload) => ({
+  type: workerTypes.GET_MY_WORK_ACTIVE,
+  activeWorks: payload,
+});
+
+export const getMyWorkFinished = (payload) => ({
+  type: workerTypes.GET_MY_WORK_FINISHED,
+  finishWorks: payload,
+});

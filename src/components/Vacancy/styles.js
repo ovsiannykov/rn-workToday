@@ -76,8 +76,8 @@ export default StyleSheet.create({
   },
   status_box: {
     position: "absolute",
-    right: 25,
-    top: 22,
+    right: 18,
+    top: 24,
   },
   place: {
     fontFamily: "ComfortaaMedium",

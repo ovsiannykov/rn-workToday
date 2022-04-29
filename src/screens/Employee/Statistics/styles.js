@@ -34,4 +34,11 @@ export default StyleSheet.create({
     top: -150,
     marginBottom: 60,
   },
+  noItems: {
+    fontFamily: "ComfortaaLight",
+    fontSize: 14,
+    color: "gray",
+    marginTop: 25,
+    textAlign: "center",
+  },
 });

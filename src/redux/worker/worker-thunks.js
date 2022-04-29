@@ -9,6 +9,8 @@ import {
   setWorkerVacancy,
   setCategoriesFilter,
   setContracts,
+  getMyWorkActive,
+  getMyWorkFinished,
 } from "./worker-actions";
 import instance from "../instance";
 import { createFile } from "../../../utils";
@@ -260,6 +262,29 @@ export const sendFeedback = (id) => async (dispatch) => {
     console.log(error);
     showMessage({
       message: "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️",
+      type: "danger",
+    });
+  }
+};
+
+export const getMyWork = () => async (dispatch) => {
+  try {
+    const res = await workerApi.getMyWork();
+
+    console.log(res.data);
+    if (res.data.status === "Success") {
+      dispatch(getMyWorkActive(res.data.active));
+      dispatch(getMyWorkFinished(res.data.finished));
+    } else {
+      showMessage({
+        message: "Не вдалося завантажити ваші роботи 😔",
+        type: "danger",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    showMessage({
+      message: "Не вдалося завантажити ваші роботи 😔",
       type: "danger",
     });
   }

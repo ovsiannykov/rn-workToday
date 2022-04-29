@@ -23,7 +23,6 @@ const ContractsScreen = (props) => {
   const dispatch = useDispatch();
 
   const data = useSelector((state) => state.workerReducer.contracts);
-  console.log(data);
 
   useEffect(() => {
     setLoading(true);
