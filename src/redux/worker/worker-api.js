@@ -20,4 +20,6 @@ export const workerApi = {
         "Content-Type": "multipart/form-data",
       },
     }),
+  getFeedback: (body) => instance.post("/application/getFeedback", body),
+  sendFeedback: (body) => instance.post("/application/sendFeedback", body),
 };

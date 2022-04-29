@@ -28,3 +28,8 @@ export const setCategoriesFilter = (payload) => ({
   type: workerTypes.SET_FILTER_CATEGORIES,
   categories: payload,
 });
+
+export const setContracts = (payload) => ({
+  type: workerTypes.SET_CONTRACTS,
+  contracts: payload,
+});

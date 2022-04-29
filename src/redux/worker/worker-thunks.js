@@ -1,5 +1,6 @@
 import { Alert } from "react-native";
 import { showMessage } from "react-native-flash-message";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { workerReducer } from "./worker-reducer";
 import { workerApi } from "./worker-api";
@@ -38,6 +39,10 @@ export const setStep1 = (body, navigation) => async (dispatch) => {
       step1Info: body,
     });
 
+    if (res.data.status === "Success") {
+      AsyncStorage.setItem("@questions", "1");
+    }
+
     if (res.status === "Error") {
       Alert.alert(
         "Помилка 😔",
@@ -57,6 +62,10 @@ export const setStep2 = (body, navigation) => async (dispatch) => {
     const res = await workerApi.step2({
       step2Info: body,
     });
+
+    if (res.data.status === "Success") {
+      AsyncStorage.setItem("@questions", "2");
+    }
 
     if (res.data.status === "Error") {
       Alert.alert(
@@ -78,6 +87,10 @@ export const setStep3 = (body, navigation) => async (dispatch) => {
       step3Info: body,
     });
 
+    if (res.data.status === "Success") {
+      AsyncStorage.setItem("@questions", "3");
+    }
+
     if (res.data.status === "Error") {
       Alert.alert(
         "Помилка 😔",
@@ -97,6 +110,10 @@ export const setStep4 = (body, navigation) => async (dispatch) => {
     const res = await workerApi.step4({
       step4Info: body,
     });
+
+    if (res.data.status === "Success") {
+      AsyncStorage.setItem("@questions", "4");
+    }
 
     if (res.data.status === "Error") {
       Alert.alert(
@@ -124,6 +141,7 @@ export const setStep5 = (body, navigation) => async (dispatch) => {
 
     const res = await workerApi.step5(formData);
     if (res.data.status === "Success") {
+      await AsyncStorage.setItem("@questions", "5");
       showMessage({
         message: "Форму успішно відправлено 🎉",
         type: "success",
@@ -171,6 +189,36 @@ export const getLoadCompetitions = (body, type) => async (dispatch) => {
         "Помилка 😔",
         "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️"
       );
+    }
+  } catch (error) {
+    console.log(error);
+    Alert.alert("Помилка 😔", "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️");
+  }
+};
+
+export const getFeedback = (body) => async (dispatch) => {
+  try {
+    const res = await workerApi.getFeedback(body);
+    console.log(res.data);
+  } catch (error) {
+    console.log(error);
+    Alert.alert("Помилка 😔", "Щось пішло не так. Спробуйте трохи пізніше 🤷‍♀️");
+  }
+};
+
+export const sendFeedback = (id) => async (dispatch) => {
+  try {
+    const res = await workerApi.sendFeedback({ _id: id });
+    if (res.data.status === "Success") {
+      showMessage({
+        message: "Заявку надіслано ✅",
+        type: "success",
+      });
+    } else {
+      showMessage({
+        message: `${res.data}`,
+        type: "error",
+      });
     }
   } catch (error) {
     console.log(error);

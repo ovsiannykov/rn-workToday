@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import * as Location from "expo-location";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import styles from "./styles";
 import Colors from "../../../constants/Colors";
@@ -37,11 +38,25 @@ const HomeScreen = (props) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
+  const getStorageQuesstion = async () => {
+    try {
+      const value = await AsyncStorage.getItem("@questions");
+
+      if (value == "5") {
+        setStoryViewModal(false);
+      } else {
+        setTimeout(() => {
+          setStoryViewModal(true);
+        }, 1000);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   // StoryModal
   useEffect(() => {
-    setTimeout(() => {
-      setStoryViewModal(true);
-    }, 1000);
+    getStorageQuesstion();
   }, []);
 
   // fetchData

@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ActivityIndicator, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useContext } from "react";
+import { LogBox } from "react-native";
 
 import { bootstrap } from "./src/bootstrap";
 import { AuthContext } from "./src/Navigation/Auth/AuthContext";
@@ -13,6 +14,10 @@ import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import Colors from "./src/constants/Colors";
 import { setTokenInHeaders } from "./src/redux/auth/auth-thunks";
+
+LogBox.ignoreLogs([
+  "Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.",
+]);
 
 let App = ({ userToken }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -56,13 +61,12 @@ const AppWrapper = () => {
 
   //const context = useContext(AuthContext);
 
-  const findToken = async (context) => {
+  const findToken = async () => {
     setFetching(true);
     const value = await AsyncStorage.getItem("@storage_workerToken");
     if (value !== null) {
       setTokenInHeaders(value);
       setUserToken(value);
-      //context.signIn(value);
     }
     setFetching(false);
   };

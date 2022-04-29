@@ -37,7 +37,7 @@ const StoryviewModal = (props) => {
           title='До заповнення'
           onPress={() => {
             props.close();
-            navigation.navigate("UploadCompetence");
+            navigation.navigate("Questions");
           }}
         />
         <TouchableOpacity

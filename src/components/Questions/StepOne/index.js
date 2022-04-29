@@ -57,9 +57,9 @@ const StepOne = (props) => {
         citizenship: "Україна",
         status: "",
       }}
-      onSubmit={async (values) => {
+      onSubmit={(values) => {
         setFetching(true);
-        await dispatch(setStep1(values, navigation));
+        dispatch(setStep1(values, navigation));
         setFetching(false);
       }}
     >
@@ -159,8 +159,8 @@ const StepOne = (props) => {
               <View style={{ width: 299 }}>
                 <LongWhiteButton
                   title='Наступний крок'
-                  onPress={async () => {
-                    await handleSubmit();
+                  onPress={() => {
+                    handleSubmit();
                     props.nextStep();
                   }}
                   disabled={!isValid}

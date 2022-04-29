@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 
 import styles from "./styles";
 import Search from "../../../components/Search";
 import ContractFilter from "../../../components/ContractFilter";
 import Vacancy from "../../../components/Vacancy";
+import { getFeedback } from "../../../redux/worker/worker-thunks";
 
 const ContractsScreen = (props) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getFeedback("consideration"));
+  }, []);
 
   return (
     <LinearGradient colors={["#F4F7FF", "#FFFFFF"]} style={styles.container}>

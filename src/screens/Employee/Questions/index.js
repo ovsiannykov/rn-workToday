@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import styles from "./styles";
 import QuestionsContainer from "../../../components/Questions/QuestionsContainer";
@@ -19,6 +20,23 @@ const Questions = (props) => {
   const nextStep = () => {
     setStep((step) => step + 1);
   };
+
+  const getStorage = async () => {
+    try {
+      const value = await AsyncStorage.getItem("@questions");
+
+      if (value !== null) {
+        const count = Number(value);
+        setStep(count);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getStorage();
+  }, []);
 
   useEffect(() => {
     if (step == 1) {

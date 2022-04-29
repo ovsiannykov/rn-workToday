@@ -58,9 +58,9 @@ const StepTwo = (props) => {
         vacation: "",
         contributions: "",
       }}
-      onSubmit={async (values) => {
+      onSubmit={(values) => {
         setFetching(true);
-        await dispatch(setStep2(values, navigation));
+        dispatch(setStep2(values, navigation));
         setFetching(false);
       }}
     >

@@ -16,6 +16,8 @@ export const workerReducer = (state = initialState, action) => {
       return { ...state, vacancyInfo: action.vacancyInfo };
     case workerTypes.SET_FILTER_CATEGORIES:
       return { ...state, categories: action.categories };
+    case workerTypes.SET_CONTRACTS:
+      return { ...state, contracts: action.contracts };
     default:
       return state;
   }

@@ -3,7 +3,7 @@ import { View, Text, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import styles from "./styles";
 import NavigationHeader from "../../../components/NavigationHeader";
@@ -13,10 +13,11 @@ import LongWhiteButton from "../../../components/LongWhiteButton";
 import LongBlueButton from "../../../components/LongBlueButton";
 import VacancyInfo from "../../../components/VacancyInfo";
 import PhotoSlider from "../../../components/PhotoSlider";
+import { sendFeedback } from "../../../redux/worker/worker-thunks";
 
 const VacancyDetail = (props) => {
-  const route = useRoute();
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const data = useSelector((state) => state.workerReducer.vacancyInfo);
 
@@ -67,7 +68,7 @@ const VacancyDetail = (props) => {
               title='Заповнити компетенції'
             />
             <LongBlueButton
-              onPress={() => navigation.navigate("Questions")}
+              onPress={() => dispatch(sendFeedback(data._id))}
               title='Відповсіти на вакансію'
             />
           </View>
