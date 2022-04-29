@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 
-const UpluadInput = ({filename, onChangeFile}) => {
+const UpluadInput = ({ filename, onChangeFile }) => {
   // const [image, setImage] = useState(null);
 
   const pickImage = async () => {
@@ -18,7 +18,7 @@ const UpluadInput = ({filename, onChangeFile}) => {
       quality: 0.3,
     });
 
-    console.log(result);
+    //console.log(result);
 
     if (!result.cancelled) {
       onChangeFile(result.uri);
@@ -31,8 +31,14 @@ const UpluadInput = ({filename, onChangeFile}) => {
         <Text style={styles.title}>Вибрати файл</Text>
       </TouchableOpacity>
       <Text style={styles.title}>|</Text>
-      <Text style={[styles.title, {width: '55%'}]} numberOfLines={1} ellipsizeMode={'tail'}>
-        {filename ? filename.split('/')[filename.split('/').length - 1] : 'Файл не вибрано'}
+      <Text
+        style={[styles.title, { width: "55%" }]}
+        numberOfLines={1}
+        ellipsizeMode={"tail"}
+      >
+        {filename
+          ? filename.split("/")[filename.split("/").length - 1]
+          : "Файл не вибрано"}
       </Text>
     </TouchableOpacity>
   );

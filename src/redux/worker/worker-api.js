@@ -7,10 +7,17 @@ export const workerApi = {
   step2: (body) => instance.post("/application/step2", body),
   step3: (body) => instance.post("/application/step3", body),
   step4: (body) => instance.post("/application/step4", body),
-  step5: (body) => instance.post("/application/step5", body, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  }),
+  step5: (body) =>
+    instance.post("/application/step5", body, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }),
   getCategories: (body) => instance.post("/application/getCategories", body),
+  getLoadCompetitions: (body) =>
+    instance.post("/application/loadCompetitions", body, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }),
 };
