@@ -9,6 +9,7 @@ import {
   setCategoriesFilter,
 } from "./worker-actions";
 import instance from "../instance";
+import {createFile} from "../../../utils";
 
 export const setTokenInHeaders = (token) => {
   Object.assign(instance.defaults, { headers: { Authorization: token } });
@@ -113,19 +114,22 @@ export const setStep4 = (body, navigation) => async (dispatch) => {
 
 export const setStep5 = (body, navigation) => async (dispatch) => {
   try {
-    const res = await workerApi.step5({
-      in: "any",
-      required: "any",
-      description: "any",
-      schema: "any",
-    });
+    const formData = new FormData()
+    formData.append('step5Info', body.method)
 
+    formData.append('Documents', createFile(body.passport1))
+    formData.append('Documents', createFile(body.passport2))
+    formData.append('Documents', createFile(body.polandCard1))
+    formData.append('Documents', createFile(body.polandCard2))
+
+    const res = await workerApi.step5(formData);
+    console.log(res.data)
     if (res.data.status === "Success") {
       showMessage({
         message: "Форму успішно відправлено 🎉",
         type: "success",
       });
-      navigation.goBack();
+      navigation.goBack()
     } else {
       Alert.alert(
         "Помилка 😔",

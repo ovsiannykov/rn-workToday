@@ -49,6 +49,7 @@ const StepFive = (props) => {
         polandCard2: "",
       }}
       onSubmit={(values) => {
+        console.log(values)
         setFetching(true);
         dispatch(setStep5(values, navigation));
         setFetching(false);
@@ -113,19 +114,19 @@ const StepFive = (props) => {
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>Фото 1 сторінки паспорту:</Text>
-                  <UploadInput />
+                  <UploadInput filename={values.passport1} onChangeFile={(value) => setFieldValue('passport1', value)} />
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>Фото 2 сторінки паспорту:</Text>
-                  <UploadInput />
+                  <UploadInput filename={values.passport2} onChangeFile={(value) => setFieldValue('passport2', value)} />
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>Фото 1 сторона Карти Поляка:</Text>
-                  <UploadInput />
+                  <UploadInput filename={values.polandCard1} onChangeFile={(value) => setFieldValue('polandCard1', value)} />
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>Фото 2 сторона Карти Поляка:</Text>
-                  <UploadInput />
+                  <UploadInput filename={values.polandCard2} onChangeFile={(value) => setFieldValue('polandCard2', value)} />
                 </View>
                 <View style={{ marginTop: 20, padding: 5 }}>
                   <LongWhiteButton
