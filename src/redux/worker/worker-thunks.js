@@ -54,7 +54,7 @@ export const setStep1 = (body, navigation) => async (dispatch) => {
 export const setStep2 = (body, navigation) => async (dispatch) => {
   try {
     const res = await workerApi.step2({
-      step1Info: body,
+      step2Info: body,
     });
 
     if (res.data.status === "Error") {
@@ -74,7 +74,7 @@ export const setStep2 = (body, navigation) => async (dispatch) => {
 export const setStep3 = (body, navigation) => async (dispatch) => {
   try {
     const res = await workerApi.step3({
-      step1Info: body,
+      step3Info: body,
     });
 
     if (res.data.status === "Error") {
@@ -94,7 +94,7 @@ export const setStep3 = (body, navigation) => async (dispatch) => {
 export const setStep4 = (body, navigation) => async (dispatch) => {
   try {
     const res = await workerApi.step4({
-      step1Info: body,
+      step4Info: body,
     });
 
     if (res.data.status === "Error") {

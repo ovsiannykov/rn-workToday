@@ -12,6 +12,7 @@ import { AuthContext } from "./src/Navigation/Auth/AuthContext";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import Colors from "./src/constants/Colors";
+import { setTokenInHeaders } from "./src/redux/auth/auth-thunks";
 
 let App = ({ userToken }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -59,7 +60,8 @@ const AppWrapper = () => {
     setFetching(true);
     const value = await AsyncStorage.getItem("@storage_workerToken");
     if (value !== null) {
-      //await setUserToken(value);
+      setTokenInHeaders(value);
+      setUserToken(value);
       //context.signIn(value);
     }
     setFetching(false);
