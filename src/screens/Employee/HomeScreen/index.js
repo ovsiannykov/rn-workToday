@@ -18,6 +18,7 @@ import StoryviewModal from "../../../components/StoryviewModal";
 import {
   vacanciesWorkerThunk,
   getCategories,
+  getInfo,
 } from "../../../redux/worker/worker-thunks";
 import {
   setSelectVacancy,
@@ -63,6 +64,7 @@ const HomeScreen = (props) => {
   useEffect(() => {
     setLoading(true);
     dispatch(getCategories());
+    dispatch(getInfo());
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {

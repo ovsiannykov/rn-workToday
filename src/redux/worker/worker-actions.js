@@ -43,3 +43,8 @@ export const getMyWorkFinished = (payload) => ({
   type: workerTypes.GET_MY_WORK_FINISHED,
   finishWorks: payload,
 });
+
+export const setWorkerInfo = (payload) => ({
+  type: workerTypes.GET_INFO,
+  info: payload,
+});

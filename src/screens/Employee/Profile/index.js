@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
 
 import styles from "./styles";
 import OldWorkItem from "../../../components/OldWorkItem";
@@ -9,6 +10,8 @@ import OldWorkItem from "../../../components/OldWorkItem";
 const image = require("../../../assets/images/profile.png");
 
 const Profile = ({ navigation }) => {
+  const dispatch = useDispatch();
+
   return (
     <LinearGradient
       colors={["#F4F7FF", "#FFFFFF"]}

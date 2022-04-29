@@ -8,6 +8,7 @@ const initialState = {
   contracts: [],
   activeWorks: [],
   finishWorks: [],
+  userInfo: null,
 };
 export const workerReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -27,6 +28,8 @@ export const workerReducer = (state = initialState, action) => {
       return { ...state, activeWorks: action.activeWorks };
     case workerTypes.GET_MY_WORK_FINISHED:
       return { ...state, finishWorks: action.finishWorks };
+    case workerTypes.GET_INFO:
+      return { ...state, userInfo: action.info };
     default:
       return state;
   }

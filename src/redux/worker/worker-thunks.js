@@ -11,6 +11,7 @@ import {
   setContracts,
   getMyWorkActive,
   getMyWorkFinished,
+  setWorkerInfo,
 } from "./worker-actions";
 import instance from "../instance";
 import { createFile } from "../../../utils";
@@ -287,5 +288,17 @@ export const getMyWork = () => async (dispatch) => {
       message: "Не вдалося завантажити ваші роботи 😔",
       type: "danger",
     });
+  }
+};
+
+export const getInfo = () => async (dispatch) => {
+  try {
+    const res = await workerApi.getInfo();
+
+    if (res.data.status === "Success") {
+      dispatch(setWorkerInfo(res.data.data));
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
