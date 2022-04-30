@@ -15,6 +15,7 @@ import Search from "../../../components/Search";
 import ContractFilter from "../../../components/ContractFilter";
 import Vacancy from "../../../components/Vacancy";
 import { getFeedback } from "../../../redux/worker/worker-thunks";
+import { setSelectContract } from "../../../redux/worker/worker-actions";
 
 const ContractsScreen = (props) => {
   const [loading, setLoading] = useState(false);
@@ -42,6 +43,10 @@ const ContractsScreen = (props) => {
       timeEnd={item.vacansyId.timeEnd}
       item={item}
       status={item.status}
+      onPress={async () => {
+        await dispatch(setSelectContract(item));
+        navigation.navigate("ContractDetailScreen");
+      }}
     />
   );
 

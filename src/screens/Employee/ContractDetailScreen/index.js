@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useSelector } from "react-redux";
 
 import styles from "./styles";
 import sized from "../../../Svg/sized";
@@ -12,6 +13,10 @@ import LongWhiteButton from "../../../components/LongWhiteButton";
 const ContractDetailScreen = (props) => {
   const [conract, setContract] = useState(false);
   const [vacancy, setVacancy] = useState(true);
+
+  const selectContract = useSelector(
+    (state) => state.workerReducer.selectContract
+  );
 
   const DownIcon = sized(downSvg, 22, 22);
   const UpIcon = sized(upSvg, 22, 22);
@@ -75,7 +80,17 @@ const ContractDetailScreen = (props) => {
           </TouchableOpacity>
           {vacancy ? (
             <View style={{ alignItems: "center" }}>
-              <VacancyInfo />
+              <VacancyInfo
+                type={selectContract.vacansyId.Type}
+                place={selectContract.vacansyId.place}
+                priceTotal={selectContract.vacansyId.priceTotal}
+                pricePerHour={selectContract.vacansyId.pricePerHour}
+                company={selectContract.vacansyId.employerId}
+                timeStart={selectContract.vacansyId.timeStart}
+                timeEnd={selectContract.vacansyId.timeEnd}
+                resp={selectContract.vacansyId.responsibilities}
+                skills={selectContract.vacansyId.skills}
+              />
             </View>
           ) : null}
         </View>

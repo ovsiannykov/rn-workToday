@@ -11,7 +11,6 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { AuthContext } from "../../../Navigation/Auth/AuthContext";
 import { connect, useDispatch } from "react-redux";
 import { Formik } from "formik";
-import { useSelector } from "react-redux";
 import * as Yup from "yup";
 import PhoneInput from "react-native-phone-input";
 

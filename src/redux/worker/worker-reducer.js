@@ -9,6 +9,7 @@ const initialState = {
   activeWorks: [],
   finishWorks: [],
   userInfo: null,
+  selectContract: null,
 };
 export const workerReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -30,6 +31,8 @@ export const workerReducer = (state = initialState, action) => {
       return { ...state, finishWorks: action.finishWorks };
     case workerTypes.GET_INFO:
       return { ...state, userInfo: action.info };
+    case workerTypes.SET_SELECT_CONTRACT:
+      return { ...state, selectContract: action.contract };
     default:
       return state;
   }

@@ -4,6 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
 import { useNavigation } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import styles from "./styles";
 import Input from "../../../components/Input";
@@ -20,11 +21,27 @@ const Settings = (props) => {
   const [disablePush, setDisablePush] = useState(0);
   const [pushType, setPushType] = useState(0);
   const [isModal, setIsModal] = useState(false);
+  const [agreement, setAgreement] = useState(true);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   const navigation = useNavigation();
   const route = useRoute();
   const SupportIcon = sized(supportSvg, 20, 20);
+
+  const isAgreements = async () => {
+    try {
+      const value = await AsyncStorage.getItem("@marketing");
+      if (value == "true") {
+        setAgreement(false);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    isAgreements();
+  }, []);
 
   useEffect(() => {
     if (route.params && route.params.setModal) {
@@ -102,8 +119,10 @@ const Settings = (props) => {
               marginRight: -20,
             }}
           >
-            <View style={{ width: "100%", marginBottom: 20 }}>
-              <ErrorBlock title='Ви не погодилися з маркетинговими умовами ' />
+            <View style={{ width: "100%", marginBottom: 0 }}>
+              {agreement ? (
+                <ErrorBlock title='Ви не погодилися з маркетинговими умовами ' />
+              ) : null}
             </View>
             <LongWhiteButton
               onPress={() => navigation.navigate("MarketingAgreements")}
@@ -115,7 +134,7 @@ const Settings = (props) => {
             />
           </View>
         </View>
-        <View>
+        <View style={{ marginTop: 10 }}>
           <Text style={styles.label}>Повідомлення</Text>
           <View style={{ ...styles.wrapper }}>
             <View style={styles.input_box}>

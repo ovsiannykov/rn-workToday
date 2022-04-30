@@ -35,6 +35,7 @@ const HomeScreen = (props) => {
   const [searchText, setSearchText] = useState();
 
   const data = useSelector((state) => state.workerReducer.vacancies);
+  const dataInfo = useSelector((state) => state.workerReducer.userInfo);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -55,10 +56,17 @@ const HomeScreen = (props) => {
     }
   };
 
+  const addStorageQuestion = async () => {
+    if (dataInfo && dataInfo.step5Info) {
+      await AsyncStorage.setItem("@questions", "5");
+    }
+  };
+
   // StoryModal
   useEffect(() => {
+    addStorageQuestion();
     getStorageQuesstion();
-  }, []);
+  }, [dataInfo]);
 
   // fetchData
   useEffect(() => {

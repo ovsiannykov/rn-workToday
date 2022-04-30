@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Colors from "../../../constants/Colors";
 import sized from "../../../Svg/sized";
@@ -10,10 +11,37 @@ import ingoSvg from "../../../assets/icons/ingo.svg";
 import LongWhiteButton from "../../../components/LongWhiteButton";
 
 const MarketingAgreements = () => {
+  const [btnTitle, setBtnTitle] = useState("Погоджуюся");
+  const [valid, setValid] = useState(false);
+
   const CheckIcon = sized(chekSvg, 12, 12);
   const InfoIcon = sized(ingoSvg, 18, 18);
 
   const navigation = useNavigation();
+
+  const storeAgreements = async () => {
+    try {
+      await AsyncStorage.setItem("@marketing", "true");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const isAgreements = async () => {
+    try {
+      const value = await AsyncStorage.getItem("@marketing");
+      if (value == "true") {
+        setBtnTitle("Ви вже погодились");
+        setValid(true);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    isAgreements();
+  }, []);
 
   return (
     <LinearGradient
@@ -75,8 +103,12 @@ const MarketingAgreements = () => {
       <View style={styles.btn_box}>
         <View style={{ width: 299 }}>
           <LongWhiteButton
-            title='Погоджуюся'
-            onPress={() => navigation.goBack()}
+            title={btnTitle}
+            disabled={valid}
+            onPress={() => {
+              storeAgreements();
+              navigation.goBack();
+            }}
           />
         </View>
       </View>

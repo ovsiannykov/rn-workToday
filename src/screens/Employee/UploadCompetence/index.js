@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -11,7 +11,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { Formik } from "formik";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { showMessage } from "react-native-flash-message";
 
@@ -19,13 +19,22 @@ import Colors from "../../../constants/Colors";
 import UpluadInput from "../../../components/UpluadInput";
 import LongWhiteButton from "../../../components/LongWhiteButton";
 import { getLoadCompetitions } from "../../../redux/worker/worker-thunks";
+import CompetenciesResult from "../../../components/CompetenciesResult";
 
 const UploadCompetence = () => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [fetching, setFetching] = useState(false);
+  const [isCompetencies, setIsCompetencies] = useState(false);
 
+  const userInfo = useSelector((state) => state.workerReducer.userInfo);
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  useEffect(() => {
+    if (userInfo.competencies[0].status == true) {
+      setIsCompetencies(true);
+    }
+  }, []);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -51,156 +60,163 @@ const UploadCompetence = () => {
       <View style={{ alignItems: "center" }}>
         <Text style={styles.title}>Завантаження компетенції</Text>
       </View>
-      <Formik
-        initialValues={{
-          k1: "",
-          date: "",
-          k2: "",
-          k3: "",
-          k4: "",
-        }}
-        onSubmit={async (values) => {
-          const body1 = { file: values.k1, date: values.date };
-          const body2 = { file: values.k2 };
-          const body3 = { file: values.k3 };
-          const body4 = { file: values.k4 };
-          setFetching(true);
-          if (values.k1) {
-            await dispatch(getLoadCompetitions(body1, "k1"));
-          }
-          if (values.k2) {
-            await dispatch(getLoadCompetitions(body2, "k2"));
-          }
-          if (values.k3) {
-            await dispatch(getLoadCompetitions(body3, "k3"));
-          }
-          if (values.k4) {
-            await dispatch(getLoadCompetitions(body4, "k4"));
-          }
-          if (values.k1 || values.k2 || values.k3 || values.k4) {
-            showMessage({
-              message: "Форму успішно відправлено 🎉",
-              type: "success",
-            });
-          }
-          setFetching(false);
+      {!isCompetencies ? (
+        <Formik
+          initialValues={{
+            k1: "",
+            date: "",
+            k2: "",
+            k3: "",
+            k4: "",
+          }}
+          onSubmit={async (values) => {
+            const body1 = { file: values.k1, date: values.date };
+            const body2 = { file: values.k2 };
+            const body3 = { file: values.k3 };
+            const body4 = { file: values.k4 };
+            setFetching(true);
+            if (values.k1) {
+              await dispatch(getLoadCompetitions(body1, "k1"));
+            }
+            if (values.k2) {
+              await dispatch(getLoadCompetitions(body2, "k2"));
+            }
+            if (values.k3) {
+              await dispatch(getLoadCompetitions(body3, "k3"));
+            }
+            if (values.k4) {
+              await dispatch(getLoadCompetitions(body4, "k4"));
+            }
+            if (values.k1 || values.k2 || values.k3 || values.k4) {
+              showMessage({
+                message: "Форму успішно відправлено 🎉",
+                type: "success",
+              });
+            }
+            setFetching(false);
 
-          navigation.goBack();
-        }}
-      >
-        {({
-          values,
-          handleChange,
-          handleSubmit,
-          errors,
-          submitCount,
-          setFieldValue,
-        }) => {
-          errors = submitCount > 0 ? errors : {};
-          // const isValid =
-          //   values.birth.length > 0 &&
-          //   values.citizenship.length > 0 &&
-          //   values.status.length > 0;
+            navigation.goBack();
+          }}
+        >
+          {({
+            values,
+            handleChange,
+            handleSubmit,
+            errors,
+            submitCount,
+            setFieldValue,
+          }) => {
+            errors = submitCount > 0 ? errors : {};
+            // const isValid =
+            //   values.birth.length > 0 &&
+            //   values.citizenship.length > 0 &&
+            //   values.status.length > 0;
 
-          const handleConfirm = (date) => {
-            const num = date.getDate().toString();
-            const month = date.getMonth().toString();
-            const year = date.getFullYear().toString();
-            setFieldValue("date", `${num}-${month}-${year}`);
-            hideDatePicker();
-          };
+            const handleConfirm = (date) => {
+              const num = date.getDate().toString();
+              const month = date.getMonth().toString();
+              const year = date.getFullYear().toString();
+              setFieldValue("date", `${num}-${month}-${year}`);
+              hideDatePicker();
+            };
 
-          return (
-            <>
-              <View style={{ paddingBottom: 40, ...styles.wrapper }}>
-                <ScrollView
-                  nestedScrollEnabled={true}
-                  showsVerticalScrollIndicator={false}
-                  //style={{ paddingBottom: 150 }}
-                >
-                  <View style={{ paddingBottom: 180 }}>
-                    <View style={{ width: "75%" }}>
-                      <Text style={styles.label}>Сучасні дослідження k1</Text>
-                      <Text
-                        style={{
-                          marginTop: 10,
-                          marginBottom: 15,
-                          ...styles.sub_title,
-                        }}
-                      >
-                        Описание документа или как доолжен выглядить документ на
-                        фото
-                      </Text>
-                      <UpluadInput
-                        filename={values.k1}
-                        onChangeFile={(value) => setFieldValue("k1", value)}
-                      />
+            return (
+              <>
+                <View style={{ paddingBottom: 40, ...styles.wrapper }}>
+                  <ScrollView
+                    nestedScrollEnabled={true}
+                    showsVerticalScrollIndicator={false}
+                    //style={{ paddingBottom: 150 }}
+                  >
+                    <View style={{ paddingBottom: 180 }}>
+                      <View style={{ width: "75%" }}>
+                        <Text style={styles.label}>Сучасні дослідження k1</Text>
+                        <Text
+                          style={{
+                            marginTop: 10,
+                            marginBottom: 15,
+                            ...styles.sub_title,
+                          }}
+                        >
+                          Описание документа или как доолжен выглядить документ
+                          на фото
+                        </Text>
+                        <UpluadInput
+                          filename={values.k1}
+                          onChangeFile={(value) => setFieldValue("k1", value)}
+                        />
+                      </View>
+                      <View style={{ marginTop: 20, width: "75%" }}>
+                        <Text style={styles.label}>
+                          Якщо ваш документ має час дії, введіть його (залиште
+                          порожнім якщо його немає)
+                        </Text>
+                        <TouchableOpacity onPress={showDatePicker}>
+                          <View pointerEvents='none'>
+                            <TextInput
+                              style={styles.input}
+                              value={values.date}
+                              onChangeText={handleChange("date")}
+                              error={errors.date}
+                              placeholder='ДД/ММ/ГГГГ'
+                              keyboardType='numeric'
+                            />
+                          </View>
+                        </TouchableOpacity>
+                        <DateTimePickerModal
+                          isVisible={isDatePickerVisible}
+                          mode='date'
+                          onConfirm={handleConfirm}
+                          onCancel={hideDatePicker}
+                          confirmTextIOS='Обрати'
+                          locale='uk_UA'
+                        />
+                      </View>
+                      <View style={{ marginTop: 20, width: "75%" }}>
+                        <Text style={styles.label}>k2</Text>
+                        <UpluadInput
+                          filename={values.k2}
+                          onChangeFile={(value) => setFieldValue("k2", value)}
+                        />
+                      </View>
+                      <View style={{ marginTop: 20, width: "75%" }}>
+                        <Text style={styles.label}>k2</Text>
+                        <UpluadInput
+                          filename={values.k3}
+                          onChangeFile={(value) => setFieldValue("k3", value)}
+                        />
+                      </View>
+                      <View style={{ marginTop: 20, width: "75%" }}>
+                        <Text style={styles.label}>k4</Text>
+                        <UpluadInput
+                          filename={values.k2}
+                          onChangeFile={(value) => setFieldValue("k4", value)}
+                        />
+                      </View>
                     </View>
-                    <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>
-                        Якщо ваш документ має час дії, введіть його (залиште
-                        порожнім якщо його немає)
-                      </Text>
-                      <TouchableOpacity onPress={showDatePicker}>
-                        <View pointerEvents='none'>
-                          <TextInput
-                            style={styles.input}
-                            value={values.date}
-                            onChangeText={handleChange("date")}
-                            error={errors.date}
-                            placeholder='ДД/ММ/ГГГГ'
-                            keyboardType='numeric'
-                          />
-                        </View>
-                      </TouchableOpacity>
-                      <DateTimePickerModal
-                        isVisible={isDatePickerVisible}
-                        mode='date'
-                        onConfirm={handleConfirm}
-                        onCancel={hideDatePicker}
-                        confirmTextIOS='Обрати'
-                        locale='uk_UA'
-                      />
-                    </View>
-                    <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>k2</Text>
-                      <UpluadInput
-                        filename={values.k2}
-                        onChangeFile={(value) => setFieldValue("k2", value)}
-                      />
-                    </View>
-                    <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>k2</Text>
-                      <UpluadInput
-                        filename={values.k3}
-                        onChangeFile={(value) => setFieldValue("k3", value)}
-                      />
-                    </View>
-                    <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>k4</Text>
-                      <UpluadInput
-                        filename={values.k2}
-                        onChangeFile={(value) => setFieldValue("k4", value)}
-                      />
-                    </View>
-                  </View>
-                </ScrollView>
-              </View>
-              <View style={styles.btn_box}>
-                <View style={{ width: 299 }}>
-                  <LongWhiteButton
-                    title='Закінчити'
-                    onPress={async () => {
-                      await handleSubmit();
-                    }}
-                    //disabled={!isValid}
-                  />
+                  </ScrollView>
                 </View>
-              </View>
-            </>
-          );
-        }}
-      </Formik>
+                <View style={styles.btn_box}>
+                  <View style={{ width: 299 }}>
+                    <LongWhiteButton
+                      title='Закінчити'
+                      onPress={async () => {
+                        await handleSubmit();
+                      }}
+                      //disabled={!isValid}
+                    />
+                  </View>
+                </View>
+              </>
+            );
+          }}
+        </Formik>
+      ) : (
+        <CompetenciesResult
+          info={userInfo}
+          onPress={() => setIsCompetencies(false)}
+        />
+      )}
     </LinearGradient>
   );
 };

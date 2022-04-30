@@ -48,3 +48,8 @@ export const setWorkerInfo = (payload) => ({
   type: workerTypes.GET_INFO,
   info: payload,
 });
+
+export const setSelectContract = (payload) => ({
+  type: workerTypes.SET_SELECT_CONTRACT,
+  contract: payload,
+});

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./styles";
 import OldWorkItem from "../../../components/OldWorkItem";
@@ -11,6 +11,8 @@ const image = require("../../../assets/images/profile.png");
 
 const Profile = ({ navigation }) => {
   const dispatch = useDispatch();
+
+  const userInfo = useSelector((state) => state.workerReducer.userInfo);
 
   return (
     <LinearGradient
@@ -38,7 +40,10 @@ const Profile = ({ navigation }) => {
                 </View>
               </LinearGradient>
               <View style={styles.profileInfo}>
-                <Text style={styles.name}>Євген Лебідь</Text>
+                <Text style={styles.name}>
+                  {userInfo.step3Info.firstname ?? "Ім'я"}{" "}
+                  {userInfo.step3Info.lastname ?? "Прізвище"}
+                </Text>
                 <Text style={styles.position}>Фермер</Text>
               </View>
             </View>
