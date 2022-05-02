@@ -45,6 +45,7 @@ export const Authorization = () => {
         }}>
         <Stack.Screen name="Onboarding" component={OnboardingScreen}/>
          <Stack.Screen name="Login" component={Login}/>
+         <Stack.Screen name="SMS" component={SMS}/>
       </Stack.Navigator>
     );
   }

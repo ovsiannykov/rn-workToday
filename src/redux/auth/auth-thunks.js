@@ -45,6 +45,7 @@ export const registerSubmitCode =
       if (res.data.status === "Success") {
         dispatch(setUserToken(res.data.token));
         setTokenInHeaders(res.data.token);
+        storeToken(res.data.token);
         context.signIn(res.data.token);
       } else {
         Alert.alert(res.data.status, res.data.text);
