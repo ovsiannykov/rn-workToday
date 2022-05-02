@@ -11,19 +11,13 @@ const RadioButtons = (props) => {
   const [data, setData] = useState(standartData);
   const [radioBtn, setRadioBtn] = useState();
 
-  const categories = useSelector((state) => state.workerReducer.categories);
+  const categories = useSelector((state) => state.employerReducer.categories);
 
   useEffect(() => {
-    if (categories.length) {
+    if (categories) {
       setData(categories);
     }
   }, []);
-
-  useEffect(() => {
-    if (props.data) {
-      setData(props.data);
-    }
-  }, [props.data]);
 
   const RadioItem = (props) => {
     if (props.all) {

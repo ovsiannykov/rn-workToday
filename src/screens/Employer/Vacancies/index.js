@@ -1,5 +1,11 @@
-import React, { useEffect } from "react";
-import { View, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  ScrollView,
+  FlatList,
+  Text,
+  ActivityIndicator,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
@@ -7,15 +13,35 @@ import { useDispatch } from "react-redux";
 import styles from "./styles";
 import Search from "../../../components/Search";
 import Vacancy from "../../../components/Vacancy";
-import { vacancyMy } from "../../../redux/employer/employer-thunks";
+import Colors from "../../../constants/Colors";
+import {
+  vacancyMy,
+  getCategoriesFilters,
+} from "../../../redux/employer/employer-thunks";
 
 const Vacancies = (props) => {
+  const [loading, setLoading] = useState(false);
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
   useEffect(() => {
+    setLoading(true);
     dispatch(vacancyMy());
+    dispatch(getCategoriesFilters());
+    setLoading(false);
   }, []);
+
+  if (loading) {
+    return (
+      <LinearGradient
+        colors={["#F4F7FF", "#FFFFFF"]}
+        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+      >
+        <ActivityIndicator size='large' color={Colors.primaryBlue} />
+      </LinearGradient>
+    );
+  }
 
   return (
     <LinearGradient

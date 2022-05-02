@@ -6,6 +6,7 @@ import instance from "../instance";
 import { employerApi } from "./employer-api";
 import { createFile } from "../../../utils";
 import { setMyVanacies } from "./employer-actions";
+import { getCategories } from "./employer-actions";
 
 export const setTokenInHeaders = (token) => {
   Object.assign(instance.defaults, { headers: { Authorization: token } });
@@ -27,6 +28,20 @@ export const vacancyMy = () => async (dispatch) => {
     console.log(error);
     showMessage({
       message: "Щось пішло не так... Перевірте підключення до інтернету",
+      type: "danger",
+    });
+  }
+};
+
+export const getCategoriesFilters = () => async (dispatch) => {
+  try {
+    const res = await employerApi.getCategories();
+    if (res.data.status === "Success") {
+      dispatch(getCategories(res.data.data));
+    }
+  } catch (error) {
+    showMessage({
+      message: `${error}`,
       type: "danger",
     });
   }
