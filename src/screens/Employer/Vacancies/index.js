@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 
 import styles from "./styles";
 import Search from "../../../components/Search";
 import Vacancy from "../../../components/Vacancy";
+import { vacancyMy } from "../../../redux/employer/employer-thunks";
 
 const Vacancies = (props) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(vacancyMy());
+  }, []);
 
   return (
     <LinearGradient
