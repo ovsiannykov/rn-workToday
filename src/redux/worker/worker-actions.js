@@ -53,3 +53,8 @@ export const setSelectContract = (payload) => ({
   type: workerTypes.SET_SELECT_CONTRACT,
   contract: payload,
 });
+
+export const addFavorites = (payload) => ({
+  type: workerTypes.ADD_FAVORITES,
+  vacancy: payload,
+});

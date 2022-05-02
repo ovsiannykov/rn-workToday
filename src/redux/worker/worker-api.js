@@ -24,4 +24,6 @@ export const workerApi = {
   sendFeedback: (body) => instance.post("/application/sendFeedback", body),
   getMyWork: () => instance.post("/application/getMyWork", {}),
   getInfo: () => instance.post("/application/getInfo", {}),
+  startMyWork: (body) => instance.post("/application/startMyWork", body),
+  endMyWork: (body) => instance.post("/application/endMyWork", body),
 };

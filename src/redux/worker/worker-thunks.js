@@ -12,6 +12,7 @@ import {
   getMyWorkActive,
   getMyWorkFinished,
   setWorkerInfo,
+  addFavorites,
 } from "./worker-actions";
 import instance from "../instance";
 import { createFile } from "../../../utils";
@@ -255,7 +256,7 @@ export const sendFeedback = (id) => async (dispatch) => {
       });
     } else {
       showMessage({
-        message: `${res.data}`,
+        message: "Упс... Не вдалося відправити заявку",
         type: "danger",
       });
     }
@@ -301,4 +302,67 @@ export const getInfo = () => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const startMyWork = (id) => async (dispatch) => {
+  try {
+    const res = await workerApi.startMyWork({ _id: id });
+    if (res.data.status !== "Success") {
+      showMessage({
+        message: "Упс... Не вдалося розпочати роботу",
+        type: "danger",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const endMyWork = (id, time) => async (dispatch) => {
+  try {
+    const res = await workerApi.endMyWork({ schema: { _id: id, time: time } });
+    if (res.data.status !== "Success") {
+      showMessage({
+        message: "Упс... Не вдалося завершити роботу",
+        type: "danger",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addFavorite = (item) => async (dispatch) => {
+  let favoritesList = [];
+  const value = await AsyncStorage.getItem("@favorites");
+  if (value !== null) {
+    const result = JSON.parse(value);
+    favoritesList = result;
+  }
+
+  await favoritesList.push(item);
+  const result = await JSON.stringify(favoritesList);
+  await AsyncStorage.setItem("@favorites", result);
+  dispatch(addFavorites(favoritesList));
+};
+
+export const getFavorites = () => async (dispatch) => {
+  const value = await AsyncStorage.getItem("@favorites");
+  if (value !== null) {
+    const result = JSON.parse(value);
+    dispatch(addFavorites(result));
+  }
+};
+
+export const deleteFavorite = (id) => async (dispatch) => {
+  let favoritesList = [];
+  const value = await AsyncStorage.getItem("@favorites");
+  if (value !== null) {
+    const result = JSON.parse(value);
+    favoritesList = result;
+  }
+  const newFavorites = favoritesList.filter((item) => item._id !== id);
+  dispatch(addFavorites(newFavorites));
+  const resultJson = await JSON.stringify(newFavorites);
+  await AsyncStorage.setItem("@favorites", resultJson);
 };

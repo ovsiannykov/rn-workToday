@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity, Platform } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./styles";
 import { sized } from "../../Svg";
@@ -12,6 +12,7 @@ import walletSvg from "../../assets/icons/Wallet.svg";
 import Colors from "../../constants/Colors";
 import VacancyStatusText from "../../components/VacancyStatusText";
 import { API_BASE_URL } from "../../redux/instance";
+import { deleteFavorite, addFavorite } from "../../redux/worker/worker-thunks";
 
 const image = require("../../assets/images/vacancy.jpeg");
 const LinkIcon = sized(linkSvg, 12, 12);
@@ -20,19 +21,44 @@ const WalletIcon = sized(walletSvg, 16, 16);
 const Vacancy = (props) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const navigation = useNavigation();
+  const favoritesList = useSelector(
+    (state) => state.workerReducer.favoritesList
+  );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    favoritesList.forEach((element) => {
+      if (element._id == props.id) {
+        setIsFavorite(true);
+      } else {
+        setIsFavorite(false);
+      }
+    });
+  }, [favoritesList]);
+
+  const favoriteSubmit = () => {
+    if (!isFavorite) {
+      dispatch(addFavorite(props.item));
+      setIsFavorite(true);
+    } else {
+      dispatch(deleteFavorite(props.id));
+      setIsFavorite(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
       {props.status ? null : (
-        <TouchableOpacity
-          onPress={() => setIsFavorite(!isFavorite)}
-          style={styles.favorite}
-        >
+        <TouchableOpacity onPress={favoriteSubmit} style={styles.favorite}>
           {isFavorite ? (
-            <Ionicons name='bookmark' size={22} color='#376AED' />
+            <Ionicons name='bookmark' size={22} color={Colors.primaryBlue} />
           ) : (
-            <Ionicons name='bookmark-outline' size={22} color='#376AED' />
+            <Ionicons
+              name='bookmark-outline'
+              size={22}
+              color={Colors.primaryBlue}
+            />
           )}
         </TouchableOpacity>
       )}
@@ -44,7 +70,6 @@ const Vacancy = (props) => {
               ? { uri: `${API_BASE_URL}static/${props.photos[0]}` }
               : image
           }
-          //source={image}
         />
         <View style={{ marginLeft: 15 }}>
           <Text style={styles.title}>{props.title ?? "Юрист"}</Text>

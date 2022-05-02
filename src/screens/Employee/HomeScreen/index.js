@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { View, Alert, FlatList, ActivityIndicator, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Location from "expo-location";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -19,6 +18,7 @@ import {
   vacanciesWorkerThunk,
   getCategories,
   getInfo,
+  getFavorites,
 } from "../../../redux/worker/worker-thunks";
 import {
   setSelectVacancy,
@@ -71,6 +71,7 @@ const HomeScreen = (props) => {
   // fetchData
   useEffect(() => {
     setLoading(true);
+    dispatch(getFavorites());
     dispatch(getCategories());
     dispatch(getInfo());
     (async () => {
@@ -177,6 +178,7 @@ const HomeScreen = (props) => {
             </Text>
           ) : null}
           <FlatList
+            contentContainerStyle={{ flexGrow: 1 }}
             data={data}
             keyExtractor={(item) => item._id}
             renderItem={renderItem}

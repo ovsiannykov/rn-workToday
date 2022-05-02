@@ -18,4 +18,11 @@ export default StyleSheet.create({
   vacancy_scrollBox: {
     height: "100%",
   },
+  noItems: {
+    fontFamily: "ComfortaaLight",
+    fontSize: 14,
+    color: "gray",
+    marginTop: 25,
+    textAlign: "center",
+  },
 });

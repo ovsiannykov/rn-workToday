@@ -10,6 +10,7 @@ const initialState = {
   finishWorks: [],
   userInfo: null,
   selectContract: null,
+  favoritesList: [],
 };
 export const workerReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -33,6 +34,8 @@ export const workerReducer = (state = initialState, action) => {
       return { ...state, userInfo: action.info };
     case workerTypes.SET_SELECT_CONTRACT:
       return { ...state, selectContract: action.contract };
+    case workerTypes.ADD_FAVORITES:
+      return { ...state, favoritesList: action.vacancy };
     default:
       return state;
   }

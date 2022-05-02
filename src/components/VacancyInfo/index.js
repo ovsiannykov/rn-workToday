@@ -1,10 +1,9 @@
-import React from "react";
-import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { useRoute } from "@react-navigation/native";
+import React, { useState, useEffect } from "react";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./styles";
 import vacancyImage from "../../assets/images/vacancy_image.jpeg";
@@ -13,12 +12,44 @@ import sized from "../../Svg/sized";
 import sendSvg from "../../assets/icons/send.svg";
 import walletSvg from "../../assets/icons/Wallet.svg";
 import timeSvg from "../../assets/icons/time.svg";
-import Skill from "../../components/Skill";
+import { deleteFavorite, addFavorite } from "../../redux/worker/worker-thunks";
 
 const VacancyInfo = (props) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const favoritesList = useSelector(
+    (state) => state.workerReducer.favoritesList
+  );
+
   const SendIcon = sized(sendSvg, 18, 18);
   const WalletIcon = sized(walletSvg, 18, 18);
   const TimeIcon = sized(timeSvg, 24, 24);
+
+  const dispatch = useDispatch();
+
+  const isFavoriteHandler = () => {
+    favoritesList.forEach((element) => {
+      if (element._id == props.id) {
+        setIsFavorite(true);
+      } else {
+        setIsFavorite(false);
+      }
+    });
+  };
+
+  useEffect(() => {
+    isFavoriteHandler();
+  }, []);
+
+  const favoriteSubmit = () => {
+    if (!isFavorite) {
+      dispatch(addFavorite(props.item));
+      setIsFavorite(true);
+    } else {
+      dispatch(deleteFavorite(props.id));
+      setIsFavorite(false);
+    }
+  };
 
   const dutyList = [
     { id: "1", label: "Обов’язок 1" },
@@ -58,12 +89,19 @@ const VacancyInfo = (props) => {
           <TouchableOpacity style={styles.send_icon}>
             <SendIcon />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.favorite_icon}>
-            <Ionicons
-              name='bookmark-outline'
-              size={21}
-              color={Colors.primaryBlue}
-            />
+          <TouchableOpacity
+            style={styles.favorite_icon}
+            onPress={favoriteSubmit}
+          >
+            {isFavorite ? (
+              <Ionicons name='bookmark' size={21} color={Colors.primaryBlue} />
+            ) : (
+              <Ionicons
+                name='bookmark-outline'
+                size={21}
+                color={Colors.primaryBlue}
+              />
+            )}
           </TouchableOpacity>
         </View>
       </View>

@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  ScrollView,
-  FlatList,
-  ActivityIndicator,
-  Text,
-} from "react-native";
+import { View, FlatList, ActivityIndicator, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
@@ -69,7 +63,7 @@ const ContractsScreen = (props) => {
           <ContractFilter />
         </View>
         <View style={{ paddingBottom: 160, marginTop: 10 }}>
-          {!data ? (
+          {!data.length ? (
             <Text style={styles.noItems}>Ви ще не подали жодної заявки</Text>
           ) : null}
           <FlatList

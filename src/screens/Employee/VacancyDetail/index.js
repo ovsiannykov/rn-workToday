@@ -38,6 +38,7 @@ const VacancyDetail = (props) => {
         <View style={{ paddingHorizontal: 39 }}>
           <View style={{ alignItems: "center" }}>
             <VacancyInfo
+              id={data._id}
               type={data.Type}
               place={data.place}
               priceTotal={data.priceTotal}
@@ -47,6 +48,7 @@ const VacancyDetail = (props) => {
               timeEnd={data.timeEnd}
               resp={data.responsibilities}
               skills={data.skills}
+              item={data}
             />
           </View>
           <ErrorBlock title='Ви недостатньо компетентні, щоб прийняти завдання' />
