@@ -1,7 +1,7 @@
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { showMessage } from "react-native-flash-message";
 
-import { authReducer } from "./auth-reducer";
 import { authApi } from "./auth-api";
 import { setUserId, setUserToken } from "./auth-actions";
 import instance from "../instance";
@@ -25,7 +25,10 @@ export const registerStart = (body, navigation, phone) => async (dispatch) => {
       dispatch(setUserId(res.data.data));
       navigation.navigate("SMS", { phone: phone });
     } else {
-      Alert.alert(res.data.status, res.data.text);
+      showMessage({
+        message: "Упс... Щось пішло не так 🤷‍♀️",
+        type: "danger",
+      });
     }
   } catch (e) {
     console.log(e);
@@ -48,7 +51,10 @@ export const registerSubmitCode =
         storeToken(res.data.token);
         context.signIn(res.data.token);
       } else {
-        Alert.alert(res.data.status, res.data.text);
+        showMessage({
+          message: "Упс... Щось пішло не так 🤷‍♀️",
+          type: "danger",
+        });
       }
     } catch (e) {
       console.log(e);
@@ -62,7 +68,10 @@ export const registerReSendCode = (num) => async (dispatch) => {
     });
 
     if (res.data.status !== "Success") {
-      Alert.alert(res.data.status, res.data.text);
+      showMessage({
+        message: "Упс... Щось пішло не так 🤷‍♀️",
+        type: "danger",
+      });
     }
   } catch (error) {
     console.log(error);
@@ -73,13 +82,18 @@ export const auth = (body, context) => async (dispatch) => {
   try {
     const res = await authApi.auth(body);
 
+    console.log(res);
+
     if (res.data.status === "Success") {
       dispatch(setUserToken(res.data.data));
       setTokenInHeaders(res.data.data);
       storeToken(res.data.data);
       context.signIn(res.data.data);
     } else {
-      Alert.alert(res.data.status, res.data.text);
+      showMessage({
+        message: "Щось пішло не так. Перевірте правильність даних 🤷‍♀️",
+        type: "danger",
+      });
     }
   } catch (e) {
     console.log(e);
