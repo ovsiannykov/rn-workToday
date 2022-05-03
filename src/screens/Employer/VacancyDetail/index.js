@@ -1,13 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 
 import styles from "./styles";
 import NavigationHeader from "../../../components/NavigationHeader";
-import ErrorBlock from "../../../components/ErrorBlock";
 import Skill from "../../../components/Skill";
 import LongWhiteButton from "../../../components/LongWhiteButton";
 import LongBlueButton from "../../../components/LongBlueButton";
@@ -15,10 +13,18 @@ import VacancyInfo from "../../../components/VacancyInfo";
 import PhotoSlider from "../../../components/PhotoSlider";
 
 const VacancyDetail = (props) => {
-  const route = useRoute();
-  const navigation = useNavigation();
+  const [data, setData] = useState();
 
-  const data = useSelector((state) => state.employerReducer.selectVacancy);
+  const navigation = useNavigation();
+  const selectVacancy = useSelector(
+    (state) => state.employerReducer.selectVacancy
+  );
+
+  useEffect(() => {
+    if (selectVacancy !== null) {
+      setData(selectVacancy);
+    }
+  }, []);
 
   const compitensesList = [
     { id: "1", label: "Art", its: undefined },

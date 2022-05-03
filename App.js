@@ -5,7 +5,6 @@ import FlashMessage from "react-native-flash-message";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ActivityIndicator, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { useContext } from "react";
 import { LogBox } from "react-native";
 
 import { bootstrap } from "./src/bootstrap";
@@ -67,6 +66,8 @@ const AppWrapper = () => {
     if (value !== null) {
       setTokenInHeaders(value);
       setUserToken(value);
+
+      //console.log(value);
     }
     setFetching(false);
   };

@@ -267,6 +267,7 @@ const CreateVacancy = (props) => {
                           onChangeText={handleChange("sumHour")}
                           error={errors.sumHour}
                           placeholder='50 zl'
+                          keyboardType='numeric'
                         />
                       </View>
                       <View style={{ width: 210, ...styles.commission_box }}>
@@ -277,6 +278,7 @@ const CreateVacancy = (props) => {
                           onChangeText={handleChange("taxHour")}
                           error={errors.taxHour}
                           placeholder='55 zl'
+                          keyboardType='numeric'
                         />
                       </View>
                     </View>
@@ -302,6 +304,7 @@ const CreateVacancy = (props) => {
                           onChangeText={handleChange("sumDay")}
                           error={errors.sumDay}
                           placeholder='500 zl'
+                          keyboardType='numeric'
                         />
                       </View>
                       <View style={{ width: 210, ...styles.commission_box }}>
@@ -312,6 +315,7 @@ const CreateVacancy = (props) => {
                           onChangeText={handleChange("taxDay")}
                           error={errors.taxDay}
                           placeholder='550 zl'
+                          keyboardType='numeric'
                         />
                       </View>
                     </View>

@@ -1,4 +1,3 @@
-import { Alert } from "react-native";
 import { showMessage } from "react-native-flash-message";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -74,23 +73,21 @@ export const vacancyCreate = (values, navigation) => async (dispatch) => {
     formData.append("geo", values.geo);
     formData.append("Documents", [values.photo]);
 
-    let body = {
-      pricePerHour: values.sumHour,
-      timeEnd: values.timeEnd,
-      Type: values.Type,
-      Title: values.Title,
-      timeStart: values.timeStart,
-      priceTotal: values.sumDay,
-      responsibilities: arrObj(values.responsibilities),
-      skills: arrObj(values.skills),
-      competencies: arrObj(values.compitence),
-      info: values.info,
-      place: values.place,
-      geo: values.geo,
-    };
-
     const res = await employerApi.vacancyCreate(formData);
-    console.log(res);
+
+    console.log(res.data);
+
+    if (res.data.status === "Success") {
+      showMessage({
+        message: "Вакансію успішно створено 👍",
+        type: "success",
+      });
+    } else {
+      showMessage({
+        message: "Щось пішло не так... Не вдалося створити вакансію 🤷‍♀️",
+        type: "danger",
+      });
+    }
   } catch (error) {
     console.log(error);
   }
