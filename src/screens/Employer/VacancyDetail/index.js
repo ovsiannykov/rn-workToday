@@ -12,8 +12,52 @@ import LongBlueButton from "../../../components/LongBlueButton";
 import VacancyInfo from "../../../components/VacancyInfo";
 import PhotoSlider from "../../../components/PhotoSlider";
 
+const initialVac = {
+  Title: "React developer",
+  Type: "remote",
+  _id: "62696118be6c7d2cc4f86032",
+  competencies: [{ name: "Art" }, { name: "Design" }],
+  createdAt: "2022-04-27T15:28:24.753Z",
+  employerId: "62696086be6c7d2cc4f86024",
+  geo: {
+    latitude: "50.427252",
+    longitude: "30.154871",
+  },
+  info: 'Оутсорс компания разработки сайтов и мобильных Приложений "Axios"',
+  photos: ["16510733047490office1.jpg", "16510733047491office2.jpg"],
+  place: "ул. Украиснкая, 24/33",
+  pricePerHour: 70,
+  priceTotal: 560,
+  responsibilities: [
+    {
+      name: "Разрабатывать сайты",
+    },
+    {
+      name: "Разрабатывать мобильные приложения",
+    },
+  ],
+  skills: [
+    {
+      name: "Коммуникабельность",
+    },
+    {
+      name: "Умение работать в команде",
+    },
+    {
+      name: "React",
+    },
+    {
+      name: "Redux",
+    },
+  ],
+  status: "active",
+  timeEnd: "25.02.2022",
+  timeStart: "15.03.2022",
+  updatedAt: "2022-04-27T15:28:24.753Z",
+};
+
 const VacancyDetail = (props) => {
-  const [data, setData] = useState();
+  const [data, setData] = useState(initialVac);
 
   const navigation = useNavigation();
   const selectVacancy = useSelector(

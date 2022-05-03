@@ -6,7 +6,7 @@ import Colors from "../../constants/Colors";
 import { API_BASE_URL } from "../../redux/instance";
 
 const images = [
-  "https://icon-library.com/images/no-profile-picture-icon/no-profile-picture-icon-11.jpg",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd-y-IJN8glQlf1qoU01dEgGPUa0d1-sjfWg&usqp=CAU",
   //require("./assets/images/girl.jpg"), // Local image
 ];
 
