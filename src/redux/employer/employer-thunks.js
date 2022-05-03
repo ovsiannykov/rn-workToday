@@ -72,7 +72,7 @@ export const vacancyCreate = (values, navigation) => async (dispatch) => {
     formData.append("info", values.compitence);
     formData.append("place", values.info);
     formData.append("geo", values.geo);
-    formData.append("Documents", []);
+    formData.append("Documents", [values.photo]);
 
     let body = {
       pricePerHour: values.sumHour,

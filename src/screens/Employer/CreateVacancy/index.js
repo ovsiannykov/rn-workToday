@@ -25,6 +25,8 @@ import LongWhiteButton from "../../../components/LongWhiteButton";
 import Colors from "../../../constants/Colors";
 import { setSelectLocation } from "../../../redux/employer/employer-actions";
 import { vacancyCreate } from "../../../redux/employer/employer-thunks";
+import UpluadInput from "../../../components/UpluadInput";
+import { setSelectVacancy } from "../../../redux/employer/employer-actions";
 
 const SlecetMapIcon = sized(selectMapSvg, 16.64, 23);
 
@@ -103,6 +105,7 @@ const CreateVacancy = (props) => {
             timeStart: "",
             timeEnd: "",
             info: "",
+            photo: "",
           }}
           onSubmit={(values, navigation) => {
             setFetching(true);
@@ -131,6 +134,7 @@ const CreateVacancy = (props) => {
               values.timeStart.length > 0 &&
               values.timeEnd.length > 0 &&
               values.info.length > 0 &&
+              values.photo &&
               values.compitence.length > 0;
 
             useEffect(() => {
@@ -140,6 +144,32 @@ const CreateVacancy = (props) => {
                 dispatch(setSelectLocation(null));
               }
             }, [mapData]);
+
+            const vacancyPreview = (values) => {
+              const arrObj = (str) => {
+                const item = str.split(", ").filter((i) => i !== " ");
+                return item.map((item) => ({
+                  name: item,
+                }));
+              };
+
+              const item = {
+                Title: values.Title,
+                info: values.info,
+                _id: "none",
+                photos: [values.photo],
+                priceTotal: values.sumDay,
+                place: values.place,
+                timeStart: values.timeStart,
+                timeEnd: values.timeEnd,
+                company: "Your Company",
+                responsibilities: arrObj(values.responsibilities),
+                skills: arrObj(values.skills),
+                competencies: arrObj(values.compitence),
+                disableFeedback: true,
+              };
+              dispatch(setSelectVacancy(item));
+            };
 
             const startDateConfirm = (date) => {
               let numValue;
@@ -453,7 +483,13 @@ const CreateVacancy = (props) => {
                         placeholder='Додати ще (через кому)'
                       />
                     </View> */}
-
+                    <View style={{ marginTop: 20, width: "75%" }}>
+                      <Text style={styles.label}>Фото:</Text>
+                      <UpluadInput
+                        filename={values.photo}
+                        onChangeFile={(value) => setFieldValue("photo", value)}
+                      />
+                    </View>
                     <View
                       style={{
                         marginTop: 40,
@@ -474,6 +510,7 @@ const CreateVacancy = (props) => {
                         title='Перегляд'
                         disabled={!isValid}
                         onPress={() => {
+                          vacancyPreview(values);
                           navigation.navigate("VacancyDetail", {
                             title: "Ваша вакансія",
                           });

@@ -14,3 +14,8 @@ export const setSelectLocation = (payload) => ({
   type: employerTypes.SET_SELECT_LOCATION,
   location: payload,
 });
+
+export const setSelectVacancy = (payload) => ({
+  type: employerTypes.SET_SELECT_VACANCY,
+  selectVacancy: payload,
+});

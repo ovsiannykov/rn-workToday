@@ -3,6 +3,7 @@ import { View, Text, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector, useDispatch } from "react-redux";
 
 import styles from "./styles";
 import NavigationHeader from "../../../components/NavigationHeader";
@@ -17,6 +18,8 @@ const VacancyDetail = (props) => {
   const route = useRoute();
   const navigation = useNavigation();
 
+  const data = useSelector((state) => state.employerReducer.selectVacancy);
+
   const compitensesList = [
     { id: "1", label: "Art", its: undefined },
     { id: "2", label: "Design", its: undefined },
@@ -27,20 +30,35 @@ const VacancyDetail = (props) => {
       colors={["#F4F7FF", "#FFFFFF"]}
       style={{ ...styles.container }}
     >
-      <NavigationHeader title={route.params.title} />
+      <NavigationHeader title={data.Title ?? "Назва вакансії"} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ paddingHorizontal: 39 }}>
           <View style={{ alignItems: "center" }}>
-            <VacancyInfo />
+            <VacancyInfo
+              id={data._id}
+              type={data.Type}
+              place={data.place}
+              priceTotal={data.priceTotal}
+              pricePerHour={data.pricePerHour}
+              company={data.employerId}
+              timeStart={data.timeStart}
+              timeEnd={data.timeEnd}
+              resp={data.responsibilities}
+              skills={data.skills}
+              item={data}
+            />
           </View>
-          <ErrorBlock title='Ви недостатньо компетентні, щоб прийняти завдання' />
           <Text style={{ marginTop: 20, ...styles.company_name }}>
             Необхідні компетенції:
           </Text>
           <View style={{ marginBottom: 20, ...styles.sills_box }}>
-            {compitensesList.map((item) => (
-              <Skill key={item.id} title={item.label} isTrue={item.its} />
-            ))}
+            {data.competencies
+              ? data.competencies.map((item) => (
+                  <Skill key={item.name} title={item.name} type='worker' />
+                ))
+              : compitensesList.map((item) => (
+                  <Skill key={item.id} title={item.label} isTrue={item.its} />
+                ))}
           </View>
           <View style={styles.buttons_container}>
             <LongWhiteButton
@@ -57,10 +75,7 @@ const VacancyDetail = (props) => {
             />
           </View>
         </View>
-        <PhotoSlider
-          description='This one got an incredible amount of backlash the last time I said it, so I’m going to say it again: a man’s sexuality is never, ever your responsibility, under any circumstances. Whether it’s the fifth date or your twentieth year of marriage, the correct determining factor for whether or not you have sex with your partner isn’t whether you ought to “take care
-'
-        />
+        <PhotoSlider photos={data.photos} info={data.info} />
       </ScrollView>
     </LinearGradient>
   );

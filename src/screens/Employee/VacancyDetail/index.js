@@ -70,7 +70,11 @@ const VacancyDetail = (props) => {
               title='Заповнити компетенції'
             />
             <LongBlueButton
-              onPress={() => dispatch(sendFeedback(data._id))}
+              onPress={
+                data.disableFeedback == true
+                  ? null
+                  : () => dispatch(sendFeedback(data._id))
+              }
               title='Відповсіти на вакансію'
             />
           </View>
