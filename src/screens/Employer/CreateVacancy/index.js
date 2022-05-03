@@ -88,8 +88,8 @@ const CreateVacancy = (props) => {
           initialValues={{
             Title: "",
             Type: "Повний рабочий день",
-            sumYear: "",
-            taxYear: "",
+            sumHour: "",
+            taxHour: "",
             sumDay: "",
             taxDay: "",
             geo: "",
@@ -123,7 +123,7 @@ const CreateVacancy = (props) => {
             const isValid =
               values.Title.length > 0 &&
               values.Type.length > 0 &&
-              values.sumYear.length > 0 &&
+              values.sumHour.length > 0 &&
               values.sumDay.length > 0 &&
               values.place.length > 0 &&
               values.responsibilities.length > 0 &&
@@ -233,20 +233,20 @@ const CreateVacancy = (props) => {
                         <Text style={styles.label}>Оплата в год.:</Text>
                         <TextInput
                           style={styles.input_min}
-                          value={values.sumYear}
-                          onChangeText={handleChange("sumYear")}
-                          error={errors.sumYear}
-                          placeholder='500 zl'
+                          value={values.sumHour}
+                          onChangeText={handleChange("sumHour")}
+                          error={errors.sumHour}
+                          placeholder='50 zl'
                         />
                       </View>
                       <View style={{ width: 210, ...styles.commission_box }}>
                         <Text style={styles.label}>Оплата з комісією:</Text>
                         <TextInput
                           style={styles.input_middle}
-                          value={values.taxYear}
-                          onChangeText={handleChange("taxYear")}
-                          error={errors.taxYear}
-                          placeholder='450 zl'
+                          value={values.taxHour}
+                          onChangeText={handleChange("taxHour")}
+                          error={errors.taxHour}
+                          placeholder='55 zl'
                         />
                       </View>
                     </View>
@@ -271,7 +271,7 @@ const CreateVacancy = (props) => {
                           value={values.sumDay}
                           onChangeText={handleChange("sumDay")}
                           error={errors.sumDay}
-                          placeholder='50 zl'
+                          placeholder='500 zl'
                         />
                       </View>
                       <View style={{ width: 210, ...styles.commission_box }}>
@@ -281,7 +281,7 @@ const CreateVacancy = (props) => {
                           value={values.taxDay}
                           onChangeText={handleChange("taxDay")}
                           error={errors.taxDay}
-                          placeholder='45 zl'
+                          placeholder='550 zl'
                         />
                       </View>
                     </View>

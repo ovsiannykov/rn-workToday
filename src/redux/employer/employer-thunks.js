@@ -58,8 +58,24 @@ export const vacancyCreate = (values, navigation) => async (dispatch) => {
       }));
     };
 
+    const formData = new FormData();
+
+    formData.append("pricePerHour", values.sumHour);
+    formData.append("timeEnd", values.timeEnd);
+    formData.append("Type", values.Type);
+    formData.append("Title", values.Title);
+    formData.append("timeStart", values.timeStart);
+    formData.append("priceTotal", values.sumDay);
+    formData.append("responsibilities", arrObj(values.responsibilities));
+    formData.append("skills", arrObj(values.skills));
+    formData.append("competencies", arrObj(values.compitence));
+    formData.append("info", values.compitence);
+    formData.append("place", values.info);
+    formData.append("geo", values.geo);
+    formData.append("Documents", []);
+
     let body = {
-      pricePerHour: values.sumYear,
+      pricePerHour: values.sumHour,
       timeEnd: values.timeEnd,
       Type: values.Type,
       Title: values.Title,
@@ -73,7 +89,7 @@ export const vacancyCreate = (values, navigation) => async (dispatch) => {
       geo: values.geo,
     };
 
-    const res = await employerApi.vacancyCreate(body);
+    const res = await employerApi.vacancyCreate(formData);
     console.log(res);
   } catch (error) {
     console.log(error);
