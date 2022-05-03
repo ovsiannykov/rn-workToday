@@ -17,6 +17,7 @@ export const vacancyMy = () => async (dispatch) => {
     const res = await employerApi.vacancyMy();
 
     if (res.data.status === "Success") {
+      console.log(res.data.data);
       dispatch(setMyVanacies(res.data.data));
     } else {
       showMessage({
@@ -44,5 +45,37 @@ export const getCategoriesFilters = () => async (dispatch) => {
       message: `${error}`,
       type: "danger",
     });
+  }
+};
+
+export const vacancyCreate = (values, navigation) => async (dispatch) => {
+  try {
+    const arrObj = (str) => {
+      const item = str.split(", ").filter((i) => i !== " ");
+
+      return item.map((item) => ({
+        name: item,
+      }));
+    };
+
+    let body = {
+      pricePerHour: values.sumYear,
+      timeEnd: values.timeEnd,
+      Type: values.Type,
+      Title: values.Title,
+      timeStart: values.timeStart,
+      priceTotal: values.sumDay,
+      responsibilities: arrObj(values.responsibilities),
+      skills: arrObj(values.skills),
+      competencies: arrObj(values.compitence),
+      info: values.info,
+      place: values.place,
+      geo: values.geo,
+    };
+
+    const res = await employerApi.vacancyCreate(body);
+    console.log(res);
+  } catch (error) {
+    console.log(error);
   }
 };

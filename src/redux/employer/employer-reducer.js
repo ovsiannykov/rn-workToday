@@ -3,6 +3,7 @@ import { employerTypes } from "./employer-types";
 const initialState = {
   vacancies: [],
   categories: [],
+  selectLocation: null,
 };
 export const employerReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -10,6 +11,8 @@ export const employerReducer = (state = initialState, action) => {
       return { ...state, vacancies: action.data };
     case employerTypes.GET_CATEGORIES:
       return { ...state, categories: action.categories };
+    case employerTypes.SET_SELECT_LOCATION:
+      return { ...state, selectLocation: action.location };
     default:
       return state;
   }

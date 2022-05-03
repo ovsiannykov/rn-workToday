@@ -12,13 +12,34 @@ import * as Location from "expo-location";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
+
 import LongWhiteButton from "../../../components/LongWhiteButton";
 import LongBlueButton from "../../../components/LongBlueButton";
 import Colors from "../../../constants/Colors";
+import { setSelectLocation } from "../../../redux/employer/employer-actions";
 
 const MapScreen = (props) => {
   const [isFetching, setIsFetching] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(mapRegion);
+  const [adress, setAdress] = useState(null);
+
+  const dispatch = useDispatch();
+
+  const reverseGeocode = async (loc) => {
+    if (loc) {
+      let response = await Location.reverseGeocodeAsync(loc);
+
+      for (let item of response) {
+        let address = `${item.name}, ${item.city}, ${item.country}`;
+        setAdress(address);
+      }
+    }
+  };
+
+  useEffect(() => {
+    reverseGeocode(selectedLocation);
+  }, [selectedLocation]);
 
   const navigation = useNavigation();
 
@@ -93,7 +114,18 @@ const MapScreen = (props) => {
           <LongWhiteButton title='Назад' onPress={() => navigation.goBack()} />
         </View>
         <View style={{ width: "48%" }}>
-          <LongBlueButton title='Ok' onPress={() => navigation.goBack()} />
+          <LongBlueButton
+            title='Ok'
+            onPress={async () => {
+              await dispatch(
+                setSelectLocation({
+                  adress: adress,
+                  location: selectedLocation,
+                })
+              );
+              navigation.goBack();
+            }}
+          />
         </View>
       </View>
       <TouchableOpacity

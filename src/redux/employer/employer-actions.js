@@ -9,3 +9,8 @@ export const getCategories = (payload) => ({
   type: employerTypes.GET_CATEGORIES,
   categories: payload,
 });
+
+export const setSelectLocation = (payload) => ({
+  type: employerTypes.SET_SELECT_LOCATION,
+  location: payload,
+});

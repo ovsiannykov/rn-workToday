@@ -7,12 +7,15 @@ import {
   Keyboard,
   ScrollView,
   Image,
+  ActivityIndicator,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
 import { Formik } from "formik";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { useSelector, useDispatch } from "react-redux";
 
 import styles from "./styles";
 import { sized } from "../../../Svg";
@@ -20,11 +23,44 @@ import selectMapSvg from "../../../assets/icons/select_map.svg";
 import vacancyImage from "../../../assets/images/vacancy_image.jpeg";
 import LongWhiteButton from "../../../components/LongWhiteButton";
 import Colors from "../../../constants/Colors";
+import { setSelectLocation } from "../../../redux/employer/employer-actions";
+import { vacancyCreate } from "../../../redux/employer/employer-thunks";
 
 const SlecetMapIcon = sized(selectMapSvg, 16.64, 23);
 
 const CreateVacancy = (props) => {
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [isDatePickerVisible2, setDatePickerVisibility2] = useState(false);
+  const [fetching, setFetching] = useState(false);
+
+  const mapData = useSelector((state) => state.employerReducer.selectLocation);
+
+  const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const showDatePicker2 = () => {
+    setDatePickerVisibility2(true);
+  };
+
+  const hideDatePicker2 = () => {
+    setDatePickerVisibility2(false);
+  };
+
+  if (fetching) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size='large' color='#376AED' />
+      </View>
+    );
+  }
 
   return (
     <LinearGradient
@@ -50,20 +86,28 @@ const CreateVacancy = (props) => {
         </View>
         <Formik
           initialValues={{
+            Title: "",
+            Type: "Повний рабочий день",
             sumYear: "",
             taxYear: "",
             sumDay: "",
             taxDay: "",
-            location: "",
+            geo: "",
             responsibilities: "",
             responsibilitiesAdditionally: "",
             skills: "",
             skillsAdditionally: "",
             compitence: "",
             compitenceAdditionally: "",
+            place: "",
+            timeStart: "",
+            timeEnd: "",
+            info: "",
           }}
-          onSubmit={(values) => {
-            console.log(values);
+          onSubmit={(values, navigation) => {
+            setFetching(true);
+            dispatch(vacancyCreate(values, navigation));
+            setFetching(false);
           }}
         >
           {({
@@ -75,15 +119,72 @@ const CreateVacancy = (props) => {
             setFieldValue,
           }) => {
             errors = submitCount > 0 ? errors : {};
+
             const isValid =
+              values.Title.length > 0 &&
+              values.Type.length > 0 &&
               values.sumYear.length > 0 &&
               values.sumDay.length > 0 &&
-              values.taxDay.length > 0 &&
-              values.taxYear.length > 0 &&
-              values.location.length > 0 &&
+              values.place.length > 0 &&
               values.responsibilities.length > 0 &&
               values.skills.length > 0 &&
+              values.timeStart.length > 0 &&
+              values.timeEnd.length > 0 &&
+              values.info.length > 0 &&
               values.compitence.length > 0;
+
+            useEffect(() => {
+              if (mapData !== null) {
+                setFieldValue("place", mapData.adress);
+                setFieldValue("geo", mapData.location);
+                dispatch(setSelectLocation(null));
+              }
+            }, [mapData]);
+
+            const startDateConfirm = (date) => {
+              let numValue;
+              let monthValue;
+              const num = date.getDate().toString();
+              const month = date.getMonth().toString();
+              const year = date.getFullYear().toString();
+
+              if (num < 10) {
+                numValue = `0${num}`;
+              } else {
+                numValue = num;
+              }
+
+              if (month < 10) {
+                monthValue = `0${month}`;
+              } else {
+                monthValue = month;
+              }
+              setFieldValue("timeStart", `${numValue}.${monthValue}.${year}`);
+              hideDatePicker();
+            };
+
+            const endDateConfirm = (date) => {
+              let numValue;
+              let monthValue;
+              const num = date.getDate().toString();
+              const month = date.getMonth().toString();
+              const year = date.getFullYear().toString();
+
+              if (num < 10) {
+                numValue = `0${num}`;
+              } else {
+                numValue = num;
+              }
+
+              if (month < 10) {
+                monthValue = `0${month}`;
+              } else {
+                monthValue = month;
+              }
+              setFieldValue("timeEnd", `${numValue}.${monthValue}.${year}`);
+              hideDatePicker2();
+            };
+
             return (
               <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <ScrollView showsVerticalScrollIndicator={false}>
@@ -92,11 +193,34 @@ const CreateVacancy = (props) => {
                       paddingBottom: 150,
                     }}
                   >
+                    <View style={{ marginTop: 20, width: "75%" }}>
+                      <Text style={styles.label}>Назва вакансії:</Text>
+                      <TextInput
+                        style={styles.input}
+                        value={values.Title}
+                        onChangeText={handleChange("Title")}
+                        error={errors.Title}
+                        placeholder='Офiцiант'
+                        maxLength={20}
+                      />
+                    </View>
+                    <View style={{ marginTop: 20, width: "75%" }}>
+                      <Text style={styles.label}>Тип вакансії:</Text>
+                      <TextInput
+                        style={styles.input}
+                        value={values.Type}
+                        onChangeText={handleChange("Type")}
+                        error={errors.Type}
+                        placeholder='Повний робочий день, Віддалено, тощо'
+                        maxLength={20}
+                      />
+                    </View>
                     <View
                       style={{
                         display: "flex",
                         flexDirection: "row",
                         alignItems: "center",
+                        marginTop: 35,
                       }}
                     >
                       <View
@@ -162,15 +286,35 @@ const CreateVacancy = (props) => {
                       </View>
                     </View>
 
-                    <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>Місце роботи:</Text>
+                    <View style={{ marginTop: 35, width: "75%" }}>
+                      <Text style={styles.label}>Опис вакансії:</Text>
                       <TextInput
                         style={styles.input}
-                        value={values.location}
-                        onChangeText={handleChange("location")}
-                        error={errors.location}
-                        placeholder='Україна'
+                        value={values.info}
+                        onChangeText={handleChange("info")}
+                        error={errors.info}
+                        placeholder='Інформація про вакансію'
+                        maxLength={250}
+                        multiline={true}
+                        numberOfLines={4}
                       />
+                    </View>
+
+                    <View style={{ marginTop: 20, width: "75%" }}>
+                      <Text style={styles.label}>Місце роботи:</Text>
+                      <TouchableOpacity
+                        onPress={() => navigation.navigate("MapScreen")}
+                      >
+                        <View pointerEvents='none'>
+                          <TextInput
+                            style={{ ...styles.input, paddingRight: 90 }}
+                            value={values.place}
+                            onChangeText={handleChange("place")}
+                            error={errors.place}
+                            placeholder='Україна'
+                          />
+                        </View>
+                      </TouchableOpacity>
                       <TouchableOpacity
                         style={styles.map_btn}
                         onPress={() => navigation.navigate("MapScreen")}
@@ -181,6 +325,67 @@ const CreateVacancy = (props) => {
                         <SlecetMapIcon />
                       </TouchableOpacity>
                     </View>
+
+                    <View
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        marginTop: 20,
+                      }}
+                    >
+                      <View
+                        style={{
+                          width: 140,
+                          marginRight: 12,
+                          ...styles.commission_box,
+                        }}
+                      >
+                        <Text style={styles.label}>Дата початку:</Text>
+                        <TouchableOpacity onPress={showDatePicker}>
+                          <View pointerEvents='none'>
+                            <TextInput
+                              style={styles.input_min}
+                              value={values.timeStart}
+                              onChangeText={handleChange("timeStart")}
+                              error={errors.timeStart}
+                              placeholder='Виберіть дату'
+                            />
+                          </View>
+                        </TouchableOpacity>
+                        <DateTimePickerModal
+                          isVisible={isDatePickerVisible}
+                          mode='date'
+                          onConfirm={startDateConfirm}
+                          onCancel={hideDatePicker}
+                          confirmTextIOS='Обрати'
+                          locale='uk_UA'
+                        />
+                      </View>
+                      <View style={{ width: 210, ...styles.commission_box }}>
+                        <Text style={styles.label}>Дата кінця:</Text>
+                        <TouchableOpacity onPress={showDatePicker2}>
+                          <View pointerEvents='none'>
+                            <TextInput
+                              style={styles.input_middle}
+                              value={values.timeEnd}
+                              onChangeText={handleChange("timeEnd")}
+                              error={errors.timeEnd}
+                              placeholder='Виберіть дату'
+                            />
+                          </View>
+                        </TouchableOpacity>
+                        <DateTimePickerModal
+                          isVisible={isDatePickerVisible2}
+                          mode='date'
+                          onConfirm={endDateConfirm}
+                          onCancel={hideDatePicker2}
+                          confirmTextIOS='Обрати'
+                          locale='uk_UA'
+                        />
+                      </View>
+                    </View>
+
                     <View style={{ marginTop: 20, width: "75%" }}>
                       <Text style={styles.label}>Обов'язки:</Text>
                       <TextInput
@@ -188,10 +393,12 @@ const CreateVacancy = (props) => {
                         value={values.responsibilities}
                         onChangeText={handleChange("responsibilities")}
                         error={errors.responsibilities}
-                        placeholder='Обов’язок 1'
+                        placeholder='Напишіть через кому'
+                        multiline={true}
+                        numberOfLines={4}
                       />
                     </View>
-                    <View style={{ marginTop: 15, width: "75%" }}>
+                    {/* <View style={{ marginTop: 15, width: "75%" }}>
                       <TextInput
                         style={styles.input}
                         value={values.responsibilitiesAdditionally}
@@ -199,9 +406,9 @@ const CreateVacancy = (props) => {
                           "responsibilitiesAdditionally"
                         )}
                         error={errors.responsibilitiesAdditionally}
-                        placeholder='Додати ще:'
+                        placeholder='Додати ще (через кому)'
                       />
-                    </View>
+                    </View> */}
                     <View style={{ marginTop: 20, width: "75%" }}>
                       <Text style={styles.label}>Необхідні навички:</Text>
                       <TextInput
@@ -209,18 +416,21 @@ const CreateVacancy = (props) => {
                         value={values.skills}
                         onChangeText={handleChange("skills")}
                         error={errors.skills}
-                        placeholder='Навик 1'
+                        placeholder='Напишіть через кому'
+                        maxLength={50}
+                        multiline={true}
+                        numberOfLines={4}
                       />
                     </View>
-                    <View style={{ marginTop: 15, width: "75%" }}>
+                    {/* <View style={{ marginTop: 15, width: "75%" }}>
                       <TextInput
                         style={styles.input}
                         value={values.skillsAdditionally}
                         onChangeText={handleChange("skillsAdditionally")}
                         error={errors.skillsAdditionally}
-                        placeholder='Додати ще:'
+                        placeholder='Додати ще (через кому)'
                       />
-                    </View>
+                    </View> */}
                     <View style={{ marginTop: 20, width: "75%" }}>
                       <Text style={styles.label}>Необхідні компетенції:</Text>
                       <TextInput
@@ -228,29 +438,32 @@ const CreateVacancy = (props) => {
                         value={values.compitence}
                         onChangeText={handleChange("compitence")}
                         error={errors.compitence}
-                        placeholder='компетенція 1'
+                        placeholder='Напишіть через кому'
+                        maxLength={50}
+                        multiline={true}
+                        numberOfLines={4}
                       />
                     </View>
-                    <View style={{ marginTop: 15, width: "75%" }}>
+                    {/* <View style={{ marginTop: 15, width: "75%" }}>
                       <TextInput
                         style={styles.input}
                         value={values.compitenceAdditionally}
                         onChangeText={handleChange("compitenceAdditionally")}
                         error={errors.compitenceAdditionally}
-                        placeholder='Додати ще:'
+                        placeholder='Додати ще (через кому)'
                       />
-                    </View>
+                    </View> */}
 
                     <View
                       style={{
-                        marginTop: 20,
+                        marginTop: 40,
                         padding: 5,
                         marginBottom: 100,
                         paddingRight: 25,
                       }}
                     >
                       <LongWhiteButton
-                        title='Создать'
+                        title='Створити'
                         disabled={!isValid}
                         onPress={() => {
                           // navigation.goBack();
@@ -259,6 +472,7 @@ const CreateVacancy = (props) => {
                       />
                       <LongWhiteButton
                         title='Перегляд'
+                        disabled={!isValid}
                         onPress={() => {
                           navigation.navigate("VacancyDetail", {
                             title: "Ваша вакансія",
