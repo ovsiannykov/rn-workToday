@@ -47,7 +47,7 @@ export const getCategoriesFilters = () => async (dispatch) => {
   }
 };
 
-export const vacancyCreate = (values, navigation) => async (dispatch) => {
+export const vacancyCreate = (values) => async (dispatch) => {
   try {
     const arrObj = (str) => {
       const item = str.split(", ").filter((i) => i !== " ");
@@ -65,7 +65,10 @@ export const vacancyCreate = (values, navigation) => async (dispatch) => {
     formData.append("Title", values.Title);
     formData.append("timeStart", values.timeStart);
     formData.append("priceTotal", values.sumDay);
-    formData.append("responsibilities", JSON.stringify(arrObj(values.responsibilities)));
+    formData.append(
+      "responsibilities",
+      JSON.stringify(arrObj(values.responsibilities))
+    );
     formData.append("skills", JSON.stringify(arrObj(values.skills)));
     formData.append("competencies", JSON.stringify(arrObj(values.compitence)));
     formData.append("info", values.compitence);

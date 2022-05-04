@@ -14,10 +14,13 @@ const PhotoSlider = (props) => {
   const [photos, setPhotos] = useState(images);
 
   useEffect(() => {
-    if (props.photos) {
+    if (props.photos && !props.isPreview) {
       const arrPhotos = props.photos.map(
         (item) => `${API_BASE_URL}static/${item}`
       );
+      setPhotos(arrPhotos);
+    } else if (props.photos && props.isPreview == true) {
+      const arrPhotos = props.photos.map((item) => item);
       setPhotos(arrPhotos);
     } else {
       setPhotos(images);

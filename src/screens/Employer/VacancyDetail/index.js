@@ -74,7 +74,7 @@ const VacancyDetail = (props) => {
     { id: "1", label: "Art", its: undefined },
     { id: "2", label: "Design", its: undefined },
   ];
-  console.log(data.photos)
+
   return (
     <LinearGradient
       colors={["#F4F7FF", "#FFFFFF"]}
@@ -125,7 +125,11 @@ const VacancyDetail = (props) => {
             />
           </View>
         </View>
-        <PhotoSlider photos={data.photos} info={data.info} />
+        <PhotoSlider
+          photos={data.photos}
+          info={data.info}
+          isPreview={data.isPreview ? data.isPreview : null}
+        />
       </ScrollView>
     </LinearGradient>
   );

@@ -106,9 +106,9 @@ const CreateVacancy = (props) => {
             info: "",
             photo: "",
           }}
-          onSubmit={(values, navigation) => {
+          onSubmit={(values) => {
             setFetching(true);
-            dispatch(vacancyCreate(values, navigation));
+            dispatch(vacancyCreate(values));
             setFetching(false);
           }}
         >
@@ -161,11 +161,11 @@ const CreateVacancy = (props) => {
                 place: values.place,
                 timeStart: values.timeStart,
                 timeEnd: values.timeEnd,
-                company: "Your Company",
+                employerId: "Ваша компанiя",
                 responsibilities: arrObj(values.responsibilities),
                 skills: arrObj(values.skills),
                 competencies: arrObj(values.compitence),
-                disableFeedback: true,
+                isPreview: true,
               };
               dispatch(setSelectVacancy(item));
             };
@@ -505,8 +505,8 @@ const CreateVacancy = (props) => {
                         title='Створити'
                         disabled={!isValid}
                         onPress={() => {
-                          // navigation.goBack();
                           handleSubmit();
+                          navigation.goBack();
                         }}
                       />
                       <LongWhiteButton
