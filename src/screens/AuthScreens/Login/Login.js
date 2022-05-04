@@ -13,6 +13,7 @@ import { connect, useDispatch } from "react-redux";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import PhoneInput from "react-native-phone-input";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 import Input from "../../../components/Input";
@@ -34,6 +35,7 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
   const context = useContext(AuthContext);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const DismissKeyboard = ({ children }) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -61,7 +63,7 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                   ...styles.switchButton,
                 }}
               >
-                Вхід
+                {t("Login.login")}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setTypeEntrance(true)}>
@@ -71,15 +73,15 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                   ...styles.switchButton,
                 }}
               >
-                реєстрація
+                {t("Login.registration")}
               </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.inputsBox}>
             {!typeEntrance ? (
               <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-                <Text style={styles.welcomeText}>Ласкаво просимо</Text>
-                <Text style={styles.subTitle}>Віхд у ваш аккаунт</Text>
+                <Text style={styles.welcomeText}>{t("Login.welcome")}</Text>
+                <Text style={styles.subTitle}>{t("Login.enter")}</Text>
                 <Formik
                   initialValues={{
                     phone: "",
@@ -111,7 +113,7 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                     return (
                       <>
                         <View>
-                          <Text style={styles.label}>Телефон</Text>
+                          <Text style={styles.label}>{t("Login.phone")}</Text>
                           <PhoneInput
                             initialCountry={"ua"}
                             error={errors.phone}
@@ -129,7 +131,7 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                         </View>
                         <View style={{ marginTop: 30, marginBottom: 20 }}>
                           <Input
-                            title='Пароль'
+                            title={t("Login.pass")}
                             textContentType='password'
                             isPassword={true}
                             value={values.password}
@@ -142,7 +144,7 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                         </View>
                         <View style={{ alignItems: "center" }}>
                           <BigButton
-                            title='УВIЙТИ'
+                            title={t("Login.loginBtn")}
                             onPress={() => {
                               handleSubmit();
                             }}
@@ -153,16 +155,20 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                   }}
                 </Formik>
                 <View style={styles.loginSmallButtonsBox}>
-                  <Text style={styles.restorePassword}>Забули пароль?</Text>
+                  <Text style={styles.restorePassword}>
+                    {t("Login.forgot")}
+                  </Text>
                   <TouchableOpacity>
-                    <Text style={styles.viewPasswordBtn}>Відновити</Text>
+                    <Text style={styles.viewPasswordBtn}>
+                      {t("Login.reestablish")}
+                    </Text>
                   </TouchableOpacity>
                 </View>
               </KeyboardAwareScrollView>
             ) : (
               <KeyboardAwareScrollView>
-                <Text style={styles.welcomeText}>Ласкаво просимо</Text>
-                <Text style={styles.subTitle}>Cтворення нового аккаунту</Text>
+                <Text style={styles.welcomeText}>{t("Login.welcome")}</Text>
+                <Text style={styles.subTitle}>{t("Login.create")}</Text>
                 <Formik
                   initialValues={{
                     phone: "",
@@ -195,7 +201,7 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                     return (
                       <>
                         <View>
-                          <Text style={styles.label}>Телефон</Text>
+                          <Text style={styles.label}>{t("Login.phone")}</Text>
                           <PhoneInput
                             initialCountry={"ua"}
                             error={errors.phone}
@@ -213,7 +219,7 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                         </View>
                         <View style={{ marginTop: 30, marginBottom: 20 }}>
                           <Input
-                            title='Пароль'
+                            title={t("Login.pass")}
                             textContentType='password'
                             isPassword={true}
                             value={values.password}
@@ -230,7 +236,7 @@ const Login = ({ navigation, login, registerStart, ...props }) => {
                               onPress={() => {
                                 handleSubmit();
                               }}
-                              title='РЕЄСТРАЦІЯ'
+                              title={t("Login.registrBtn")}
                             />
                           </View>
                         </View>

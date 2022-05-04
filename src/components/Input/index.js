@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 
 const Input = (props) => {
   const [text, onChangeText] = useState("");
   const [show, setShow] = useState(false);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (props.isPassword == true) {
@@ -35,7 +38,7 @@ const Input = (props) => {
           style={styles.viewPassBox}
           onPress={() => setShow(!show)}
         >
-          <Text style={styles.viewPasswordBtn}>Показати</Text>
+          <Text style={styles.viewPasswordBtn}>{t("Login.viewPass")}</Text>
         </TouchableOpacity>
       ) : null}
     </View>

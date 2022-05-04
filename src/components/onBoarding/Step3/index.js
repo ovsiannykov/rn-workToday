@@ -1,26 +1,37 @@
-import { StyleSheet, Platform, Dimensions } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Platform,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 
 import Colors from "../../../constants/Colors";
 
-export default StyleSheet.create({
-  container: {
-    flex: 1,
-    // justifyContent: "center",
-    //alignItems: "center",
-  },
-  row_one: {
-    display: "flex",
-    flexDirection: "row",
-    //paddingHorizontal: 40,
-    paddingTop:
-      Platform.OS == "android" ? 60 : Dimensions.get("window").height / 8,
-  },
-  row_two: {
-    display: "flex",
-    flexDirection: "row",
-    //paddingHorizontal: 40,
-    paddingTop: 16.25,
-  },
+const Step3 = (props) => {
+  return (
+    <View style={styles.slide}>
+      <Text style={styles.title}>{props.title}</Text>
+      <Text style={styles.subtitle}>{props.subtitle}</Text>
+      <View style={styles.slide2_content}>
+        <View style={styles.pionts_box}>
+          <View style={styles.point_smal} />
+          <View style={styles.point_smal} />
+          <View style={styles.point_big} />
+          <View style={styles.point_smal} />
+        </View>
+        <TouchableOpacity style={styles.next_button} onPress={props.onPress}>
+          <AntDesign name='arrowright' size={24} color='white' />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
   img_smal: {
     width: 92.12,
     height: 157.75,
@@ -45,25 +56,7 @@ export default StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 1.0,
   },
-  content_box: {
-    backgroundColor: "white",
-    minHeight:
-      Platform.OS == "android" ? null : Dimensions.get("window").height - 530,
-    paddingBottom: 40,
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-    borderTopLeftRadius: 28,
-    borderTopRightRadius: 28,
-    shadowColor: "#000000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.17,
-    shadowRadius: 2.54,
-    elevation: 3,
-  },
+
   slide: {
     paddingTop: 26,
     paddingHorizontal: 30,
@@ -73,7 +66,7 @@ export default StyleSheet.create({
     fontSize: 24,
     lineHeight: 32,
     color: "#0D253C",
-    width: 218,
+    width: 278,
   },
   subtitle: {
     fontFamily: "RobotoThinItalic",
@@ -129,13 +122,6 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  imagesBox: {
-    width: "90%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  imagesContainer: {
-    width: "100%",
-    alignItems: "center",
-  },
 });
+
+export default Step3;

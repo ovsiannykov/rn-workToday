@@ -1,26 +1,56 @@
-import { StyleSheet, Platform, Dimensions } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Platform,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 
 import Colors from "../../../constants/Colors";
+import { sized } from "../../../Svg";
+import ukraineSvg from "../../../assets/icons/ukraine-flag.svg";
+import polandSvg from "../../../assets/icons/poland-flag.svg";
+import ukSvg from "../../../assets/icons/united-kingdom-flag.svg";
 
-export default StyleSheet.create({
+const UkraineIcon = sized(ukraineSvg, 63, 63);
+const PolandIcon = sized(polandSvg, 63, 63);
+const UkIcon = sized(ukSvg, 63, 63);
+
+const Step1 = (props) => {
+  return (
+    <View style={styles.slide}>
+      <Text style={styles.title}>{props.title}</Text>
+      <Text style={styles.subtitle}>{props.subtitle}</Text>
+      <View style={styles.flags_box}>
+        <TouchableOpacity onPress={props.onPress}>
+          <UkraineIcon style={styles.flag} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={props.onPress}>
+          <PolandIcon style={styles.flag} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={props.onPress}>
+          <UkIcon style={styles.flag} />
+        </TouchableOpacity>
+      </View>
+      <View style={{ marginTop: 30, ...styles.pionts_box }}>
+        <View style={styles.point_big} />
+        <View style={styles.point_smal} />
+        <View style={styles.point_smal} />
+        <View style={styles.point_smal} />
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     // justifyContent: "center",
     //alignItems: "center",
   },
-  row_one: {
-    display: "flex",
-    flexDirection: "row",
-    //paddingHorizontal: 40,
-    paddingTop:
-      Platform.OS == "android" ? 60 : Dimensions.get("window").height / 8,
-  },
-  row_two: {
-    display: "flex",
-    flexDirection: "row",
-    //paddingHorizontal: 40,
-    paddingTop: 16.25,
-  },
+
   img_smal: {
     width: 92.12,
     height: 157.75,
@@ -45,25 +75,7 @@ export default StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 1.0,
   },
-  content_box: {
-    backgroundColor: "white",
-    minHeight:
-      Platform.OS == "android" ? null : Dimensions.get("window").height - 530,
-    paddingBottom: 40,
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-    borderTopLeftRadius: 28,
-    borderTopRightRadius: 28,
-    shadowColor: "#000000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.17,
-    shadowRadius: 2.54,
-    elevation: 3,
-  },
+
   slide: {
     paddingTop: 26,
     paddingHorizontal: 30,
@@ -129,13 +141,6 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  imagesBox: {
-    width: "90%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  imagesContainer: {
-    width: "100%",
-    alignItems: "center",
-  },
 });
+
+export default Step1;
