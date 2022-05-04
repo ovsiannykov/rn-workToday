@@ -104,7 +104,7 @@ const VacancyDetail = (props) => {
           <View style={{ marginBottom: 20, ...styles.sills_box }}>
             {data.competencies
               ? data.competencies.map((item) => (
-                  <Skill key={item.name} title={item.name} type='worker' />
+                  <Skill key={item.name} title={item.name} type='employer' />
                 ))
               : compitensesList.map((item) => (
                   <Skill key={item.id} title={item.label} isTrue={item.its} />

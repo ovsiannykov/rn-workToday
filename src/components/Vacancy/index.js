@@ -47,6 +47,11 @@ const Vacancy = (props) => {
     }
   };
 
+  const splitImage = (item) => {
+    const fileName = item.split("/").pop();
+    return `${API_BASE_URL}static/${fileName}`;
+  };
+
   return (
     <View style={styles.container}>
       {props.status ? null : (
@@ -66,9 +71,7 @@ const Vacancy = (props) => {
         <Image
           style={styles.image}
           source={
-            props.photos
-              ? { uri: `${API_BASE_URL}static/${props.photos[0]}` }
-              : image
+            props.photos ? { uri: `${splitImage(props.photos[0])}` } : image
           }
         />
         <View style={{ marginLeft: 15 }}>

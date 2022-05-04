@@ -25,8 +25,8 @@ const Skill = (props) => {
   }, [props.isTrue]);
 
   useEffect(() => {
-    if (props.type == "worker") {
-      setTypeUser("worker");
+    if (props.type) {
+      setTypeUser(props.type);
     }
   }, [props.type]);
 
@@ -45,7 +45,7 @@ const Skill = (props) => {
     );
   }
 
-  if (isTrue == undefined) {
+  if (typeUser == "employer") {
     return (
       <View style={styles.container_just}>
         <Text style={styles.text_just}>{props.title}</Text>

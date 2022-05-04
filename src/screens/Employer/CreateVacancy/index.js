@@ -154,6 +154,7 @@ const CreateVacancy = (props) => {
 
               const item = {
                 Title: values.Title,
+                Type: values.Type,
                 info: values.info,
                 _id: "none",
                 photos: [values.photo],

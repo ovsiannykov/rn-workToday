@@ -15,9 +15,10 @@ const PhotoSlider = (props) => {
 
   useEffect(() => {
     if (props.photos && !props.isPreview) {
-      const arrPhotos = props.photos.map(
-        (item) => `${API_BASE_URL}static/${item}`
-      );
+      const arrPhotos = props.photos.map((item) => {
+        const fileName = item.split("/").pop();
+        return `${API_BASE_URL}static/${fileName}`;
+      });
       setPhotos(arrPhotos);
     } else if (props.photos && props.isPreview == true) {
       const arrPhotos = props.photos.map((item) => item);

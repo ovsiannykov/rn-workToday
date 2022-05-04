@@ -9,7 +9,7 @@ const initialState = {
 export const employerReducer = (state = initialState, action) => {
   switch (action.type) {
     case employerTypes.SET_MY_VACANCIES:
-      return { ...state, vacancies: action.data };
+      return { ...state, vacancies: action.vacancies };
     case employerTypes.GET_CATEGORIES:
       return { ...state, categories: action.categories };
     case employerTypes.SET_SELECT_LOCATION:

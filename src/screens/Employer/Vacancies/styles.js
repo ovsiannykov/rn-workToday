@@ -11,5 +11,13 @@ export default StyleSheet.create({
   },
   input_box: {
     width: "100%",
+    paddingBottom: 1,
+  },
+  noItems: {
+    fontFamily: "ComfortaaLight",
+    fontSize: 14,
+    color: "gray",
+    marginTop: 25,
+    textAlign: "center",
   },
 });

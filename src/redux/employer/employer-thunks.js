@@ -16,8 +16,7 @@ export const vacancyMy = () => async (dispatch) => {
     const res = await employerApi.vacancyMy();
 
     if (res.data.status === "Success") {
-      console.log(res.data.data);
-      dispatch(setMyVanacies(res.data.data));
+      await dispatch(setMyVanacies(res.data.data));
     } else {
       showMessage({
         message: "Упс... Не вдалося завантажити вакансії 🤷‍♀️",
@@ -71,8 +70,8 @@ export const vacancyCreate = (values) => async (dispatch) => {
     );
     formData.append("skills", JSON.stringify(arrObj(values.skills)));
     formData.append("competencies", JSON.stringify(arrObj(values.compitence)));
-    formData.append("info", values.compitence);
-    formData.append("place", values.info);
+    formData.append("info", values.info);
+    formData.append("place", values.place);
     formData.append("geo", JSON.stringify(values.geo));
     formData.append("Documents", createFile(values.photo));
 

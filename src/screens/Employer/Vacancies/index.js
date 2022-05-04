@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./styles";
 import Search from "../../../components/Search";
@@ -18,9 +18,13 @@ import {
   vacancyMy,
   getCategoriesFilters,
 } from "../../../redux/employer/employer-thunks";
+import { setSelectVacancy } from "../../../redux/employer/employer-actions";
 
 const Vacancies = (props) => {
   const [loading, setLoading] = useState(false);
+
+  const data = useSelector((state) => state.employerReducer.vacancies);
+  console.log(data);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -31,6 +35,25 @@ const Vacancies = (props) => {
     dispatch(getCategoriesFilters());
     setLoading(false);
   }, []);
+
+  const renderItem = ({ item }) => (
+    <Vacancy
+      title={item.Title}
+      info={item.info}
+      id={item._id}
+      photos={item.photos}
+      priceTotal={item.priceTotal}
+      place={item.place}
+      timeStart={item.timeStart}
+      timeEnd={item.timeEnd}
+      item={item}
+      type='employer'
+      onPress={async () => {
+        await dispatch(setSelectVacancy(item));
+        navigation.navigate("VacancyDetail");
+      }}
+    />
+  );
 
   if (loading) {
     return (
@@ -52,21 +75,20 @@ const Vacancies = (props) => {
         <Search />
       </View>
 
-      <ScrollView style={{ height: "100%", paddingTop: 20 }}>
-        <View style={styles.wrapper}>
-          <Vacancy
-            onPress={() =>
-              navigation.navigate("VacancyDetail", { title: "Офіціант" })
-            }
-          />
-          <Vacancy
-            title='Лiкар'
-            onPress={() =>
-              navigation.navigate("VacancyDetail", { title: "Лiкар" })
-            }
-          />
-        </View>
-      </ScrollView>
+      <View style={{ ...styles.wrapper, paddingBottom: 80 }}>
+        {data.length == 0 ? (
+          <Text style={styles.noItems}>
+            Поки що немає актуальних вакансій 😔
+          </Text>
+        ) : null}
+        <FlatList
+          contentContainerStyle={{ flexGrow: 1 }}
+          data={data}
+          keyExtractor={(item) => item._id}
+          renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
     </LinearGradient>
   );
 };
