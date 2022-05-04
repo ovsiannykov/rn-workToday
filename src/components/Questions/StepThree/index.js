@@ -6,10 +6,13 @@ import {
   TextInput,
   ActivityIndicator,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { useTranslation } from "react-i18next";
 
 import Colors from "../../../constants/Colors";
 import LongWhiteButton from "../../LongWhiteButton";
@@ -17,9 +20,19 @@ import { setStep3 } from "../../../redux/worker/worker-thunks";
 
 const StepThree = (props) => {
   const [fetching, setFetching] = useState(false);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
 
   if (fetching) {
     return (
@@ -65,6 +78,28 @@ const StepThree = (props) => {
           values.email.length > 0 &&
           values.card.length > 0 &&
           values.tax.length > 0;
+
+        const handleConfirm = (date) => {
+          let numValue;
+          let monthValue;
+          const num = date.getDate().toString();
+          const month = date.getMonth().toString();
+          const year = date.getFullYear().toString();
+          if (num < 10) {
+            numValue = `0${num}`;
+          } else {
+            numValue = num;
+          }
+
+          if (month < 10) {
+            monthValue = `0${month}`;
+          } else {
+            monthValue = num;
+          }
+          setFieldValue("passportDate", `${numValue}.${monthValue}.${year}`);
+          hideDatePicker();
+        };
+
         return (
           <View>
             <ScrollView
@@ -77,7 +112,9 @@ const StepThree = (props) => {
                 }}
               >
                 <View style={{ marginTop: 20, width: "75%" }}>
-                  <Text style={styles.label}>Серія і номер паспорту:</Text>
+                  <Text style={styles.label}>
+                    {t("Worker.Questions.passport")}
+                  </Text>
                   <TextInput
                     style={styles.input}
                     value={values.passport}
@@ -87,17 +124,33 @@ const StepThree = (props) => {
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>
-                    Дата закінчення дії паспорту:
+                    {t("Worker.Questions.passportDate")}
                   </Text>
-                  <TextInput
-                    style={styles.input}
-                    value={values.passportDate}
-                    onChangeText={handleChange("passportDate")}
-                    error={errors.passportDate}
+                  <TouchableOpacity onPress={showDatePicker}>
+                    <View pointerEvents='none'>
+                      <TextInput
+                        style={styles.input}
+                        value={values.passportDate}
+                        onChangeText={handleChange("passportDate")}
+                        error={errors.passportDate}
+                        placeholder={t("Worker.Questions.datePlaceholder")}
+                      />
+                    </View>
+                  </TouchableOpacity>
+
+                  <DateTimePickerModal
+                    isVisible={isDatePickerVisible}
+                    mode='date'
+                    onConfirm={handleConfirm}
+                    onCancel={hideDatePicker}
+                    confirmTextIOS='Обрати'
+                    locale='uk_UA'
                   />
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
-                  <Text style={styles.label}>Номер PESEL:</Text>
+                  <Text style={styles.label}>
+                    {t("Worker.Questions.pesel")}
+                  </Text>
                   <TextInput
                     style={styles.input}
                     value={values.pessel}
@@ -106,7 +159,7 @@ const StepThree = (props) => {
                   />
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
-                  <Text style={styles.label}>Ім’я:</Text>
+                  <Text style={styles.label}>{t("Worker.Questions.name")}</Text>
                   <TextInput
                     style={styles.input}
                     value={values.firstname}
@@ -115,7 +168,9 @@ const StepThree = (props) => {
                   />
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
-                  <Text style={styles.label}>Прізвище:</Text>
+                  <Text style={styles.label}>
+                    {t("Worker.Questions.lastname")}
+                  </Text>
                   <TextInput
                     style={styles.input}
                     value={values.lastname}
@@ -124,7 +179,9 @@ const StepThree = (props) => {
                   />
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
-                  <Text style={styles.label}>Електронна адреса:</Text>
+                  <Text style={styles.label}>
+                    {t("Worker.Questions.email")}
+                  </Text>
                   <TextInput
                     style={styles.input}
                     value={values.email}
@@ -134,7 +191,9 @@ const StepThree = (props) => {
                   />
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
-                  <Text style={styles.label}>Номер банківського рахунку:</Text>
+                  <Text style={styles.label}>
+                    {t("Worker.Questions.bankNum")}
+                  </Text>
                   <TextInput
                     style={styles.input}
                     value={values.card}
@@ -144,7 +203,9 @@ const StepThree = (props) => {
                   />
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
-                  <Text style={styles.label}>Назва, адреса податкової:</Text>
+                  <Text style={styles.label}>
+                    {t("Worker.Questions.taxAdress")}
+                  </Text>
                   <TextInput
                     style={styles.input}
                     value={values.tax}
@@ -154,7 +215,7 @@ const StepThree = (props) => {
                 </View>
                 <View style={{ marginTop: 20, padding: 5 }}>
                   <LongWhiteButton
-                    title='Наступний крок'
+                    title={t("Worker.Questions.nextStep")}
                     onPress={() => {
                       handleSubmit();
                       props.nextStep();

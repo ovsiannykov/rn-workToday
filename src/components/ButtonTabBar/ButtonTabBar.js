@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   View,
   StyleSheet,
@@ -6,6 +6,7 @@ import {
   Platform,
   Text,
 } from "react-native";
+import { useTranslation } from "react-i18next";
 
 import { sized } from "../../Svg";
 import homeSvg from "../../assets/icons/home.svg";
@@ -35,6 +36,8 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
   if (focusedOptions.tabBarVisible === false) {
     return null;
   }
+
+  const { t } = useTranslation();
 
   const HomeIcon = sized(homeSvg, 22, 22);
   const ContractsIcon = sized(contractsSvg, 21, 21);
@@ -69,7 +72,7 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
                 ...styles.TabTitle,
               }}
             >
-              Вакансії
+              {t("Worker.Tabbar.vacancies")}
             </Text>
           </View>
         </TouchableOpacity>
@@ -92,7 +95,7 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
                 ...styles.TabTitle,
               }}
             >
-              Контракти
+              {t("Worker.Tabbar.contracts")}
             </Text>
           </View>
         </TouchableOpacity>
@@ -126,7 +129,7 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
                 ...styles.TabTitle,
               }}
             >
-              Закладки
+              {t("Worker.Tabbar.bookmarks")}
             </Text>
           </View>
         </TouchableOpacity>
@@ -149,7 +152,7 @@ export const ButtonTabBar = ({ state, descriptors, navigation }) => {
                 ...styles.TabTitle,
               }}
             >
-              Профіль
+              {t("Worker.Tabbar.profile")}
             </Text>
           </View>
         </TouchableOpacity>

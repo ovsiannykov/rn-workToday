@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 import sized from "../../../Svg/sized";
@@ -18,15 +19,20 @@ const ContractDetailScreen = (props) => {
     (state) => state.workerReducer.selectContract
   );
 
+  const { t } = useTranslation();
   const DownIcon = sized(downSvg, 22, 22);
   const UpIcon = sized(upSvg, 22, 22);
 
   const ContractDetai = () => {
     return (
       <View style={styles.contract}>
-        <Text style={styles.contract_title}>Контракт з компанією</Text>
+        <Text style={styles.contract_title}>
+          {t("Worker.ContractDetail.contractTitle")}
+        </Text>
         <View style={styles.border} />
-        <Text style={styles.contract_subTitle}>Деталі анкети</Text>
+        <Text style={styles.contract_subTitle}>
+          {t("Worker.ContractDetail.questionnaireDetail")}
+        </Text>
         <View style={styles.border} />
         <Text style={styles.contract_text}>
           This one got an incredible amount of backlash the last time I said it,
@@ -38,7 +44,9 @@ const ContractDetailScreen = (props) => {
           really horny.
         </Text>
         <View style={{ alignItems: "center" }}>
-          <LongWhiteButton title='Завантажити контракт' />
+          <LongWhiteButton
+            title={t("Worker.ContractDetail.downloadContract")}
+          />
         </View>
       </View>
     );
@@ -49,7 +57,7 @@ const ContractDetailScreen = (props) => {
       colors={["#F4F7FF", "#FFFFFF"]}
       style={{ ...styles.container }}
     >
-      <Text style={styles.title}>Перегляд контракту</Text>
+      <Text style={styles.title}>{t("Worker.ContractDetail.title")}</Text>
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{ paddingBottom: 280 }}
@@ -60,7 +68,9 @@ const ContractDetailScreen = (props) => {
             style={styles.button}
           >
             <View style={{ ...styles.button_wrapper }}>
-              <Text style={styles.button_text}>Деталі контракту</Text>
+              <Text style={styles.button_text}>
+                {t("Worker.ContractDetail.contractDetail")}
+              </Text>
             </View>
             {!conract ? <DownIcon /> : <UpIcon />}
           </TouchableOpacity>
@@ -74,7 +84,9 @@ const ContractDetailScreen = (props) => {
             onPress={() => setVacancy(!vacancy)}
           >
             <View style={{ ...styles.button_wrapper }}>
-              <Text style={styles.button_text}>Деталі вакансії</Text>
+              <Text style={styles.button_text}>
+                {t("Worker.ContractDetail.vacancyDetail")}
+              </Text>
             </View>
             {!vacancy ? <DownIcon /> : <UpIcon />}
           </TouchableOpacity>

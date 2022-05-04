@@ -14,6 +14,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { showMessage } from "react-native-flash-message";
+import { useTranslation } from "react-i18next";
 
 import Colors from "../../../constants/Colors";
 import UpluadInput from "../../../components/UpluadInput";
@@ -26,12 +27,13 @@ const UploadCompetence = () => {
   const [fetching, setFetching] = useState(false);
   const [isCompetencies, setIsCompetencies] = useState(false);
 
+  const { t } = useTranslation();
   const userInfo = useSelector((state) => state.workerReducer.userInfo);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (userInfo.competencies[0].status == true) {
+    if (userInfo && userInfo.competencies[0].status == true) {
       setIsCompetencies(true);
     }
   }, []);
@@ -58,7 +60,7 @@ const UploadCompetence = () => {
       style={{ ...styles.container }}
     >
       <View style={{ alignItems: "center" }}>
-        <Text style={styles.title}>Завантаження компетенції</Text>
+        <Text style={styles.title}>{t("Worker.Skills.title")}</Text>
       </View>
       {!isCompetencies ? (
         <Formik
@@ -113,10 +115,26 @@ const UploadCompetence = () => {
             //   values.status.length > 0;
 
             const handleConfirm = (date) => {
+              let numValue;
+              let monthValue;
+
               const num = date.getDate().toString();
               const month = date.getMonth().toString();
               const year = date.getFullYear().toString();
-              setFieldValue("date", `${num}-${month}-${year}`);
+
+              if (num < 10) {
+                numValue = `0${num}`;
+              } else {
+                numValue = num;
+              }
+
+              if (month < 10) {
+                monthValue = `0${month}`;
+              } else {
+                monthValue = num;
+              }
+
+              setFieldValue("date", `${numValue}.${monthValue}.${year}`);
               hideDatePicker();
             };
 
@@ -130,7 +148,9 @@ const UploadCompetence = () => {
                   >
                     <View style={{ paddingBottom: 180 }}>
                       <View style={{ width: "75%" }}>
-                        <Text style={styles.label}>Сучасні дослідження k1</Text>
+                        <Text style={styles.label}>
+                          {t("Worker.Skills.skill1")}
+                        </Text>
                         <Text
                           style={{
                             marginTop: 10,
@@ -138,8 +158,7 @@ const UploadCompetence = () => {
                             ...styles.sub_title,
                           }}
                         >
-                          Описание документа или как доолжен выглядить документ
-                          на фото
+                          {t("Worker.Skills.uploadPhoto")}
                         </Text>
                         <UpluadInput
                           filename={values.k1}
@@ -148,8 +167,7 @@ const UploadCompetence = () => {
                       </View>
                       <View style={{ marginTop: 20, width: "75%" }}>
                         <Text style={styles.label}>
-                          Якщо ваш документ має час дії, введіть його (залиште
-                          порожнім якщо його немає)
+                          {t("Worker.Skills.dateLabel")}
                         </Text>
                         <TouchableOpacity onPress={showDatePicker}>
                           <View pointerEvents='none'>
@@ -158,7 +176,7 @@ const UploadCompetence = () => {
                               value={values.date}
                               onChangeText={handleChange("date")}
                               error={errors.date}
-                              placeholder='ДД/ММ/ГГГГ'
+                              placeholder={t("Worker.Skills.datePleaceholder")}
                               keyboardType='numeric'
                             />
                           </View>
@@ -173,21 +191,29 @@ const UploadCompetence = () => {
                         />
                       </View>
                       <View style={{ marginTop: 20, width: "75%" }}>
-                        <Text style={styles.label}>k2</Text>
+                        <Text style={styles.label}>
+                          {t("Worker.Skills.skill2")}
+                        </Text>
                         <UpluadInput
                           filename={values.k2}
                           onChangeFile={(value) => setFieldValue("k2", value)}
                         />
                       </View>
                       <View style={{ marginTop: 20, width: "75%" }}>
-                        <Text style={styles.label}>k2</Text>
+                        <Text style={styles.label}>
+                          {" "}
+                          {t("Worker.Skills.skill3")}
+                        </Text>
                         <UpluadInput
                           filename={values.k3}
                           onChangeFile={(value) => setFieldValue("k3", value)}
                         />
                       </View>
                       <View style={{ marginTop: 20, width: "75%" }}>
-                        <Text style={styles.label}>k4</Text>
+                        <Text style={styles.label}>
+                          {" "}
+                          {t("Worker.Skills.skill4")}
+                        </Text>
                         <UpluadInput
                           filename={values.k2}
                           onChangeFile={(value) => setFieldValue("k4", value)}
@@ -199,7 +225,7 @@ const UploadCompetence = () => {
                 <View style={styles.btn_box}>
                   <View style={{ width: 299 }}>
                     <LongWhiteButton
-                      title='Закінчити'
+                      title={t("Worker.Skills.end")}
                       onPress={async () => {
                         await handleSubmit();
                       }}

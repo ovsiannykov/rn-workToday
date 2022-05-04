@@ -7,9 +7,11 @@ import {
   Platform,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { useTranslation } from "react-i18next";
 
 const UpluadInput = ({ filename, onChangeFile }) => {
   // const [image, setImage] = useState(null);
+  const { t } = useTranslation();
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -28,7 +30,7 @@ const UpluadInput = ({ filename, onChangeFile }) => {
   return (
     <TouchableOpacity onPress={pickImage} style={styles.container}>
       <TouchableOpacity onPress={pickImage}>
-        <Text style={styles.title}>Вибрати файл</Text>
+        <Text style={styles.title}>{t("Worker.Skills.selectFile")}</Text>
       </TouchableOpacity>
       <Text style={styles.title}>|</Text>
       <Text
@@ -38,7 +40,7 @@ const UpluadInput = ({ filename, onChangeFile }) => {
       >
         {filename
           ? filename.split("/")[filename.split("/").length - 1]
-          : "Файл не вибрано"}
+          : t("Worker.Skills.fileSelected")}
       </Text>
     </TouchableOpacity>
   );

@@ -5,6 +5,7 @@ import SegmentedControl from "@react-native-segmented-control/segmented-control"
 import { useNavigation } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 import Input from "../../../components/Input";
@@ -24,6 +25,7 @@ const Settings = (props) => {
   const [agreement, setAgreement] = useState(true);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
+  const { t } = useTranslation();
   const navigation = useNavigation();
   const route = useRoute();
   const SupportIcon = sized(supportSvg, 20, 20);
@@ -52,7 +54,7 @@ const Settings = (props) => {
   const Button = () => {
     return (
       <TouchableOpacity style={styles.btn}>
-        <Text style={styles.btn_title}>Змінити</Text>
+        <Text style={styles.btn_title}>{t("Worker.Settings.change")}</Text>
       </TouchableOpacity>
     );
   };
@@ -70,23 +72,26 @@ const Settings = (props) => {
         isModal={isModal}
         closeModal={closeModal}
         onPress={() => {
-          navigation.navigate("Feedback");
           setIsModal(false);
         }}
       />
-      <Text style={styles.title}>Налаштування профілю</Text>
+      <Text style={styles.title}>{t("Worker.Settings.settings")}</Text>
       <ScrollView style={styles.scroll_container}>
         <View style={styles.wrapper}>
           <View style={styles.input_box}>
-            <Input title='Зміна пошти' value={email} onChange={setEmail} />
+            <Input
+              title={t("Worker.Settings.email")}
+              value={email}
+              onChange={setEmail}
+            />
           </View>
           <Button />
         </View>
         <View style={{ marginTop: 20, ...styles.wrapper }}>
           <View style={styles.input_box}>
             <Input
-              title='Змінити пароль'
-              placeholder='Введіть старый пароль'
+              title={t("Worker.Settings.pass")}
+              placeholder={t("Worker.Settings.writeOldPass")}
               textContentType='password'
               secureTextEntry={true}
             />
@@ -96,7 +101,7 @@ const Settings = (props) => {
           <View style={styles.input_box}>
             <Input
               title=' '
-              placeholder='Введіть новий пароль'
+              placeholder={t("Worker.Settings.writeNewPass")}
               textContentType='password'
               secureTextEntry={true}
             />
@@ -121,24 +126,28 @@ const Settings = (props) => {
           >
             <View style={{ width: "100%", marginBottom: 0 }}>
               {agreement ? (
-                <ErrorBlock title='Ви не погодилися з маркетинговими умовами ' />
+                <ErrorBlock title={t("Worker.Settings.errorPolitic")} />
               ) : null}
             </View>
             <LongWhiteButton
               onPress={() => navigation.navigate("MarketingAgreements")}
-              title='Переглянути маркетингові умови'
+              title={
+                agreement
+                  ? t("Worker.Settings.viewPolitic")
+                  : t("Worker.Settings.acceptPolitic")
+              }
             />
             <LongBlueButton
               onPress={() => navigation.navigate("UploadCompetence")}
-              title='Заповнити компетенції'
+              title={t("Worker.Settings.addSkills")}
             />
           </View>
         </View>
         <View style={{ marginTop: 10 }}>
-          <Text style={styles.label}>Повідомлення</Text>
+          <Text style={styles.label}>{t("Worker.Settings.notifications")}</Text>
           <View style={{ ...styles.wrapper }}>
             <View style={styles.input_box}>
-              <Text style={styles.push_title}>Push-Повідомлення</Text>
+              <Text style={styles.push_title}>{t("Worker.Settings.push")}</Text>
             </View>
             <Switch
               trackColor={{ false: "#767577", true: "#376AED" }}
@@ -148,7 +157,9 @@ const Settings = (props) => {
           </View>
         </View>
         <View style={{ marginTop: 21 }}>
-          <Text style={styles.push_title}>Вимкнути Push-Повідомлення на</Text>
+          <Text style={styles.push_title}>
+            {t("Worker.Settings.disablePush")}
+          </Text>
           <View style={{ marginTop: 21 }}>
             <SegmentedControl
               values={["Off", "1H", "1D", "1W"]}
@@ -160,7 +171,9 @@ const Settings = (props) => {
           </View>
         </View>
         <View style={{ marginTop: 21 }}>
-          <Text style={styles.push_title}>Отримувати повідомлення через</Text>
+          <Text style={styles.push_title}>
+            {t("Worker.Settings.typeMessages")}
+          </Text>
           <View style={{ marginTop: 21, paddingBottom: 40 }}>
             <SegmentedControl
               values={["Off", "E-Mail", "SMS"]}
@@ -177,14 +190,16 @@ const Settings = (props) => {
           >
             <TouchableOpacity style={{ marginBottom: 20, ...styles.btn_long2 }}>
               <Text style={{ ...styles.btnLong_title2 }}>
-                Заповнити інформацію для роботодавців
+                {t("Worker.Settings.employerInfo")}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.btn_long}
               onPress={() => setIsModal(true)}
             >
-              <Text style={styles.btnLong_title}>Відправити питання</Text>
+              <Text style={styles.btnLong_title}>
+                {t("Worker.Settings.support")}
+              </Text>
               <SupportIcon />
             </TouchableOpacity>
           </View>

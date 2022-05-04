@@ -3,6 +3,7 @@ import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 import OldWorkItem from "../../../components/OldWorkItem";
@@ -11,6 +12,7 @@ const image = require("../../../assets/images/profile.png");
 
 const Profile = ({ navigation }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const userInfo = useSelector((state) => state.workerReducer.userInfo);
 
@@ -21,7 +23,7 @@ const Profile = ({ navigation }) => {
     >
       <View style={styles.header}>
         <View style={styles.headerContainer}>
-          <Text style={styles.headerTitle}>Профіль</Text>
+          <Text style={styles.headerTitle}>{t("Worker.Profile.profile")}</Text>
           <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
             <Ionicons name='ellipsis-horizontal' size={24} color='black' />
           </TouchableOpacity>
@@ -41,15 +43,19 @@ const Profile = ({ navigation }) => {
               </LinearGradient>
               <View style={styles.profileInfo}>
                 <Text style={styles.name}>
-                  {userInfo.step3Info.firstname ?? "Ім'я"}{" "}
-                  {userInfo.step3Info.lastname ?? "Прізвище"}
+                  {userInfo ? userInfo.step3Info.firstname : "Ім'я"}{" "}
+                  {userInfo ? userInfo.step3Info.lastname : "Прізвище"}
                 </Text>
                 <Text style={styles.position}>Фермер</Text>
               </View>
             </View>
-            <Text style={styles.aboutLabel}>Про себе</Text>
+            <Text style={styles.aboutLabel}>{t("Worker.Profile.about")}</Text>
             <ScrollView style={{ height: 80 }}>
-              <Text style={styles.aboutText}>
+              <Text
+                style={styles.aboutText}
+                ellipsizeMode={"tail"}
+                numberOfLines={4}
+              >
                 Норм чел все делал быстро и качественно Норм чел все делал
                 быстро и качественно Норм чел все делал быстро и
               </Text>
@@ -59,24 +65,30 @@ const Profile = ({ navigation }) => {
                 style={{ backgroundColor: "#2151CD", ...styles.numbersItem }}
               >
                 <Text style={styles.ratingNumber}>4,9</Text>
-                <Text style={styles.ratingInfo}>Рейтинг</Text>
+                <Text style={styles.ratingInfo}>
+                  {t("Worker.Profile.rating")}
+                </Text>
               </View>
               <View
                 style={{ backgroundColor: "#386BED", ...styles.numbersItem }}
               >
                 <Text style={styles.ratingNumber}>250</Text>
-                <Text style={styles.ratingInfo}>Годин</Text>
+                <Text style={styles.ratingInfo}>
+                  {t("Worker.Profile.hours")}
+                </Text>
               </View>
               <View
                 style={{ backgroundColor: "#386BED", ...styles.numbersItem }}
               >
                 <Text style={styles.ratingNumber}>25</Text>
-                <Text style={styles.ratingInfo}>Днів</Text>
+                <Text style={styles.ratingInfo}>
+                  {t("Worker.Profile.days")}
+                </Text>
               </View>
             </View>
           </View>
         </View>
-        <Text style={styles.worksTitle}>Останні роботи</Text>
+        <Text style={styles.worksTitle}>{t("Worker.Profile.recentWorks")}</Text>
         <View style={{ paddingBottom: 30 }}>
           <OldWorkItem
             company='Alt Bier'

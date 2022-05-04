@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 import { sized } from "../../Svg";
@@ -18,6 +19,7 @@ import Colors from "../../constants/Colors";
 const HomeHeader = (props) => {
   const CalendarIcon = sized(calendarSvg, 28, 28);
   const FilterIcon = sized(filterSvg, 28, 28);
+  const { t } = useTranslation();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -25,7 +27,7 @@ const HomeHeader = (props) => {
         <Feather name='search' size={20} color='#828282' />
         <TextInput
           style={styles.serach_input}
-          placeholder='Пошук'
+          placeholder={t("Worker.HomeScreen.search")}
           placeholderTextColor='#828282'
           placeholderStyle={{ fontSize: 16 }}
           value={props.value}

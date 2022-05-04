@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.17,
     shadowRadius: 3.05,
     elevation: 4,
+    alignContent: "center",
   },
   text: {
     color: "#FFFFFF",

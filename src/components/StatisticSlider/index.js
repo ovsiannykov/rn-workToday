@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
+import { useTranslation } from "react-i18next";
 
 import Colors from "../../constants/Colors";
 
@@ -21,6 +22,8 @@ const dates = [
 
 const StatisticSlider = (props) => {
   const [selectItem, setSelectItem] = useState("4");
+
+  const { t } = useTranslation();
 
   const Item = (props) => {
     if (props.worked == true) {
@@ -50,7 +53,7 @@ const StatisticSlider = (props) => {
                   : styles.inWork_title
               }
             >
-              В роботі
+              {t("Worker.Statistics.inWork")}
             </Text>
           ) : (
             <Text style={styles.workDate}>{props.date}</Text>
@@ -67,7 +70,9 @@ const StatisticSlider = (props) => {
         >
           <Text style={styles.inWork_title_active}>{props.title}</Text>
           {props.worked == true ? (
-            <Text style={styles.inWork_title}>В роботі</Text>
+            <Text style={styles.inWork_title}>
+              {t("Worker.Statistics.inWork")}
+            </Text>
           ) : (
             <Text style={styles.workDate_active}>{props.date}</Text>
           )}
@@ -98,7 +103,9 @@ const StatisticSlider = (props) => {
       >
         <Text style={styles.title}>{props.title}</Text>
         {props.worked == true ? (
-          <Text style={styles.inWork_title}>В роботі</Text>
+          <Text style={styles.inWork_title}>
+            {t("Worker.Statistics.inWork")}
+          </Text>
         ) : (
           <Text style={styles.workDate}>{props.date}</Text>
         )}

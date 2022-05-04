@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useTranslation } from "react-i18next";
 
 import Colors from "../../../constants/Colors";
 import sized from "../../../Svg/sized";
@@ -11,7 +12,8 @@ import ingoSvg from "../../../assets/icons/ingo.svg";
 import LongWhiteButton from "../../../components/LongWhiteButton";
 
 const MarketingAgreements = () => {
-  const [btnTitle, setBtnTitle] = useState("Погоджуюся");
+  const { t } = useTranslation();
+  const [btnTitle, setBtnTitle] = useState(t("Worker.Politic.accept"));
   const [valid, setValid] = useState(false);
 
   const CheckIcon = sized(chekSvg, 12, 12);
@@ -31,7 +33,7 @@ const MarketingAgreements = () => {
     try {
       const value = await AsyncStorage.getItem("@marketing");
       if (value == "true") {
-        setBtnTitle("Ви вже погодились");
+        setBtnTitle(t("Worker.Politic.isAccept"));
         setValid(true);
       }
     } catch (e) {
@@ -49,7 +51,7 @@ const MarketingAgreements = () => {
       style={{ ...styles.container }}
     >
       <View style={{ alignItems: "center" }}>
-        <Text style={styles.title}>Маркетингові згоди</Text>
+        <Text style={styles.title}>{t("Worker.Politic.title")}</Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.wrapper}>

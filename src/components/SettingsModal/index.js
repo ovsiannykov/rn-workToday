@@ -12,9 +12,12 @@ import Input from "../Input";
 import Colors from "../../constants/Colors";
 import sized from "../../Svg/sized";
 import supportSvg from "../../assets/icons/support.svg";
+import { useTranslation } from "react-i18next";
 
 const SettingsModal = (props) => {
   const SupportIcon = sized(supportSvg, 20, 20);
+  const { t } = useTranslation();
+
   return (
     <Modal
       isVisible={props.isModal}
@@ -24,14 +27,19 @@ const SettingsModal = (props) => {
       style={styles.view}
     >
       <View style={{ ...styles.modal }}>
-        <Text style={styles.title}>Звернутися у підтримку</Text>
+        <Text style={styles.title}>{t("Worker.Settings.support")}</Text>
         <View style={{ marginTop: 30 }}>
-          <Input title='Мое питання' placeholder='Моє питання наступне: ' />
+          <Input
+            title={t("Worker.Settings.myQuestion")}
+            placeholder={t("Worker.Settings.writeQuestion")}
+          />
         </View>
         <View style={{ alignItems: "center", justifyContent: "center" }}>
           <View style={styles.btn_box}>
             <TouchableOpacity style={styles.btn} onPress={props.onPress}>
-              <Text style={styles.btn_title}>Відправити питання</Text>
+              <Text style={styles.btn_title}>
+                {t("Worker.Settings.sendQuestion")}
+              </Text>
               <SupportIcon />
             </TouchableOpacity>
           </View>

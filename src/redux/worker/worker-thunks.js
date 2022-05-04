@@ -256,7 +256,7 @@ export const sendFeedback = (id) => async (dispatch) => {
       });
     } else {
       showMessage({
-        message: "Упс... Не вдалося відправити заявку",
+        message: `Не вдалося відправити заявку - перевірте відповідність навичок`,
         type: "danger",
       });
     }
@@ -273,7 +273,6 @@ export const getMyWork = () => async (dispatch) => {
   try {
     const res = await workerApi.getMyWork();
 
-    console.log(res.data);
     if (res.data.status === "Success") {
       dispatch(getMyWorkActive(res.data.active));
       dispatch(getMyWorkFinished(res.data.finished));

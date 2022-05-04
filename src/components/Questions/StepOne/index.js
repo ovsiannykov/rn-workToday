@@ -15,24 +15,26 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Formik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 
 import Colors from "../../../constants/Colors";
 import LongWhiteButton from "../../LongWhiteButton";
 import { setStep1 } from "../../../redux/worker/worker-thunks";
-
-const statusOptions = [
-  { id: "1", label: "Працюю" },
-  { id: "2", label: "Безробітний" },
-  { id: "3", label: "Iнше" },
-];
 
 const StepOne = (props) => {
   const [selctList, setSelectList] = useState(true);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [fetching, setFetching] = useState(false);
 
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  const statusOptions = [
+    { id: "1", label: t("Worker.Questions.work") },
+    { id: "2", label: t("Worker.Questions.unemployed") },
+    { id: "3", label: t("Worker.Questions.other") },
+  ];
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -78,10 +80,23 @@ const StepOne = (props) => {
           values.status.length > 0;
 
         const handleConfirm = (date) => {
+          let numValue;
+          let monthValue;
           const num = date.getDate().toString();
           const month = date.getMonth().toString();
           const year = date.getFullYear().toString();
-          setFieldValue("birth", `${num}-${month}-${year}`);
+          if (num < 10) {
+            numValue = `0${num}`;
+          } else {
+            numValue = num;
+          }
+
+          if (month < 10) {
+            monthValue = `0${month}`;
+          } else {
+            monthValue = num;
+          }
+          setFieldValue("birth", `${numValue}.${monthValue}.${year}`);
           hideDatePicker();
         };
 
@@ -93,7 +108,9 @@ const StepOne = (props) => {
               style={{ paddingBottom: 50 }}
             >
               <View style={{ marginTop: 20, width: "75%" }}>
-                <Text style={styles.label}>Дата народження:</Text>
+                <Text style={styles.label}>
+                  {t("Worker.Questions.bithDay")}
+                </Text>
                 <TouchableOpacity onPress={showDatePicker}>
                   <View pointerEvents='none'>
                     <TextInput
@@ -101,7 +118,7 @@ const StepOne = (props) => {
                       value={values.birth}
                       onChangeText={handleChange("birth")}
                       error={errors.birth}
-                      placeholder='(день-місяць-рік)'
+                      placeholder={t("Worker.Questions.datePlaceholder")}
                       keyboardType='numeric'
                     />
                   </View>
@@ -116,23 +133,27 @@ const StepOne = (props) => {
                 />
               </View>
               <View style={{ marginTop: 20, width: "75%" }}>
-                <Text style={styles.label}>Громадянство:</Text>
+                <Text style={styles.label}>
+                  {t("Worker.Questions.citenzship")}
+                </Text>
                 <TextInput
                   style={styles.input}
                   value={values.citizenship}
                   onChangeText={handleChange("citizenship")}
                   error={errors.citizenship}
-                  placeholder='Україна'
+                  placeholder='Ukraine'
                 />
               </View>
               <View style={{ marginTop: 20 }}>
-                <Text style={styles.label}>Я в даний час*</Text>
+                <Text style={styles.label}>{t("Worker.Questions.status")}</Text>
                 <TouchableOpacity
                   style={styles.select_input}
                   onPress={() => setSelectList(!selctList)}
                 >
                   <Text style={styles.select_text}>
-                    {values.status ? values.status : "Виберіть"}
+                    {values.status
+                      ? values.status
+                      : t("Worker.Questions.choose")}
                   </Text>
                 </TouchableOpacity>
                 {selctList ? (
@@ -158,7 +179,7 @@ const StepOne = (props) => {
             <View style={styles.btn_box}>
               <View style={{ width: 299 }}>
                 <LongWhiteButton
-                  title='Наступний крок'
+                  title={t("Worker.Questions.nextStep")}
                   onPress={() => {
                     handleSubmit();
                     props.nextStep();

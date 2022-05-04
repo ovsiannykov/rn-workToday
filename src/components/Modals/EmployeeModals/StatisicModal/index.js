@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Modal from "react-native-modal";
+import { useTranslation } from "react-i18next";
 
 import exclamationSvg from "../../../../assets/icons/exclamation_point.svg";
 import sized from "../../../../Svg/sized";
@@ -11,6 +12,7 @@ import Input from "../../../../components/Input";
 const StatisicModal = (props) => {
   const [content, setContent] = useState(1);
 
+  const { t } = useTranslation();
   const QuestionIcon = sized(questionMarkSvg, 64, 64);
   const ExclamationIcon = sized(exclamationSvg, 64, 64);
 
@@ -23,16 +25,16 @@ const StatisicModal = (props) => {
     return (
       <View style={styles.modal}>
         <QuestionIcon style={{ marginBottom: 27 }} />
-        <Text style={styles.title}>Відмінити роботу?</Text>
+        <Text style={styles.title}>{t("Worker.Statistics.reviev?")}</Text>
         <View style={styles.buttons_container}>
           <TouchableOpacity
             onPress={props.closeModal}
             style={{ marginRight: 23, ...styles.btn }}
           >
-            <Text style={styles.btn_titile}>Ні</Text>
+            <Text style={styles.btn_titile}>{t("Worker.Statistics.no")}</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => setContent(2)} style={styles.btn}>
-            <Text style={styles.btn_titile}>Так</Text>
+            <Text style={styles.btn_titile}>{t("Worker.Statistics.yes")}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -44,17 +46,21 @@ const StatisicModal = (props) => {
       <View style={styles.modal2}>
         <ExclamationIcon style={{ marginBottom: 27 }} />
         <View style={{ width: 295 }}>
-          <Input title='Вкажіть причину відміни' />
+          <Input title={t("Worker.Statistics.reason")} />
         </View>
         <View style={styles.buttons_container}>
           <TouchableOpacity
             onPress={props.closeModal}
             style={{ marginRight: 23, ...styles.btn }}
           >
-            <Text style={styles.btn_titile}>Отмена</Text>
+            <Text style={styles.btn_titile}>
+              {t("Worker.Statistics.cancel")}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={CancelHandler} style={styles.btn}>
-            <Text style={styles.btn_titile}>Відправити</Text>
+            <Text style={styles.btn_titile}>
+              {t("Worker.Statistics.send")}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -1,14 +1,17 @@
 import React from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 const Search = (props) => {
+  const { t } = useTranslation();
+
   return (
     <View style={styles.search_box}>
       <Feather name='search' size={20} color='#828282' />
       <TextInput
         style={styles.serach_input}
-        placeholder='Пошук'
+        placeholder={t("Worker.HomeScreen.search")}
         placeholderStyle={{ fontSize: 16 }}
       />
     </View>
@@ -17,7 +20,7 @@ const Search = (props) => {
 
 const styles = StyleSheet.create({
   search_box: {
-   // width: 347,
+    // width: 347,
     paddingLeft: 20,
     flexDirection: "row",
     alignItems: "center",

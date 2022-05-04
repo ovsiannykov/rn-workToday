@@ -9,6 +9,7 @@ import {
 import Modal from "react-native-modal";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 
 import LongWhiteButton from "../../components/LongWhiteButton";
 
@@ -16,6 +17,7 @@ const StoryviewModal = (props) => {
   const deviceWidth = Dimensions.get("window").width;
   const deviceHeight = Dimensions.get("window").height;
   const navigation = useNavigation();
+  const { t } = useTranslation();
 
   return (
     <Modal
@@ -27,14 +29,11 @@ const StoryviewModal = (props) => {
       style={styles.modal}
     >
       <View style={styles.container}>
-        <Text style={styles.text}>
-          Щоб використовувати застосунов вам необхідно пройти заповнення
-          документів
-        </Text>
+        <Text style={styles.text}>{t("Worker.Storyview.title")}</Text>
       </View>
       <View style={styles.buttons_box}>
         <LongWhiteButton
-          title='До заповнення'
+          title={t("Worker.Storyview.verificate")}
           onPress={() => {
             props.close();
             navigation.navigate("Questions");
@@ -49,7 +48,7 @@ const StoryviewModal = (props) => {
             }, 500);
           }}
         >
-          <Text style={styles.btn_text}>Потрібна допомога ? </Text>
+          <Text style={styles.btn_text}>{t("Worker.Storyview.help")}</Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity style={styles.close_box} onPress={props.close}>

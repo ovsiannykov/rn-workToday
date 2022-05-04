@@ -47,12 +47,14 @@ const styles = StyleSheet.create({
     color: Colors.primaryBlue,
     fontFamily: "ComfortaaMedium",
     fontSize: 16,
+    textAlign: "center",
   },
   text_disabled: {
     color: Colors.primaryBlue,
     fontFamily: "ComfortaaMedium",
     fontSize: 16,
     opacity: 0.5,
+    textAlign: "center",
   },
 });
 

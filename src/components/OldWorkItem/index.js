@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Image, ScrollView } from "react-native";
+import { useTranslation } from "react-i18next";
 
 import styles from "./style";
 import RatingBox from "../RatingBox";
@@ -7,6 +8,8 @@ import RatingBox from "../RatingBox";
 const starsImage = require("../../assets/images/GroupStars.png");
 
 const OldWorkItem = (props) => {
+  const { t } = useTranslation();
+
   return (
     <View style={{ alignItems: "center" }}>
       <View style={styles.worksBox}>
@@ -18,13 +21,15 @@ const OldWorkItem = (props) => {
           }}
         >
           <View>
-            <Text style={styles.oldWorkTitle}>Назва роботи:</Text>
+            <Text style={styles.oldWorkTitle}>{t("Worker.Profile.name")}</Text>
             <Text style={styles.oldWorkInfo}>
               {props.position ? props.position : "-"}
             </Text>
           </View>
           <View>
-            <Text style={styles.oldWorkTitle}>Компанія:</Text>
+            <Text style={styles.oldWorkTitle}>
+              {t("Worker.Profile.company")}
+            </Text>
             <Text style={styles.oldWorkInfo}>
               {props.company ? props.company : "-"}
             </Text>
@@ -40,7 +45,7 @@ const OldWorkItem = (props) => {
           }}
         >
           <View>
-            <Text style={styles.review}>Вiдгук:</Text>
+            <Text style={styles.review}>{t("Worker.Profile.feedback")}</Text>
             <Text style={styles.reviewText}>
               {props.review ? props.review : "-"}
             </Text>

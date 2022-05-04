@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
+import { useTranslation } from "react-i18next";
 
 import Colors from "../../constants/Colors";
 import { API_BASE_URL } from "../../redux/instance";
@@ -12,6 +13,7 @@ const images = [
 
 const PhotoSlider = (props) => {
   const [photos, setPhotos] = useState(images);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (props.photos && !props.isPreview) {
@@ -43,7 +45,9 @@ const PhotoSlider = (props) => {
         />
       </View>
       <View style={{ paddingHorizontal: 39, marginTop: 21 }}>
-        <Text style={styles.description_title}>Деталі вакансії</Text>
+        <Text style={styles.description_title}>
+          {t("Worker.VacancyDetail.detail")}
+        </Text>
         <Text style={styles.description}>
           {props.info ??
             "This one got an incredible amount of backlash the last time I said it, so I’m going to say it again: a man’s sexuality"}

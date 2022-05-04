@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 import StatisticSlider from "../../../components/StatisticSlider";
@@ -18,6 +19,7 @@ const Statistics = (props) => {
   const activeWorks = useSelector((state) => state.workerReducer.activeWorks);
   const finishedWorks = useSelector((state) => state.workerReducer.finishWorks);
 
+  const { t } = useTranslation();
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -54,11 +56,13 @@ const Statistics = (props) => {
         onPress={cancelWork}
       />
       <Text style={styles.title}>
-        {props.title ? props.title : "Статистика"}
+        {props.title ?? t("Worker.Statistics.title")}
       </Text>
       <View style={styles.content}>
         <ScrollView>
-          <Text style={styles.sub_title}>Оберіть вакансію</Text>
+          <Text style={styles.sub_title}>
+            {t("Worker.Statistics.vacancySelect")}
+          </Text>
           <View>
             <StatisticSlider />
             <Chart />

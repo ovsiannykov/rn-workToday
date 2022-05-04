@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 import QuestionsContainer from "../../../components/Questions/QuestionsContainer";
@@ -11,9 +12,11 @@ import StepThree from "../../../components/Questions/StepThree";
 import StepFour from "../../../components/Questions/StepFour";
 import StepFive from "../../../components/Questions/StepFive";
 
+
 const Questions = (props) => {
+  const { t } = useTranslation();
   const [step, setStep] = useState(1);
-  const [title, setTitle] = useState("Основна інформація");
+  const [title, setTitle] = useState(t("Worker.Questions.title1"));
 
   const navigation = useNavigation();
 
@@ -40,19 +43,19 @@ const Questions = (props) => {
 
   useEffect(() => {
     if (step == 1) {
-      setTitle("Основна інформація");
+      setTitle(t("Worker.Questions.title1"));
     }
     if (step == 2) {
-      setTitle("Працевлаштування");
+      setTitle(t("Worker.Questions.title2"));
     }
     if (step == 3) {
-      setTitle("Особисті дані");
+      setTitle(t("Worker.Questions.title3"));
     }
     if (step == 4) {
-      setTitle("Адресса проживання");
+      setTitle(t("Worker.Questions.title4"));
     }
     if (step == 5) {
-      setTitle("Завантаження документів");
+      setTitle(t("Worker.Questions.title5"));
     }
   }, [step]);
 

@@ -11,27 +11,11 @@ import {
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 
 import Colors from "../../../constants/Colors";
 import LongWhiteButton from "../../LongWhiteButton";
 import { setStep2 } from "../../../redux/worker/worker-thunks";
-
-const termOptions = [
-  { id: "1", label: "На вказаний" },
-  { id: "2", label: "Безтерміново" },
-];
-
-const vacationOtions = [
-  { id: "1", label: "Я не у відпустці" },
-  { id: "2", label: "Я у відпустці по догляду за дитиною" },
-  { id: "3", label: "Я у декретній відпустці" },
-  { id: "4", label: "Я у неоплачуваній відпустці" },
-];
-
-const contributionsOptions = [
-  { id: "1", label: "Так" },
-  { id: "2", label: "Ні" },
-];
 
 const StepTwo = (props) => {
   const [selctList, setSelectList] = useState(true);
@@ -39,8 +23,26 @@ const StepTwo = (props) => {
   const [selctList3, setSelectList3] = useState(true);
   const [fetching, setFetching] = useState(false);
 
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  const termOptions = [
+    { id: "1", label: t("Worker.Questions.deadline") },
+    { id: "2", label: t("Worker.Questions.noDeadline") },
+  ];
+
+  const vacationOtions = [
+    { id: "1", label: t("Worker.Questions.noVocation") },
+    { id: "2", label: t("Worker.Questions.childVocation") },
+    { id: "3", label: t("Worker.Questions.moternity") },
+    { id: "4", label: t("Worker.Questions.unpaid") },
+  ];
+
+  const contributionsOptions = [
+    { id: "1", label: t("Worker.Questions.yes") },
+    { id: "2", label: t("Worker.Questions.no") },
+  ];
 
   if (fetching) {
     return (
@@ -87,7 +89,7 @@ const StepTwo = (props) => {
               <View style={{ paddingBottom: 150 }}>
                 <View style={{ marginTop: 20, width: 300 }}>
                   <Text style={styles.label}>
-                    Назва та адреса закладу праці
+                    {t("Worker.Questions.workAdress")}
                   </Text>
                   <TextInput
                     style={styles.input}
@@ -97,13 +99,15 @@ const StepTwo = (props) => {
                   />
                 </View>
                 <View style={{ marginTop: 20 }}>
-                  <Text style={styles.label}>Мене приймають на роботу*</Text>
+                  <Text style={styles.label}>
+                    {t("Worker.Questions.currentluWorking")}
+                  </Text>
                   <TouchableOpacity
                     style={styles.select_input}
                     onPress={() => setSelectList(!selctList)}
                   >
                     <Text style={styles.select_text}>
-                      {values.term ? values.term : "Виберіть"}
+                      {values.term ? values.term : t("Worker.Questions.choose")}
                     </Text>
                   </TouchableOpacity>
                   {selctList ? (
@@ -126,13 +130,17 @@ const StepTwo = (props) => {
                   ) : null}
                 </View>
                 <View style={{ marginTop: 20 }}>
-                  <Text style={styles.label}>Відпустка крім щорічної*</Text>
+                  <Text style={styles.label}>
+                    {t("Worker.Questions.vacation")}
+                  </Text>
                   <TouchableOpacity
                     style={styles.select_input}
                     onPress={() => setSelectList2(!selctList2)}
                   >
                     <Text style={styles.select_text}>
-                      {values.vacation ? values.vacation : "Виберіть"}
+                      {values.vacation
+                        ? values.vacation
+                        : t("Worker.Questions.choose")}
                     </Text>
                   </TouchableOpacity>
                   {selctList2 ? (
@@ -155,14 +163,16 @@ const StepTwo = (props) => {
                 </View>
                 <View style={{ marginTop: 20 }}>
                   <Text style={styles.label}>
-                    Внески сплачуються від мінімум 2800 брутто*
+                    {t("Worker.Questions.taxesPay")}
                   </Text>
                   <TouchableOpacity
                     style={styles.select_input}
                     onPress={() => setSelectList3(!selctList3)}
                   >
                     <Text style={styles.select_text}>
-                      {values.contributions ? values.contributions : "Виберіть"}
+                      {values.contributions
+                        ? values.contributions
+                        : t("Worker.Questions.choose")}
                     </Text>
                   </TouchableOpacity>
                   {selctList3 ? (
@@ -185,7 +195,7 @@ const StepTwo = (props) => {
                 </View>
                 <View style={{ marginTop: 20, padding: 5 }}>
                   <LongWhiteButton
-                    title='Наступний крок'
+                    title={t("Worker.Questions.nextStep")}
                     onPress={() => {
                       handleSubmit();
                       props.nextStep();

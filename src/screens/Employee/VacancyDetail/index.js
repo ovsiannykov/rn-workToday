@@ -4,6 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 import NavigationHeader from "../../../components/NavigationHeader";
@@ -16,6 +17,7 @@ import PhotoSlider from "../../../components/PhotoSlider";
 import { sendFeedback } from "../../../redux/worker/worker-thunks";
 
 const VacancyDetail = (props) => {
+  const { t } = useTranslation();
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -51,9 +53,9 @@ const VacancyDetail = (props) => {
               item={data}
             />
           </View>
-          <ErrorBlock title='Ви недостатньо компетентні, щоб прийняти завдання' />
+          <ErrorBlock title={t("Worker.VacancyDetail.errorMessage")} />
           <Text style={{ marginTop: 20, ...styles.company_name }}>
-            Необхідні компетенції:
+            {t("Worker.VacancyDetail.skills")}
           </Text>
           <View style={{ marginBottom: 20, ...styles.sills_box }}>
             {data.competencies
@@ -67,7 +69,7 @@ const VacancyDetail = (props) => {
           <View style={styles.buttons_container}>
             <LongWhiteButton
               onPress={() => navigation.navigate("UploadCompetence")}
-              title='Заповнити компетенції'
+              title={t("Worker.VacancyDetail.addSkills")}
             />
             <LongBlueButton
               onPress={
@@ -75,7 +77,7 @@ const VacancyDetail = (props) => {
                   ? null
                   : () => dispatch(sendFeedback(data._id))
               }
-              title='Відповсіти на вакансію'
+              title={t("Worker.VacancyDetail.reply")}
             />
           </View>
         </View>

@@ -4,6 +4,7 @@ import { Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 import vacancyImage from "../../assets/images/vacancy_image.jpeg";
@@ -26,6 +27,7 @@ const VacancyInfo = (props) => {
   const TimeIcon = sized(timeSvg, 24, 24);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const isFavoriteHandler = () => {
     favoritesList.forEach((element) => {
@@ -122,9 +124,11 @@ const VacancyInfo = (props) => {
         </Text>
       </View>
       <Text style={{ marginTop: 18, ...styles.company_name }}>
-        Категорія вакансії: {props.type ?? "Невідомо"}
+        {t("Worker.VacancyDetail.category")} {props.type ?? "Невідомо"}
       </Text>
-      <Text style={{ marginTop: 20, ...styles.company_name }}>Обов'язки:</Text>
+      <Text style={{ marginTop: 20, ...styles.company_name }}>
+        {t("Worker.VacancyDetail.responsibilities")}
+      </Text>
       <View>
         {props.resp
           ? props.resp.map((item) => (
@@ -139,7 +143,7 @@ const VacancyInfo = (props) => {
             ))}
       </View>
       <Text style={{ marginTop: 20, ...styles.company_name }}>
-        Необхідні навички:
+        {t("Worker.VacancyDetail.skills")}
       </Text>
       <View style={{ marginBottom: 20 }}>
         {props.skills

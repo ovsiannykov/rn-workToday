@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 import workerImg from "../../assets/images/worker.jpeg";
@@ -8,6 +9,8 @@ import TimeButton from "../TimeButton";
 const WorkStatus = (props) => {
   const [perzent, setPerzent] = useState(72);
   const [status, setStatus] = useState("Активний");
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (props.status) {
@@ -28,24 +31,26 @@ const WorkStatus = (props) => {
             {props.name ? props.name : "Євген Лебідь"}
           </Text>
           <Text style={{ marginTop: 3, ...styles.date }}>
-            Дата початку роботи:{" "}
+            {t("Worker.Statistics.dateStart")}{" "}
             {props.startDate ? props.startDate : "23.03.2022"}
           </Text>
           <Text style={{ marginTop: 5, ...styles.date }}>
-            Дата початку роботи:{" "}
+            {t("Worker.Statistics.dateEnd")}{" "}
             {props.finishtDate ? props.finishtDate : "23.03.2022"}
           </Text>
         </View>
       </View>
       <View style={{ ...styles.statusBox, ...styles.flexBox }}>
         <View>
-          <Text style={styles.title}>Процесс виконання</Text>
+          <Text style={styles.title}>{t("Worker.Statistics.process")}</Text>
           <View style={styles.progressBox}>
             <Text style={styles.title}>{perzent}%</Text>
             <View style={styles.perzent_container}>
               <View style={styles.perzent} />
             </View>
-            <Text style={styles.time}>24/34 годин</Text>
+            <Text style={styles.time}>
+              24/34 {t("Worker.Statistics.hours")}
+            </Text>
           </View>
         </View>
         <View style={{ marginLeft: 42 }}>
@@ -61,7 +66,9 @@ const WorkStatus = (props) => {
             style={styles.cancel_btn}
             onPress={props.greenPress}
           >
-            <Text style={styles.cancel_btn_text}>Відмінити роботу</Text>
+            <Text style={styles.cancel_btn_text}>
+              {t("Worker.Statistics.review")}
+            </Text>
           </TouchableOpacity>
         ) : null}
         <TouchableOpacity
@@ -71,7 +78,9 @@ const WorkStatus = (props) => {
           }}
           onPress={props.onPressRed}
         >
-          <Text style={styles.support_btn_text}>Звернутися у підтримку</Text>
+          <Text style={styles.support_btn_text}>
+            {t("Worker.Statistics.support")}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -11,28 +11,18 @@ import {
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 
 import Colors from "../../../constants/Colors";
 import LongWhiteButton from "../../LongWhiteButton";
 import { setStep4 } from "../../../redux/worker/worker-thunks";
-
-const streetType = [
-  { id: "1", label: "Вулиця" },
-  { id: "2", label: "Алея" },
-  { id: "3", label: "Площа" },
-  { id: "4", label: "Мікрорайон" },
-];
-
-const factAdress = [
-  { id: "1", label: "Так" },
-  { id: "2", label: "Ні" },
-];
 
 const StepFour = (props) => {
   const [selctList, setSelectList] = useState(true);
   const [selctList2, setSelectList2] = useState(true);
   const [fetching, setFetching] = useState(false);
 
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -43,6 +33,18 @@ const StepFour = (props) => {
       </View>
     );
   }
+
+  const streetType = [
+    { id: "1", label: t("Worker.Questions.street") },
+    { id: "2", label: t("Worker.Questions.alley") },
+    { id: "3", label: t("Worker.Questions.square") },
+    { id: "4", label: t("Worker.Questions.district") },
+  ];
+
+  const factAdress = [
+    { id: "1", label: t("Worker.Questions.yes") },
+    { id: "2", label: t("Worker.Questions.no") },
+  ];
 
   return (
     <Formik
@@ -93,7 +95,9 @@ const StepFour = (props) => {
                 }}
               >
                 <View style={{ marginTop: 20, width: "75%" }}>
-                  <Text style={styles.label}>Код почтовий (індекс):</Text>
+                  <Text style={styles.label}>
+                    {t("Worker.Questions.postCode")}
+                  </Text>
                   <TextInput
                     style={styles.input}
                     value={values.post}
@@ -103,7 +107,9 @@ const StepFour = (props) => {
                   />
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
-                  <Text style={styles.label}>Населений пункт:</Text>
+                  <Text style={styles.label}>
+                    {t("Worker.Questions.settlement")}
+                  </Text>
                   <TextInput
                     style={styles.input}
                     value={values.city}
@@ -112,13 +118,17 @@ const StepFour = (props) => {
                   />
                 </View>
                 <View style={{ marginTop: 20 }}>
-                  <Text style={styles.label}>Вид вулиці*</Text>
+                  <Text style={styles.label}>
+                    {t("Worker.Questions.streetType")}
+                  </Text>
                   <TouchableOpacity
                     style={styles.select_input}
                     onPress={() => setSelectList(!selctList)}
                   >
                     <Text style={styles.select_text}>
-                      {values.streetType ? values.streetType : "Виберіть"}
+                      {values.streetType
+                        ? values.streetType
+                        : t("Worker.Questions.choose")}
                     </Text>
                   </TouchableOpacity>
                   {selctList ? (
@@ -141,7 +151,9 @@ const StepFour = (props) => {
                   ) : null}
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
-                  <Text style={styles.label}>Номер будинку:</Text>
+                  <Text style={styles.label}>
+                    {t("Worker.Questions.houseNum")}
+                  </Text>
                   <TextInput
                     style={styles.input}
                     value={values.houseNum}
@@ -151,7 +163,9 @@ const StepFour = (props) => {
                   />
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
-                  <Text style={styles.label}>Номер квартири:</Text>
+                  <Text style={styles.label}>
+                    {t("Worker.Questions.appartamentNum")}
+                  </Text>
                   <TextInput
                     style={styles.input}
                     value={values.apartament}
@@ -162,15 +176,16 @@ const StepFour = (props) => {
                 </View>
                 <View style={{ marginTop: 20 }}>
                   <Text style={styles.label}>
-                    Поштова адреса (адреса кореспонденції) така сама як і адреса
-                    проживання?
+                    {t("Worker.Questions.postalAdress")}
                   </Text>
                   <TouchableOpacity
                     style={styles.select_input}
                     onPress={() => setSelectList2(!selctList2)}
                   >
                     <Text style={styles.select_text}>
-                      {values.isAdress ? values.isAdress : "Виберіть"}
+                      {values.isAdress
+                        ? values.isAdress
+                        : t("Worker.Questions.choose")}
                     </Text>
                   </TouchableOpacity>
                   {selctList2 ? (
@@ -193,7 +208,7 @@ const StepFour = (props) => {
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>
-                    Населений пункт кореспонденції:
+                    {t("Worker.Questions.locationCorrespondence")}
                   </Text>
                   <TextInput
                     style={styles.input}
@@ -203,7 +218,9 @@ const StepFour = (props) => {
                   />
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
-                  <Text style={styles.label}>Вид вулиці:</Text>
+                  <Text style={styles.label}>
+                    {t("Worker.Questions.streetTypeCorrespondence")}
+                  </Text>
                   <TextInput
                     style={styles.input}
                     value={values.correspondenceStreetType}
@@ -213,7 +230,7 @@ const StepFour = (props) => {
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>
-                    Назва вулиці для кореспонденції:
+                    {t("Worker.Questions.correspondenceStreet")}
                   </Text>
                   <TextInput
                     style={styles.input}
@@ -224,7 +241,7 @@ const StepFour = (props) => {
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>
-                    Номер будинку для кореспонденції:
+                    {t("Worker.Questions.correspondenceHouseNum")}
                   </Text>
                   <TextInput
                     style={styles.input}
@@ -236,7 +253,7 @@ const StepFour = (props) => {
                 </View>
                 <View style={{ marginTop: 20, width: "75%" }}>
                   <Text style={styles.label}>
-                    Номер квартири для кореспонденції:
+                    {t("Worker.Questions.appartamentNumCorrespondence")}
                   </Text>
                   <TextInput
                     style={styles.input}
@@ -248,7 +265,7 @@ const StepFour = (props) => {
                 </View>
                 <View style={{ marginTop: 20, padding: 5 }}>
                   <LongWhiteButton
-                    title='Наступний крок'
+                    title={t("Worker.Questions.nextStep")}
                     onPress={() => {
                       handleSubmit();
                       props.nextStep();

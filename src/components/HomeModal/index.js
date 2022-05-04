@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import Modal from "react-native-modal";
 import { Slider } from "@miblanchard/react-native-slider";
+import { useTranslation } from "react-i18next";
 
 import RadioButtons from "../RadioButtons";
 
 const HomeModal = (props) => {
   const [rateValue, setRateValue] = useState(0.38);
+
+  const { t } = useTranslation();
 
   return (
     <Modal
@@ -17,7 +20,7 @@ const HomeModal = (props) => {
       style={styles.view}
     >
       <View style={{ ...styles.modal }}>
-        <Text style={styles.title}>Радіус</Text>
+        <Text style={styles.title}>{t("Worker.HomeScreen.radius")}</Text>
         <View style={{ marginBottom: 40 }}>
           <Slider
             containerStyle={styles.rate_box}
@@ -35,7 +38,7 @@ const HomeModal = (props) => {
             <Text>50км</Text>
           </View>
         </View>
-        <Text style={styles.title}>Категорії</Text>
+        <Text style={styles.title}>{t("Worker.HomeScreen.categories")}</Text>
         <View>
           <RadioButtons />
         </View>

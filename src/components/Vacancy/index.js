@@ -4,6 +4,7 @@ import { EvilIcons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 import { sized } from "../../Svg";
@@ -14,7 +15,7 @@ import VacancyStatusText from "../../components/VacancyStatusText";
 import { API_BASE_URL } from "../../redux/instance";
 import { deleteFavorite, addFavorite } from "../../redux/worker/worker-thunks";
 
-const image = require("../../assets/images/vacancy.jpeg");
+const defaultImg = require("../../assets/images/default-img.jpg");
 const LinkIcon = sized(linkSvg, 12, 12);
 const WalletIcon = sized(walletSvg, 16, 16);
 
@@ -25,6 +26,7 @@ const Vacancy = (props) => {
     (state) => state.workerReducer.favoritesList
   );
 
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -69,6 +71,7 @@ const Vacancy = (props) => {
       )}
       <View style={styles.content}>
         <Image
+          defaultSource={defaultImg}
           style={styles.image}
           source={
             props.photos ? { uri: `${splitImage(props.photos[0])}` } : image
@@ -108,7 +111,9 @@ const Vacancy = (props) => {
           </View>
         </View>
         <TouchableOpacity style={styles.link_btn} onPress={props.onPress}>
-          <Text style={styles.link_title}>Перейти</Text>
+          <Text style={styles.link_title}>
+            {t("Worker.VacancyDetail.link")}
+          </Text>
           <LinkIcon />
         </TouchableOpacity>
       </View>
