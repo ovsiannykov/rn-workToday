@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ActivityIndicator, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { LogBox } from "react-native";
+import i18next from "i18next";
 
 import { bootstrap } from "./src/bootstrap";
 import { AuthContext } from "./src/Navigation/Auth/AuthContext";

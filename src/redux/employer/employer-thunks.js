@@ -65,13 +65,13 @@ export const vacancyCreate = (values, navigation) => async (dispatch) => {
     formData.append("Title", values.Title);
     formData.append("timeStart", values.timeStart);
     formData.append("priceTotal", values.sumDay);
-    formData.append("responsibilities", arrObj(values.responsibilities));
-    formData.append("skills", arrObj(values.skills));
-    formData.append("competencies", arrObj(values.compitence));
+    formData.append("responsibilities", JSON.stringify(arrObj(values.responsibilities)));
+    formData.append("skills", JSON.stringify(arrObj(values.skills)));
+    formData.append("competencies", JSON.stringify(arrObj(values.compitence)));
     formData.append("info", values.compitence);
     formData.append("place", values.info);
-    formData.append("geo", values.geo);
-    formData.append("Documents", [values.photo]);
+    formData.append("geo", JSON.stringify(values.geo));
+    formData.append("Documents", createFile(values.photo));
 
     const res = await employerApi.vacancyCreate(formData);
 

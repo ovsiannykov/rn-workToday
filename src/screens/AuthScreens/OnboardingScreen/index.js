@@ -16,6 +16,7 @@ import { sized } from "../../../Svg";
 import ukraineSvg from "../../../assets/icons/ukraine-flag.svg";
 import polandSvg from "../../../assets/icons/poland-flag.svg";
 import ukSvg from "../../../assets/icons/united-kingdom-flag";
+import {useTranslation} from "react-i18next";
 
 const bgImage = require("../../../assets/images/bg.png");
 
@@ -26,7 +27,7 @@ const OnboardingImg4 = require("../../../assets/images/onboarding/onboarding-4.j
 
 const OnboardingScreen = (props) => {
   const [section, setSection] = useState(false);
-
+  const {t} = useTranslation()
   const navigation = useNavigation();
 
   const UkraineIcon = sized(ukraineSvg, 63, 63);
@@ -66,7 +67,7 @@ const OnboardingScreen = (props) => {
       <View style={styles.content_box}>
         {!section ? (
           <View style={styles.slide}>
-            <Text style={styles.title}>Оберіть мову застосунку</Text>
+            <Text style={styles.title}>{t('OnBoarding.chooseLanguage')}</Text>
             <Text style={styles.subtitle}>
               За умовчанням обрана Українська мова
             </Text>

@@ -74,7 +74,7 @@ const VacancyDetail = (props) => {
     { id: "1", label: "Art", its: undefined },
     { id: "2", label: "Design", its: undefined },
   ];
-
+  console.log(data.photos)
   return (
     <LinearGradient
       colors={["#F4F7FF", "#FFFFFF"]}
