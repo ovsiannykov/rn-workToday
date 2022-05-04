@@ -24,7 +24,6 @@ const Vacancies = (props) => {
   const [loading, setLoading] = useState(false);
 
   const data = useSelector((state) => state.employerReducer.vacancies);
-  console.log(data);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();

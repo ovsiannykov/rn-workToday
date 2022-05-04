@@ -171,7 +171,13 @@ const HomeScreen = (props) => {
           {isCalendar ? <DateFilter /> : null}
           {isMap ? <Map data={data} /> : null}
         </View>
-        <View style={styles.vacancy_scrollBox}>
+        <View
+          style={{
+            ...styles.vacancy_scrollBox,
+            paddingBottom: 120,
+            marginTop: 1,
+          }}
+        >
           {data.length == 0 ? (
             <Text style={styles.noItems}>
               Поки що немає актуальних вакансій 😔
@@ -182,6 +188,7 @@ const HomeScreen = (props) => {
             data={data}
             keyExtractor={(item) => item._id}
             renderItem={renderItem}
+            showsVerticalScrollIndicator={false}
           />
         </View>
       </LinearGradient>
