@@ -36,6 +36,7 @@ const PhotoSlider = (props) => {
         <SliderBox
           images={photos}
           dotColor={Colors.primaryBlue}
+          imageLoadingColor={Colors.primaryBlue}
           inactiveDotColor='gray'
           paginationBoxStyle={{ position: "absolute", bottom: -40 }}
           ImageComponentStyle={{
