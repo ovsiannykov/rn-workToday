@@ -1,14 +1,19 @@
-import React, { useState } from "react";
-import { View, ScrollView, FlatList } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, ScrollView, FlatList, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useRoute } from "@react-navigation/native";
 
 import ReviewsHeader from "../../../components/ReviewsHeader";
 import ContractFilter from "../../../components/ContractFilter";
 import WorkerItem from "../../../components/WorkerItem";
 import RewievsModal from "../../../components/RewievsModal";
 import HomeModal from "../../../components/HomeModal";
+import {
+  acceptUser,
+  canseledUser,
+} from "../../../redux/employer/employer-thunks";
 
 import styles from "./styles";
 
@@ -26,11 +31,20 @@ const data = [
 
 const Reviews = (props) => {
   const [isFilter, setIsFilter] = useState(false);
+  const [selectVacancyId, setSelectVacancyId] = useState(null);
   const reviews = useSelector((state) => state.employerReducer.reviews);
 
-  //console.log(reviews);
+  console.log(selectVacancyId);
 
+  const dispatch = useDispatch();
+  const route = useRoute();
   const navigation = useNavigation();
+
+  useEffect(() => {
+    if (route.params && route.params.vacancyId) {
+      setSelectVacancyId(route.params.vacancyId);
+    }
+  }, []);
 
   const filterHandler = () => {
     setIsFilter(true);
@@ -50,8 +64,8 @@ const Reviews = (props) => {
       status={item.status}
       userId={item.userId}
       workInfo={item.workInfo}
-      refuseOnPress={() => console.log("i")}
-      acceptOnPress={() => console.log("i")}
+      refuseOnPress={() => dispatch(canseledUser(item._id))}
+      acceptOnPress={() => dispatch(acceptUser(item._id))}
     />
   );
 
@@ -67,6 +81,9 @@ const Reviews = (props) => {
       <View style={{ marginTop: 23 }}>
         <ContractFilter data={filters} />
       </View>
+      {reviews.length == 0 ? (
+        <Text style={styles.noItems}>Поки що ніхто не відкликнувся 😔</Text>
+      ) : null}
       <View style={styles.wrapper}>
         <FlatList
           contentContainerStyle={{ flexGrow: 1 }}
@@ -75,17 +92,6 @@ const Reviews = (props) => {
           showsVerticalScrollIndicator={false}
           data={reviews}
         />
-        {/* <WorkerItem
-          status='Прийнято'
-          refuseBtn={true}
-          acceptBtn={true}
-          onPress={() => navigation.navigate("Profile")}
-        />
-        <WorkerItem
-          status='Відхилино'
-          acceptBtn={true}
-          onPress={() => navigation.navigate("Profile")}
-        /> */}
       </View>
     </LinearGradient>
   );

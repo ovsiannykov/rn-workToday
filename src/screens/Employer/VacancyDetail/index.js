@@ -129,7 +129,9 @@ const VacancyDetail = (props) => {
                   title={t("Worker.VacancyDetail.changeDetail")}
                 />
                 <LongBlueButton
-                  //onPress={() => navigation.navigate("Questions")}
+                  onPress={() =>
+                    navigation.navigate("Reviews", { vacancyId: data._id })
+                  }
                   title={t("Worker.VacancyDetail.seeReviews")}
                 />
                 <LongWhiteButton

@@ -10,4 +10,11 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  noItems: {
+    fontFamily: "ComfortaaLight",
+    fontSize: 14,
+    color: "gray",
+    marginTop: 25,
+    textAlign: "center",
+  },
 });

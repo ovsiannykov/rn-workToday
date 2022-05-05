@@ -16,4 +16,6 @@ export const employerApi = {
       },
     }),
   getFeedback: (body) => instance.post("/emloyer/getFeedback", body),
+  acceptUser: (body) => instance.post("/emloyer/acceptUser", body),
+  canseledUser: (body) => instance.post("/emloyer/canseledUser", body),
 };

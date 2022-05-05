@@ -159,3 +159,41 @@ export const getFeedback = (body) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const acceptUser = (id) => async (dispatch) => {
+  try {
+    const res = await employerApi.acceptUser({ _id: id });
+    if (res.data.status === "Success") {
+      showMessage({
+        message: "Прицівника прийнято 🤝",
+        type: "success",
+      });
+    } else {
+      showMessage({
+        message: "Упс... Щось пішло не так",
+        type: "danger",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const canseledUser = (id) => async (dispatch) => {
+  try {
+    const res = await employerApi.canseledUser({ _id: id });
+    if (res.data.status === "Success") {
+      showMessage({
+        message: "Працівник відхилен 👌",
+        type: "success",
+      });
+    } else {
+      showMessage({
+        message: "Упс... Щось пішло не так",
+        type: "danger",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
