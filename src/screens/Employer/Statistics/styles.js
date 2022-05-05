@@ -41,4 +41,21 @@ export default StyleSheet.create({
     top: -150,
     marginBottom: 60,
   },
+  peopleContainer: {
+    width: "100%",
+    paddingLeft: 32,
+    marginTop: 10,
+  },
+  peopleTitle: {
+    fontSize: 18,
+    opacity: 0.4,
+    fontFamily: "ComfortaaLight",
+    lineHeight: 20,
+  },
+  peopleValue: {
+    fontSize: 16,
+    marginTop: 5,
+    lineHeight: 18,
+    fontFamily: "ComfortaaLight",
+  },
 });

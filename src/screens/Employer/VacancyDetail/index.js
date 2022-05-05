@@ -3,6 +3,7 @@ import { View, Text, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 import NavigationHeader from "../../../components/NavigationHeader";
@@ -59,6 +60,7 @@ const initialVac = {
 const VacancyDetail = (props) => {
   const [data, setData] = useState(initialVac);
 
+  const { t } = useTranslation();
   const navigation = useNavigation();
   const selectVacancy = useSelector(
     (state) => state.employerReducer.selectVacancy
@@ -99,7 +101,7 @@ const VacancyDetail = (props) => {
             />
           </View>
           <Text style={{ marginTop: 20, ...styles.company_name }}>
-            Необхідні компетенції:
+            {t("Worker.VacancyDetail.skills")}
           </Text>
           <View style={{ marginBottom: 20, ...styles.sills_box }}>
             {data.competencies
@@ -113,15 +115,15 @@ const VacancyDetail = (props) => {
           <View style={styles.buttons_container}>
             <LongWhiteButton
               //onPress={() => navigation.navigate("UploadCompetence")}
-              title='Змінити деталі вакансії'
+              title={t("Worker.VacancyDetail.changeDetail")}
             />
             <LongBlueButton
               //onPress={() => navigation.navigate("Questions")}
-              title='Переглянути відгуки'
+              title={t("Worker.VacancyDetail.seeReviews")}
             />
             <LongWhiteButton
               onPress={() => navigation.navigate("Workers")}
-              title='Переглянути працівників'
+              title={t("Worker.VacancyDetail.seeWorkers")}
             />
           </View>
         </View>

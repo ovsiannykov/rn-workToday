@@ -4,6 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import StarRating from "react-native-star-rating";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 
 import Colors from "../../../constants/Colors";
 import Input from "../../../components/Input";
@@ -14,15 +15,16 @@ const Feedback = () => {
 
   const navigation = useNavigation();
   const route = useRoute();
+  const { t } = useTranslation();
 
   return (
     <LinearGradient
       colors={["#F4F7FF", "#FFFFFF"]}
       style={{ ...styles.container }}
     >
-      <Text style={styles.title}>Відгук о працівнику</Text>
+      <Text style={styles.title}>{t("Employer.Feedback.title")}</Text>
       <View style={styles.wrapper}>
-        <Text style={styles.label}>Рейтинг обслуговування</Text>
+        <Text style={styles.label}>{t("Employer.Feedback.rating")}</Text>
         <View style={styles.rating_box}>
           <StarRating
             disabled={false}
@@ -37,12 +39,15 @@ const Feedback = () => {
             style={styles.rating}
           />
         </View>
-        <Input title='Додатковий відгук' placeholder='Я вважаю...' />
+        <Input
+          title={t("Employer.Feedback.addFeedback")}
+          placeholder={t("Employer.Feedback.placeholder")}
+        />
       </View>
       <View style={styles.btn_box}>
         <View style={{ width: 299 }}>
           <LongWhiteButton
-            title='Закінчити'
+            title={t("Employer.Feedback.finish")}
             onPress={() => navigation.goBack()}
             disabled={rating == 0 ? true : false}
           />

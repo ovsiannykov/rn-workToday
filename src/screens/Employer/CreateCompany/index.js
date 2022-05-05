@@ -31,7 +31,7 @@ const CreateCompany = (props) => {
       style={{ ...styles.container }}
     >
       <View style={{ alignItems: "center" }}>
-        <Text style={styles.title}>Створення компанії</Text>
+        <Text style={styles.title}>{t("Employer.createCompany.h1")}</Text>
       </View>
 
       <View style={styles.wrapper}>
@@ -70,27 +70,33 @@ const CreateCompany = (props) => {
                     }}
                   >
                     <View style={{ width: "75%" }}>
-                      <Text style={styles.label}>Назва компанії</Text>
+                      <Text style={styles.label}>
+                        {t("Employer.createCompany.name")}
+                      </Text>
                       <TextInput
                         style={styles.input}
                         value={values.companyName}
                         onChangeText={handleChange("companyName")}
                         error={errors.companyName}
-                        placeholder='Назва компанії'
+                        placeholder={t("Employer.createCompany.name")}
                       />
                     </View>
                     <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>Тематика</Text>
+                      <Text style={styles.label}>
+                        {t("Employer.createCompany.theme")}
+                      </Text>
                       <TextInput
                         style={styles.input}
                         value={values.thematic}
                         onChangeText={handleChange("thematic")}
                         error={errors.thematic}
-                        placeholder='Тематика'
+                        placeholder={t("Employer.createCompany.theme")}
                       />
                     </View>
                     <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>Місце роботи:</Text>
+                      <Text style={styles.label}>
+                        {t("Employer.createCompany.place")}
+                      </Text>
                       <TextInput
                         style={styles.input}
                         value={values.location}
@@ -103,29 +109,33 @@ const CreateCompany = (props) => {
                         onPress={() => navigation.navigate("MapScreen")}
                       >
                         <Text style={styles.selectMap_text}>
-                          Выбрать на карте
+                          {t("Employer.createCompany.mapSelect")}
                         </Text>
                         <SlecetMapIcon />
                       </TouchableOpacity>
                     </View>
                     <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>Про компанію</Text>
+                      <Text style={styles.label}>
+                        {t("Employer.createCompany.about")}
+                      </Text>
                       <TextInput
                         style={styles.input}
                         value={values.about}
                         onChangeText={handleChange("about")}
                         error={errors.about}
-                        placeholder='У кількох словах'
+                        placeholder={t("Employer.createCompany.info")}
                       />
                     </View>
                     <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>Аватар профіля</Text>
+                      <Text style={styles.label}>
+                        {t("Employer.createCompany.avatar")}
+                      </Text>
                       <UpluadInput />
                     </View>
 
                     <View style={{ marginTop: 20, padding: 5 }}>
                       <LongWhiteButton
-                        title='Создать'
+                        title={t("Employer.createCompany.create")}
                         disabled={!isValid}
                         onPress={() => {
                           navigation.goBack();
