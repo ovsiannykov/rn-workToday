@@ -15,6 +15,7 @@ import { Formik } from "formik";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 import { sized } from "../../../Svg";
@@ -38,6 +39,7 @@ const CreateVacancy = (props) => {
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const { t } = useTranslation();
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -69,7 +71,7 @@ const CreateVacancy = (props) => {
       style={{ ...styles.container }}
     >
       <View style={{ alignItems: "center" }}>
-        <Text style={styles.title}>Створення вакансії</Text>
+        <Text style={styles.title}>{t("Employer.CreateVacancy.h1")}</Text>
       </View>
 
       <View style={styles.wrapper}>
@@ -224,24 +226,28 @@ const CreateVacancy = (props) => {
                     }}
                   >
                     <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>Назва вакансії:</Text>
+                      <Text style={styles.label}>
+                        {t("Employer.CreateVacancy.title")}
+                      </Text>
                       <TextInput
                         style={styles.input}
                         value={values.Title}
                         onChangeText={handleChange("Title")}
                         error={errors.Title}
-                        placeholder='Офiцiант'
+                        placeholder={t("Employer.CreateVacancy.waiter")}
                         maxLength={20}
                       />
                     </View>
                     <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>Тип вакансії:</Text>
+                      <Text style={styles.label}>
+                        {t("Employer.CreateVacancy.type")}
+                      </Text>
                       <TextInput
                         style={styles.input}
                         value={values.Type}
                         onChangeText={handleChange("Type")}
                         error={errors.Type}
-                        placeholder='Повний робочий день, Віддалено, тощо'
+                        placeholder={t("Employer.CreateVacancy.remote")}
                         maxLength={20}
                       />
                     </View>
@@ -260,7 +266,9 @@ const CreateVacancy = (props) => {
                           ...styles.commission_box,
                         }}
                       >
-                        <Text style={styles.label}>Оплата в год.:</Text>
+                        <Text style={styles.label}>
+                          {t("Employer.CreateVacancy.priceHour")}
+                        </Text>
                         <TextInput
                           style={styles.input_min}
                           value={values.sumHour}
@@ -271,7 +279,9 @@ const CreateVacancy = (props) => {
                         />
                       </View>
                       <View style={{ width: 210, ...styles.commission_box }}>
-                        <Text style={styles.label}>Оплата з комісією:</Text>
+                        <Text style={styles.label}>
+                          {t("Employer.CreateVacancy.priceTax")}
+                        </Text>
                         <TextInput
                           style={styles.input_middle}
                           value={values.taxHour}
@@ -297,7 +307,9 @@ const CreateVacancy = (props) => {
                           ...styles.commission_box,
                         }}
                       >
-                        <Text style={styles.label}>Оплата в день:</Text>
+                        <Text style={styles.label}>
+                          {t("Employer.CreateVacancy.priceDay")}
+                        </Text>
                         <TextInput
                           style={styles.input_min}
                           value={values.sumDay}
@@ -308,7 +320,9 @@ const CreateVacancy = (props) => {
                         />
                       </View>
                       <View style={{ width: 210, ...styles.commission_box }}>
-                        <Text style={styles.label}>Оплата з комісією:</Text>
+                        <Text style={styles.label}>
+                          {t("Employer.CreateVacancy.priceDay")}
+                        </Text>
                         <TextInput
                           style={styles.input_middle}
                           value={values.taxDay}
@@ -321,13 +335,17 @@ const CreateVacancy = (props) => {
                     </View>
 
                     <View style={{ marginTop: 35, width: "75%" }}>
-                      <Text style={styles.label}>Опис вакансії:</Text>
+                      <Text style={styles.label}>
+                        {t("Employer.CreateVacancy.info")}
+                      </Text>
                       <TextInput
                         style={styles.input}
                         value={values.info}
                         onChangeText={handleChange("info")}
                         error={errors.info}
-                        placeholder='Інформація про вакансію'
+                        placeholder={t(
+                          "Employer.CreateVacancy.infoPlaceholder"
+                        )}
                         maxLength={250}
                         multiline={true}
                         numberOfLines={4}
@@ -335,7 +353,9 @@ const CreateVacancy = (props) => {
                     </View>
 
                     <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>Місце роботи:</Text>
+                      <Text style={styles.label}>
+                        {t("Employer.CreateVacancy.place")}
+                      </Text>
                       <TouchableOpacity
                         onPress={() => navigation.navigate("MapScreen")}
                       >
@@ -354,7 +374,7 @@ const CreateVacancy = (props) => {
                         onPress={() => navigation.navigate("MapScreen")}
                       >
                         <Text style={styles.selectMap_text}>
-                          Выбрать на карте
+                          {t("Employer.CreateVacancy.mapSelect")}
                         </Text>
                         <SlecetMapIcon />
                       </TouchableOpacity>
@@ -375,7 +395,9 @@ const CreateVacancy = (props) => {
                           ...styles.commission_box,
                         }}
                       >
-                        <Text style={styles.label}>Дата початку:</Text>
+                        <Text style={styles.label}>
+                          {t("Employer.CreateVacancy.startDate")}
+                        </Text>
                         <TouchableOpacity onPress={showDatePicker}>
                           <View pointerEvents='none'>
                             <TextInput
@@ -383,7 +405,9 @@ const CreateVacancy = (props) => {
                               value={values.timeStart}
                               onChangeText={handleChange("timeStart")}
                               error={errors.timeStart}
-                              placeholder='Виберіть дату'
+                              placeholder={t(
+                                "Employer.CreateVacancy.selectDate"
+                              )}
                             />
                           </View>
                         </TouchableOpacity>
@@ -392,12 +416,14 @@ const CreateVacancy = (props) => {
                           mode='date'
                           onConfirm={startDateConfirm}
                           onCancel={hideDatePicker}
-                          confirmTextIOS='Обрати'
+                          confirmTextIOS={t("Employer.CreateVacancy.select")}
                           locale='uk_UA'
                         />
                       </View>
                       <View style={{ width: 210, ...styles.commission_box }}>
-                        <Text style={styles.label}>Дата кінця:</Text>
+                        <Text style={styles.label}>
+                          {t("Employer.CreateVacancy.endDate")}
+                        </Text>
                         <TouchableOpacity onPress={showDatePicker2}>
                           <View pointerEvents='none'>
                             <TextInput
@@ -405,7 +431,9 @@ const CreateVacancy = (props) => {
                               value={values.timeEnd}
                               onChangeText={handleChange("timeEnd")}
                               error={errors.timeEnd}
-                              placeholder='Виберіть дату'
+                              placeholder={t(
+                                "Employer.CreateVacancy.selectDate"
+                              )}
                             />
                           </View>
                         </TouchableOpacity>
@@ -414,20 +442,22 @@ const CreateVacancy = (props) => {
                           mode='date'
                           onConfirm={endDateConfirm}
                           onCancel={hideDatePicker2}
-                          confirmTextIOS='Обрати'
+                          confirmTextIOS={t("Employer.CreateVacancy.select")}
                           locale='uk_UA'
                         />
                       </View>
                     </View>
 
                     <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>Обов'язки:</Text>
+                      <Text style={styles.label}>
+                        {t("Employer.CreateVacancy.responsibilites")}
+                      </Text>
                       <TextInput
                         style={styles.input}
                         value={values.responsibilities}
                         onChangeText={handleChange("responsibilities")}
                         error={errors.responsibilities}
-                        placeholder='Напишіть через кому'
+                        placeholder={t("Employer.CreateVacancy.comma")}
                         multiline={true}
                         numberOfLines={4}
                       />
@@ -444,13 +474,15 @@ const CreateVacancy = (props) => {
                       />
                     </View> */}
                     <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>Необхідні навички:</Text>
+                      <Text style={styles.label}>
+                        {t("Employer.CreateVacancy.skills")}
+                      </Text>
                       <TextInput
                         style={styles.input}
                         value={values.skills}
                         onChangeText={handleChange("skills")}
                         error={errors.skills}
-                        placeholder='Напишіть через кому'
+                        placeholder={t("Employer.CreateVacancy.comma")}
                         maxLength={50}
                         multiline={true}
                         numberOfLines={4}
@@ -466,13 +498,15 @@ const CreateVacancy = (props) => {
                       />
                     </View> */}
                     <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>Необхідні компетенції:</Text>
+                      <Text style={styles.label}>
+                        {t("Employer.CreateVacancy.compentencies")}
+                      </Text>
                       <TextInput
                         style={styles.input}
                         value={values.compitence}
                         onChangeText={handleChange("compitence")}
                         error={errors.compitence}
-                        placeholder='Напишіть через кому'
+                        placeholder={t("Employer.CreateVacancy.comma")}
                         maxLength={50}
                         multiline={true}
                         numberOfLines={4}
@@ -488,7 +522,9 @@ const CreateVacancy = (props) => {
                       />
                     </View> */}
                     <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>Фото:</Text>
+                      <Text style={styles.label}>
+                        {t("Employer.CreateVacancy.photo")}
+                      </Text>
                       <UpluadInput
                         filename={values.photo}
                         onChangeFile={(value) => setFieldValue("photo", value)}
@@ -503,7 +539,7 @@ const CreateVacancy = (props) => {
                       }}
                     >
                       <LongWhiteButton
-                        title='Створити'
+                        title={t("Employer.CreateVacancy.create")}
                         disabled={!isValid}
                         onPress={() => {
                           handleSubmit();
@@ -511,7 +547,7 @@ const CreateVacancy = (props) => {
                         }}
                       />
                       <LongWhiteButton
-                        title='Перегляд'
+                        title={t("Employer.CreateVacancy.view")}
                         disabled={!isValid}
                         onPress={() => {
                           vacancyPreview(values);

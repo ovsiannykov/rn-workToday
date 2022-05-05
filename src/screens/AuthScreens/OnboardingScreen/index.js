@@ -79,21 +79,21 @@ const OnboardingScreen = (props) => {
         {section == 2 ? (
           <Step2
             onPress={nextHandler}
-            title={t("OnBoardingWorker.Step2title")}
-            subtitle={t("OnBoardingWorker.Step2subtitle")}
+            title={t("OnBoardingEmployer.Step2title")}
+            subtitle={t("OnBoardingEmployer.Step2subtitle")}
           />
         ) : null}
         {section == 3 ? (
           <Step3
             onPress={nextHandler}
-            title={t("OnBoardingWorker.Step3title")}
-            subtitle={t("OnBoardingWorker.Step3subtitle")}
+            title={t("OnBoardingEmployer.Step3title")}
+            subtitle={t("OnBoardingEmployer.Step3subtitle")}
           />
         ) : null}
         {section == 4 ? (
           <Step4
-            title={t("OnBoardingWorker.Step4title")}
-            subtitle={t("OnBoardingWorker.Step4subtitle")}
+            title={t("OnBoardingEmployer.Step4title")}
+            subtitle={t("OnBoardingEmployer.Step4subtitle")}
             onPress={storeOnboarding}
           />
         ) : null}

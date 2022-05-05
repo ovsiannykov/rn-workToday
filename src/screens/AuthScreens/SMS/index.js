@@ -9,6 +9,7 @@ import {
 } from "react-native-confirmation-code-field";
 import { useRoute } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 import sized from "../../../Svg/sized";
@@ -22,8 +23,9 @@ import {
 const CELL_COUNT = 4;
 
 const SMS = () => {
+  const { t } = useTranslation();
   const [value, setValue] = useState("");
-  const [number, setNumber] = useState("Ваш номер");
+  const [number, setNumber] = useState(t("OnBoardingEmployer.yourNum"));
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
@@ -52,9 +54,11 @@ const SMS = () => {
       style={{ ...styles.container }}
     >
       <LogoIcon />
-      <Text style={styles.header_title}>Введите код из смс</Text>
+      <Text style={styles.header_title}>
+        {t("OnBoardingEmployer.writeCode")}
+      </Text>
       <Text style={styles.sub_title}>
-        Проверочный код был отправлен вам на телефон {number}
+        {t("OnBoardingEmployer.phoneNumber")} {number}
       </Text>
       <CodeField
         ref={ref}
@@ -84,7 +88,7 @@ const SMS = () => {
           dispatch(registerReSendCode(number));
         }}
       >
-        <Text style={styles.btn_text}>Переотправить код</Text>
+        <Text style={styles.btn_text}>{t("OnBoardingEmployer.codeAgain")}</Text>
       </TouchableOpacity>
     </LinearGradient>
   );

@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 import OldWorkCompanyItem from "../../../components/OldWorkCompanyItem";
@@ -9,6 +10,8 @@ import OldWorkCompanyItem from "../../../components/OldWorkCompanyItem";
 const image = require("../../../assets/images/company.png");
 
 const CompanyProfile = ({ navigation }, props) => {
+  const { t } = useTranslation();
+
   return (
     <LinearGradient
       colors={["#F4F7FF", "#FFFFFF"]}
@@ -16,7 +19,7 @@ const CompanyProfile = ({ navigation }, props) => {
     >
       <View style={styles.header}>
         <View style={styles.headerContainer}>
-          <Text style={styles.headerTitle}>Профіль</Text>
+          <Text style={styles.headerTitle}>{t("Worker.Profile.profile")}</Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("CreateCompany")}
           >
@@ -45,7 +48,9 @@ const CompanyProfile = ({ navigation }, props) => {
                 </Text>
               </View>
             </View>
-            <Text style={styles.aboutLabel}>Про компанію</Text>
+            <Text style={styles.aboutLabel}>
+              {t("Worker.Profile.aboutCompany")}
+            </Text>
             <Text style={styles.aboutText}>
               {props.about
                 ? props.about
@@ -53,7 +58,7 @@ const CompanyProfile = ({ navigation }, props) => {
             </Text>
           </View>
         </View>
-        <Text style={styles.worksTitle}>Останні вакансии</Text>
+        <Text style={styles.worksTitle}>{t("Worker.Profile.recentWorks")}</Text>
         <View style={{ paddingBottom: 30 }}>
           <OldWorkCompanyItem
             сlikeds='18'

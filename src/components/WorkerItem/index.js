@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 import workerPhoto from "../../assets/images/worker.jpeg";
@@ -9,6 +10,8 @@ import { sized } from "../../Svg";
 import linkSvg from "../../assets/icons/link.svg";
 
 const WorkerItem = (props) => {
+  const { t } = useTranslation();
+
   const StatusText = (props) => {
     if (props.status !== "Прийнято" && props.status !== "Відхилино") {
       return (
@@ -48,7 +51,9 @@ const WorkerItem = (props) => {
           <Text style={styles.name}>
             {props.name ? props.name : "Євген Лебідь"}
           </Text>
-          <Text style={styles.comment_title}>Коментар працівника:</Text>
+          <Text style={styles.comment_title}>
+            {t("Employer.Employer.comment")}
+          </Text>
           <Text style={styles.about}>
             {props.about
               ? props.about
@@ -59,18 +64,22 @@ const WorkerItem = (props) => {
       <View style={{ ...styles.down_box }}>
         <View>
           <View style={styles.info_box}>
-            <Text style={styles.vancy_title}>Вакансія:</Text>
+            <Text style={styles.vancy_title}>
+              {t("Employer.Employer.vacancy")}
+            </Text>
             <Text style={styles.vancy}>
               {props.vacancy ? props.vacancy : "Охоронець"}
             </Text>
           </View>
           <View style={{ marginTop: 6, ...styles.info_box }}>
-            <Text style={styles.vancy_title}>Статус:</Text>
+            <Text style={styles.vancy_title}>
+              {t("Employer.Employer.status")}
+            </Text>
             <StatusText status={props.status} />
           </View>
         </View>
         <TouchableOpacity style={styles.link_btn} onPress={props.onPress}>
-          <Text style={styles.link_title}>Перейти</Text>
+          <Text style={styles.link_title}>{t("Employer.Employer.link")}</Text>
           <LinkIcon />
         </TouchableOpacity>
       </View>
@@ -78,13 +87,13 @@ const WorkerItem = (props) => {
         <View style={{ marginTop: 10 }}>
           {props.refuseBtn ? (
             <LongWhiteButton
-              title='Відмовити у роботі'
+              title={t("Employer.Employer.refuse")}
               onPress={props.refuseOnPress}
             />
           ) : null}
           {props.acceptBtn ? (
             <LongBlueButton
-              title='Взяти на роботу'
+              title={t("Employer.Employer.toRecruit")}
               onPress={props.acceptOnPress}
             />
           ) : null}

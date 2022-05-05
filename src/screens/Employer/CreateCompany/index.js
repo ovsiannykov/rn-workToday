@@ -11,6 +11,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { Formik } from "formik";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useTranslation } from "react-i18next";
 
 import styles from "./styles";
 import sized from "../../../Svg/sized";
@@ -22,6 +23,7 @@ const SlecetMapIcon = sized(selectMapSvg, 16.64, 23);
 
 const CreateCompany = (props) => {
   const navigation = useNavigation();
+  const { t } = useTranslation();
 
   return (
     <LinearGradient

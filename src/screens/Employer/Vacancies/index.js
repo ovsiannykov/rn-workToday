@@ -5,6 +5,7 @@ import {
   FlatList,
   Text,
   ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
@@ -76,9 +77,11 @@ const Vacancies = (props) => {
 
       <View style={{ ...styles.wrapper, paddingBottom: 80 }}>
         {data.length == 0 ? (
-          <Text style={styles.noItems}>
-            Поки що немає актуальних вакансій 😔
-          </Text>
+          <>
+            <Text style={styles.noItems}>
+              Ви поки що не створили жодної вакансії
+            </Text>
+          </>
         ) : null}
         <FlatList
           contentContainerStyle={{ flexGrow: 1 }}
