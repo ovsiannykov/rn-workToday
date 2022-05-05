@@ -24,7 +24,10 @@ import vacancyImage from "../../../assets/images/vacancy_image.jpeg";
 import LongWhiteButton from "../../../components/LongWhiteButton";
 import Colors from "../../../constants/Colors";
 import { setSelectLocation } from "../../../redux/employer/employer-actions";
-import { vacancyCreate } from "../../../redux/employer/employer-thunks";
+import {
+  vacancyCreate,
+  vacancyUpdate,
+} from "../../../redux/employer/employer-thunks";
 import UpluadInput from "../../../components/UpluadInput";
 import { setSelectVacancy } from "../../../redux/employer/employer-actions";
 
@@ -34,11 +37,13 @@ const CreateVacancy = (props) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isDatePickerVisible2, setDatePickerVisibility2] = useState(false);
   const [fetching, setFetching] = useState(false);
+  const [id, setId] = useState(null);
 
   const mapData = useSelector((state) => state.employerReducer.selectLocation);
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const route = useRoute();
   const { t } = useTranslation();
 
   const showDatePicker = () => {
@@ -56,6 +61,12 @@ const CreateVacancy = (props) => {
   const hideDatePicker2 = () => {
     setDatePickerVisibility2(false);
   };
+
+  useEffect(() => {
+    if (route.params && route.params.id) {
+      setId(route.params.id);
+    }
+  }, [route.params]);
 
   if (fetching) {
     return (
@@ -110,7 +121,11 @@ const CreateVacancy = (props) => {
           }}
           onSubmit={(values) => {
             setFetching(true);
-            dispatch(vacancyCreate(values));
+            if (id !== null) {
+              dispatch(vacancyUpdate(values, id));
+            } else {
+              dispatch(vacancyCreate(values));
+            }
             setFetching(false);
           }}
         >
@@ -135,7 +150,6 @@ const CreateVacancy = (props) => {
               values.timeStart.length > 0 &&
               values.timeEnd.length > 0 &&
               values.info.length > 0 &&
-              values.photo &&
               values.compitence.length > 0;
 
             useEffect(() => {
@@ -521,15 +535,20 @@ const CreateVacancy = (props) => {
                         placeholder='Додати ще (через кому)'
                       />
                     </View> */}
-                    <View style={{ marginTop: 20, width: "75%" }}>
-                      <Text style={styles.label}>
-                        {t("Employer.CreateVacancy.photo")}
-                      </Text>
-                      <UpluadInput
-                        filename={values.photo}
-                        onChangeFile={(value) => setFieldValue("photo", value)}
-                      />
-                    </View>
+                    {id == null ? (
+                      <View style={{ marginTop: 20, width: "75%" }}>
+                        <Text style={styles.label}>
+                          {t("Employer.CreateVacancy.photo")}
+                        </Text>
+                        <UpluadInput
+                          filename={values.photo}
+                          onChangeFile={(value) =>
+                            setFieldValue("photo", value)
+                          }
+                        />
+                      </View>
+                    ) : null}
+
                     <View
                       style={{
                         marginTop: 40,
@@ -539,7 +558,11 @@ const CreateVacancy = (props) => {
                       }}
                     >
                       <LongWhiteButton
-                        title={t("Employer.CreateVacancy.create")}
+                        title={
+                          id
+                            ? t("Employer.CreateVacancy.change")
+                            : t("Employer.CreateVacancy.create")
+                        }
                         disabled={!isValid}
                         onPress={() => {
                           handleSubmit();
@@ -551,7 +574,7 @@ const CreateVacancy = (props) => {
                         disabled={!isValid}
                         onPress={() => {
                           vacancyPreview(values);
-                          navigation.navigate("VacancyDetail", {
+                          navigation.push("VacancyDetail", {
                             title: "Ваша вакансія",
                           });
                         }}

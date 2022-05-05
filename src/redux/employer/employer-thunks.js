@@ -94,3 +94,52 @@ export const vacancyCreate = (values) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const vacancyUpdate = (values, id) => async (dispatch) => {
+  try {
+    const arrObj = (str) => {
+      const item = str.split(", ").filter((i) => i !== " ");
+
+      return item.map((item) => ({
+        name: item,
+      }));
+    };
+
+    const formData = new FormData();
+    formData.append("timeEnd", values.timeEnd);
+    formData.append("_id", id);
+    formData.append("timeStart", values.timeStart);
+    formData.append("Type", values.Type);
+    formData.append("pricePerHour", values.sumHour);
+    formData.append("priceTotal", values.sumDay);
+    formData.append(
+      "responsibilities",
+      JSON.stringify(arrObj(values.responsibilities))
+    );
+    formData.append("Title", values.Title);
+    formData.append("skills", JSON.stringify(arrObj(values.skills)));
+    formData.append("competencies", JSON.stringify(arrObj(values.compitence)));
+    formData.append("info", values.info);
+    formData.append("place", values.place);
+    formData.append("geo", JSON.stringify(values.geo));
+
+    const res = await employerApi.vacancyUpdate(formData);
+
+    if (res.data.status === "Success") {
+      showMessage({
+        message: "Вакансію успішно оновлено 👍",
+        type: "success",
+      });
+    } else {
+      showMessage({
+        message: "Щось пішло не так... Не вдалося оновити вакансію 🤷‍♀️",
+        type: "danger",
+      });
+    }
+  } catch (error) {
+    showMessage({
+      message: "Упс... Щось пішло не так",
+      type: "danger",
+    });
+  }
+};

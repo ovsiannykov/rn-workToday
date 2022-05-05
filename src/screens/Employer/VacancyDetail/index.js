@@ -71,11 +71,13 @@ const VacancyDetail = (props) => {
     if (selectVacancy !== null) {
       setData(selectVacancy);
     }
+  }, []);
 
-    if (props.isPreview == true) {
+  useEffect(() => {
+    if (data && data.isPreview == true) {
       setPreview(true);
     }
-  }, []);
+  }, [data.isPreview]);
 
   const compitensesList = [
     { id: "1", label: "Art", its: undefined },
@@ -118,10 +120,12 @@ const VacancyDetail = (props) => {
                 ))}
           </View>
           <View style={styles.buttons_container}>
-            {preview ? (
+            {preview == false ? (
               <>
                 <LongWhiteButton
-                  //onPress={() => navigation.navigate("UploadCompetence")}
+                  onPress={() =>
+                    navigation.navigate("CreateVacancy", { id: data._id })
+                  }
                   title={t("Worker.VacancyDetail.changeDetail")}
                 />
                 <LongBlueButton
