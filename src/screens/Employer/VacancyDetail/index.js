@@ -141,6 +141,7 @@ const VacancyDetail = (props) => {
           </View>
         </View>
         <PhotoSlider
+          preview={data.isPreview}
           photos={data.photos}
           info={data.info}
           isPreview={data.isPreview ? data.isPreview : null}

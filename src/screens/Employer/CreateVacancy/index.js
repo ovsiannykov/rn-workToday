@@ -160,7 +160,7 @@ const CreateVacancy = (props) => {
               }
             }, [mapData]);
 
-            const vacancyPreview = (values) => {
+            const vacancyPreview = async (values) => {
               const arrObj = (str) => {
                 const item = str.split(", ").filter((i) => i !== " ");
                 return item.map((item) => ({
@@ -184,7 +184,7 @@ const CreateVacancy = (props) => {
                 competencies: arrObj(values.compitence),
                 isPreview: true,
               };
-              dispatch(setSelectVacancy(item));
+              await dispatch(setSelectVacancy(item));
             };
 
             const startDateConfirm = (date) => {

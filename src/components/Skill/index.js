@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     borderColor: "#FF4B55",
     alignItems: "center",
     minHeight: 32,
-    maxWidth: 128,
+    //maxWidth: 128,
     marginHorizontal: 5,
   },
   container_true: {
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     borderColor: "#59C36A",
     alignItems: "center",
     minHeight: 32,
-    maxWidth: 128,
+    //maxWidth: 128,
     marginHorizontal: 5,
   },
   text_true: {
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     borderColor: "#376AED",
     alignItems: "center",
     minHeight: 32,
-    maxWidth: 128,
+    // maxWidth: 128,
     marginHorizontal: 5,
   },
   text_just: {

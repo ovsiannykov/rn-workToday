@@ -58,7 +58,7 @@ export default StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    maxWidth: 300,
+    maxWidth: 500,
   },
   buttons_container: {
     justifyContent: "center",

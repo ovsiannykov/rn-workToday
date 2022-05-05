@@ -32,19 +32,22 @@ const PhotoSlider = (props) => {
 
   return (
     <View style={styles.container}>
-      <View style={{ height: 219 }}>
-        <SliderBox
-          images={photos}
-          dotColor={Colors.primaryBlue}
-          imageLoadingColor={Colors.primaryBlue}
-          inactiveDotColor='gray'
-          paginationBoxStyle={{ position: "absolute", bottom: -40 }}
-          ImageComponentStyle={{
-            borderTopLeftRadius: 28,
-            borderTopRightRadius: 28,
-          }}
-        />
-      </View>
+      {props.preview == true ? null : (
+        <View style={{ height: 219 }}>
+          <SliderBox
+            images={photos}
+            dotColor={Colors.primaryBlue}
+            imageLoadingColor={Colors.primaryBlue}
+            inactiveDotColor='gray'
+            paginationBoxStyle={{ position: "absolute", bottom: -40 }}
+            ImageComponentStyle={{
+              borderTopLeftRadius: 28,
+              borderTopRightRadius: 28,
+            }}
+          />
+        </View>
+      )}
+
       <View style={{ paddingHorizontal: 39, marginTop: 21 }}>
         <Text style={styles.description_title}>
           {t("Worker.VacancyDetail.detail")}
