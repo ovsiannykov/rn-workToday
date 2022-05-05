@@ -6,6 +6,7 @@ import {
   Platform,
   Text,
 } from "react-native";
+import { useTranslation } from "react-i18next";
 
 import { sized } from "../../Svg";
 import homeSvg from "../../assets/icons/home.svg";
@@ -31,6 +32,7 @@ export const ButtonTabBarEmployer = ({ state, descriptors, navigation }) => {
     return null;
   }
 
+  const { t } = useTranslation();
   const HomeIcon = sized(homeSvg, 22, 22);
   const ContractsIcon = sized(contractsSvg, 21, 21);
   const BookmarksIcon = sized(bookmarksSvg, 20, 20);
@@ -64,7 +66,7 @@ export const ButtonTabBarEmployer = ({ state, descriptors, navigation }) => {
                 ...styles.TabTitle,
               }}
             >
-              Вакансії
+              {t("Employer.Tabbar.vacancies")}
             </Text>
           </View>
         </TouchableOpacity>
@@ -87,7 +89,7 @@ export const ButtonTabBarEmployer = ({ state, descriptors, navigation }) => {
                 ...styles.TabTitle,
               }}
             >
-              Відгуки
+              {t("Employer.Tabbar.reviews")}
             </Text>
           </View>
         </TouchableOpacity>
@@ -122,7 +124,7 @@ export const ButtonTabBarEmployer = ({ state, descriptors, navigation }) => {
                 ...styles.TabTitle,
               }}
             >
-              Додати Вакансії
+              {t("Employer.Tabbar.add")}
             </Text>
           </View>
         </TouchableOpacity>
@@ -145,7 +147,7 @@ export const ButtonTabBarEmployer = ({ state, descriptors, navigation }) => {
                 ...styles.TabTitle,
               }}
             >
-              Профіль
+              {t("Employer.Tabbar.profile")}
             </Text>
           </View>
         </TouchableOpacity>

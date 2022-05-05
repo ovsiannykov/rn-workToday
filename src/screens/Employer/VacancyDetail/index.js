@@ -59,6 +59,7 @@ const initialVac = {
 
 const VacancyDetail = (props) => {
   const [data, setData] = useState(initialVac);
+  const [preview, setPreview] = useState(false);
 
   const { t } = useTranslation();
   const navigation = useNavigation();
@@ -69,6 +70,10 @@ const VacancyDetail = (props) => {
   useEffect(() => {
     if (selectVacancy !== null) {
       setData(selectVacancy);
+    }
+
+    if (props.isPreview == true) {
+      setPreview(true);
     }
   }, []);
 
@@ -113,18 +118,22 @@ const VacancyDetail = (props) => {
                 ))}
           </View>
           <View style={styles.buttons_container}>
-            <LongWhiteButton
-              //onPress={() => navigation.navigate("UploadCompetence")}
-              title={t("Worker.VacancyDetail.changeDetail")}
-            />
-            <LongBlueButton
-              //onPress={() => navigation.navigate("Questions")}
-              title={t("Worker.VacancyDetail.seeReviews")}
-            />
-            <LongWhiteButton
-              onPress={() => navigation.navigate("Workers")}
-              title={t("Worker.VacancyDetail.seeWorkers")}
-            />
+            {preview ? (
+              <>
+                <LongWhiteButton
+                  //onPress={() => navigation.navigate("UploadCompetence")}
+                  title={t("Worker.VacancyDetail.changeDetail")}
+                />
+                <LongBlueButton
+                  //onPress={() => navigation.navigate("Questions")}
+                  title={t("Worker.VacancyDetail.seeReviews")}
+                />
+                <LongWhiteButton
+                  onPress={() => navigation.navigate("Workers")}
+                  title={t("Worker.VacancyDetail.seeWorkers")}
+                />
+              </>
+            ) : null}
           </View>
         </View>
         <PhotoSlider
