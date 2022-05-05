@@ -5,6 +5,7 @@ const initialState = {
   categories: [],
   selectLocation: null,
   selectVacancy: null,
+  reviews: null,
 };
 export const employerReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -16,6 +17,8 @@ export const employerReducer = (state = initialState, action) => {
       return { ...state, selectLocation: action.location };
     case employerTypes.SET_SELECT_VACANCY:
       return { ...state, selectVacancy: action.selectVacancy };
+    case employerTypes.SET_REVIEWS:
+      return { ...state, reviews: action.reviews };
     default:
       return state;
   }

@@ -13,6 +13,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import LongWhiteButton from "../../../components/LongWhiteButton";
 import LongBlueButton from "../../../components/LongBlueButton";
@@ -25,6 +26,7 @@ const MapScreen = (props) => {
   const [adress, setAdress] = useState(null);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const reverseGeocode = async (loc) => {
     if (loc) {
@@ -111,11 +113,14 @@ const MapScreen = (props) => {
       </MapView>
       <View style={styles.btn_box}>
         <View style={{ width: "48%" }}>
-          <LongWhiteButton title='Назад' onPress={() => navigation.goBack()} />
+          <LongWhiteButton
+            title={t("Employer.Map.back")}
+            onPress={() => navigation.goBack()}
+          />
         </View>
         <View style={{ width: "48%" }}>
           <LongBlueButton
-            title='Ok'
+            title='OK'
             onPress={async () => {
               await dispatch(
                 setSelectLocation({

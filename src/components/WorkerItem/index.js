@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 import styles from "./styles";
 import workerPhoto from "../../assets/images/worker.jpeg";
@@ -11,14 +12,23 @@ import linkSvg from "../../assets/icons/link.svg";
 
 const WorkerItem = (props) => {
   const { t } = useTranslation();
+  const [selectVacancy, setSelectVacancy] = useState("Your Vacancy");
+
+  const vacancies = useSelector((state) => state.employerReducer.vacancies);
+
+  useEffect(() => {
+    if (props.vacansyId) {
+      const desiredVacancy = vacancies.filter(
+        (item) => item._id == props.vacansyId
+      );
+
+      setSelectVacancy(desiredVacancy[0].Title);
+    }
+  }, [props]);
 
   const StatusText = (props) => {
-    if (props.status !== "Прийнято" && props.status !== "Відхилино") {
-      return (
-        <Text style={styles.vancy}>
-          {props.status ? props.status : "На розгляді"}
-        </Text>
-      );
+    if (props.status == "consideration") {
+      return <Text style={styles.vancy}>{"На розгляді"}</Text>;
     }
     if (props.status == "Прийнято") {
       return (
@@ -67,9 +77,7 @@ const WorkerItem = (props) => {
             <Text style={styles.vancy_title}>
               {t("Employer.Employer.vacancy")}
             </Text>
-            <Text style={styles.vancy}>
-              {props.vacancy ? props.vacancy : "Охоронець"}
-            </Text>
+            <Text style={styles.vancy}>{selectVacancy}</Text>
           </View>
           <View style={{ marginTop: 6, ...styles.info_box }}>
             <Text style={styles.vancy_title}>

@@ -19,3 +19,8 @@ export const setSelectVacancy = (payload) => ({
   type: employerTypes.SET_SELECT_VACANCY,
   selectVacancy: payload,
 });
+
+export const setReviews = (payload) => ({
+  type: employerTypes.SET_REVIEWS,
+  reviews: payload,
+});

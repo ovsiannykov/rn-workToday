@@ -4,8 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import instance from "../instance";
 import { employerApi } from "./employer-api";
 import { createFile } from "../../../utils";
-import { setMyVanacies } from "./employer-actions";
-import { getCategories } from "./employer-actions";
+import { setMyVanacies, getCategories, setReviews } from "./employer-actions";
 
 export const setTokenInHeaders = (token) => {
   Object.assign(instance.defaults, { headers: { Authorization: token } });
@@ -141,5 +140,22 @@ export const vacancyUpdate = (values, id) => async (dispatch) => {
       message: "Упс... Щось пішло не так",
       type: "danger",
     });
+  }
+};
+
+export const getFeedback = (body) => async (dispatch) => {
+  try {
+    const res = await employerApi.getFeedback({ status: "consideration" });
+
+    if (res.data.status === "Success") {
+      dispatch(setReviews(res.data.data));
+    } else {
+      showMessage({
+        message: "Упс... Не вдалося завантажити відгуки",
+        type: "danger",
+      });
+    }
+  } catch (error) {
+    console.log(error);
   }
 };

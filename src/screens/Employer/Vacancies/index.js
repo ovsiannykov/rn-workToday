@@ -18,8 +18,10 @@ import Colors from "../../../constants/Colors";
 import {
   vacancyMy,
   getCategoriesFilters,
+  getFeedback,
 } from "../../../redux/employer/employer-thunks";
 import { setSelectVacancy } from "../../../redux/employer/employer-actions";
+import LongBlueButton from "../../../components/LongBlueButton";
 
 const Vacancies = (props) => {
   const [loading, setLoading] = useState(false);
@@ -33,6 +35,7 @@ const Vacancies = (props) => {
     setLoading(true);
     dispatch(vacancyMy());
     dispatch(getCategoriesFilters());
+    dispatch(getFeedback());
     setLoading(false);
   }, []);
 
@@ -77,11 +80,20 @@ const Vacancies = (props) => {
 
       <View style={{ ...styles.wrapper, paddingBottom: 80 }}>
         {data.length == 0 ? (
-          <>
+          <View style={{ alignItems: "center" }}>
             <Text style={styles.noItems}>
               Ви поки що не створили жодної вакансії
             </Text>
-          </>
+            <View style={{ width: 200, marginTop: 20 }}>
+              <LongBlueButton
+                title='Створити'
+                onPress={() => navigation.navigate("CreateVacancy")}
+              />
+            </View>
+          </View>
+        ) : null}
+        {loading ? (
+          <ActivityIndicator size='large' color={Colors.primaryBlue} />
         ) : null}
         <FlatList
           contentContainerStyle={{ flexGrow: 1 }}

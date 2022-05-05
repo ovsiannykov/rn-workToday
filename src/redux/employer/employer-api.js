@@ -15,4 +15,5 @@ export const employerApi = {
         "Content-Type": "multipart/form-data",
       },
     }),
+  getFeedback: (body) => instance.post("/emloyer/getFeedback", body),
 };

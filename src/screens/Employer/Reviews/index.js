@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, FlatList } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 
 import ReviewsHeader from "../../../components/ReviewsHeader";
 import ContractFilter from "../../../components/ContractFilter";
@@ -25,6 +26,9 @@ const data = [
 
 const Reviews = (props) => {
   const [isFilter, setIsFilter] = useState(false);
+  const reviews = useSelector((state) => state.employerReducer.reviews);
+
+  //console.log(reviews);
 
   const navigation = useNavigation();
 
@@ -35,6 +39,21 @@ const Reviews = (props) => {
   const closeModal = () => {
     setIsFilter(false);
   };
+
+  const renderItem = ({ item }) => (
+    <WorkerItem
+      onPress={() => navigation.navigate("Profile")}
+      refuseBtn={true}
+      acceptBtn={true}
+      id={item._id}
+      vacansyId={item.vacansyId}
+      status={item.status}
+      userId={item.userId}
+      workInfo={item.workInfo}
+      refuseOnPress={() => console.log("i")}
+      acceptOnPress={() => console.log("i")}
+    />
+  );
 
   return (
     <LinearGradient
@@ -48,21 +67,26 @@ const Reviews = (props) => {
       <View style={{ marginTop: 23 }}>
         <ContractFilter data={filters} />
       </View>
-      <ScrollView>
-        <View style={styles.wrapper}>
-          <WorkerItem
-            status='Прийнято'
-            refuseBtn={true}
-            acceptBtn={true}
-            onPress={() => navigation.navigate("Profile")}
-          />
-          <WorkerItem
-            status='Відхилино'
-            acceptBtn={true}
-            onPress={() => navigation.navigate("Profile")}
-          />
-        </View>
-      </ScrollView>
+      <View style={styles.wrapper}>
+        <FlatList
+          contentContainerStyle={{ flexGrow: 1 }}
+          keyExtractor={(item) => item._id}
+          renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
+          data={reviews}
+        />
+        {/* <WorkerItem
+          status='Прийнято'
+          refuseBtn={true}
+          acceptBtn={true}
+          onPress={() => navigation.navigate("Profile")}
+        />
+        <WorkerItem
+          status='Відхилино'
+          acceptBtn={true}
+          onPress={() => navigation.navigate("Profile")}
+        /> */}
+      </View>
     </LinearGradient>
   );
 };
