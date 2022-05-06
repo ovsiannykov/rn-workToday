@@ -30,13 +30,18 @@ import {
 } from "../../../redux/employer/employer-thunks";
 import UpluadInput from "../../../components/UpluadInput";
 import { setSelectVacancy } from "../../../redux/employer/employer-actions";
+import SkillsSelectModal from "../../../components/SkillsSelectModal";
 
 const SlecetMapIcon = sized(selectMapSvg, 16.64, 23);
+
+const initialSkills = ["k1", "k2", "k3", "k4"];
 
 const CreateVacancy = (props) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isDatePickerVisible2, setDatePickerVisibility2] = useState(false);
   const [fetching, setFetching] = useState(false);
+  const [isModal, setIsModal] = useState(false);
+  const [selectSkills, setSelectSkills] = useState([]);
   const [id, setId] = useState(null);
 
   const mapData = useSelector((state) => state.employerReducer.selectLocation);
@@ -62,6 +67,10 @@ const CreateVacancy = (props) => {
     setDatePickerVisibility2(false);
   };
 
+  const closeModal = () => {
+    setIsModal(false);
+  };
+
   useEffect(() => {
     if (route.params && route.params.id) {
       setId(route.params.id);
@@ -84,6 +93,17 @@ const CreateVacancy = (props) => {
       <View style={{ alignItems: "center" }}>
         <Text style={styles.title}>{t("Employer.CreateVacancy.h1")}</Text>
       </View>
+
+      <SkillsSelectModal
+        isModal={isModal}
+        closeModal={closeModal}
+        onPress={() => {
+          setIsModal(false);
+        }}
+        data={initialSkills}
+        skills={selectSkills}
+        skillsChange={setSelectSkills}
+      />
 
       <View style={styles.wrapper}>
         <View style={styles.vacancy_info}>
@@ -153,6 +173,12 @@ const CreateVacancy = (props) => {
               values.compitence.length > 0;
 
             useEffect(() => {
+              if (selectSkills.length > 0) {
+                setFieldValue("compitence", selectSkills.join(", "));
+              }
+            }, [selectSkills]);
+
+            useEffect(() => {
               if (mapData !== null) {
                 setFieldValue("place", mapData.adress);
                 setFieldValue("geo", mapData.location);
@@ -183,6 +209,7 @@ const CreateVacancy = (props) => {
                 skills: arrObj(values.skills),
                 competencies: arrObj(values.compitence),
                 isPreview: true,
+                hidePhoto: id !== null ? true : false,
               };
               await dispatch(setSelectVacancy(item));
             };
@@ -511,21 +538,26 @@ const CreateVacancy = (props) => {
                         placeholder='Додати ще (через кому)'
                       />
                     </View> */}
+
                     <View style={{ marginTop: 20, width: "75%" }}>
                       <Text style={styles.label}>
                         {t("Employer.CreateVacancy.compentencies")}
                       </Text>
-                      <TextInput
-                        style={styles.input}
-                        value={values.compitence}
-                        onChangeText={handleChange("compitence")}
-                        error={errors.compitence}
-                        placeholder={t("Employer.CreateVacancy.comma")}
-                        maxLength={50}
-                        multiline={true}
-                        numberOfLines={4}
-                      />
+                      <TouchableOpacity onPress={() => setIsModal(true)}>
+                        <View pointerEvents='none'>
+                          <TextInput
+                            style={styles.input}
+                            value={values.compitence}
+                            onChangeText={handleChange("compitence")}
+                            error={errors.compitence}
+                            maxLength={50}
+                            multiline={true}
+                            numberOfLines={4}
+                          />
+                        </View>
+                      </TouchableOpacity>
                     </View>
+
                     {/* <View style={{ marginTop: 15, width: "75%" }}>
                       <TextInput
                         style={styles.input}

@@ -13,6 +13,7 @@ import HomeModal from "../../../components/HomeModal";
 import {
   acceptUser,
   canseledUser,
+  getFeedback,
 } from "../../../redux/employer/employer-thunks";
 
 import styles from "./styles";
@@ -34,8 +35,6 @@ const Reviews = (props) => {
   const [selectVacancyId, setSelectVacancyId] = useState(null);
   const reviews = useSelector((state) => state.employerReducer.reviews);
 
-  console.log(selectVacancyId);
-
   const dispatch = useDispatch();
   const route = useRoute();
   const navigation = useNavigation();
@@ -44,6 +43,8 @@ const Reviews = (props) => {
     if (route.params && route.params.vacancyId) {
       setSelectVacancyId(route.params.vacancyId);
     }
+
+    dispatch(getFeedback(selectVacancyId));
   }, []);
 
   const filterHandler = () => {

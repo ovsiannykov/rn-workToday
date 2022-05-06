@@ -147,6 +147,7 @@ const VacancyDetail = (props) => {
           photos={data.photos}
           info={data.info}
           isPreview={data.isPreview ? data.isPreview : null}
+          hidePhoto={data.hidePhoto}
         />
       </ScrollView>
     </LinearGradient>

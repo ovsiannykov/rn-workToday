@@ -143,17 +143,33 @@ export const vacancyUpdate = (values, id) => async (dispatch) => {
   }
 };
 
-export const getFeedback = (body) => async (dispatch) => {
+export const getFeedback = (vacancyId) => async (dispatch) => {
   try {
-    const res = await employerApi.getFeedback({ status: "consideration" });
-
-    if (res.data.status === "Success") {
-      dispatch(setReviews(res.data.data));
-    } else {
-      showMessage({
-        message: "Упс... Не вдалося завантажити відгуки",
-        type: "danger",
+    if (vacancyId !== null) {
+      const res = await employerApi.getFeedback({
+        status: "consideration",
+        _id: vacancyId,
       });
+
+      if (res.data.status === "Success") {
+        dispatch(setReviews(res.data.data));
+      } else {
+        showMessage({
+          message: "Упс... Не вдалося завантажити відгуки",
+          type: "danger",
+        });
+      }
+    } else {
+      const res = await employerApi.getFeedback({ status: "consideration" });
+
+      if (res.data.status === "Success") {
+        dispatch(setReviews(res.data.data));
+      } else {
+        showMessage({
+          message: "Упс... Не вдалося завантажити відгуки",
+          type: "danger",
+        });
+      }
     }
   } catch (error) {
     console.log(error);

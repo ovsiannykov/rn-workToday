@@ -16,23 +16,26 @@ const PhotoSlider = (props) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (props.photos && !props.isPreview) {
+    if (props.photos && props.isPreview == null) {
       const arrPhotos = props.photos.map((item) => {
         const fileName = item.split("/").pop();
         return `${API_BASE_URL}static/${fileName}`;
       });
       setPhotos(arrPhotos);
-    } else if (props.photos && props.isPreview == true) {
-      const arrPhotos = props.photos.map((item) => item);
-      setPhotos(arrPhotos);
-    } else {
-      setPhotos(images);
     }
+    if (props.isPreview !== null) {
+      const arrPhotos = props.photos.map((item) => item);
+      console.log(arrPhotos);
+      setPhotos(arrPhotos);
+    }
+    //else {
+    //   setPhotos(images);
+    // }
   }, [props.photos]);
 
   return (
     <View style={styles.container}>
-      {props.preview == true ? null : (
+      {props.hidePhoto && props.hidePhoto == true ? null : (
         <View style={{ height: 219 }}>
           <SliderBox
             images={photos}
