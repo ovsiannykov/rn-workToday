@@ -6,6 +6,7 @@ import {
   Text,
   ActivityIndicator,
   TouchableOpacity,
+  RefreshControl,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
@@ -31,12 +32,16 @@ const Vacancies = (props) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  const fetchData = () => {
     setLoading(true);
     dispatch(vacancyMy());
     dispatch(getCategoriesFilters());
     dispatch(getFeedback());
     setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   const renderItem = ({ item }) => (
@@ -57,17 +62,6 @@ const Vacancies = (props) => {
       }}
     />
   );
-
-  if (loading) {
-    return (
-      <LinearGradient
-        colors={["#F4F7FF", "#FFFFFF"]}
-        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-      >
-        <ActivityIndicator size='large' color={Colors.primaryBlue} />
-      </LinearGradient>
-    );
-  }
 
   return (
     <LinearGradient
@@ -92,15 +86,24 @@ const Vacancies = (props) => {
             </View>
           </View>
         ) : null}
-        {loading ? (
+
+        {/* {loading ? (
           <ActivityIndicator size='large' color={Colors.primaryBlue} />
-        ) : null}
+        ) : null} */}
+
         <FlatList
           contentContainerStyle={{ flexGrow: 1 }}
           data={data}
           keyExtractor={(item) => item._id}
           renderItem={renderItem}
           showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              //refresh control used for the Pull to Refresh
+              refreshing={loading}
+              onRefresh={fetchData}
+            />
+          }
         />
       </View>
     </LinearGradient>
