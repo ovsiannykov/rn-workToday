@@ -7,6 +7,7 @@ import {
   Text,
 } from "react-native";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 
 import { sized } from "../../Svg";
 import homeSvg from "../../assets/icons/home.svg";
@@ -15,6 +16,7 @@ import bookmarksSvg from "../../assets/icons/bookmarks.svg";
 import settingsSvg from "../../assets/icons/settings.svg";
 import statisticSvg from "../../assets/icons/statistic.svg";
 import activeHomeSvg from "../../assets/icons/active/Home.svg";
+import { getFeedback } from "../../redux/employer/employer-thunks";
 
 import activeContractsSvg from "../../assets/icons/active/Articles.svg";
 import activebookmarksSvg from "../../assets/icons/active/Bookmark.svg";
@@ -32,6 +34,7 @@ export const ButtonTabBarEmployer = ({ state, descriptors, navigation }) => {
     return null;
   }
 
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const HomeIcon = sized(homeSvg, 22, 22);
   const ContractsIcon = sized(contractsSvg, 21, 21);
@@ -71,7 +74,10 @@ export const ButtonTabBarEmployer = ({ state, descriptors, navigation }) => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate("Reviews")}
+          onPress={async () => {
+            await dispatch(getFeedback());
+            navigation.navigate("Reviews");
+          }}
           style={styles.TabView__item}
         >
           <View style={styles.iconWrapper}>

@@ -145,11 +145,13 @@ export const vacancyUpdate = (values, id) => async (dispatch) => {
 
 export const getFeedback = (vacancyId) => async (dispatch) => {
   try {
-    if (vacancyId !== null) {
+    if (vacancyId) {
       const res = await employerApi.getFeedback({
-        status: "consideration",
+        status: "active",
         _id: vacancyId,
       });
+
+      console.log(res.data);
 
       if (res.data.status === "Success") {
         dispatch(setReviews(res.data.data));

@@ -26,7 +26,7 @@ export const registerStart = (body, navigation, phone) => async (dispatch) => {
       navigation.navigate("SMS", { phone: phone });
     } else {
       showMessage({
-        message: "Упс... Щось пішло не так 🤷‍♀️",
+        message: `Oops... ${res.data.text}`,
         type: "danger",
       });
     }
@@ -91,7 +91,7 @@ export const auth = (body, context) => async (dispatch) => {
       context.signIn(res.data.data);
     } else {
       showMessage({
-        message: "Щось пішло не так. Перевірте правильність даних 🤷‍♀️",
+        message: `Oops... ${res.data.text}`,
         type: "danger",
       });
     }

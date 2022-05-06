@@ -12,6 +12,7 @@ import LongWhiteButton from "../../../components/LongWhiteButton";
 import LongBlueButton from "../../../components/LongBlueButton";
 import VacancyInfo from "../../../components/VacancyInfo";
 import PhotoSlider from "../../../components/PhotoSlider";
+import { getFeedback } from "../../../redux/employer/employer-thunks";
 
 const initialVac = {
   Title: "React developer",
@@ -63,6 +64,7 @@ const VacancyDetail = (props) => {
 
   const { t } = useTranslation();
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const selectVacancy = useSelector(
     (state) => state.employerReducer.selectVacancy
   );
@@ -129,9 +131,10 @@ const VacancyDetail = (props) => {
                   title={t("Worker.VacancyDetail.changeDetail")}
                 />
                 <LongBlueButton
-                  onPress={() =>
-                    navigation.navigate("Reviews", { vacancyId: data._id })
-                  }
+                  onPress={async () => {
+                    //await dispatch(getFeedback(data._id));
+                    navigation.navigate("Reviews", { vacancyId: data._id });
+                  }}
                   title={t("Worker.VacancyDetail.seeReviews")}
                 />
                 <LongWhiteButton

@@ -39,13 +39,15 @@ const Reviews = (props) => {
   const route = useRoute();
   const navigation = useNavigation();
 
-  useEffect(() => {
-    if (route.params && route.params.vacancyId) {
-      setSelectVacancyId(route.params.vacancyId);
-    }
-
-    dispatch(getFeedback(selectVacancyId));
-  }, []);
+  // useEffect(() => {
+  //   if (route.params && route.params.vacancyId) {
+  //     setSelectVacancyId(route.params.vacancyId);
+  //     dispatch(getFeedback(selectVacancyId));
+  //   }
+  //   // else {
+  //   //   dispatch(getFeedback());
+  //   // }
+  // }, []);
 
   const filterHandler = () => {
     setIsFilter(true);
@@ -82,7 +84,7 @@ const Reviews = (props) => {
       <View style={{ marginTop: 23 }}>
         <ContractFilter data={filters} />
       </View>
-      {reviews.length == 0 ? (
+      {!reviews || reviews.length == 0 ? (
         <Text style={styles.noItems}>Поки що ніхто не відкликнувся 😔</Text>
       ) : null}
       <View style={styles.wrapper}>
