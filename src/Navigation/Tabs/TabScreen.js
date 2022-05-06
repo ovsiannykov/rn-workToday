@@ -21,8 +21,8 @@ export const TabsScreen = () => {
         tabBarHideOnKeyboard: true,
         keyboardVerticalOffset: -25,
       }}
-      // tabBar={(props) => <ButtonTabBar {...props} />}
-      tabBar={(props) => <ButtonTabBarEmployer {...props} />}
+      //tabBar={(props) => <ButtonTabBar {...props} />}
+       tabBar={(props) => <ButtonTabBarEmployer {...props} />}
     >
       {/* <Tabs.Screen name='TabsBar' component={MainStackScreen} /> */}
       <Tabs.Screen name='TabsBar' component={EmployerStack} />

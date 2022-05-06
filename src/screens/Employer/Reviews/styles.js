@@ -9,6 +9,7 @@ export default StyleSheet.create({
     marginTop: 20,
     justifyContent: "center",
     alignItems: "center",
+    paddingBottom: 100,
   },
   noItems: {
     fontFamily: "ComfortaaLight",

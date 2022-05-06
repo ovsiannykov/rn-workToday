@@ -68,7 +68,7 @@ const AppWrapper = () => {
       setTokenInHeaders(value);
       setUserToken(value);
 
-      console.log(value);
+      //console.log(value);
     }
     setFetching(false);
   };

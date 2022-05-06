@@ -147,7 +147,7 @@ export const getFeedback = (vacancyId) => async (dispatch) => {
   try {
     if (vacancyId) {
       const res = await employerApi.getFeedback({
-        status: "active",
+        status: "consideration",
         _id: vacancyId,
       });
 

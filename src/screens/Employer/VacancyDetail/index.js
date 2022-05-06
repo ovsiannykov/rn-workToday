@@ -132,7 +132,7 @@ const VacancyDetail = (props) => {
                 />
                 <LongBlueButton
                   onPress={async () => {
-                    //await dispatch(getFeedback(data._id));
+                    await dispatch(getFeedback(data._id));
                     navigation.navigate("Reviews", { vacancyId: data._id });
                   }}
                   title={t("Worker.VacancyDetail.seeReviews")}

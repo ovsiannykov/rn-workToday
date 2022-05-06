@@ -42,10 +42,15 @@ const Profile = ({ navigation }) => {
                 </View>
               </LinearGradient>
               <View style={styles.profileInfo}>
-                <Text style={styles.name}>
-                  {userInfo ? userInfo.step3Info.firstname : "Ім'я"}{" "}
-                  {userInfo ? userInfo.step3Info.lastname : "Прізвище"}
-                </Text>
+                {/* <Text style={styles.name}>
+                  {userInfo && userInfo.step3Info.firstname
+                    ? userInfo.step3Info.firstname
+                    : "Ім'я"}{" "}
+                  {userInfo && userInfo.step3Info.lastname
+                    ? userInfo.step3Info.lastname
+                    : "Прізвище"}
+                </Text> */}
+                <Text style={styles.name}>Ім'я Прізвище</Text>
                 <Text style={styles.position}>Фермер</Text>
               </View>
             </View>
