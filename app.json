@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Employer",
-    "slug": "Employer",
+    "name": "Worker",
+    "slug": "Worker",
     "privacy": "public",
     "userInterfaceStyle": "automatic",
      "plugins": [
