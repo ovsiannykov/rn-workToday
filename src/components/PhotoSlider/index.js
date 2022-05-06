@@ -25,7 +25,6 @@ const PhotoSlider = (props) => {
     }
     if (props.isPreview !== null) {
       const arrPhotos = props.photos.map((item) => item);
-      console.log(arrPhotos);
       setPhotos(arrPhotos);
     }
     //else {

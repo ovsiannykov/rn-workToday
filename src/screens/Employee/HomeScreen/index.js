@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { View, Alert, FlatList, ActivityIndicator, Text } from "react-native";
+import {
+  View,
+  Alert,
+  FlatList,
+  ActivityIndicator,
+  Text,
+  RefreshControl,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import * as Location from "expo-location";
@@ -68,12 +75,16 @@ const HomeScreen = (props) => {
     getStorageQuesstion();
   }, [dataInfo]);
 
-  // fetchData
-  useEffect(() => {
-    setLoading(true);
+  const fetchData = () => {
     dispatch(getFavorites());
     dispatch(getCategories());
     dispatch(getInfo());
+  };
+
+  // fetchData
+  useEffect(() => {
+    setLoading(true);
+    fetchData();
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
@@ -189,6 +200,9 @@ const HomeScreen = (props) => {
             keyExtractor={(item) => item._id}
             renderItem={renderItem}
             showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl refreshing={loading} onRefresh={fetchData} />
+            }
           />
         </View>
       </LinearGradient>
